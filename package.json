@@ -1,0 +1,65 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node -r module-alias/register dist/config/index.js",
+    "dev":"nodemon -r tsconfig-paths/register src/config/index.ts"
+  },
+
+    "_moduleAliases": {
+    "@shared": "dist/shared",
+    "@server": "dist/server.js",
+    "@di": "dist/di",
+    "@application": "dist/application",
+    "@config": "dist/config",
+    "@domain": "dist/domain",
+    "@infrastructure": "dist/infrastructure",
+    "@presentation": "dist/presentation"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/nodemailer": "^7.0.1",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.7.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.18",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.2.1",
+    "google-auth-library": "^10.3.0",
+    "inversify": "^7.9.1",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
+    "mongoose": "^8.18.1",
+    "morgan": "^1.10.1",
+    "nodemailer": "^7.0.6",
+    "otp-generator": "^4.0.1",
+    "tsconfig-paths": "^4.2.0",
+    "winston": "^3.17.0"
+  },
+
+
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/express-validator": "^2.20.33",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/mongoose": "^5.11.96",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.3.1",
+    "@types/otp-generator": "^4.0.2",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
