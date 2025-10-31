@@ -1,8 +1,8 @@
-import { Iuser } from "@domain/entities/user.entity";
+import { IUser } from "@domain/entities/user.entity";
 
 import mongoose, {Schema} from "mongoose";
 
-const userSchema = new Schema<Iuser>(
+const userSchema = new Schema<IUser>(
     {
     role:{ type:String,
         enum:["user","admin","provider"],
@@ -12,11 +12,11 @@ const userSchema = new Schema<Iuser>(
     firstName:{type:String, required:true},
     lastName: {type:String,required:true},
     email:{type:String, required:true,unique:true},
-    isActive:{type:Boolean, default:false},
+    isActive:{type:Boolean, default:true},
      password:{type:String,required:true},
     otpVerified:{type:Boolean, default:false},
     googleVerified: {type:Boolean,default:false},
-    phone:{type:String},
+    mobile:{type:String},
     dateOfBirth:{type:String},
     gender:{type:String},
     profilePicture:{type:String},
@@ -29,5 +29,5 @@ const userSchema = new Schema<Iuser>(
 
 );
 
-const userModel = mongoose.model<Iuser>("User",userSchema)
-export default userModel;
+const UserModel = mongoose.model<IUser>("User",userSchema)
+export default UserModel;

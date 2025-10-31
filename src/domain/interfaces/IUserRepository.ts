@@ -1,7 +1,11 @@
 import { IBaseRepository } from "@domain/interfaces/IBaseRepository"
-import { Iuser } from "@domain/entities/user.entity"
+import { IUser } from "@domain/entities/user.entity"
+import { FindEmailDTO,UpdatePasswordDTO } from "@application/dtos/auth-dtos";
 
-export interface IUserRepository extends IBaseRepository<Iuser>{
-      createUser(user: Iuser): Promise<Iuser>;
+export interface IUserRepository extends IBaseRepository<IUser>{
+      
+       updateUserVerificationStatus(data: FindEmailDTO): Promise<IUser | null>;
+  forgotPassword(data: UpdatePasswordDTO): Promise<IUser | null>;
+  
 
 }

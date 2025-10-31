@@ -3,8 +3,6 @@ import mongoose from 'mongoose'
 const connectDB =async(): Promise<void> =>{
 const url :string = process.env.ATLAS_DATABASE_CONFIG!;
   
-  console.log('MongoDB URI:', url); 
-
 if(!url){
     console.error("Database url is not defined");
     process.exit(1)

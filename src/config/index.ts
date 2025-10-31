@@ -4,7 +4,7 @@ import connectDB from "@infrastructure/config/db.config"
 import { createServer } from "http";
 
  dotenv.config();
- 
+ import "reflect-metadata"
  connectDB();
 
  const httpServer =  createServer(app);
