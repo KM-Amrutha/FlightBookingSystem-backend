@@ -1,9 +1,9 @@
 import mongoose, {Document} from "mongoose"
 
 
-export interface Iuser extends Document {
+export interface IUser extends Document {
     _id:mongoose.Schema.Types.ObjectId;
-    role:"user"|"admin"|"provider";
+    role:"user"|"admin";
     firstName:string;
     lastName:string;
     email:string;
@@ -11,7 +11,7 @@ export interface Iuser extends Document {
     password:string;
     otpVerified: boolean;
     googleVerified: boolean;
-    phone:string;
+    mobile:string;
     dateOfBirth:string;
     gender:"male"|"female";
     profilePicture?:string;
