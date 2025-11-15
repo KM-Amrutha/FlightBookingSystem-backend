@@ -115,12 +115,14 @@ export class SignInUseCase implements ISignInUseCase {
   }> {
     try {
       const userData = await this.validateUserLogin(email, password);
+      // const userWithRole = { ...userData, role: "user" };
       const accessToken = this.generateAccessToken(userData);
       const refreshToken = this.generateRefreshToken(userData);
-      return { accessToken, refreshToken, userData };
+      return { accessToken, refreshToken, userData};
     } catch (userError) {
       try {
-        const providerData = await this.validateProviderLogin(email, password);
+        const providerData = await this.validateProviderLogin(email, password); 
+        providerData.role = "provider";
         const accessToken = this.generateAccessToken(providerData);
         const refreshToken = this.generateRefreshToken(providerData);
         return { accessToken, refreshToken, userData: providerData };

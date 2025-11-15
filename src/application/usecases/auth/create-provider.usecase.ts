@@ -53,14 +53,6 @@ export class CreateProviderUseCase implements ICreateProviderUseCase {
     mobile,
     password,
     airlineCode,
-    establishment_year,
-    license_expiry_date,
-    headquarters_address,
-    country_of_operation,
-    type_of_operation,
-    website_url,
-    ceo_name,
-    office_contact_number,
     isActive,
   isVerified
   }: CreateProviderDTO): Promise<Provider | IUser> {
@@ -98,16 +90,9 @@ export class CreateProviderUseCase implements ICreateProviderUseCase {
       mobile,
       password: hashedPassword,
       airlineCode,
-      establishment_year,
-      license_expiry_date,
-      headquarters_address,
-      country_of_operation,
-      type_of_operation,
-      website_url,
-      ceo_name,
-      office_contact_number,
       isActive: true,
-      isVerified: true 
+      isVerified: true,
+    
     };
 
     const createdProvider = await this._providerRepository.createProvider(providerData);

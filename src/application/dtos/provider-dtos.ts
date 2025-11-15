@@ -5,19 +5,19 @@ export interface Provider {
   email: string;
   mobile: string;
   airlineCode: string;
-  logo_url?: string;
-  registration_certificate_url?: string;
-  insurance_proof_url?: string;
-  establishment_year?: number;
-  license_expiry_date?: Date;
-  headquarters_address?: string;
-  country_of_operation?: string;
-  type_of_operation?: string;
-  website_url?: string;
-  ceo_name?: string;
-  office_contact_number?: string;
-  created_at: Date;
-  updated_at: Date;
+  logoUrl?: string;
+  registrationCertificateUrl?: string;
+  insuranceProofUrl?: string;
+  establishmentYear?: number;
+  licenseExpiryDate?: Date;
+  headquartersAddress?: string;
+  countryOfOperation?: string;
+  typeOfOperation?: string;
+  websiteUrl?: string;
+  ceoName?: string;
+  officeContactNumber?: string;
+  createdAt: Date;
+  updatedAt: Date;
   isActive: boolean;
   isVerified: boolean;
 }
@@ -28,30 +28,42 @@ export interface CreateProviderDTO {
   mobile: string;
   password: string;
   airlineCode: string;
-  establishment_year: number;
-  license_expiry_date: Date;
-  headquarters_address: string;
-  country_of_operation: string;
-  type_of_operation: string;
-  website_url: string;
-  ceo_name: string;
-  office_contact_number: string;
   isActive: true, 
   isVerified: true 
 }
 
+export interface CompleteProviderProfileDTO {
+  companyName?: string;
+  email?: string;
+  mobile?: string;
+  airlineCode?: string;
+  logoUrl: string;
+  registrationCertificateUrl: string;
+  insuranceProofUrl: string;
+  establishmentYear: number;
+  licenseExpiryDate: Date;
+  headquartersAddress: string;
+  countryOfOperation: string;
+  typeOfOperation: string;
+  websiteUrl: string;
+  ceoName: string;
+  officeContactNumber: string;
+}
+
 export interface UpdateProviderDTO {
   companyName?: string;
+  email?:string;
   mobile?: string;
-  logo_url?: string;
-  registration_certificate_url?: string;
-  insurance_proof_url?: string;
-  establishment_year?: number;
-  license_expiry_date?: Date;
-  headquarters_address?: string;
-  country_of_operation?: string;
-  type_of_operation?: string;
-  website_url?: string;
-  ceo_name?: string;
-  office_contact_number?: string;
+  airlineCode?:string;
+  logoUrl?: string;
+  registrationCertificateUrl?: string;
+  insuranceProofUrl?: string;
+  establishmentYear?: number;
+  licenseExpiryDate?: Date;
+  headquartersAddress?: string;
+  countryOfOperation?: string;
+  typeOfOperation?: string;
+  websiteUrl?: string;
+  ceoName?: string;
+  officeContactNumber?: string;
 }

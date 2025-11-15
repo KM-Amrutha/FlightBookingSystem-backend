@@ -3,7 +3,7 @@ import mongoose, {Document} from "mongoose"
 
 export interface IUser extends Document {
     _id:mongoose.Schema.Types.ObjectId;
-    role:"user"|"admin";
+    role:"user"
     firstName:string;
     lastName:string;
     email:string;

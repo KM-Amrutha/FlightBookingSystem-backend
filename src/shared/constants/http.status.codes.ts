@@ -5,6 +5,6 @@ export enum StatusCodes {
     UnAuthorized = 401,
     Forbidden = 403,
     NotFound = 404,
-    RateLimit = 429,
     InternalServerError = 500,
+    RateLimit = 429,
 }

@@ -16,7 +16,7 @@ import { Provider,
   updateProvider(providerId: string, updateData: UpdateProviderDTO): Promise<Provider | null>;
   updateActiveStatus(providerId: string, isActive: boolean): Promise<boolean>;
   updateVerificationStatus(providerId: string, isVerified: boolean): Promise<boolean>;
-
+ completeProviderProfile(providerId: string, profileData: UpdateProviderDTO): Promise<void>;
 
   getProviderByEmailWithPassword(email: string): Promise<IProvider | null>;
       }

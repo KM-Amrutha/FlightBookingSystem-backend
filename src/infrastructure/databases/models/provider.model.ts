@@ -33,48 +33,53 @@ const providerSchema = new Schema<IProvider>(
       uppercase: true,
       trim: true
     },
-    logo_url: {
+     role: {
+      type: String,
+      enum: ['provider'],
+      default: 'provider'
+    },
+    logoUrl: {
       type: String,
       default: null
     },
-    registration_certificate_url: {
+    registrationCertificateUrl: {
       type: String,
       default: null
     },
-    insurance_proof_url: {
+    insuranceProofUrl: {
       type: String,
       default: null
     },
-    establishment_year: {
+    establishmentYear: {
       type: Number,
       min: 1900,
       max: new Date().getFullYear()
     },
-    license_expiry_date: {
+    licenseExpiryDate: {
       type: Date
     },
-    headquarters_address: {
+    headquartersAddress: {
       type: String,
       trim: true
     },
-    country_of_operation: {
+    countryOfOperation: {
       type: String,
       trim: true
     },
-    type_of_operation: {
+    typeOfOperation: {
       type: String,
       enum: ['domestic', 'international', 'both'],
       default: 'both'
     },
-    website_url: {
+    websiteUrl: {
       type: String,
       trim: true
     },
-    ceo_name: {
+    ceoName: {
       type: String,
       trim: true
     },
-    office_contact_number: {
+    officeContactNumber: {
       type: String,
       trim: true
     },
@@ -89,10 +94,14 @@ const providerSchema = new Schema<IProvider>(
     adminApproval: {
   type: Boolean,
   default: false
-}
+},
+ isProfileComplete: {
+    type: Boolean,
+    default: false 
+  }
   },
   {
-    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
+    timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' }
   }
 );
 

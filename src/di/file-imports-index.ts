@@ -23,9 +23,15 @@ export {SignInUseCase} from "@application/usecases/auth/signin-user.usecases";
 export {ForgotPasswordUseCase} from "@application/usecases/auth/forgot-password.usecase";
 export{SendPasswordRestLinkUseCase} from "@application/usecases/auth/send-password-reset-link.usecase";
 export {LoggerUseCase} from "@application/usecases/handle-log-usecase";
+
+// ProviderUseCases
+
 export {VerifyProviderUseCase} from "@application/usecases/admin/verify-provider.usecase";
 export {RejectProviderUseCase} from "@application/usecases/admin/reject-provider.usecase";
 export {GetPendingProvidersUseCase} from "@application/usecases/admin/get-pending-provider.usecase";
+
+export {CompleteProviderProfileUseCase} from "@application/usecases/provider/completeProviderProfile.usecase";
+export {GetProviderProfileUseCase} from "@application/usecases/provider/getProviderProfile.usecase"
 
 
 
@@ -39,7 +45,15 @@ export {SignOutController} from"@presentation/controllers/auth/sign-out.controll
 export {RefreshAccessTokenController} from "@presentation/controllers/auth/refresh-access-token.controller";
 export {ForgotPasswordController} from "@presentation/controllers/auth/forget-password.controller";
 export {PasswordResetLinkController} from "presentation/controllers/auth/genereate-password-link.controller";
+
+// Admin Controllers
+
 export {ProviderVerificationController} from "@presentation/controllers/admin/provider-verification.controller";
+
+// Provider Controllers
+export {CompleteProviderProfileController} from "@presentation/controllers/provider/completeProviderProfile.controller";
+export {GetProviderProfileController} from "@presentation/controllers/provider/getProviderProfile.controller";
+
 
 // Repository Interfaces
 export {IUserRepository} from "@domain/interfaces/IUserRepository"
@@ -70,8 +84,11 @@ export {ISendPasswordRestLinkUseCase} from "@application/interfaces/usecase/ISen
 export {ISignInUseCase} from "@application/interfaces/usecase/ISignin-user.usecase";
 export {ITokenUseCase} from "@application/interfaces/usecase/IToken.usecase";
 export {ILoggerUseCase} from "@application/interfaces/usecase/ILogger-usecase";
+
+
 export {IGetPendingProvidersUseCase} from "@application/interfaces/usecase/IGetPendingProviderUsecase";
 export {IRejectProviderUseCase} from "@application/interfaces/usecase/IRejectedProviderUsecase";
 export {IVerifyProviderUseCase} from "@application/interfaces/usecase/IVerifyProviderUsecase";
 
-
+export {ICompleteProviderProfileUseCase} from "@application/interfaces/usecase/ICompleteProvider-profileUsecase";
+export {IGetProviderProfileUseCase} from "@application/interfaces/usecase/IGetProviderProfileUsecase";
