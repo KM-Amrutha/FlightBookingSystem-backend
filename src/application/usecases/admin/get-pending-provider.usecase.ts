@@ -15,7 +15,8 @@ export class GetPendingProvidersUseCase implements IGetPendingProvidersUseCase {
     return await this._providerRepository.findMany({ 
       isVerified: true,
       adminApproval: false,
-      isActive: true 
+      isActive: true,
+      isProfileComplete: true
     });
   }
 }

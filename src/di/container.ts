@@ -2,6 +2,7 @@ import { Container } from "inversify";
 
 import {
     TYPES_AUTH_CONTROLLERS,
+    TYPES_ADMIN_CONTROLLERS,
     TYPES_PROVIDER_CONTROLLERS
 
 } from "@di/types-controllers"
@@ -24,7 +25,12 @@ SignOutController,
 RefreshAccessTokenController,
  ForgotPasswordController,
  PasswordResetLinkController,
+
  ProviderVerificationController,
+
+ CompleteProviderProfileController,
+ GetProviderProfileController,
+
 
 IUserRepository,
 IOtpRepository,
@@ -65,10 +71,12 @@ SignInUseCase,
 ForgotPasswordUseCase,
 SendPasswordRestLinkUseCase,
 LoggerUseCase,
+
 GetPendingProvidersUseCase,
 VerifyProviderUseCase,
 RejectProviderUseCase,
-
+CompleteProviderProfileUseCase,
+GetProviderProfileUseCase,
 
 ICheckUserBlockStatusUseCase,
 ICreateProviderUseCase,
@@ -81,7 +89,9 @@ ITokenUseCase,
 ILoggerUseCase,
 IGetPendingProvidersUseCase,
 IRejectProviderUseCase,
-IVerifyProviderUseCase
+IVerifyProviderUseCase,
+ICompleteProviderProfileUseCase,
+IGetProviderProfileUseCase
 
 } from "@di/file-imports-index";
 
@@ -118,6 +128,8 @@ container.bind<ILoggerUseCase>(TYPES_LOGGER_USECASES.LoggerUseCase).to(LoggerUse
 container.bind<IGetPendingProvidersUseCase>(TYPES_PROVIDER_USECASES.GetPendingProvidersUseCase).to(GetPendingProvidersUseCase);
 container.bind<IRejectProviderUseCase>(TYPES_PROVIDER_USECASES.RejectProviderUseCase).to(RejectProviderUseCase);
 container.bind<IVerifyProviderUseCase>(TYPES_PROVIDER_USECASES.VerifyProviderUseCase).to(VerifyProviderUseCase);
+container.bind<ICompleteProviderProfileUseCase>(TYPES_PROVIDER_USECASES.CompleteProviderProfileUseCase).to(CompleteProviderProfileUseCase);
+container.bind<IGetProviderProfileUseCase>(TYPES_PROVIDER_USECASES.GetProviderProfileUseCase).to(GetProviderProfileUseCase)
 
 
 
@@ -130,7 +142,13 @@ container.bind(TYPES_AUTH_CONTROLLERS.SignOutController).to(SignOutController);
 container.bind(TYPES_AUTH_CONTROLLERS.RefreshAccessTokenController).to(RefreshAccessTokenController);
 container.bind(TYPES_AUTH_CONTROLLERS.ForgotPasswordController).to( ForgotPasswordController);
 container.bind(TYPES_AUTH_CONTROLLERS.PasswordResetLinkController).to(PasswordResetLinkController);
-container.bind(TYPES_PROVIDER_CONTROLLERS.ProviderVerificationController).to(ProviderVerificationController);
+
+container.bind(TYPES_ADMIN_CONTROLLERS.ProviderVerificationController).to(ProviderVerificationController);
+
+container.bind(TYPES_PROVIDER_CONTROLLERS.CompleteProviderProfileController).to(CompleteProviderProfileController);
+container.bind(TYPES_PROVIDER_CONTROLLERS.GetProviderProfileController).to(GetProviderProfileController);
+
+
 
 export { container };
 

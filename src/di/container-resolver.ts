@@ -12,6 +12,9 @@ import {
    PasswordResetLinkController,
    ProviderVerificationController,
 
+    CompleteProviderProfileController,
+    GetProviderProfileController,
+
 CreateProviderUseCase,
 CreateUserUseCase,
   TokenUseCase,
@@ -22,6 +25,8 @@ CreateUserUseCase,
     GetPendingProvidersUseCase,
     RejectProviderUseCase,
     VerifyProviderUseCase,
+    CompleteProviderProfileUseCase,
+    GetProviderProfileUseCase,
 
    ICheckUserBlockStatusUseCase,
    ICreateProviderUseCase,
@@ -35,10 +40,12 @@ CreateUserUseCase,
    IGetPendingProvidersUseCase,
    IRejectProviderUseCase,
    IVerifyProviderUseCase,
+   IGetProviderProfileUseCase,
+   ICompleteProviderProfileUseCase
 
 } from "@di/file-imports-index"
 
-import {TYPES_AUTH_CONTROLLERS, TYPES_PROVIDER_CONTROLLERS} from "@di/types-controllers";
+import {TYPES_AUTH_CONTROLLERS, TYPES_ADMIN_CONTROLLERS, TYPES_PROVIDER_CONTROLLERS} from "@di/types-controllers";
 import {TYPES_AUTH_USECASES, TYPES_LOGGER_USECASES,TYPES_PROVIDER_USECASES} from "@di/types-usecases";
 import {TYPES_SERVICES} from "di/types-services"
 
@@ -51,8 +58,10 @@ export const signOutController = container.get<SignOutController>(TYPES_AUTH_CON
 export const refreshAccessTokenController = container.get<RefreshAccessTokenController>(TYPES_AUTH_CONTROLLERS.RefreshAccessTokenController);
 export const  forgotPasswordController = container.get<ForgotPasswordController>(TYPES_AUTH_CONTROLLERS.ForgotPasswordController);
 export const passwordResetLinkController = container.get<PasswordResetLinkController>(TYPES_AUTH_CONTROLLERS.PasswordResetLinkController);
-export const providerVerificationController = container.get<ProviderVerificationController>(TYPES_PROVIDER_CONTROLLERS.ProviderVerificationController);
+export const providerVerificationController = container.get<ProviderVerificationController>(TYPES_ADMIN_CONTROLLERS.ProviderVerificationController);
 
+export const completeProviderProfileController = container.get<CompleteProviderProfileController>(TYPES_PROVIDER_CONTROLLERS.CompleteProviderProfileController);
+export const getProviderProfileController = container.get<GetProviderProfileController>(TYPES_PROVIDER_CONTROLLERS.GetProviderProfileController);
 
 
 export const createUseUseCase = container.get<ICreateUserUseCase>(TYPES_AUTH_USECASES.CreateUserUseCase);
@@ -67,3 +76,5 @@ export const loggerUseCase = container.get<ILoggerUseCase>(TYPES_LOGGER_USECASES
 export const getPendingProvidersUseCase = container.get<IGetPendingProvidersUseCase>(TYPES_PROVIDER_USECASES.GetPendingProvidersUseCase)
 export const rejectProviderUseCase = container.get<IRejectProviderUseCase>(TYPES_PROVIDER_USECASES.RejectProviderUseCase);
 export const verifyProviderUseCase = container.get<IVerifyProviderUseCase>(TYPES_PROVIDER_USECASES.VerifyProviderUseCase);
+export const completeProviderProfileUseCase = container.get<ICompleteProviderProfileUseCase>(TYPES_PROVIDER_USECASES.CompleteProviderProfileUseCase);
+export const getProviderProfileUseCase = container.get<IGetProviderProfileUseCase>(TYPES_PROVIDER_USECASES.GetProviderProfileUseCase)

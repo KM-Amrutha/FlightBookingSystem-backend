@@ -11,7 +11,12 @@ export const TYPES_AUTH_CONTROLLERS = {
     
 }
 
-export const TYPES_PROVIDER_CONTROLLERS = {
+export const TYPES_ADMIN_CONTROLLERS = {
     ProviderVerificationController : Symbol.for("ProviderVerificationController"),
     
+}
+
+export const TYPES_PROVIDER_CONTROLLERS = {
+    CompleteProviderProfileController : Symbol.for("CompleteProviderProfileController"),
+    GetProviderProfileController : Symbol.for("GetProviderProfileController"),
 }

@@ -13,6 +13,20 @@ export class ProviderRepository
     super(model);
   }
 
+  async completeProviderProfile(
+    providerId: string, 
+    profileData: UpdateProviderDTO
+  ): Promise<void> {
+    await this.model.findByIdAndUpdate(
+      providerId,
+      {
+        ...profileData,
+        isProfileComplete: true
+      },
+      { new: true }
+    ).exec();
+  }
+
   async getProviderDetailsById(providerId: string): Promise<Provider> {
     const providerData = await this.model.aggregate([
       {
@@ -27,21 +41,22 @@ export class ProviderRepository
           email: 1,
           mobile: 1,
           airlineCode: 1,
-          logo_url: 1,
-          registration_certificate_url: 1,
-          insurance_proof_url: 1,
-          establishment_year: 1,
-          license_expiry_date: 1,
-          headquarters_address: 1,
-          country_of_operation: 1,
-          type_of_operation: 1,
-          website_url: 1,
-          ceo_name: 1,
-          office_contact_number: 1,
-          created_at: 1,
-          updated_at: 1,
+          logoUrl: 1,
+          registrationCertificateUrl: 1,
+          insuranceProofUrl: 1,
+          establishmentYear: 1,
+          licenseExpiryDate: 1,
+          headquartersAddress: 1,
+          countryOfOperation: 1,
+          typeOfOperation: 1,
+          websiteUrl: 1,
+          ceoName: 1,
+          officeContactNumber: 1,
+          createdAt: 1,
+          updatedAt: 1,
           isActive: 1,
           isVerified: 1,
+          isProfileComplete: 1
         },
       },
     ]);
@@ -63,21 +78,22 @@ export class ProviderRepository
           mobile: 1,
           password: 1,
           airlineCode: 1,
-          logo_url: 1,
-          registration_certificate_url: 1,
-          insurance_proof_url: 1,
-          establishment_year: 1,
-          license_expiry_date: 1,
-          headquarters_address: 1,
-          country_of_operation: 1,
-          type_of_operation: 1,
-          website_url: 1,
-          ceo_name: 1,
-          office_contact_number: 1,
-          created_at: 1,
-          updated_at: 1,
+          logoUrl: 1,
+          registrationCertificateUrl: 1,
+          insuranceProofUrl: 1,
+          establishmentYear: 1,
+          licenseExpiryDate: 1,
+          headquartersAddress: 1,
+          countryOfOperation: 1,
+          typeOfOperation: 1,
+          websiteUrl: 1,
+          ceoName: 1,
+          officeContactNumber: 1,
+          createdAt: 1,
+          updatedAt: 1,
           isActive: 1,
           isVerified: 1,
+          isProfileComplete: 1
         },
       },
     ]);
@@ -98,21 +114,22 @@ export class ProviderRepository
           email: 1,
           mobile: 1,
           airlinCode: 1,
-          logo_url: 1,
-          registration_certificate_url: 1,
-          insurance_proof_url: 1,
-          establishment_year: 1,
-          license_expiry_date: 1,
-          headquarters_address: 1,
-          country_of_operation: 1,
-          type_of_operation: 1,
-          website_url: 1,
-          ceo_name: 1,
-          office_contact_number: 1,
-          created_at: 1,
-          updated_at: 1,
+          logoUrl: 1,
+          registrationCertificateUrl: 1,
+          insuranceProofUrl: 1,
+          establishmentYear: 1,
+          licenseExpiryDate: 1,
+          headquartersAddress: 1,
+          countryOfOperation: 1,
+          typeOfOperation: 1,
+          websiteUrl: 1,
+          ceoName: 1,
+          officeContactNumber: 1,
+          createdAt: 1,
+          updatedAt: 1,
           isActive: 1,
           isVerified: 1,
+          isProfileComplete: 1
         },
       },
     ]);
@@ -133,19 +150,20 @@ export class ProviderRepository
           email: 1,
           mobile: 1,
           airlineCode: 1,
-          logo_url: 1,
-          establishment_year: 1,
-          headquarters_address: 1,
-          country_of_operation: 1,
-          type_of_operation: 1,
-          website_url: 1,
-          created_at: 1,
-          updated_at: 1,
+          logoUrl: 1,
+          establishmentYear: 1,
+          headquartersAddress: 1,
+          countryOfOperation: 1,
+          typeOfOperation: 1,
+          websiteUrl: 1,
+          createdAt: 1,
+          updatedAt: 1,
           isActive: 1,
           isVerified: 1,
+          isProfileComplete: 1
         },
       },
-    ]).sort({ created_at: -1 });
+    ]).sort({ createdAt: -1 });
     return providersData;
   }
 
@@ -164,19 +182,20 @@ export class ProviderRepository
           email: 1,
           mobile: 1,
           airlineCode: 1,
-          logo_url: 1,
-          establishment_year: 1,
-          headquarters_address: 1,
-          country_of_operation: 1,
-          type_of_operation: 1,
-          website_url: 1,
-          created_at: 1,
-          updated_at: 1,
+          logoUrl: 1,
+          establishmentYear: 1,
+          headquartersAddress: 1,
+          countryOfOperation: 1,
+          typeOfOperation: 1,
+          websiteUrl: 1,
+          createdAt: 1,
+          updatedAt: 1,
           isActive: 1,
           isVerified: 1,
+          isProfileComplete: 1
         },
       },
-    ]).sort({ created_at: -1 });
+    ]).sort({ createdAt: -1 });
     return providersData;
   }
 

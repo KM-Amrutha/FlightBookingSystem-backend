@@ -47,5 +47,5 @@ export interface PasswordResetDTO {
 
 export interface UpdateBlockStatusDTO {
   userId: string;
-  isBlocked: boolean;
+  isActive: boolean;
 }

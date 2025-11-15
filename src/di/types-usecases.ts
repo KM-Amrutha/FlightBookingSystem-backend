@@ -18,6 +18,8 @@ export const TYPES_LOGGER_USECASES = {
 export const  TYPES_PROVIDER_USECASES = {
   GetPendingProvidersUseCase: Symbol.for("GetPendingProvidersUseCase"),
     RejectProviderUseCase: Symbol.for("RejectProviderUseCase"),
-    VerifyProviderUseCase:Symbol.for("VerifyProviderUseCase")
+    VerifyProviderUseCase:Symbol.for("VerifyProviderUseCase"),
 
+      CompleteProviderProfileUseCase:Symbol.for("CompleteProviderProfileUseCase"),
+      GetProviderProfileUseCase:Symbol.for("GetProviderProfileUseCase")
 }
