@@ -6,18 +6,22 @@ const seatLayoutSchema = new Schema<ISeatLayout>(
     aircraftId: {
       type: String,
       required: [true, "Aircraft ID is required"],
-      ref: "Aircraft"
+      ref: "Aircraft",
+      index: true
     },
     cabinClass: {
       type: String,
       required: [true, "Cabin class is required"],
       lowercase: true,
-      enum: ["economy", "premium_economy", "business", "first"]
+      enum: {
+        values: ["economy", "premium_economy", "business", "first"],
+        message: "{VALUE} is not a valid cabin class"
+      }
     },
-    rowsConfiguration: {
+    layout: {
       type: String,
-      required: [true, "Rows configuration is required"],
-      match: [/^\d+-\d+(-\d+)?$/, "Format must be like 3-3 or 2-4-2"]
+      required: [true, "Layout is required"],
+      match: [/^\d+-\d+(-\d+)?$/, "Format must be like 3-3 or 2-4-2 or 1-2-1"]
     },
     startRow: {
       type: Number,
@@ -37,7 +41,7 @@ const seatLayoutSchema = new Schema<ISeatLayout>(
     },
     totalRows: {
       type: Number,
-      required: [true, "Total rows is required"],
+      required: [false, "total row is not required"],
       min: 1
     },
     seatsPerRow: {
@@ -45,6 +49,16 @@ const seatLayoutSchema = new Schema<ISeatLayout>(
       required: [true, "Seats per row is required"],
       min: [1, "Must have at least 1 seat per row"],
       max: [12, "Cannot exceed 12 seats per row"]
+    },
+    columns: {
+      type: [String],
+      required: [true, "Columns are required"],
+      validate: {
+        validator: function(arr: string[]) {
+          return arr.length > 0 && arr.every(val => /^[A-K]$/.test(val));
+        },
+        message: "Columns must be array of single letters A-K"
+      }
     },
     aisleColumns: {
       type: [String],
@@ -55,6 +69,10 @@ const seatLayoutSchema = new Schema<ISeatLayout>(
         },
         message: "Aisle columns must be in format like C-D"
       }
+    },
+    exitRows: {
+      type: [Number],
+      default: []
     },
     wingStartRow: {
       type: Number,
@@ -80,6 +98,5 @@ seatLayoutSchema.pre("save", function(next) {
   next();
 });
 
- const SeatLayout = model<ISeatLayout>("SeatLayout", seatLayoutSchema);
- export default SeatLayout;
- 
+const SeatLayout = model<ISeatLayout>("SeatLayout", seatLayoutSchema);
+export default SeatLayout;

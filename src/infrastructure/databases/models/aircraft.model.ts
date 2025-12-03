@@ -36,7 +36,7 @@ const aircraftSchema: Schema = new Schema(
     },
     seatLayoutType: {
       type: String,
-      required: true,
+      required: false,
       trim: true
     },
     flyingRangeKm: {

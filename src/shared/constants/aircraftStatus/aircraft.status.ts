@@ -1,0 +1,16 @@
+export enum AircraftStatus {
+  Created = "Aircraft has been successfully created and added to your fleet.",
+  CreationFailed = "Failed to create aircraft. Please try again later.",
+  Updated = "Aircraft details have been successfully updated.",
+  UpdateFailed = "Failed to update aircraft details. Please try again.",
+  NotFound = "The aircraft you are looking for does not exist.",
+  Deleted = "Aircraft has been successfully removed from your fleet.",
+  DeleteFailed = "Failed to delete aircraft. Please try again.",
+  StatusUpdated = "Aircraft status has been successfully changed.",
+  InvalidAircraftType = "The aircraft type you selected is not valid.",
+  InvalidCapacity = "Seat capacity must be greater than 0.",
+  InvalidBuildYear = "Build year must be between 1900 and current year.",
+  ProviderNotFound = "Provider account not found. Please verify provider ID.",
+  StationNotFound = "The specified station does not exist.",
+  AlreadyExists = "An aircraft with this name already exists for this provider.",
+}

@@ -5,5 +5,6 @@ export enum ProviderStatus {
   Rejected = "Trainer's application has been rejected. Please try again",
   FailedToRetrieveProviderDetails = "Failed to retrieve provider details",
   ProviderDetailsRetrieved = "provider details retrieved successfully",
+  ProviderNotFound = "Provider not found",
 
 }

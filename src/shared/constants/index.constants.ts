@@ -9,5 +9,6 @@ export * from "@shared/constants/authStatus/profile.status";
 export * from "@shared/constants/commonStatus/application.status";
 export * from "@shared/constants/commonStatus/dashboard.status";
 
-export * from "@shared/constants/userStatus/user.status"
-export * from "@shared/constants/providerStatus/provider.status"
+export * from "@shared/constants/userStatus/user.status";
+export * from "@shared/constants/providerStatus/provider.status";
+export * from "@shared/constants/aircraftStatus/aircraft.status";

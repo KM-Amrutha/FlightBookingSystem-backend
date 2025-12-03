@@ -1,7 +1,7 @@
 import mongoose, { Document } from "mongoose";
 
 export interface ISeat extends Document {
- _id: string;
+  _id: string;
   aircraftId: string;
   seatTypeId: string;
   seatNumber: string; // "12A", "15F"
@@ -10,7 +10,9 @@ export interface ISeat extends Document {
   section: string; // "front" | "middle" | "rear" | "overwing"
   position: string; // "window" | "middle" | "aisle"
   isExitRow: boolean;
-  isBlocked: boolean; // for lavatories, galleys
+  isBlocked: boolean;
+  blockReason?: string; 
   features: string[]; // ["extra legroom", "power outlet"]
   createdAt: Date;
+  updatedAt: Date; 
 }

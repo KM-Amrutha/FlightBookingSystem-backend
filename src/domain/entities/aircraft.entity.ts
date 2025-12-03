@@ -16,7 +16,8 @@ export interface IAircraft extends Document {
   currentLocationId: string;
   availableFrom: Date;
   status: "active" | "inactive" | "maintenance";
-  createdAt: Date;
+  createdAt: Date; 
+  updatedAt: Date;
 }
 
 

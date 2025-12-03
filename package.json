@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc",
     "start": "node -r module-alias/register dist/config/index.js",
-    "dev": "nodemon -r tsconfig-paths/register src/config/index.ts"
+    "dev": "nodemon -r tsconfig-paths/register src/config/index.ts",
+    "seed:airports": "ts-node src/scripts/seed-airports.ts",
+    "seed:seats": "ts-node src/scripts/seed-seatTypes.ts"
   },
   "_moduleAliases": {
     "@shared": "dist/shared",
@@ -28,12 +30,14 @@
     "cloudinary": "^2.7.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "express-async-handler": "^1.2.0",
     "express-rate-limit": "^8.1.0",
     "express-validator": "^7.2.1",
+    "geo-tz": "^8.1.4",
     "google-auth-library": "^10.3.0",
     "inversify": "^7.9.1",
     "jsonwebtoken": "^9.0.2",

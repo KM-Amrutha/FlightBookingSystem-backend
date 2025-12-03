@@ -44,6 +44,11 @@ export class ForbiddenError extends AppError {
     super(message, StatusCodes.Forbidden);
   }
 }
+export class ConflictError extends AppError {
+  constructor(message: string) {
+    super(message, StatusCodes.Conflict); 
+  }
+}
 
 export const errorMiddleware = (
   err: AppError,

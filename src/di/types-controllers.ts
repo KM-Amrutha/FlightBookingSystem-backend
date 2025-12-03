@@ -1,4 +1,3 @@
-
 export const TYPES_AUTH_CONTROLLERS = {
     SignUpUserController: Symbol.for("SignUpUserController"),
     SignUpProviderController: Symbol.for("SignUpProviderController"),
@@ -19,4 +18,17 @@ export const TYPES_ADMIN_CONTROLLERS = {
 export const TYPES_PROVIDER_CONTROLLERS = {
     CompleteProviderProfileController : Symbol.for("CompleteProviderProfileController"),
     GetProviderProfileController : Symbol.for("GetProviderProfileController"),
+}
+
+export const TYPES_AIRCRAFT_CONTROLLERS = {
+    CreateAircraftController: Symbol.for("CreateAircraftController"),
+    GetProviderAircraftsController: Symbol.for("GetProviderAircraftsController"),
+    UpdateAircraftController: Symbol.for("UpdateAircraftController"),
+    DeleteAircraftController: Symbol.for("DeleteAircraftController"),
+    SearchDestinationsController: Symbol.for("SearchDestinationsController"),
+    GetAllSeatTypesController: Symbol.for("GetAllSeatTypesController"),
+    CreateSeatLayoutController: Symbol.for("CreateSeatLayoutController"),
+    GenerateSeatsController: Symbol.for("GenerateSeatsController"), 
+    GetSeatLayoutsController: Symbol.for("GetSeatLayoutsController"),
+    DeleteSeatLayoutController: Symbol.for("DeleteSeatLayoutController")
 }

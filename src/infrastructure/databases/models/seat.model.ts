@@ -1,31 +1,33 @@
-import mongoose, { Schema,model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 import { ISeat } from "@domain/entities/seat.entity";
-
 
 const seatSchema = new Schema<ISeat>(
   {
     aircraftId: {
       type: String,
       required: [true, "Aircraft ID is required"],
-      ref: "Aircraft"
+      ref: "Aircraft",
+      index: true
     },
     seatTypeId: {
       type: String,
       required: [true, "Seat type ID is required"],
-      ref: "SeatType"
+      ref: "SeatType",
+      index: true
     },
     seatNumber: {
       type: String,
       required: [true, "Seat number is required"],
       trim: true,
       uppercase: true,
-      match: [/^\d{1,2}[A-Z]$/, "Seat number must be in format like 12A"]
+      match: [/^\d{1,2}[A-K]$/, "Seat number must be in format like 12A"]
     },
     rowNumber: {
       type: Number,
       required: [true, "Row number is required"],
       min: [1, "Row number must be at least 1"],
-      max: [100, "Row number cannot exceed 100"]
+      max: [100, "Row number cannot exceed 100"],
+      index: true
     },
     columnPosition: {
       type: String,
@@ -49,15 +51,22 @@ const seatSchema = new Schema<ISeat>(
       enum: {
         values: ["window", "middle", "aisle"],
         message: "{VALUE} is not a valid position"
-      }
+      },
+      index: true
     },
     isExitRow: {
       type: Boolean,
-      default: false
+      default: false,
+      index: true
     },
     isBlocked: {
       type: Boolean,
-      default: false
+      default: false,
+      index: true
+    },
+    blockReason: {
+      type: String,
+      trim: true
     },
     features: {
       type: [String],
@@ -73,8 +82,6 @@ seatSchema.index({ aircraftId: 1, seatNumber: 1 }, { unique: true });
 seatSchema.index({ aircraftId: 1, rowNumber: 1 });
 seatSchema.index({ aircraftId: 1, seatTypeId: 1 });
 seatSchema.index({ aircraftId: 1, isBlocked: 1 });
-seatSchema.index({ position: 1, isExitRow: 1 });
 
 const Seat = model<ISeat>("Seat", seatSchema);
-
 export default Seat;

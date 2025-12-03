@@ -1,12 +1,16 @@
-import mongoose, { Document } from "mongoose";
+import { Document } from "mongoose";
 
 export interface IDestination extends Document {
   _id: string;
-  airportCode: string;
-  airportName: string;
-  city: string;
-  country: string;
+  name: string;
+  iataCode: string;
+  icaoCode?: string;
+  municipality: string;
+  isoCountry: string;
   latitude: number;
   longitude: number;
+  timezone: string;
+  isActive: boolean;
   createdAt: Date;
+  updatedAt: Date;
 }
