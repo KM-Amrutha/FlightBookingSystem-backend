@@ -2,14 +2,14 @@ import { Request, Response } from "express";
 import { injectable, inject } from "inversify";
 import { sendResponse } from "@shared/utils/http.response";
 import { StatusCodes } from "@shared/constants/index.constants";
-import { TYPES_ARICRAFT_USECASES } from "@di/types-usecases";
+import { TYPES_AIRCRAFT_USECASES } from "@di/types-usecases";
 import { IUpdateAircraftUseCase } from "@di/file-imports-index";
 import { UpdateAircraftDTO } from "@application/dtos/aircraft-dtos";
 
 @injectable()
 export class UpdateAircraftController {
   constructor(
-    @inject(TYPES_ARICRAFT_USECASES.UpdateAircraftUseCase)
+    @inject(TYPES_AIRCRAFT_USECASES.UpdateAircraftUseCase)
     private _updateAircraftUseCase: IUpdateAircraftUseCase
   ) {}
 

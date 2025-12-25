@@ -7,7 +7,7 @@ import { IUserRepository,
  } from "@di/file-imports-index";
 
 import { PasswordResetDTO } from "@application/dtos/auth-dtos";
-import { AuthStatus, PasswordStatus } from "@shared/constants/index.constants";
+import { AUTH_MESSAGES, PASSWORD_MESSAGES } from "@shared/constants/index.constants";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { injectable, inject } from "inversify";
 import { TYPES_REPOSITORIES } from "@di/types-repositories";
@@ -34,12 +34,12 @@ export class ForgotPasswordUseCase implements IForgotPasswordUseCase {
     });
 
     if (!tokenData) {
-      throw new validationError(PasswordStatus.LinkExpired);
+      throw new validationError(PASSWORD_MESSAGES.LINK_EXPIRED);
     }
     const { email } = tokenData;
     const userData = await this._userRepository.findOne({ email });
     if (!userData) {
-      throw new validationError(AuthStatus.EmailNotFound);
+      throw new validationError(AUTH_MESSAGES.EMAIL_NOT_FOUND);
     }
     if (password) {
       const hashedPassword = await this._encryptionService.hash(password);

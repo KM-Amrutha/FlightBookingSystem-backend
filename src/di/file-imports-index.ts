@@ -8,8 +8,7 @@ export {DestinationRepository} from "@infrastructure/databases/repositories/dest
 export {SeatRepository} from "@infrastructure/databases/repositories/seat.repository";
 export {SeatLayoutRepository} from "@infrastructure/databases/repositories/seatLayout.repository";
 export {SeatTypeRepository} from "@infrastructure/databases/repositories/seatType.repository";
-
-
+export {FlightRepository} from "@infrastructure/databases/repositories/flight.repository";
 
 // services
 export {JwtService} from "@infrastructure/services/auth/jwt.service";
@@ -53,6 +52,11 @@ export {GenerateSeatsUseCase} from "@application/usecases/aircraft/generate-seat
 export {GetAllSeatTypesUseCase} from "@application/usecases/aircraft/getall-seatTypes.usecase";
 export {GetSeatLayoutsByAircraftUseCase} from "@application/usecases/aircraft/getSeatLayoutBYAircraft.usecase"
 export {DeleteSeatLayoutUseCase} from "@application/usecases/aircraft/delete-seatLayout.usecase"
+export {CreateFlightUseCase} from "@application/usecases/flight/create-flight.usecase";
+export {GetProviderFlightsUseCase} from "@application/usecases/flight/getProvider-flightUsecase";   
+export {PendingFlightsForApprovalUseCase} from "@application/usecases/flight/pendingFlightsForApprovalUsecase";
+export {ApproveFlightUseCase} from "@application/usecases/flight/Approve-flight.usecase";
+export {AvailableAircraftsForScheduleUseCase} from "@application/usecases/flight/availableAircraftForSchedule.usecase";
 
 
 //   Authentication Controllers 
@@ -84,9 +88,14 @@ export {SearchDestinationsController} from "@presentation/controllers/provider/s
 export {GetAllSeatTypesController} from "@presentation/controllers/provider/getAllSeatTypes.controller";
 export {CreateSeatLayoutController} from "@presentation/controllers/provider/createSeatLayout.controller";
 export {GenerateSeatsController} from "@presentation/controllers/provider/generateSeats.controller";    
-export {GetSeatLayoutsController}  from "@presentation/controllers/provider/getSeatLayoutController";
+export {GetSeatLayoutsController}  from "@presentation/controllers/provider/getSeatLayout.controller";
 export {DeleteSeatLayoutController} from "@presentation/controllers/provider/deleteSeatLayout.controller"
 
+export {CreateFlightController} from "@presentation/controllers/flight/createFlight.controller";
+export {GetProviderFlightsController} from "@presentation/controllers/flight/getProviderFlights.controller";
+export {PendingFlightsForApprovalController} from "@presentation/controllers/flight/pendingFlightsForApproval.controller";
+export {ApproveFlightController} from "@presentation/controllers/flight/approveFlights.controller";
+export {AvailableAircraftsForScheduleController} from "@presentation/controllers/flight/availableFlightsForSchedule.controller";    
 
 
 
@@ -102,6 +111,8 @@ export {IDestinationRepository} from "@domain/interfaces/IDestinationRepository"
 export {ISeatRepository} from "@domain/interfaces/ISeatRepository";
 export {ISeatLayoutRepository} from "@domain/interfaces/ISeatLayoutRepository";
 export {ISeatTypeRepository} from "@domain/interfaces/ISeatTypeRepository";
+export {IFlightRepository} from "@domain/interfaces/IFlightRepository";
+
 
 
 
@@ -150,3 +161,9 @@ export {IGenerateSeatsUseCase} from "@application/interfaces/usecase/aircraft/IG
 export {IGetAllSeatTypesUseCase} from "@application/interfaces/usecase/aircraft/IGetAll-seatTypesUsecase";
 export {IGetSeatLayoutsByAircraftUseCase} from "@application/interfaces/usecase/aircraft/IGetSeatLayoutByAircraft-usecase"
 export {IDeleteSeatLayoutUseCase} from "@application/interfaces/usecase/aircraft/IDelete-seatLayoutUsecase"
+export {ICreateFlightUseCase} from "@application/interfaces/usecase/flight/ICreate-flightUsecase";
+export {IGetProviderFlightsUseCase} from "@application/interfaces/usecase/flight/IGetProvider-flightUsecase";   
+
+export {IPendingFlightsForApprovalUseCase} from "@application/interfaces/usecase/flight/IPending-flightForApprovalUsecase";
+export {IApproveFlightUseCase} from "@application/interfaces/usecase/flight/IApprove-flightUsecase";
+export {IAvailableAircraftsForScheduleUsecase} from "@application/interfaces/usecase/flight/IAvailableAircraftsForSchedule-Usecase";    

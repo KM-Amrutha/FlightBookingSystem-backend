@@ -3,7 +3,7 @@ import {
   IProviderRepository 
 } from "@di/file-imports-index";
 import { AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
-import { AircraftStatus, AuthStatus, ApplicationStatus } from "@shared/constants/index.constants";
+import { AIRCRAFT_MESSAGES, AUTH_MESSAGES, APPLICATION_MESSAGES } from "@shared/constants/index.constants";
 import { validationError, NotFoundError, ForbiddenError, ConflictError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
@@ -25,15 +25,15 @@ export class DeleteAircraftUseCase implements IDeleteAircraftUseCase {
     ]);
 
     if (!provider) {
-      throw new NotFoundError(AircraftStatus.ProviderNotFound);
+      throw new NotFoundError(AIRCRAFT_MESSAGES.PROVIDER_NOT_FOUND);
     }
 
     if (isBlocked) {
-      throw new ForbiddenError(AuthStatus.AccountBlocked);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
     }
 
     if (!provider.isVerified) {
-      throw new ForbiddenError(AuthStatus.AccountNotVerified);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
     }
   }
 
@@ -44,7 +44,7 @@ export class DeleteAircraftUseCase implements IDeleteAircraftUseCase {
     const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
     
     if (!aircraft) {
-      throw new NotFoundError(AircraftStatus.NotFound);
+      throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
     }
 
     if (aircraft.providerId !== providerId) {
@@ -96,7 +96,7 @@ export class DeleteAircraftUseCase implements IDeleteAircraftUseCase {
  async execute(aircraftId: string, providerId: string): Promise<AircraftDetailsDTO> {
 
     if (!aircraftId || !providerId) {
-      throw new validationError(ApplicationStatus.AllFieldsAreRequired);
+      throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
 
     if (!aircraftId.match(/^[0-9a-fA-F]{24}$/)) {
@@ -117,7 +117,7 @@ export class DeleteAircraftUseCase implements IDeleteAircraftUseCase {
    const deletedAircraft = await this._aircraftRepository.deleteAircraft(aircraftId);
 
 if (!deletedAircraft) {
-  throw new NotFoundError(AircraftStatus.NotFound);
+  throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
 }
 
 return aircraft; 
@@ -132,7 +132,7 @@ return aircraft;
       ) {
         throw error;
       }
-      throw new validationError(AircraftStatus.DeleteFailed);
+      throw new validationError(AIRCRAFT_MESSAGES.DELETE_FAILED);
     }
   }
 }

@@ -1,7 +1,7 @@
 import { UploadApiResponse } from "cloudinary";
 import cloudinary from "@infrastructure/config/cloudinary.config";
 import { validationError } from "@presentation/middlewares/error.middleware";
-import { ApplicationStatus } from "@shared/constants/index.constants";
+import { APPLICATION_MESSAGES } from "@shared/constants/index.constants";
 import { ICloudStorageService } from "@application/interfaces/service/storage/ICloud.storage.service";
 import { UploadImage } from "@application/dtos/service/cloud.storage.service";
 import { injectable } from "inversify";
@@ -25,7 +25,7 @@ export class CloudinaryService implements ICloudStorageService {
       return result.secure_url;
     } catch (error: any) {
       console.log("Error while uploading to cloudinary:", error.message);
-      throw new validationError(ApplicationStatus.FailedToUploadToCloudinary);
+      throw new validationError(APPLICATION_MESSAGES.FAILED_TO_UPLOAD_TO_CLOUDINARY);
     }
   }
 }

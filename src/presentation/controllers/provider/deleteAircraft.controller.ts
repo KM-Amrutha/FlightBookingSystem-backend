@@ -2,13 +2,13 @@ import { Request, Response } from "express";
 import { injectable, inject } from "inversify";
 import { sendResponse } from "@shared/utils/http.response";
 import { StatusCodes } from "@shared/constants/index.constants";
-import { TYPES_ARICRAFT_USECASES } from "@di/types-usecases";
+import { TYPES_AIRCRAFT_USECASES } from "@di/types-usecases";
 import { IDeleteAircraftUseCase } from "@di/file-imports-index";
 
 @injectable()
 export class DeleteAircraftController {
   constructor(
-    @inject(TYPES_ARICRAFT_USECASES.DeleteAircraftUseCase)
+    @inject(TYPES_AIRCRAFT_USECASES.DeleteAircraftUseCase)
     private _deleteAircraftUseCase: IDeleteAircraftUseCase
   ) {}
 

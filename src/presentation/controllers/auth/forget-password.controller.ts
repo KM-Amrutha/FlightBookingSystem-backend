@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { injectable, inject } from "inversify";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { sendResponse } from "@shared/utils/http.response";
-import { StatusCodes, PasswordStatus } from "@shared/constants/index.constants";
+import { StatusCodes, PASSWORD_MESSAGES } from "@shared/constants/index.constants";
 import { ForgotPasswordUseCase } from "@application/usecases/auth/forgot-password.usecase";
 import { TYPES_AUTH_USECASES } from "@di/types-usecases";
 
@@ -28,6 +28,6 @@ export class ForgotPasswordController {
 
     await this._forgotPasswordUseCase.execute(resetData);
 
-    sendResponse(res, PasswordStatus.ResetSuccess, null,StatusCodes.OK,);
+    sendResponse(res, PASSWORD_MESSAGES.RESET_SUCCESS, null, StatusCodes.OK);
   }
 }

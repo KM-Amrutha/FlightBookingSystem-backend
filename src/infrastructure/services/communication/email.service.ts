@@ -2,9 +2,8 @@ import nodemailer, { Transporter } from "nodemailer";
 import dotenv from "dotenv";
 dotenv.config();
 import { injectable } from "inversify";
-import {
-    AuthStatus,
-    ApplicationStatus
+import{
+    APPLICATION_MESSAGES
 } from "@shared/constants/index.constants";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { IEmailService } from "@application/interfaces/service/communication/IEmail.service";
@@ -37,7 +36,7 @@ export class EmailService implements IEmailService {
   private validateEnv(): void {
     if (!this._emailUser || !this._emailPass) {
       throw new validationError(
-        ApplicationStatus.MissingEmailEnvironmentVariables
+        APPLICATION_MESSAGES.MISSING_EMAIL_ENVIRONMENT_VARIABLES
       );
     }
   }

@@ -2,6 +2,7 @@ import fs from 'fs';
 import csv from 'csv-parser';
 import mongoose from 'mongoose';
 import DestinationModel from '../infrastructure/databases/models/destination.model';
+// import { IDestination } from '@domain/entities/destination.entity';
 import { find } from 'geo-tz';
 import * as dotenv from 'dotenv';
 
@@ -63,9 +64,11 @@ async function seedAirports() {
       })
       .on('error', (error) => {
         process.exit(1);
+        console.log(error);
       });
   } catch (error) {
     process.exit(1);
+    console.log(error);
   }
 }
 

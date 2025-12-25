@@ -4,7 +4,7 @@ import {
   IDestinationRepository
 } from "@di/file-imports-index";
 import { UpdateAircraftLocationDTO, AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
-import { AircraftStatus, AuthStatus, ApplicationStatus } from "@shared/constants/index.constants";
+import { AIRCRAFT_MESSAGES, AUTH_MESSAGES, APPLICATION_MESSAGES } from "@shared/constants/index.constants";
 import { validationError, NotFoundError, ForbiddenError, ConflictError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
@@ -28,15 +28,15 @@ export class UpdateAircraftLocationUseCase implements IUpdateAircraftLocationUse
     ]);
 
     if (!provider) {
-      throw new NotFoundError(AircraftStatus.ProviderNotFound);
+      throw new NotFoundError(AIRCRAFT_MESSAGES.PROVIDER_NOT_FOUND);
     }
 
     if (isBlocked) {
-      throw new ForbiddenError(AuthStatus.AccountBlocked);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
     }
 
     if (!provider.isVerified) {
-      throw new ForbiddenError(AuthStatus.AccountNotVerified);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
     }
   }
 
@@ -47,7 +47,7 @@ export class UpdateAircraftLocationUseCase implements IUpdateAircraftLocationUse
     const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
     
     if (!aircraft) {
-      throw new NotFoundError(AircraftStatus.NotFound);
+      throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
     }
 
     if (aircraft.providerId !== providerId) {
@@ -61,7 +61,7 @@ export class UpdateAircraftLocationUseCase implements IUpdateAircraftLocationUse
     const destination = await this._destinationRepository.findById(destinationId);
     
     if (!destination) {
-      throw new NotFoundError(AircraftStatus.StationNotFound);
+      throw new NotFoundError(AIRCRAFT_MESSAGES.STATION_NOT_FOUND);
     }
 
     if (!destination.isActive) {
@@ -83,14 +83,14 @@ export class UpdateAircraftLocationUseCase implements IUpdateAircraftLocationUse
     }
   }
 
-  private validateLocationChange(
-    currentLocationId: string,
-    newLocationId: string
-  ): void {
-    if (currentLocationId === newLocationId) {
-      throw new ConflictError("Aircraft is already at this location");
-    }
+ private validateLocationChange(
+  currentLocationId: string,
+  newLocationId: string
+): void {
+  if (currentLocationId === newLocationId) {
+    throw new ConflictError("Aircraft is already at this location");
   }
+}
 
   private async checkActiveFlights(aircraftId: string): Promise<void> {
     // TODO: Implement when FlightSchedule module is ready
@@ -157,50 +157,58 @@ export class UpdateAircraftLocationUseCase implements IUpdateAircraftLocationUse
   }
 
   async execute(
-    providerId: string, 
-    data: UpdateAircraftLocationDTO
-  ): Promise<AircraftDetailsDTO> {
-    if (!providerId || !data.aircraftId || !data.currentLocationId) {
-      throw new validationError(ApplicationStatus.AllFieldsAreRequired);
+  providerId: string, 
+  data: UpdateAircraftLocationDTO
+): Promise<AircraftDetailsDTO> {
+  if (!providerId || !data.aircraftId || !data.currentLocationId) {
+    throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
+  }
+
+  if (!data.aircraftId.match(/^[0-9a-fA-F]{24}$/)) {
+    throw new validationError("Invalid aircraft ID format");
+  }
+
+  if (!data.currentLocationId.match(/^[0-9a-fA-F]{24}$/)) {
+    throw new validationError("Invalid destination ID format");
+  }
+
+  const [aircraft] = await Promise.all([
+    this.validateOwnership(data.aircraftId, providerId),
+    this.validateProvider(providerId),
+    this.validateDestination(data.currentLocationId)
+  ]);
+
+  this.validateAircraftStatus(aircraft);
+
+  // ✅ use IDs, not object
+  this.validateLocationChange(
+    aircraft.currentLocationId,
+    data.currentLocationId
+  );
+
+  await this.validateFlightConstraints(
+    data.aircraftId,
+    data.currentLocationId
+  );
+
+  try {
+    const updatedAircraft = await this._aircraftRepository.updateAircraft(
+      data.aircraftId,
+      { currentLocationId: data.currentLocationId }
+    );
+
+    if (!updatedAircraft) {
+      throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
     }
 
-    if (!data.aircraftId.match(/^[0-9a-fA-F]{24}$/)) {
-      throw new validationError("Invalid aircraft ID format");
-    }
+    await this.logLocationChange(
+      data.aircraftId,
+      aircraft.currentLocationId,
+      data.currentLocationId,
+      providerId
+    );
 
-    if (!data.currentLocationId.match(/^[0-9a-fA-F]{24}$/)) {
-      throw new validationError("Invalid destination ID format");
-    }
-
-    const [aircraft] = await Promise.all([
-      this.validateOwnership(data.aircraftId, providerId),
-      this.validateProvider(providerId),
-      this.validateDestination(data.currentLocationId)
-    ]);
-
-    this.validateAircraftStatus(aircraft);
-    this.validateLocationChange(aircraft.currentLocationId, data.currentLocationId);
-
-    await this.validateFlightConstraints(data.aircraftId, data.currentLocationId);
-
-    try {
-      const updatedAircraft = await this._aircraftRepository.updateAircraft(
-        data.aircraftId,
-        { currentLocationId: data.currentLocationId }
-      );
-
-      if (!updatedAircraft) {
-        throw new NotFoundError(AircraftStatus.NotFound);
-      }
-
-      await this.logLocationChange(
-        data.aircraftId,
-        aircraft.currentLocationId,
-        data.currentLocationId,
-        providerId
-      );
-
-      return updatedAircraft;
+    return updatedAircraft;
     } catch (error) {
       if (
         error instanceof validationError || 

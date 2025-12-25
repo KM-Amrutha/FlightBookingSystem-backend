@@ -2,13 +2,13 @@ import { Request, Response } from "express";
 import { injectable, inject } from "inversify";
 import { sendResponse } from "@shared/utils/http.response";
 import { StatusCodes } from "@shared/constants/index.constants";
-import { TYPES_ARICRAFT_USECASES } from "@di/types-usecases";
+import { TYPES_AIRCRAFT_USECASES } from "@di/types-usecases";
 import { IGenerateSeatsUseCase } from "@di/file-imports-index";
 
 @injectable()
 export class GenerateSeatsController {
   constructor(
-    @inject(TYPES_ARICRAFT_USECASES.GenerateSeatsUseCase)
+    @inject(TYPES_AIRCRAFT_USECASES.GenerateSeatsUseCase)
     private _generateSeatsUseCase: IGenerateSeatsUseCase
   ) {}
 

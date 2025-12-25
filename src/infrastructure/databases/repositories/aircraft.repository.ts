@@ -107,56 +107,69 @@ export class AircraftRepository
     ]);
     return aircraftData[0];
   }
-
-  async getAircraftsByProvider(providerId: string): Promise<AircraftDetailsDTO[]> {
-    const aircraftsData = await this.model.aggregate([
-      {
-        $match: {
-          providerId: providerId
-        }
-      },
-      {
-        $lookup: {
-          from: "destinations",
-          localField: "currentLocationId",
-          foreignField: "_id",
-          as: "currentLocation"
-        }
-      },
-      {
-        $unwind: {
-          path: "$currentLocation",
-          preserveNullAndEmptyArrays: true
-        }
-      },
-      {
-        $project: {
-          _id: 1,
-          providerId: 1,
-          aircraftType: 1,
-          aircraftName: 1,
-          manufacturer: 1,
-          buildYear: 1,
-          seatCapacity: 1,
-          seatLayoutType: 1,
-          flyingRangeKm: 1,
-          engineCount: 1,
-          lavatoryCount: 1,
-          baseStationId: 1,
-          currentLocationId: 1,
-          availableFrom: 1,
-          status: 1,
-          createdAt: 1,
-          updatedAt: 1,
-          "currentLocation._id": 1,
-          "currentLocation.name": 1,
-          "currentLocation.city": 1,
-          "currentLocation.country": 1
-        }
+async getAircraftsByProvider(providerId: string): Promise<AircraftDetailsDTO[]> {
+  const aircraftsData = await this.model.aggregate([
+    {
+      $match: { providerId }
+    },
+    {
+      $addFields: {
+        baseStationObjectId: { $toObjectId: "$baseStationId" },
+        currentLocationObjectId: { $toObjectId: "$currentLocationId" }
       }
-    ]).sort({ createdAt: -1 });
-    return aircraftsData;
-  }
+    },
+    {
+      $lookup: {
+        from: "destinations",
+        localField: "baseStationObjectId",
+        foreignField: "_id",
+        as: "baseStation"
+      }
+    },
+    {
+      $lookup: {
+        from: "destinations",
+        localField: "currentLocationObjectId",
+        foreignField: "_id",
+        as: "currentLocation"
+      }
+    },
+    { $unwind: { path: "$baseStation", preserveNullAndEmptyArrays: true } },
+    { $unwind: { path: "$currentLocation", preserveNullAndEmptyArrays: true } },
+    {
+      $project: {
+        _id: 1,
+        providerId: 1,
+        aircraftType: 1,
+        aircraftName: 1,
+        manufacturer: 1,
+        buildYear: 1,
+        seatCapacity: 1,
+        seatLayoutType: 1,
+        flyingRangeKm: 1,
+        engineCount: 1,
+        lavatoryCount: 1,
+        baseStationId: 1,
+        currentLocationId: 1,
+        availableFrom: 1,
+        status: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        "baseStation._id": 1,
+        "baseStation.name": 1,
+        "baseStation.city": 1,
+        "baseStation.country": 1,
+        "currentLocation._id": 1,
+        "currentLocation.name": 1,
+        "currentLocation.city": 1,
+        "currentLocation.country": 1
+      }
+    }
+  ]).sort({ createdAt: -1 });
+
+  return aircraftsData;
+}
+
 
   async getAllAircrafts(): Promise<AircraftDetailsDTO[]> {
     const aircraftsData = await this.model.aggregate([
@@ -291,8 +304,8 @@ export class AircraftRepository
 async findByStatus(status: "active" | "inactive" | "maintenance"): Promise<IAircraft[]> {
   return await this.findMany({ status });
 }
-
-async findAvailableAircrafts(fromDate: Date): Promise<IAircraft[]> {
+// availableflightsusecase il use cheythitund...
+async availableAircraftsForSchedule(fromDate: Date): Promise<IAircraft[]> {
   return await this.findMany({   
     status: "active",
     availableFrom: { $lte: fromDate }

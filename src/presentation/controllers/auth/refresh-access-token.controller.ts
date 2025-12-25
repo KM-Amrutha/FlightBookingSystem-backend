@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { injectable, inject } from "inversify";
 import { sendResponse } from "@shared/utils/http.response";
-import { StatusCodes, JWTStatus } from "@shared/constants/index.constants";
+import { StatusCodes, JWT_MESSAGES } from "@shared/constants/index.constants";
 import { TokenUseCase } from "@application/usecases/auth/token.usecase";
 import { TYPES_AUTH_USECASES } from "@di/types-usecases";
 
@@ -21,7 +21,7 @@ export class RefreshAccessTokenController {
 
     sendResponse(
       res,
-      JWTStatus.TokenRefreshSuccess,
+      JWT_MESSAGES.TOKEN_REFRESH_SUCCESS,
       { newAccessToken },
       StatusCodes.OK,
     );

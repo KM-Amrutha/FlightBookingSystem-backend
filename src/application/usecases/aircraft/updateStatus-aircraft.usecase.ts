@@ -3,7 +3,7 @@ import {
   IProviderRepository 
 } from "@di/file-imports-index";
 import { UpdateAircraftStatusDTO, AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
-import { AircraftStatus, AuthStatus, ApplicationStatus } from "@shared/constants/index.constants";
+import { AIRCRAFT_MESSAGES, AUTH_MESSAGES,APPLICATION_MESSAGES } from "@shared/constants/index.constants";
 import { validationError, NotFoundError, ForbiddenError, ConflictError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
@@ -25,15 +25,15 @@ export class UpdateAircraftStatusUseCase implements IUpdateAircraftStatusUseCase
     ]);
 
     if (!provider) {
-      throw new NotFoundError(AircraftStatus.ProviderNotFound);
+      throw new NotFoundError(AIRCRAFT_MESSAGES.PROVIDER_NOT_FOUND);
     }
 
     if (isBlocked) {
-      throw new ForbiddenError(AuthStatus.AccountBlocked);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
     }
 
     if (!provider.isVerified) {
-      throw new ForbiddenError(AuthStatus.AccountNotVerified);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
     }
   }
 
@@ -44,7 +44,7 @@ export class UpdateAircraftStatusUseCase implements IUpdateAircraftStatusUseCase
     const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
     
     if (!aircraft) {
-      throw new NotFoundError(AircraftStatus.NotFound);
+      throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
     }
 
     if (aircraft.providerId !== providerId) {
@@ -143,7 +143,7 @@ export class UpdateAircraftStatusUseCase implements IUpdateAircraftStatusUseCase
     data: UpdateAircraftStatusDTO
   ): Promise<AircraftDetailsDTO> {
     if (!providerId || !data.aircraftId || !data.status) {
-      throw new validationError(ApplicationStatus.AllFieldsAreRequired);
+      throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
 
     if (!data.aircraftId.match(/^[0-9a-fA-F]{24}$/)) {
@@ -170,7 +170,7 @@ export class UpdateAircraftStatusUseCase implements IUpdateAircraftStatusUseCase
       );
 
       if (!updatedAircraft) {
-        throw new NotFoundError(AircraftStatus.NotFound);
+        throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
       }
 
       return updatedAircraft;

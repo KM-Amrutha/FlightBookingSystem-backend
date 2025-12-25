@@ -1,7 +1,7 @@
 import {Request,Response} from 'express'
 import { inject,injectable } from 'inversify'
 import { sendResponse } from "@shared/utils/http.response";
-import { AuthStatus, StatusCodes} from "@shared/constants/index.constants";
+import { AUTH_MESSAGES, StatusCodes} from "@shared/constants/index.constants";
 import { TYPES_AUTH_USECASES } from "@di/types-usecases";
 import { CreateProviderUseCase } from '@application/usecases/auth/create-provider.usecase';
 
@@ -23,6 +23,6 @@ export class SignUpProviderController {
     }as any;
     const createdTrainer = await this._createProviderUseCase.execute(mappedData);
 
-    sendResponse(res, AuthStatus.UserCreated,createdTrainer,StatusCodes.OK );
+    sendResponse(res, AUTH_MESSAGES.PROVIDER_CREATED,createdTrainer,StatusCodes.OK );
   }
 }

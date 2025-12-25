@@ -1,3 +1,4 @@
+
 export const TYPES_AUTH_USECASES = {
     CheckUserBlockStatusUseCase: Symbol.for("CheckUserBlockStatusUseCase"),
     TokenUseCase: Symbol.for("TokenUseCase"),
@@ -23,7 +24,7 @@ export const  TYPES_PROVIDER_USECASES = {
       GetProviderProfileUseCase:Symbol.for("GetProviderProfileUseCase")
 }
 
-export const TYPES_ARICRAFT_USECASES = {
+export const TYPES_AIRCRAFT_USECASES = {
   CreateAircraftUseCase: Symbol.for("CreateAircraftUseCase"),
   UpdateAircraftUseCase: Symbol.for("UpdateAircraftUseCase"),
   GetAircraftsUseCase: Symbol.for("GetAircraftsUseCase"),
@@ -35,6 +36,14 @@ export const TYPES_ARICRAFT_USECASES = {
   GenerateSeatsUseCase: Symbol.for("GenerateSeatsUseCase"),
   GetAllSeatTypesUseCase: Symbol.for("GetAllSeatTypesUseCase"),
   GetSeatLayoutsByAircraftUseCase: Symbol.for("GetSeatLayoutsByAircraftUseCase"),
-  DeleteSeatLayoutUseCase: Symbol.for("DeleteSeatLayoutUseCase")
+  DeleteSeatLayoutUseCase: Symbol.for("DeleteSeatLayoutUseCase"),
+
+  CreateFlightUseCase: Symbol.for("CreateFlightUseCase"),
+  GetProviderFlightsUseCase: Symbol.for("GetProviderFlightsUseCase"),
   
+  PendingFlightsForApprovalUseCase: Symbol.for("PendingFlightsForApprovalUseCase"),
+  ApproveFlightUseCase: Symbol.for("ApproveFlightUseCase"),
+  AvailableAircraftsForScheduleUseCase: Symbol.for("AvailableAircraftsForScheduleUseCase"),
+
+    
 }

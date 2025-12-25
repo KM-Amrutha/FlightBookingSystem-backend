@@ -1,7 +1,7 @@
 import { Request,Response, NextFunction } from "express";
 import {
     StatusCodes,
-    ApplicationStatus
+    APPLICATION_MESSAGES
 } from "@shared/constants/index.constants"
 import { sendResponse } from "@shared/utils/http.response";
 import { loggerUseCase } from "@di/container-resolver";
@@ -58,6 +58,6 @@ export const errorMiddleware = (
 ) => {
   loggerUseCase.LogError(err, req.originalUrl, err.message);
   const statusCode = err.statusCode || StatusCodes.InternalServerError;
-  const message = err.message || ApplicationStatus.InternalServerError;
+  const message = err.message || APPLICATION_MESSAGES.INTERNAL_SERVER_ERROR;
   sendResponse(res, message, null,statusCode,);
 };

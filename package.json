@@ -8,7 +8,9 @@
     "start": "node -r module-alias/register dist/config/index.js",
     "dev": "nodemon -r tsconfig-paths/register src/config/index.ts",
     "seed:airports": "ts-node src/scripts/seed-airports.ts",
-    "seed:seats": "ts-node src/scripts/seed-seatTypes.ts"
+    "seed:seats": "ts-node src/scripts/seed-seatTypes.ts",
+     "lint": "eslint .",
+     "lint:fix": "eslint . --fix"
   },
   "_moduleAliases": {
     "@shared": "dist/shared",
@@ -52,6 +54,7 @@
     "winston": "^3.17.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
@@ -62,8 +65,11 @@
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.3.1",
     "@types/otp-generator": "^4.0.2",
+    "eslint": "^9.39.2",
+    "globals": "^16.5.0",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.50.0"
   }
 }

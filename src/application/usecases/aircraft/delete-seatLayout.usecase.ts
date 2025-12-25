@@ -1,7 +1,6 @@
 import { 
   ISeatLayoutRepository 
 } from "@di/file-imports-index";
-import { SeatLayoutDetailsDTO } from "@application/dtos/seat-dtos";
 import { NotFoundError, validationError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";

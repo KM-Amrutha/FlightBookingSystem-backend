@@ -4,7 +4,7 @@ import {
   IDestinationRepository 
 } from "@di/file-imports-index";
 import { UpdateAircraftDTO, AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
-import { AircraftStatus, AuthStatus, ApplicationStatus } from "@shared/constants/index.constants";
+import { AIRCRAFT_MESSAGES, AUTH_MESSAGES, APPLICATION_MESSAGES } from "@shared/constants/index.constants";
 import { validationError, NotFoundError, ForbiddenError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import {TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
@@ -28,15 +28,15 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
     ]);
 
     if (!provider) {
-      throw new NotFoundError(AircraftStatus.ProviderNotFound);
+      throw new NotFoundError(AIRCRAFT_MESSAGES.PROVIDER_NOT_FOUND);
     }
 
     if (isBlocked) {
-      throw new ForbiddenError(AuthStatus.AccountBlocked);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
     }
 
     if (!provider.isVerified) {
-      throw new ForbiddenError(AuthStatus.AccountNotVerified);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
     }
   }
 
@@ -44,7 +44,7 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
     const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
     
     if (!aircraft) {
-      throw new NotFoundError(AircraftStatus.NotFound);
+      throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
     }
 
     if (aircraft.providerId !== providerId) {
@@ -68,7 +68,7 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
     );
 
     if (nameExists) {
-      throw new validationError(AircraftStatus.AlreadyExists);
+      throw new validationError(AIRCRAFT_MESSAGES.ALREADY_EXISTS);
     }
   }
 
@@ -76,7 +76,7 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
     const destination = await this._destinationRepository.findById(destinationId);
     
     if (!destination) {
-      throw new NotFoundError(AircraftStatus.StationNotFound);
+      throw new NotFoundError(AIRCRAFT_MESSAGES.STATION_NOT_FOUND);
     }
 
     if (!destination.isActive) {
@@ -87,7 +87,7 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
   private validateUpdateData(data: UpdateAircraftDTO): void {
     if (data.seatCapacity !== undefined) {
       if (data.seatCapacity <= 0) {
-        throw new validationError(AircraftStatus.InvalidCapacity);
+        throw new validationError(AIRCRAFT_MESSAGES.INVALID_CAPACITY);
       }
       if (data.seatCapacity > 1000) {
         throw new validationError("Seat capacity cannot exceed 1000");
@@ -97,7 +97,7 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
     if (data.buildYear !== undefined) {
       const currentYear = new Date().getFullYear();
       if (data.buildYear < 1900 || data.buildYear > currentYear) {
-        throw new validationError(AircraftStatus.InvalidBuildYear);
+        throw new validationError(AIRCRAFT_MESSAGES.INVALID_BUILD_YEAR);
       }
     }
 
@@ -150,7 +150,7 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
     data: UpdateAircraftDTO
   ): Promise<AircraftDetailsDTO> {
     if (!aircraftId || !providerId) {
-      throw new validationError(ApplicationStatus.AllFieldsAreRequired);
+      throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
 
     if (Object.keys(data).length === 0) {
@@ -173,7 +173,7 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
       const updatedAircraft = await this._aircraftRepository.updateAircraft(aircraftId, data);
       
       if (!updatedAircraft) {
-        throw new NotFoundError(AircraftStatus.NotFound);
+        throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
       }
 
       return updatedAircraft;
@@ -185,7 +185,7 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
       ) {
         throw error;
       }
-      throw new validationError(AircraftStatus.UpdateFailed);
+      throw new validationError(AIRCRAFT_MESSAGES.UPDATE_FAILED);
     }
   }
 }

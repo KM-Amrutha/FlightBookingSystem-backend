@@ -2,14 +2,14 @@ import { Request, Response } from "express";
 import { injectable, inject } from "inversify";
 import { sendResponse } from "@shared/utils/http.response";
 import { StatusCodes } from "@shared/constants/index.constants";
-import { TYPES_ARICRAFT_USECASES } from "@di/types-usecases";
+import { TYPES_AIRCRAFT_USECASES } from "@di/types-usecases";
 import { ICreateSeatLayoutUseCase } from "@di/file-imports-index";
 import { CreateSeatLayoutDTO } from "@application/dtos/seat-dtos";
 
 @injectable()
 export class CreateSeatLayoutController {
   constructor(
-    @inject(TYPES_ARICRAFT_USECASES.CreateSeatLayoutUseCase)
+    @inject(TYPES_AIRCRAFT_USECASES.CreateSeatLayoutUseCase)
     private _createSeatLayoutUseCase: ICreateSeatLayoutUseCase
   ) {}
 

@@ -1,14 +1,14 @@
 export * from "@shared/constants/http.status.codes"
-export * from "@shared/constants/authStatus/auth.status";
-export * from "@shared/constants/authStatus/block.status";
-export * from "@shared/constants/authStatus/jwt.status";
-export * from "@shared/constants/authStatus/otp.status";
-export * from "@shared/constants/authStatus/password.status";
-export * from "@shared/constants/authStatus/profile.status";
+export * from "@shared/constants/authMessages/auth.messages";
+export * from "@shared/constants/authMessages/block.messages";
+export * from "@shared/constants/authMessages/jwt.messages";
+export * from "@shared/constants/authMessages/otp.messages";
+export * from "@shared/constants/authMessages/password.messages";
+export * from "@shared/constants/authMessages/profile.messsages";
 
-export * from "@shared/constants/commonStatus/application.status";
-export * from "@shared/constants/commonStatus/dashboard.status";
+export * from "@shared/constants/commonMessages/application.messages";
+export * from "@shared/constants/commonMessages/dashboard.messages";
 
-export * from "@shared/constants/userStatus/user.status";
-export * from "@shared/constants/providerStatus/provider.status";
-export * from "@shared/constants/aircraftStatus/aircraft.status";
+export * from "@shared/constants/userMessages/user.messages";
+export * from "@shared/constants/providerMessages/provider.messages";
+export * from "@shared/constants/aircraftMessages/aircraft.messages";

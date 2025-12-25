@@ -49,9 +49,9 @@ export interface AircraftDetailsDTO {
   flyingRangeKm: number;
   engineCount: number;
   lavatoryCount: number;
+  availableFrom: Date;
   baseStationId: string;
   currentLocationId: string;
-  availableFrom: Date;
   status: "active" | "inactive" | "maintenance";
   createdAt: Date;
   updatedAt: Date;

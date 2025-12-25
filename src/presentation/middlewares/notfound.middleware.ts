@@ -1,6 +1,6 @@
 import {
   StatusCodes,
-  ApplicationStatus,
+  APPLICATION_MESSAGES
 } from "@shared/constants/index.constants";
 import { sendResponse } from "@shared/utils/http.response";
 import { NextFunction, Request, Response } from "express";
@@ -9,5 +9,5 @@ export const notFoundMiddleware = (
   res: Response,
   next: NextFunction
 ): void => {
-  sendResponse(res, ApplicationStatus.NotFound,null,StatusCodes.NotFound,);
+  sendResponse(res, APPLICATION_MESSAGES.NOT_FOUND,null,StatusCodes.NotFound,);
 };

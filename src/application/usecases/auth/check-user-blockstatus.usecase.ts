@@ -1,5 +1,5 @@
 import { validationError } from "@presentation/middlewares/error.middleware";
-import { AuthStatus } from "@shared/constants/index.constants";
+import { AUTH_MESSAGES } from "@shared/constants/index.constants";
 import { IProviderRepository,
     IUserRepository,
     ICheckUserBlockStatusUseCase,
@@ -19,7 +19,7 @@ export class CheckUserBlockStatusUseCase implements ICheckUserBlockStatusUseCase
 
   async execute(_id: string): Promise<boolean> {
     if (!_id) {
-      throw new validationError(AuthStatus.IdRequired);
+      throw new validationError(AUTH_MESSAGES.ID_REQUIRED);
     }
     const [userData, providerData] = await Promise.all([
       this._userRepository.findById(_id),
@@ -27,7 +27,7 @@ export class CheckUserBlockStatusUseCase implements ICheckUserBlockStatusUseCase
     ]);
 
     if (!userData && !providerData) {
-      throw new validationError(AuthStatus.InvalidId);
+      throw new validationError(AUTH_MESSAGES.INVALID_ID);
     }
 
     if (userData) return userData.isActive;

@@ -5,13 +5,13 @@ import {
   IAircraftRepository,
   IProviderRepository
 } from "@di/file-imports-index";
-import { SeatDetailsDTO, CreateSeatDTO } from "@application/dtos/seat-dtos";
+import { SeatDetailsDTO, CreateSeatDTO,SeatLayoutDetailsDTO } from "@application/dtos/seat-dtos";
 import { validationError, NotFoundError, ForbiddenError, ConflictError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { IGenerateSeatsUseCase } from "@di/file-imports-index";
 import { getLayoutConfig } from "@shared/utils/seat-layout.constants";
-import { ApplicationStatus, AuthStatus,ProviderStatus, AircraftStatus } from "@shared/constants/index.constants";
+import { APPLICATION_MESSAGES, AUTH_MESSAGES,PROVIDER_MESSAGES, AIRCRAFT_MESSAGES } from "@shared/constants/index.constants";
 
 @injectable()
 export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
@@ -35,15 +35,15 @@ export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
     ]);
 
     if (!provider) {
-      throw new NotFoundError(ProviderStatus.ProviderNotFound);
+      throw new NotFoundError(PROVIDER_MESSAGES.PROVIDER_NOT_FOUND);
     }
 
     if (isBlocked) {
-      throw new ForbiddenError(AuthStatus.AccountBlocked);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
     }
 
     if (!provider.isVerified) {
-      throw new ForbiddenError(AuthStatus.AccountNotVerified);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
     }
   }
 
@@ -54,7 +54,7 @@ export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
     const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
 
     if (!aircraft) {
-      throw new NotFoundError(AircraftStatus.NotFound);
+      throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
     }
 
     if (aircraft.providerId !== providerId) {
@@ -150,7 +150,7 @@ export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
 
   private async generateSeatsForLayout(
     aircraftId: string,
-    layout: any,
+    layout: SeatLayoutDetailsDTO,
     seatTypeId: string,
     totalAircraftRows: number
   ): Promise<CreateSeatDTO[]> {
@@ -195,7 +195,7 @@ export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
     return seats;
   }
 
-  private calculateTotalRows(layouts: any[]): number {
+  private calculateTotalRows(layouts: SeatLayoutDetailsDTO[]): number {
     if (layouts.length === 0) return 0;
     return Math.max(...layouts.map(layout => layout.endRow));
   }
@@ -205,7 +205,7 @@ export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
     aircraftId: string
   ): Promise<SeatDetailsDTO[]> {
     if (!providerId || !aircraftId) {
-      throw new validationError(ApplicationStatus.AllFieldsAreRequired);
+      throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
 
     if (!aircraftId.match(/^[0-9a-fA-F]{24}$/)) {

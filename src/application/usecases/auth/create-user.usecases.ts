@@ -8,8 +8,8 @@ ICreateUserUseCase, } from "@di/file-imports-index";
 
 import { CreateUserDTO } from "@application/dtos/user-dtos";
 import { IUser } from "@domain/entities/user.entity";
-import { ApplicationStatus,
-     AuthStatus } 
+import { APPLICATION_MESSAGES,
+     AUTH_MESSAGES } 
      from "@shared/constants/index.constants";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import {injectable,inject} from "inversify";
@@ -49,21 +49,21 @@ export class CreateUserUseCase implements ICreateUserUseCase {
     password,
   }: CreateUserDTO): Promise<IUser> {
     if (!firstName || !lastName || !email || !password) {
-      throw new validationError(ApplicationStatus.AllFieldsAreRequired);
+      throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
 
     const existinguser = await this._userRepository.findOne({
       email: email,
     });
     if (existinguser && existinguser.otpVerified) {
-      throw new validationError(AuthStatus.EmailConflict);
+      throw new validationError(AUTH_MESSAGES.EMAIL_CONFLICT);
     }
     if (
       existinguser &&
       !existinguser.otpVerified &&
       existinguser.googleVerified
     ) {
-      throw new validationError(AuthStatus.DifferentLoginMethod);
+      throw new validationError(AUTH_MESSAGES.DIFFERENT_LOGIN_METHOD);
     }
     if (existinguser && !existinguser.otpVerified) {
       await this.sendOtpEmail(email);

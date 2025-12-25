@@ -1,5 +1,3 @@
-
-
 export const TYPES_REPOSITORIES = {
      OtpRepository: Symbol.for("OtpRepository"),
      UserRepository: Symbol.for("UserRepository"),
@@ -14,4 +12,5 @@ export const  TYPES_AIRCRAFT_REPOSITORIES = {
      SeatRepository: Symbol.for("SeatRepository"),
      SeatLayoutRepository: Symbol.for("SeatLayoutRepository"),
      SeatTypeRepository: Symbol.for("SeatTypeRepository"),
+     FlightRepository: Symbol.for("FlightRepository")
 }

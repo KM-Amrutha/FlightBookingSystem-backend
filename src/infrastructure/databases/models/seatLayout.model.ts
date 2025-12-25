@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from "mongoose";
+import  { Schema, model } from "mongoose";
 import { ISeatLayout } from "@domain/entities/seatLayout.entity";
 
 const seatLayoutSchema = new Schema<ISeatLayout>(

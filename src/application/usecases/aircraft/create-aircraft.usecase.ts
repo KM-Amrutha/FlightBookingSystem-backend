@@ -1,7 +1,7 @@
 import { IAircraftRepository } from "@di/file-imports-index";
 import { IProviderRepository } from "@domain/interfaces/IProviderRepository";
 import { CreateAircraftDTO, AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
-import { ApplicationStatus, AircraftStatus, AuthStatus } from "@shared/constants/index.constants";
+import { APPLICATION_MESSAGES, AIRCRAFT_MESSAGES, AUTH_MESSAGES } from "@shared/constants/index.constants";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES,TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
@@ -18,26 +18,26 @@ export class CreateAircraftUseCase implements ICreateAircraftUseCase {
 
   async execute(data: CreateAircraftDTO): Promise<AircraftDetailsDTO> {
     if (!data.providerId) {
-      throw new validationError(ApplicationStatus.AllFieldsAreRequired);
+      throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
 
     if (data.seatCapacity <= 0) {
-      throw new validationError(AircraftStatus.InvalidCapacity);
+      throw new validationError(AIRCRAFT_MESSAGES.INVALID_CAPACITY);
     }
 
     const currentYear = new Date().getFullYear();
     if (data.buildYear < 1900 || data.buildYear > currentYear) {
-      throw new validationError(AircraftStatus.InvalidBuildYear);
+      throw new validationError(AIRCRAFT_MESSAGES.INVALID_BUILD_YEAR);
     }
 
     const provider = await this._providerRepository.findById(data.providerId);
     if (!provider) {
-      throw new validationError(AircraftStatus.ProviderNotFound);
+      throw new validationError(AIRCRAFT_MESSAGES.PROVIDER_NOT_FOUND);
     }
 
     const isProviderBlocked = await this._providerRepository.isProviderBlocked(data.providerId);
     if (isProviderBlocked) {
-      throw new validationError(AuthStatus.AccountBlocked);
+      throw new validationError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
     }
 
     const existingAircrafts = await this._aircraftRepository.findByProviderId(data.providerId);
@@ -46,7 +46,7 @@ export class CreateAircraftUseCase implements ICreateAircraftUseCase {
     );
     
     if (nameExists) {
-      throw new validationError(AircraftStatus.AlreadyExists);
+      throw new validationError(AIRCRAFT_MESSAGES.ALREADY_EXISTS);
     }
 
     try {
@@ -54,7 +54,7 @@ export class CreateAircraftUseCase implements ICreateAircraftUseCase {
     } catch (error) {
        console.error("❌ ACTUAL REPOSITORY ERROR:", error);
        
-      throw new validationError(AircraftStatus.CreationFailed);
+      throw new validationError(AIRCRAFT_MESSAGES.CREATION_FAILED);
     }
   }
 }

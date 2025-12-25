@@ -21,7 +21,7 @@ export interface IAircraftRepository extends IBaseRepository<IAircraft> {
   isAircraftActive(aircraftId: string): Promise<boolean>;
   findByProviderId(providerId: string): Promise<IAircraft[]>;
   findByStatus(status: "active" | "inactive" | "maintenance"): Promise<IAircraft[]>;
-  findAvailableAircrafts(fromDate: Date): Promise<IAircraft[]>;
+  availableAircraftsForSchedule(fromDate: Date): Promise<IAircraft[]>;
   findByType(aircraftType: string): Promise<IAircraft[]>;
   getAircraftDetails(aircraftId: string): Promise<IAircraft | null>;
 }

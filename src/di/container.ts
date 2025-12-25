@@ -11,7 +11,7 @@ import {
 import { TYPES_AUTH_USECASES,
      TYPES_LOGGER_USECASES, 
      TYPES_PROVIDER_USECASES,
-    TYPES_ARICRAFT_USECASES } from "@di/types-usecases";
+    TYPES_AIRCRAFT_USECASES } from "@di/types-usecases";
 import { TYPES_SERVICES } from "di/types-services"
 
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES }   from "di/types-repositories"
@@ -27,6 +27,7 @@ DestinationRepository,
 SeatRepository,
 SeatLayoutRepository,
 SeatTypeRepository,
+FlightRepository,
 
 
 // controllers
@@ -56,6 +57,11 @@ GenerateSeatsController,
 GetSeatLayoutsController,
 DeleteSeatLayoutController,
 
+ApproveFlightController,
+CreateFlightController,
+GetProviderFlightsController,
+PendingFlightsForApprovalController,
+AvailableAircraftsForScheduleController,
 
 
 IUserRepository,
@@ -68,6 +74,7 @@ IDestinationRepository,
 ISeatRepository,
 ISeatLayoutRepository,
 ISeatTypeRepository,
+IFlightRepository,
 
 IAuthService,
 IEncryptionService,
@@ -122,6 +129,12 @@ GenerateSeatsUseCase,
 GetAllSeatTypesUseCase,
 GetSeatLayoutsByAircraftUseCase,
 DeleteSeatLayoutUseCase,
+CreateFlightUseCase,
+GetProviderFlightsUseCase,
+PendingFlightsForApprovalUseCase,
+ApproveFlightUseCase,
+AvailableAircraftsForScheduleUseCase,
+
 
 
 ICheckUserBlockStatusUseCase,
@@ -151,7 +164,11 @@ IGenerateSeatsUseCase,
 IGetAllSeatTypesUseCase,
 IGetSeatLayoutsByAircraftUseCase,
 IDeleteSeatLayoutUseCase,
-
+ICreateFlightUseCase,
+IGetProviderFlightsUseCase,
+IPendingFlightsForApprovalUseCase,
+IApproveFlightUseCase,
+IAvailableAircraftsForScheduleUsecase,
 } from "@di/file-imports-index";
 
 const container = new Container();
@@ -167,6 +184,7 @@ container.bind<IDestinationRepository>(TYPES_AIRCRAFT_REPOSITORIES.DestionationR
 container.bind<ISeatRepository>(TYPES_AIRCRAFT_REPOSITORIES.SeatRepository).to(SeatRepository);
 container.bind<ISeatLayoutRepository>(TYPES_AIRCRAFT_REPOSITORIES.SeatLayoutRepository).to(SeatLayoutRepository);
 container.bind<ISeatTypeRepository>(TYPES_AIRCRAFT_REPOSITORIES.SeatTypeRepository).to(SeatTypeRepository);
+container.bind<IFlightRepository>(TYPES_AIRCRAFT_REPOSITORIES.FlightRepository).to(FlightRepository);
 
 
 
@@ -198,19 +216,23 @@ container.bind<IVerifyProviderUseCase>(TYPES_PROVIDER_USECASES.VerifyProviderUse
 container.bind<ICompleteProviderProfileUseCase>(TYPES_PROVIDER_USECASES.CompleteProviderProfileUseCase).to(CompleteProviderProfileUseCase);
 container.bind<IGetProviderProfileUseCase>(TYPES_PROVIDER_USECASES.GetProviderProfileUseCase).to(GetProviderProfileUseCase);
 
-container.bind<ICreateAircraftUseCase>(TYPES_ARICRAFT_USECASES.CreateAircraftUseCase).to(CreateAircraftUseCase);
-container.bind<IUpdateAircraftUseCase>(TYPES_ARICRAFT_USECASES.UpdateAircraftUseCase).to(UpdateAircraftUseCase);
-container.bind<IGetProviderAircraftsUseCase>(TYPES_ARICRAFT_USECASES.GetAircraftsUseCase).to(GetProviderAircraftsUseCase);
-container.bind<IDeleteAircraftUseCase>(TYPES_ARICRAFT_USECASES.DeleteAircraftUseCase).to(DeleteAircraftUseCase);
-container.bind<IUpdateAircraftStatusUseCase>(TYPES_ARICRAFT_USECASES.UpdateAircraftStatusUseCase).to(UpdateAircraftStatusUseCase);
-container.bind<ISearchDestinationsUseCase>(TYPES_ARICRAFT_USECASES.SearchDestinationsUseCase).to(SearchDestinationsUseCase);
-container.bind<IUpdateAircraftLocationUseCase>(TYPES_ARICRAFT_USECASES.UpdateAircraftLocationUseCase).to(UpdateAircraftLocationUseCase);
-container.bind<ICreateSeatLayoutUseCase>(TYPES_ARICRAFT_USECASES.CreateSeatLayoutUseCase).to(CreateSeatLayoutUseCase);
-container.bind<IGenerateSeatsUseCase>(TYPES_ARICRAFT_USECASES.GenerateSeatsUseCase).to(GenerateSeatsUseCase);
-container.bind<IGetAllSeatTypesUseCase>(TYPES_ARICRAFT_USECASES.GetAllSeatTypesUseCase).to(GetAllSeatTypesUseCase);
-container.bind<IGetSeatLayoutsByAircraftUseCase>(TYPES_ARICRAFT_USECASES.GetSeatLayoutsByAircraftUseCase).to(GetSeatLayoutsByAircraftUseCase)
-container.bind<IDeleteSeatLayoutUseCase>(TYPES_ARICRAFT_USECASES.DeleteSeatLayoutUseCase).to(DeleteSeatLayoutUseCase)
-
+container.bind<ICreateAircraftUseCase>(TYPES_AIRCRAFT_USECASES.CreateAircraftUseCase).to(CreateAircraftUseCase);
+container.bind<IUpdateAircraftUseCase>(TYPES_AIRCRAFT_USECASES.UpdateAircraftUseCase).to(UpdateAircraftUseCase);
+container.bind<IGetProviderAircraftsUseCase>(TYPES_AIRCRAFT_USECASES.GetAircraftsUseCase).to(GetProviderAircraftsUseCase);
+container.bind<IDeleteAircraftUseCase>(TYPES_AIRCRAFT_USECASES.DeleteAircraftUseCase).to(DeleteAircraftUseCase);
+container.bind<IUpdateAircraftStatusUseCase>(TYPES_AIRCRAFT_USECASES.UpdateAircraftStatusUseCase).to(UpdateAircraftStatusUseCase);
+container.bind<ISearchDestinationsUseCase>(TYPES_AIRCRAFT_USECASES.SearchDestinationsUseCase).to(SearchDestinationsUseCase);
+container.bind<IUpdateAircraftLocationUseCase>(TYPES_AIRCRAFT_USECASES.UpdateAircraftLocationUseCase).to(UpdateAircraftLocationUseCase);
+container.bind<ICreateSeatLayoutUseCase>(TYPES_AIRCRAFT_USECASES.CreateSeatLayoutUseCase).to(CreateSeatLayoutUseCase);
+container.bind<IGenerateSeatsUseCase>(TYPES_AIRCRAFT_USECASES.GenerateSeatsUseCase).to(GenerateSeatsUseCase);
+container.bind<IGetAllSeatTypesUseCase>(TYPES_AIRCRAFT_USECASES.GetAllSeatTypesUseCase).to(GetAllSeatTypesUseCase);
+container.bind<IGetSeatLayoutsByAircraftUseCase>(TYPES_AIRCRAFT_USECASES.GetSeatLayoutsByAircraftUseCase).to(GetSeatLayoutsByAircraftUseCase)
+container.bind<IDeleteSeatLayoutUseCase>(TYPES_AIRCRAFT_USECASES.DeleteSeatLayoutUseCase).to(DeleteSeatLayoutUseCase)
+container.bind<ICreateFlightUseCase>(TYPES_AIRCRAFT_USECASES.CreateFlightUseCase).to(CreateFlightUseCase);
+container.bind<IGetProviderFlightsUseCase>(TYPES_AIRCRAFT_USECASES.GetProviderFlightsUseCase).to(GetProviderFlightsUseCase);
+container.bind<IPendingFlightsForApprovalUseCase>(TYPES_AIRCRAFT_USECASES.PendingFlightsForApprovalUseCase).to(PendingFlightsForApprovalUseCase);   
+container.bind<IApproveFlightUseCase>(TYPES_AIRCRAFT_USECASES.ApproveFlightUseCase).to(ApproveFlightUseCase);
+container.bind<IAvailableAircraftsForScheduleUsecase>(TYPES_AIRCRAFT_USECASES.AvailableAircraftsForScheduleUseCase).to(AvailableAircraftsForScheduleUseCase);   
 
 
 // Bind Controllers
@@ -238,6 +260,13 @@ container.bind(TYPES_AIRCRAFT_CONTROLLERS.CreateSeatLayoutController).to(CreateS
 container.bind(TYPES_AIRCRAFT_CONTROLLERS.GenerateSeatsController).to(GenerateSeatsController); 
 container.bind(TYPES_AIRCRAFT_CONTROLLERS.GetSeatLayoutsController).to(GetSeatLayoutsController);
 container.bind(TYPES_AIRCRAFT_CONTROLLERS.DeleteSeatLayoutController).to(DeleteSeatLayoutController)
+
+container.bind(TYPES_AIRCRAFT_CONTROLLERS.CreateFlightController).to(CreateFlightController);
+container.bind(TYPES_AIRCRAFT_CONTROLLERS.GetProviderFlightsController).to(GetProviderFlightsController);
+container.bind(TYPES_AIRCRAFT_CONTROLLERS.PendingFlightsForApprovalController).to(PendingFlightsForApprovalController);
+container.bind(TYPES_AIRCRAFT_CONTROLLERS.ApproveFlightController).to(ApproveFlightController); 
+container.bind(TYPES_AIRCRAFT_CONTROLLERS.AvailableAircraftsForScheduleController).to(AvailableAircraftsForScheduleController);
+
 
 
 export { container };

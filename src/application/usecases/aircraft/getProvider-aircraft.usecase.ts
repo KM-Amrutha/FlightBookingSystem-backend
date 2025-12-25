@@ -4,7 +4,7 @@ import {
 } from "@di/file-imports-index";
 import { AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
 import { IAircraft } from "@domain/entities/aircraft.entity";
-import { AuthStatus, ApplicationStatus, AircraftStatus } from "@shared/constants/index.constants";
+import { AUTH_MESSAGES, APPLICATION_MESSAGES, AIRCRAFT_MESSAGES } from "@shared/constants/index.constants";
 import { validationError, NotFoundError, ForbiddenError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
@@ -30,11 +30,11 @@ export class GetProviderAircraftsUseCase implements IGetProviderAircraftsUseCase
     }
 
     if (isBlocked) {
-      throw new ForbiddenError(AuthStatus.AccountBlocked);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
     }
 
     if (!provider.isVerified) {
-      throw new ForbiddenError(AuthStatus.AccountNotVerified);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
     }
   }
 
@@ -51,7 +51,7 @@ export class GetProviderAircraftsUseCase implements IGetProviderAircraftsUseCase
 
   private validateAircraftData(aircrafts: AircraftDetailsDTO[]): void {
     if (aircrafts.length === 0) {
-      throw new NotFoundError(AircraftStatus.NotFound);
+      throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
     }
 
     aircrafts.forEach(aircraft => {
@@ -62,15 +62,16 @@ export class GetProviderAircraftsUseCase implements IGetProviderAircraftsUseCase
   }
 
   async execute(providerId: string): Promise<AircraftDetailsDTO[]> {
+     console.log('USE CASE CALLED with', providerId);
     if (!providerId) {
-      throw new validationError(ApplicationStatus.AllFieldsAreRequired);
+      throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
 
     await this.validateProvider(providerId);
 
     try {
-      const aircrafts = await this._aircraftRepository.findByProviderId(providerId);
-      
+      const aircrafts = await this._aircraftRepository.getAircraftsByProvider(providerId);
+        console.log('FIRST AIRCRAFT FROM USE CASE:', aircrafts[0]);
       if (aircrafts.length === 0) {
         return [];
       }

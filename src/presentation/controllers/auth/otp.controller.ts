@@ -2,9 +2,9 @@ import { Request,Response } from "express";
 import {inject,injectable} from 'inversify';
 import { sendResponse } from "@shared/utils/http.response";
 import {
-    AuthStatus,
+    AUTH_MESSAGES,
     StatusCodes,
-    OTPStatus
+    OTP_MESSAGES
 } from "@shared/constants/index.constants";
 
 import { OtpUseCase } from "@application/usecases/auth/otp.usecase";
@@ -20,12 +20,12 @@ export class OtpController {
   async verifyOtp(req: Request, res: Response): Promise<void> {
     await this._otpUseCase.verifyOtp(req.body);
 
-    sendResponse(res, AuthStatus.RegistrationSuccess, null,StatusCodes.OK);
+    sendResponse(res, AUTH_MESSAGES.REGISTRATION_SUCCESS, null,StatusCodes.OK);
   }
 
   async resendOtp(req: Request, res: Response): Promise<void> {
     await this._otpUseCase.resendOtp(req.body);
 
-    sendResponse(res, OTPStatus.Sent,null, StatusCodes.OK);
+    sendResponse(res, OTP_MESSAGES.SENT,null, StatusCodes.OK);
   }
 }

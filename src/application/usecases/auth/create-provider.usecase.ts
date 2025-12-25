@@ -7,8 +7,8 @@ IProviderRepository,
  ICreateProviderUseCase
 
  } from "@di/file-imports-index";
- import { ApplicationStatus,
-         AuthStatus
+ import { APPLICATION_MESSAGES,
+         AUTH_MESSAGES
  } from "@shared/constants/index.constants";
 import { Provider, CreateProviderDTO } from "@application/dtos/provider-dtos";
 import {validationError} from "@presentation/middlewares/error.middleware";
@@ -63,14 +63,14 @@ export class CreateProviderUseCase implements ICreateProviderUseCase {
         !password ||
         !airlineCode 
     ) {
-      throw new validationError(ApplicationStatus.AllFieldsAreRequired);
+      throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
 
     const existinguser = await this._userRepository.findOne({
       email: email,
     });
     if (existinguser && existinguser.otpVerified) {
-      throw new validationError(AuthStatus.EmailConflict);
+      throw new validationError(AUTH_MESSAGES.EMAIL_CONFLICT);
     }
 
     const existingAirlineCode = await this._providerRepository.getProviderByAirlineCode(airlineCode);
