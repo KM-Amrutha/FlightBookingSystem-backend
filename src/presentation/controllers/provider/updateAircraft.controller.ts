@@ -23,7 +23,7 @@ export class UpdateAircraftController {
           res,
           "Aircraft ID is required",
           null,
-          StatusCodes.BadRequest
+          StatusCodes.BAD_REQUEST
         );
         return;
       }
@@ -77,7 +77,7 @@ export class UpdateAircraftController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

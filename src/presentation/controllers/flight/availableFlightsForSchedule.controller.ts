@@ -22,7 +22,7 @@ export class AvailableAircraftsForScheduleController {
           res,
           "departureDestinationId and departureTime are required",
           null,
-          StatusCodes.BadRequest
+          StatusCodes.BAD_REQUEST
         );
         return;
       }
@@ -44,7 +44,7 @@ export class AvailableAircraftsForScheduleController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

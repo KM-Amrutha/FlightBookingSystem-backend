@@ -24,14 +24,14 @@ export class ApproveFlightController {
       const flightIdParam = req.params.flightId;
 
       if (!flightIdParam) {
-        sendResponse(res, FLIGHT_MESSAGES.ID_REQUIRED, null, StatusCodes.BadRequest);
+        sendResponse(res, FLIGHT_MESSAGES.ID_REQUIRED, null, StatusCodes.BAD_REQUEST);
         return;
       }
 
       const rawStatus = req.body.status as string | undefined;
 
       if (rawStatus !== "approved" && rawStatus !== "rejected") {
-        sendResponse(res, "Invalid status", null, StatusCodes.BadRequest);
+        sendResponse(res, "Invalid status", null, StatusCodes.BAD_REQUEST);
         return;
       }
 
@@ -46,7 +46,7 @@ export class ApproveFlightController {
             res,
             FLIGHT_MESSAGES.APPROVAL_REASON_REQUIRED,
             null,
-            StatusCodes.BadRequest
+            StatusCodes.BAD_REQUEST
           );
           return;
         }
@@ -69,7 +69,7 @@ export class ApproveFlightController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

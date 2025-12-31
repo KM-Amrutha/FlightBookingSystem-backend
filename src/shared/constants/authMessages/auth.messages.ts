@@ -17,4 +17,5 @@ export const AUTH_MESSAGES = {
   USER_ID_REQUIRED: 'A valid User ID is required to proceed with this action.',
   ID_REQUIRED: 'Unique id is required to continue with this process.',
   INVALID_ID: 'The ID you provided is not valid. Please check and try again.',
+  INTERNAL_SERVER_ERROR: 'An unexpected error occurred on the server. Please try again later.', 
 } as const

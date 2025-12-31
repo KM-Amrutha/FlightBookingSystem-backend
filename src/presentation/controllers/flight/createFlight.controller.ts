@@ -84,7 +84,7 @@ export class CreateFlightController {
         res,
         FLIGHT_MESSAGES.CREATED,
         flight,
-        StatusCodes.Created
+        StatusCodes.CREATED
       );
     } catch (error: any) {
       console.error("Flight creation error:", error.message || error);
@@ -92,7 +92,7 @@ export class CreateFlightController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

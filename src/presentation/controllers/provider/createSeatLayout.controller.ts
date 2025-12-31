@@ -40,14 +40,14 @@ export class CreateSeatLayoutController {
         res,
         "Seat layout created successfully",
         seatLayout,
-        StatusCodes.Created
+        StatusCodes.CREATED
       );
     } catch (error: any) {
       sendResponse(
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

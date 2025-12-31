@@ -9,5 +9,5 @@ export const notFoundMiddleware = (
   res: Response,
   next: NextFunction
 ): void => {
-  sendResponse(res, APPLICATION_MESSAGES.NOT_FOUND,null,StatusCodes.NotFound,);
+  sendResponse(res, APPLICATION_MESSAGES.NOT_FOUND,null,StatusCodes.NOT_FOUND,);
 };

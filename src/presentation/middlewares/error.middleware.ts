@@ -16,12 +16,12 @@ this.statusCode = statusCode;
 
 export class validationError extends AppError {
   constructor(message: string) {
-    super(message, StatusCodes.BadRequest);
+    super(message, StatusCodes.BAD_REQUEST);
   }
 }
 export class NotFoundError extends AppError {
   constructor(message: string) {
-    super(message, StatusCodes.NotFound);
+    super(message, StatusCodes.NOT_FOUND);
   }
 }
 
@@ -29,24 +29,24 @@ export class NotFoundError extends AppError {
 
 export class UnauthorizedError extends AppError {
   constructor(message: string) {
-    super(message, StatusCodes.UnAuthorized);
+    super(message, StatusCodes.UNAUTHORIZED);
   }
 }
 
 export class DatabaseError extends AppError {
   constructor(message: string) {
-    super(message, StatusCodes.InternalServerError);
+    super(message, StatusCodes.INTERNAL_SERVER_ERROR);
   }
 }
 
 export class ForbiddenError extends AppError {
   constructor(message: string) {
-    super(message, StatusCodes.Forbidden);
+    super(message, StatusCodes.FORBIDDEN);
   }
 }
 export class ConflictError extends AppError {
   constructor(message: string) {
-    super(message, StatusCodes.Conflict); 
+    super(message, StatusCodes.CONFLICT); 
   }
 }
 
@@ -57,7 +57,7 @@ export const errorMiddleware = (
   next: NextFunction
 ) => {
   loggerUseCase.LogError(err, req.originalUrl, err.message);
-  const statusCode = err.statusCode || StatusCodes.InternalServerError;
+  const statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
   const message = err.message || APPLICATION_MESSAGES.INTERNAL_SERVER_ERROR;
   sendResponse(res, message, null,statusCode,);
 };

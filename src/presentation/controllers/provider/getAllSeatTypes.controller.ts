@@ -27,7 +27,7 @@ export class GetAllSeatTypesController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

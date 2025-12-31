@@ -30,7 +30,7 @@ export class GetProviderFlightsController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

@@ -22,7 +22,7 @@ export class GenerateSeatsController {
           res,
           "Aircraft ID is required",
           null,
-          StatusCodes.BadRequest
+          StatusCodes.BAD_REQUEST
         );
         return;
       }
@@ -39,14 +39,14 @@ export class GenerateSeatsController {
           totalSeats: seats.length,
           seats: seats
         },
-        StatusCodes.Created
+        StatusCodes.CREATED
       );
     } catch (error: any) {
       sendResponse(
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

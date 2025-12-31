@@ -40,7 +40,7 @@ export class SearchDestinationsController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

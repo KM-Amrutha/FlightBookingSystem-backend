@@ -1,0 +1,38 @@
+31-12-2025 00:06:25 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 14.799 ms
+31-12-2025 00:06:26 [[31MERROR[39M]: [/auth/sign-in] The password you entered is incorrect. Please try again.: The password you entered is incorrect. Please try again.
+Error: The password you entered is incorrect. Please try again.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:75:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+31-12-2025 00:06:26 [[32MINFO[39M]: POST /auth/sign-in 400 111 - 770.987 ms
+31-12-2025 00:06:40 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 1.961 ms
+31-12-2025 00:06:40 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:61:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+31-12-2025 00:06:40 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 101.571 ms
+31-12-2025 00:06:57 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.388 ms
+31-12-2025 00:06:58 [[32MINFO[39M]: POST /auth/sign-in 200 1386 - 384.417 ms
+31-12-2025 00:08:56 [[32MINFO[39M]: OPTIONS /auth/sign-out/ 204 0 - 0.807 ms
+31-12-2025 00:08:56 [[32MINFO[39M]: POST /auth/sign-out/ 200 137 - 4.005 ms
+31-12-2025 00:09:32 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.324 ms
+31-12-2025 00:09:32 [[31MERROR[39M]: [/auth/sign-in] The password you entered is incorrect. Please try again.: The password you entered is incorrect. Please try again.
+Error: The password you entered is incorrect. Please try again.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:75:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+31-12-2025 00:09:32 [[32MINFO[39M]: POST /auth/sign-in 400 111 - 236.502 ms
+31-12-2025 00:10:39 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 2.993 ms
+31-12-2025 00:10:40 [[32MINFO[39M]: POST /auth/sign-in 200 642 - 258.825 ms
+31-12-2025 00:11:18 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.351 ms
+31-12-2025 00:11:19 [[32MINFO[39M]: POST /auth/sign-in 200 642 - 175.694 ms
+31-12-2025 00:11:19 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 0.345 ms
+31-12-2025 00:11:19 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.204 ms
+31-12-2025 00:11:19 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 0.180 ms
+31-12-2025 00:11:19 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.643 ms
+31-12-2025 00:11:19 [[32MINFO[39M]: GET /admin/flights/pending-approval 200 974 - 98.910 ms
+31-12-2025 00:11:19 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 48.544 ms
+31-12-2025 00:11:19 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 53.908 ms
+31-12-2025 00:11:19 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 49.777 ms

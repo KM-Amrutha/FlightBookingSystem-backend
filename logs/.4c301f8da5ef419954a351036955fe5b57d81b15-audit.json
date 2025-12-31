@@ -1,0 +1,30 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\amrut\\Desktop\\airticketbooking\\back-end\\logs\\.4c301f8da5ef419954a351036955fe5b57d81b15-audit.json",
+    "files": [
+        {
+            "date": 1766768391386,
+            "name": "C:\\Users\\amrut\\Desktop\\airticketbooking\\back-end\\logs\\app-2025-12-26.log",
+            "hash": "096f30a2b6b3a7ac62913a1c1962910b818382c60c45ebfb59e6d879dd07a880"
+        },
+        {
+            "date": 1766820628297,
+            "name": "C:\\Users\\amrut\\Desktop\\airticketbooking\\back-end\\logs\\app-2025-12-27.log",
+            "hash": "3e4c079726df7f1066fdfff12bf6af1eb8d8ac3f60e04894b4453ac09322de96"
+        },
+        {
+            "date": 1767035087127,
+            "name": "C:\\Users\\amrut\\Desktop\\airticketbooking\\back-end\\logs\\app-2025-12-30.log",
+            "hash": "e28343cfb51920601d351084646e36df40b482135331d70790090dfa65e2089d"
+        },
+        {
+            "date": 1767119785867,
+            "name": "C:\\Users\\amrut\\Desktop\\airticketbooking\\back-end\\logs\\app-2025-12-31.log",
+            "hash": "42864a22132414ba486e2282d77f1f2500bc0ecc2c416e4724a50edc71720b1a"
+        }
+    ],
+    "hashType": "sha256"
+}

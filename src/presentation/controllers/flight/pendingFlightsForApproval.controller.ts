@@ -28,7 +28,7 @@ export class PendingFlightsForApprovalController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

@@ -7,7 +7,7 @@ import {
 import { sendResponse } from "@shared/utils/http.response";
 
 const handleRateLimitExceeded = (req: Request, res: Response) => {
-  sendResponse(res, APPLICATION_MESSAGES.LIMIT_EXCEEDED, null, StatusCodes.RateLimit);
+  sendResponse(res, APPLICATION_MESSAGES.LIMIT_EXCEEDED, null, StatusCodes.RATE_LIMIT);
 };
 
 const createRateLimiter = (windowMs: number, maxRequests: number) =>
@@ -15,7 +15,7 @@ const createRateLimiter = (windowMs: number, maxRequests: number) =>
     windowMs,
     max: maxRequests,
     message: APPLICATION_MESSAGES.LIMIT_EXCEEDED,
-    statusCode: StatusCodes.RateLimit,
+    statusCode: StatusCodes.RATE_LIMIT,
     handler: handleRateLimitExceeded,
   });
 

@@ -43,7 +43,7 @@ export class CreateAircraftController {
         res,
         "Aircraft created successfully",
         aircraft,
-        StatusCodes.Created
+        StatusCodes.CREATED
       );
     } catch (error: any) {
     console.error('Error message:', error.message);       
@@ -53,7 +53,7 @@ export class CreateAircraftController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

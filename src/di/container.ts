@@ -62,7 +62,7 @@ CreateFlightController,
 GetProviderFlightsController,
 PendingFlightsForApprovalController,
 AvailableAircraftsForScheduleController,
-
+GoogleAuthController,
 
 IUserRepository,
 IOtpRepository,
@@ -83,6 +83,8 @@ IOtpService,
 IEmailService,
 ICloudStorageService,
 ILoggerService,
+IGoogleAuthService,
+
 
 
 
@@ -98,6 +100,7 @@ OtpService,
 EmailService,
 CloudinaryService,
 LoggerService,
+GoogleAuthService,
 } from "@di/file-imports-index";
 
 import {
@@ -110,6 +113,7 @@ SignInUseCase,
 ForgotPasswordUseCase,
 SendPasswordRestLinkUseCase,
 LoggerUseCase,
+GoogleAuthUseCase,
 
 GetPendingProvidersUseCase,
 VerifyProviderUseCase,
@@ -151,6 +155,7 @@ IRejectProviderUseCase,
 IVerifyProviderUseCase,
 ICompleteProviderProfileUseCase,
 IGetProviderProfileUseCase,
+
 
 ICreateAircraftUseCase,
 IUpdateAircraftUseCase,
@@ -198,6 +203,7 @@ container.bind<IOtpService>(TYPES_SERVICES.OtpService).to(OtpService);
 container.bind<IEmailService>(TYPES_SERVICES.EmailService).to(EmailService);
 container.bind<ICloudStorageService>(TYPES_SERVICES.CloudinaryService).to(CloudinaryService);
 container.bind<ILoggerService>(TYPES_SERVICES.LoggerService).to(LoggerService);
+container.bind<IGoogleAuthService>(TYPES_SERVICES.GoogleAuthService).to(GoogleAuthService);
 
 
 // Bind UseCases
@@ -215,6 +221,7 @@ container.bind<IRejectProviderUseCase>(TYPES_PROVIDER_USECASES.RejectProviderUse
 container.bind<IVerifyProviderUseCase>(TYPES_PROVIDER_USECASES.VerifyProviderUseCase).to(VerifyProviderUseCase);
 container.bind<ICompleteProviderProfileUseCase>(TYPES_PROVIDER_USECASES.CompleteProviderProfileUseCase).to(CompleteProviderProfileUseCase);
 container.bind<IGetProviderProfileUseCase>(TYPES_PROVIDER_USECASES.GetProviderProfileUseCase).to(GetProviderProfileUseCase);
+container.bind<GoogleAuthUseCase>(TYPES_AUTH_USECASES.GoogleAuthUseCase).to(GoogleAuthUseCase);
 
 container.bind<ICreateAircraftUseCase>(TYPES_AIRCRAFT_USECASES.CreateAircraftUseCase).to(CreateAircraftUseCase);
 container.bind<IUpdateAircraftUseCase>(TYPES_AIRCRAFT_USECASES.UpdateAircraftUseCase).to(UpdateAircraftUseCase);
@@ -244,6 +251,7 @@ container.bind(TYPES_AUTH_CONTROLLERS.SignOutController).to(SignOutController);
 container.bind(TYPES_AUTH_CONTROLLERS.RefreshAccessTokenController).to(RefreshAccessTokenController);
 container.bind(TYPES_AUTH_CONTROLLERS.ForgotPasswordController).to( ForgotPasswordController);
 container.bind(TYPES_AUTH_CONTROLLERS.PasswordResetLinkController).to(PasswordResetLinkController);
+container.bind(TYPES_AUTH_CONTROLLERS.GoogleAuthController).to(GoogleAuthController);
 
 container.bind(TYPES_ADMIN_CONTROLLERS.ProviderVerificationController).to(ProviderVerificationController);
 

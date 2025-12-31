@@ -11,6 +11,7 @@ import {
    ForgotPasswordController,
    PasswordResetLinkController,
    ProviderVerificationController,
+   GoogleAuthController,
 
     CompleteProviderProfileController,
     GetProviderProfileController,
@@ -89,6 +90,7 @@ export const refreshAccessTokenController = container.get<RefreshAccessTokenCont
 export const  forgotPasswordController = container.get<ForgotPasswordController>(TYPES_AUTH_CONTROLLERS.ForgotPasswordController);
 export const passwordResetLinkController = container.get<PasswordResetLinkController>(TYPES_AUTH_CONTROLLERS.PasswordResetLinkController);
 export const providerVerificationController = container.get<ProviderVerificationController>(TYPES_ADMIN_CONTROLLERS.ProviderVerificationController);
+export const googleAuthController = container.get<GoogleAuthController>(TYPES_AUTH_CONTROLLERS.GoogleAuthController);
 
 export const completeProviderProfileController = container.get<CompleteProviderProfileController>(TYPES_PROVIDER_CONTROLLERS.CompleteProviderProfileController);
 export const getProviderProfileController = container.get<GetProviderProfileController>(TYPES_PROVIDER_CONTROLLERS.GetProviderProfileController);

@@ -56,7 +56,7 @@ export class SignInUseCase implements ISignInUseCase {
     email: string,
     password: string
   ): Promise<IUser> {
-    const userData = await this._userRepository.findOne({ email: email });
+    const userData = await this._userRepository.findOne({ email: email});
     if (!userData) {
       throw new validationError(AUTH_MESSAGES.EMAIL_NOT_FOUND);
     }

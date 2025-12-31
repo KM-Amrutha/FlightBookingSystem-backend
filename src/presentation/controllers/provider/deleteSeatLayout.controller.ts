@@ -21,7 +21,7 @@ export class DeleteSeatLayoutController {
           res,
           "Layout ID is required",
           null,
-          StatusCodes.BadRequest
+          StatusCodes.BAD_REQUEST
         );
         return;
       }
@@ -39,7 +39,7 @@ export class DeleteSeatLayoutController {
         res,
         error.message || "Failed to delete seat layout",
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

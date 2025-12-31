@@ -8,6 +8,7 @@ export const TYPES_AUTH_CONTROLLERS = {
     RefreshAccessTokenController:Symbol.for("RefreshAccessTokenController"),
     ForgotPasswordController: Symbol.for("ForgotPasswordController"),
     PasswordResetLinkController: Symbol.for("PasswordResetLinkController"),
+    GoogleAuthController: Symbol.for("GoogleAuthController"),
     
 }
 

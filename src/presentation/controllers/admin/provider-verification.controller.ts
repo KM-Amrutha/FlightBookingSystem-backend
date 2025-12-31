@@ -35,7 +35,7 @@ export class ProviderVerificationController {
         res,
         error.message,
         null,
-        StatusCodes.InternalServerError
+        StatusCodes.INTERNAL_SERVER_ERROR
       );
     }
   }
@@ -49,7 +49,7 @@ export class ProviderVerificationController {
           res,
           "Provider ID is required",
           null,
-          StatusCodes.BadRequest
+          StatusCodes.BAD_REQUEST
         );
         return;
       }
@@ -66,7 +66,7 @@ export class ProviderVerificationController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }
@@ -80,7 +80,7 @@ export class ProviderVerificationController {
           res,
           "Provider ID is required",
           null,
-          StatusCodes.BadRequest
+          StatusCodes.BAD_REQUEST
         );
         return;
       }
@@ -97,7 +97,7 @@ export class ProviderVerificationController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

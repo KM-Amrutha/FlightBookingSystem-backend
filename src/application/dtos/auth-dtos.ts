@@ -49,3 +49,6 @@ export interface UpdateBlockStatusDTO {
   userId: string;
   isActive: boolean;
 }
+export interface GoogleTokenDTO {
+  token: string;
+}

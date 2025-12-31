@@ -1,4 +1,5 @@
 
+
 export const TYPES_AUTH_USECASES = {
     CheckUserBlockStatusUseCase: Symbol.for("CheckUserBlockStatusUseCase"),
     TokenUseCase: Symbol.for("TokenUseCase"),
@@ -8,6 +9,7 @@ export const TYPES_AUTH_USECASES = {
             SignInUseCase : Symbol.for("SignInUseCase"),
             ForgotPasswordUseCase: Symbol.for("ForgotPasswordUseCase"),
             SendPasswordRestLinkUseCase: Symbol.for("SendPasswordRestLinkUseCase"),
+            GoogleAuthUseCase: Symbol.for("GoogleAuthUseCase"),
 }
 
 export const TYPES_LOGGER_USECASES = {

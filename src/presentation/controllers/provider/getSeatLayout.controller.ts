@@ -20,7 +20,7 @@ export class GetSeatLayoutsController {
         res,
         "Aircraft ID is required",
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
       return;
     }
@@ -38,7 +38,7 @@ export class GetSeatLayoutsController {
       res,
       error.message,
       null,
-      StatusCodes.BadRequest
+      StatusCodes.BAD_REQUEST
     );
   }
 }

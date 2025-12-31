@@ -22,7 +22,7 @@ export class DeleteAircraftController {
           res,
           "Aircraft ID is required",
           null,
-          StatusCodes.BadRequest
+          StatusCodes.BAD_REQUEST
         );
         return;
       }
@@ -40,7 +40,7 @@ export class DeleteAircraftController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }
