@@ -1,0 +1,44 @@
+26-12-2025 22:50:14 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 16.368 ms
+26-12-2025 22:50:14 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:61:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+26-12-2025 22:50:14 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 446.752 ms
+26-12-2025 22:50:19 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.493 ms
+26-12-2025 22:50:19 [[32MINFO[39M]: POST /auth/sign-in 200 1386 - 297.706 ms
+26-12-2025 22:50:57 [[32MINFO[39M]: OPTIONS /auth/sign-out/ 204 0 - 1.887 ms
+26-12-2025 22:50:57 [[32MINFO[39M]: POST /auth/sign-out/ 200 137 - 4.300 ms
+26-12-2025 22:51:47 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 1.787 ms
+26-12-2025 22:51:47 [[32MINFO[39M]: POST /auth/sign-in 200 1386 - 286.086 ms
+26-12-2025 23:27:53 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 15.935 ms
+26-12-2025 23:27:53 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 1.085 ms
+26-12-2025 23:27:54 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+26-12-2025 23:27:54 [[32MINFO[39M]: GET /provider/profile 401 133 - 231.314 ms
+26-12-2025 23:27:54 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+26-12-2025 23:27:54 [[32MINFO[39M]: GET /provider/profile 401 133 - 15.281 ms
+26-12-2025 23:27:54 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.211 ms
+26-12-2025 23:27:54 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.266 ms
+26-12-2025 23:27:54 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 21.752 ms
+26-12-2025 23:27:54 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 6.616 ms
+26-12-2025 23:27:54 [[32MINFO[39M]: GET /provider/profile 304 - - 258.935 ms
+26-12-2025 23:27:54 [[32MINFO[39M]: GET /provider/profile 304 - - 127.542 ms
+26-12-2025 23:29:01 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.352 ms
+26-12-2025 23:29:01 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.393 ms
+26-12-2025 23:29:01 [[32MINFO[39M]: GET /provider/profile 304 - - 209.394 ms
+26-12-2025 23:29:01 [[32MINFO[39M]: GET /provider/profile 304 - - 173.156 ms
+26-12-2025 23:29:44 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 1.337 ms
+26-12-2025 23:29:44 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.697 ms
+26-12-2025 23:29:45 [[32MINFO[39M]: GET /provider/profile 304 - - 955.514 ms
+26-12-2025 23:29:45 [[32MINFO[39M]: GET /provider/profile 304 - - 177.845 ms

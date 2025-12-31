@@ -1,7 +1,7 @@
 import {v2 as cloudinary} from "cloudinary";
 import dotenv from "dotenv";
 import { validationError } from "@presentation/middlewares/error.middleware";
-import { ApplicationStatus } from "@shared/constants/index.constants";
+import { APPLICATION_MESSAGES } from "@shared/constants/index.constants";
 dotenv.config();
 
 interface CloudinaryConfig {
@@ -14,7 +14,7 @@ const { CLOUDINARY_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } =
   process.env as unknown as CloudinaryConfig;
   
   if (!CLOUDINARY_NAME || !CLOUDINARY_API_KEY || !CLOUDINARY_API_SECRET) {
-  throw new validationError(ApplicationStatus.MissingCloudinaryCredentials);
+  throw new validationError(APPLICATION_MESSAGES.MISSING_CLOUDINARY_CREDENTIALS);
 }
 
 cloudinary.config({

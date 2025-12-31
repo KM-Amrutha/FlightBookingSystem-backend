@@ -1,7 +1,7 @@
 import { Request,Response,NextFunction } from "express";
 import {JwtPayload} from "jsonwebtoken";
-import { AuthStatus,JWTStatus } from "@shared/constants/index.constants";
-import { ForbiddenError, UnauthorizedError } from "./error.middleware";
+import { JWT_MESSAGES } from "@shared/constants/index.constants";
+import {  UnauthorizedError } from "./error.middleware";
 import { tokenUseCase } from "@di/container-resolver";
 
 export const authenticateAdmin = async (
@@ -11,21 +11,21 @@ export const authenticateAdmin = async (
 ) => {
   const authHeader = req.headers["authorization"];
   if (!authHeader) {
-    next(new UnauthorizedError(JWTStatus.AuthHeaderMissing));
+    next(new UnauthorizedError(JWT_MESSAGES.AUTH_HEADER_MISSING));
     return;
   }
   const accessToken = authHeader.split(" ")[1];
   if (!accessToken) {
-    next(new UnauthorizedError(JWTStatus.NoAccessToken));
+    next(new UnauthorizedError(JWT_MESSAGES.NO_ACCESS_TOKEN));
     return;
   }
   try {
     const decoded = await tokenUseCase.authAccessToken(accessToken);
-    (req as any).user = decoded as JwtPayload;
+    (req as any).admin = decoded as JwtPayload;
     next();
   } catch (error: any) {
     console.log(`Error in admin authentication middleware: ${error}`);
-    next(new UnauthorizedError(JWTStatus.NoAccessToken));
+    next(new UnauthorizedError(JWT_MESSAGES.NO_ACCESS_TOKEN));
     return;
   }
 };

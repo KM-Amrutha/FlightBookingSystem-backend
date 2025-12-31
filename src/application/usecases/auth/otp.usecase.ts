@@ -8,7 +8,7 @@ import { IOtpRepository ,
 } from "@di/file-imports-index";
 
 import { OtpDTO } from "@application/dtos/auth-dtos";
-import { OTPStatus } from "@shared/constants/index.constants";
+import { OTP_MESSAGES } from "@shared/constants/index.constants";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { IOtp } from "@domain/entities/otp.entity";
 import { injectable, inject } from "inversify";
@@ -38,7 +38,7 @@ export class OtpUseCase implements IOtpUseCase {
     const otpData = await this._otpRepository.findOne({ email, otp });
 
     if (!otpData) {
-      throw new validationError(OTPStatus.Invalid);
+      throw new validationError(OTP_MESSAGES.INVALID);
     }
 
     const { email: userEmail } = otpData;
@@ -71,7 +71,7 @@ export class OtpUseCase implements IOtpUseCase {
       throw new validationError("No account found with this email");
     }
     if (userData?.otpVerified || providerData?.isVerified) {
-      throw new validationError(OTPStatus.Verified);
+      throw new validationError(OTP_MESSAGES.VERIFIED);
     }
 
     

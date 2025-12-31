@@ -1,0 +1,12 @@
+27-12-2025 13:05:09 [[32MINFO[39M]: OPTIONS /auth/user/sign-up 204 0 - 16.824 ms
+27-12-2025 13:05:15 [[32MINFO[39M]: POST /auth/user/sign-up 200 471 - 5031.438 ms
+27-12-2025 13:05:37 [[32MINFO[39M]: OPTIONS /auth/otp/verify 204 0 - 1.625 ms
+27-12-2025 13:05:38 [[32MINFO[39M]: POST /auth/otp/verify 200 107 - 330.567 ms
+27-12-2025 13:06:08 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.253 ms
+27-12-2025 13:06:08 [[32MINFO[39M]: POST /auth/sign-in 200 635 - 254.143 ms
+27-12-2025 13:06:57 [[32MINFO[39M]: OPTIONS /auth/password-reset 204 0 - 24.480 ms
+27-12-2025 13:07:01 [[32MINFO[39M]: PATCH /auth/password-reset 200 105 - 3571.289 ms
+27-12-2025 13:08:31 [[32MINFO[39M]: OPTIONS /auth/password-reset/19c8eb28c60fec2de7d4dc8d5825eb946476120c055062c1ea95f07f44255faa 204 0 - 1.037 ms
+27-12-2025 13:08:31 [[32MINFO[39M]: POST /auth/password-reset/19c8eb28c60fec2de7d4dc8d5825eb946476120c055062c1ea95f07f44255faa 200 139 - 486.685 ms
+27-12-2025 13:09:07 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 1.057 ms
+27-12-2025 13:09:07 [[32MINFO[39M]: POST /auth/sign-in 200 635 - 218.076 ms

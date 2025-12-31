@@ -30,7 +30,7 @@ export class CompleteProviderProfileUseCase implements ICompleteProviderProfileU
     mobile?: string;
     airlineCode?: string;
     logoUrl?: string;
-    registration_certificateUrl?: string;
+    registrationCertificateUrl?: string;
     insuranceProofUrl?: string;
     establishmentYear: number;
     licenseExpiryDate: Date;
@@ -52,9 +52,9 @@ export class CompleteProviderProfileUseCase implements ICompleteProviderProfileU
       email,
       mobile,
       airlineCode,
-      logoUrl,
-      registration_certificateUrl,
-      insuranceProofUrl,
+       logoUrl: inputLogoUrl,
+      registrationCertificateUrl: inputRegistrationCertificateUrl,
+      insuranceProofUrl: inputInsuranceProofUrl,
       establishmentYear,
       licenseExpiryDate,
       headquartersAddress,
@@ -104,23 +104,23 @@ export class CompleteProviderProfileUseCase implements ICompleteProviderProfileU
     let registrationCertificateUrl = provider.registrationCertificateUrl;
     let insuranceProofUrl = provider.insuranceProofUrl;
 
-    if (logoUrl) {
+    if (inputLogoUrl) {
       logoUrl = await this.uploadToCloud(
-        logoUrl,
+        inputLogoUrl,
         `skylife/providers/${providerId}/logo`
       );
     }
 
-    if (registration_certificateUrl) {
+    if (inputRegistrationCertificateUrl) {
       registrationCertificateUrl = await this.uploadToCloud(
-        registration_certificateUrl,
+        inputRegistrationCertificateUrl,
         `skylife/providers/${providerId}/documents`
       );
     }
 
-    if (insuranceProofUrl) {
+    if (inputInsuranceProofUrl) {
       insuranceProofUrl = await this.uploadToCloud(
-        insuranceProofUrl,
+        inputInsuranceProofUrl,
         `skylife/providers/${providerId}/documents`
       );
     }

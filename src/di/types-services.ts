@@ -6,7 +6,8 @@ export const TYPES_SERVICES = {
         EncryptionService: Symbol.for("EncryptionService"),
         HashService: Symbol.for("HashService"),
         CloudinaryService: Symbol.for("CloudinaryService"),
-        LoggerService:Symbol.for("LoogerService")
+        LoggerService:Symbol.for("LoogerService"),
+        GoogleAuthService: Symbol.for("GoogleAuthService"),
 
     
 }

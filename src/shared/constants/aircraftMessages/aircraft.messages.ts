@@ -1,0 +1,16 @@
+export const AIRCRAFT_MESSAGES = {
+  CREATED: 'Aircraft has been successfully created and added to your fleet.',
+  CREATION_FAILED: 'Failed to create aircraft. Please try again later.',
+  UPDATED: 'Aircraft details have been successfully updated.',
+  UPDATE_FAILED: 'Failed to update aircraft details. Please try again.',
+  NOT_FOUND: 'The aircraft you are looking for does not exist.',
+  DELETED: 'Aircraft has been successfully removed from your fleet.',
+  DELETE_FAILED: 'Failed to delete aircraft. Please try again.',
+  STATUS_UPDATED: 'Aircraft status has been successfully changed.',
+  INVALID_AIRCRAFT_TYPE: 'The aircraft type you selected is not valid.',
+  INVALID_CAPACITY: 'Seat capacity must be greater than 0.',
+  INVALID_BUILD_YEAR: 'Build year must be between 1900 and current year.',
+  PROVIDER_NOT_FOUND: 'Provider account not found. Please verify provider ID.',
+  STATION_NOT_FOUND: 'The specified station does not exist.',
+  ALREADY_EXISTS: 'An aircraft with this name already exists for this provider.',
+} as const;

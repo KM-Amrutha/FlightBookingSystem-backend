@@ -1,4 +1,4 @@
-import { IOtpRepository,
+import { 
   IUserRepository,
   IProviderRepository,
 IAuthService,
@@ -8,9 +8,8 @@ ISignInUseCase
  } from "@di/file-imports-index";
 
 import {
-  AuthStatus,
-  PasswordStatus,
-  ProviderStatus,
+  AUTH_MESSAGES,
+  PASSWORD_MESSAGES,
 } from "@shared/constants/index.constants";
 import { SignInDTO } from "@application/dtos/auth-dtos";
 import {
@@ -20,7 +19,6 @@ import {
 
 import { Provider } from "@application/dtos/provider-dtos";
 import { IUser } from "@domain/entities/user.entity";
-import {IProvider} from "@domain/entities/provider.entity";
 import { injectable, inject } from "inversify";
 import { TYPES_REPOSITORIES } from "@di/types-repositories";
 import { TYPES_SERVICES } from "@di/types-services";
@@ -58,23 +56,23 @@ export class SignInUseCase implements ISignInUseCase {
     email: string,
     password: string
   ): Promise<IUser> {
-    const userData = await this._userRepository.findOne({ email: email });
+    const userData = await this._userRepository.findOne({ email: email});
     if (!userData) {
-      throw new validationError(AuthStatus.EmailNotFound);
+      throw new validationError(AUTH_MESSAGES.EMAIL_NOT_FOUND);
     }
   
     if (!userData?.otpVerified) {
-      throw new ForbiddenError(AuthStatus.AccountNotVerified);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
     }
     if (!userData?.isActive) {
-      throw new ForbiddenError(AuthStatus.AccountBlocked);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
     }
     const isValidPassword = await this._encryptionService.compare(
       password,
       userData?.password
     );
     if (!isValidPassword) {
-      throw new validationError(PasswordStatus.Incorrect);
+      throw new validationError(PASSWORD_MESSAGES.INCORRECT);
     }
     return userData;
   }
@@ -85,20 +83,20 @@ export class SignInUseCase implements ISignInUseCase {
   ): Promise<Provider> {
     const providerData = await this._providerRepository.getProviderByEmailWithPassword(email);
     if (!providerData) {
-      throw new validationError(AuthStatus.EmailNotFound);
+      throw new validationError(AUTH_MESSAGES.EMAIL_NOT_FOUND);
     }
     if (!providerData?.isVerified) {
-      throw new ForbiddenError(AuthStatus.AccountNotVerified);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
     }
     if (!providerData?.isActive) {
-      throw new ForbiddenError(AuthStatus.AccountBlocked);
+      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
     }
     const isValidPassword = await this._encryptionService.compare(
       password,
       providerData?.password
     );
     if (!isValidPassword) {
-      throw new validationError(PasswordStatus.Incorrect);
+      throw new validationError(PASSWORD_MESSAGES.INCORRECT);
     }
     const providerDTO =  await this._providerRepository.getProviderByEmail(email);
     if (!providerDTO) {
@@ -126,7 +124,7 @@ export class SignInUseCase implements ISignInUseCase {
         const accessToken = this.generateAccessToken(providerData);
         const refreshToken = this.generateRefreshToken(providerData);
         return { accessToken, refreshToken, userData: providerData };
-      } catch (providerError) {
+      } catch (error) {
         throw userError;
       }
     }

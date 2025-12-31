@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { injectable, inject } from "inversify";
 import { sendResponse } from "@shared/utils/http.response";
-import { AuthStatus, StatusCodes } from "@shared/constants/index.constants";
+import { AUTH_MESSAGES, StatusCodes } from "@shared/constants/index.constants";
 import { SignInUseCase } from "@application/usecases/auth/signin-user.usecases";
 import { setRefreshTokenCookie } from "@shared/utils/cookie";
 import { TYPES_AUTH_USECASES } from "@di/types-usecases";
@@ -22,7 +22,7 @@ export class SignInController {
 
     sendResponse(
       res,
-      AuthStatus.LoginSuccess,
+      AUTH_MESSAGES.LOGIN_SUCCESS,
       { userData, accessToken },
       StatusCodes.OK,
     );

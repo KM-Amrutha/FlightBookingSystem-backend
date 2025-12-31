@@ -29,7 +29,7 @@ export class GetProviderProfileController {
         res,
         error.message,
         null,
-        StatusCodes.BadRequest
+        StatusCodes.BAD_REQUEST
       );
     }
   }

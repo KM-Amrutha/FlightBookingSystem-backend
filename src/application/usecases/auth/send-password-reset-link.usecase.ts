@@ -7,7 +7,7 @@ IHashService,
 
 import { CreatePassResetTokenDTO } from "@application/dtos/auth-dtos";
 import { IPasswordResetToken } from "@domain/entities/pass-reset-token.entity";
-import { AuthStatus } from "@shared/constants/index.constants";
+import { AUTH_MESSAGES } from "@shared/constants/index.constants";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { injectable, inject } from "inversify";
 import { TYPES_REPOSITORIES } from "@di/types-repositories";
@@ -31,11 +31,11 @@ export class SendPasswordRestLinkUseCase implements ISendPasswordRestLinkUseCase
   }: CreatePassResetTokenDTO): Promise<IPasswordResetToken> {
     const userData = await this._userRepository.findOne({ email: email });
     if (!userData) {
-      throw new validationError(AuthStatus.EmailNotFound);
+      throw new validationError(AUTH_MESSAGES.EMAIL_NOT_FOUND);
     }
   
     if (userData && !userData.otpVerified) {
-      throw new validationError(AuthStatus.AccountNotVerified);
+      throw new validationError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
     }
     const token = await this._hashService.generate();
     const hashedToken = await this._hashService.hash(token);

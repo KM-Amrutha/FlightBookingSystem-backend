@@ -13,7 +13,7 @@ const userSchema = new Schema<IUser>(
     lastName: {type:String,required:true},
     email:{type:String, required:true,unique:true},
     isActive:{type:Boolean, default:true},
-     password:{type:String,required:true},
+    password: {type: String,required: function() { return !this.googleVerified;}, default: ""},
     otpVerified:{type:Boolean, default:false},
     googleVerified: {type:Boolean,default:false},
     mobile:{type:String},

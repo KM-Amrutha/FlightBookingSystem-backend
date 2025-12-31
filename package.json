@@ -6,7 +6,11 @@
   "scripts": {
     "build": "tsc",
     "start": "node -r module-alias/register dist/config/index.js",
-    "dev": "nodemon -r tsconfig-paths/register src/config/index.ts"
+    "dev": "nodemon -r tsconfig-paths/register src/config/index.ts",
+    "seed:airports": "ts-node src/scripts/seed-airports.ts",
+    "seed:seats": "ts-node src/scripts/seed-seatTypes.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "_moduleAliases": {
     "@shared": "dist/shared",
@@ -28,12 +32,14 @@
     "cloudinary": "^2.7.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "express-async-handler": "^1.2.0",
     "express-rate-limit": "^8.1.0",
     "express-validator": "^7.2.1",
+    "geo-tz": "^8.1.4",
     "google-auth-library": "^10.3.0",
     "inversify": "^7.9.1",
     "jsonwebtoken": "^9.0.2",
@@ -45,9 +51,11 @@
     "otp-generator": "^4.0.1",
     "reflect-metadata": "^0.2.2",
     "tsconfig-paths": "^4.2.0",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
@@ -58,8 +66,11 @@
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.3.1",
     "@types/otp-generator": "^4.0.2",
+    "eslint": "^9.39.2",
+    "globals": "^16.5.0",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.50.0"
   }
 }

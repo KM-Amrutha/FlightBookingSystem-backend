@@ -2,9 +2,8 @@ import nodemailer, { Transporter } from "nodemailer";
 import dotenv from "dotenv";
 dotenv.config();
 import { injectable } from "inversify";
-import {
-    AuthStatus,
-    ApplicationStatus
+import{
+    APPLICATION_MESSAGES
 } from "@shared/constants/index.constants";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { IEmailService } from "@application/interfaces/service/communication/IEmail.service";
@@ -37,31 +36,23 @@ export class EmailService implements IEmailService {
   private validateEnv(): void {
     if (!this._emailUser || !this._emailPass) {
       throw new validationError(
-        ApplicationStatus.MissingEmailEnvironmentVariables
+        APPLICATION_MESSAGES.MISSING_EMAIL_ENVIRONMENT_VARIABLES
       );
     }
   }
-  async sendEmail({ to, subject, text }: SendEmail) {
-    console.log("data for sending email", to, subject, text);
+  async sendEmail({ to, subject, text }: SendEmail): Promise<void> {
+  try {
+    await this._transporter.sendMail({
+      from: this._emailUser,
+      to,
+      subject,
+      text,
+    });
 
-  console.log("EMAIL MOCK SUCCESS - Email 'sent' to:", to);
-  console.log(" SUBJECT:", subject);
-  console.log(" CONTENT:", text);
-  console.log(" EXTRACT OTP FROM TEXT ABOVE ↑");
-  
-  // Just return success immediately
-  return Promise.resolve();
-    // try {
-    //   await this.transporter.sendMail({
-    //     to: to,
-    //     from: this.emailUser,
-    //     subject: subject,
-    //     text: text,
-    //   });
-    //   console.log("Email sent successfully to", to, subject, text);
-    // } catch (error) {
-    //   console.log(`Error sending the email:${error}`);
-    //   throw new validationError(AuthStatus.EmailSendFailed);
-    // }
+    console.log("✅ Email sent successfully to:", to);
+  } catch (error: any) {
+    console.error("❌ Error sending email:", error.message || error);
+    throw new validationError("Failed to send email. Please try again later.");
   }
+}
 }

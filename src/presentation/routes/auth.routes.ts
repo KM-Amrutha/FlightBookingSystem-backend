@@ -10,6 +10,8 @@ import { signOutController } from "@di/container-resolver";
 import { refreshAccessTokenController } from "@di/container-resolver";
 import { forgotPasswordController } from "@di/container-resolver";
 import { passwordResetLinkController } from "@di/container-resolver";
+import { googleAuthController } from "@di/container-resolver";
+
 
 
 const authRoutes = express.Router();
@@ -19,6 +21,7 @@ const authRoutes = express.Router();
 authRoutes.post("/user/sign-up",asyncHandler(signUpUserController.handle.bind(signUpUserController)));
 authRoutes.post("/provider/sign-up",asyncHandler(signUpProviderController.handle.bind(signUpProviderController)));
 authRoutes.post("/sign-in",asyncHandler(signInController.handle.bind(signInController)));
+authRoutes.post("/google",asyncHandler(googleAuthController.handle.bind(googleAuthController)));
 
 // otp
 authRoutes.post("/otp/verify",asyncHandler(otpController.verifyOtp.bind(otpController)));

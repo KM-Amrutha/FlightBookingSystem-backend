@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import ms from 'ms';
 import dotenv from 'dotenv';
-import { ApplicationStatus } from '@shared/constants/index.constants';
+import { APPLICATION_MESSAGES } from '@shared/constants/index.constants';
 import { validationError } from '@presentation/middlewares/error.middleware';
 import { TokenPayload  } from '@application/dtos/service/auth.service';
 import { IAuthService } from '@application/interfaces/service/auth/IAuth.service';
@@ -29,7 +29,7 @@ private validateEnv() {
         !this._jwtRefreshExpiration
         
     ) {
-        throw new validationError(ApplicationStatus.MissingJwtEnvironmentVariables);
+        throw new validationError(APPLICATION_MESSAGES.MISSING_JWT_ENVIRONMENT_VARIABLES);
     }
 }
    generateAccessToken(payload: TokenPayload): string {
