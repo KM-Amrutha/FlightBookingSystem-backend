@@ -15,11 +15,6 @@ export class ApproveFlightController {
   ) {}
 
   async handle(req: Request, res: Response): Promise<void> {
-    console.log("=== FLIGHT APPROVAL REQUEST RECEIVED ===");
-  console.log("req.params:", req.params);           // Should show { flightId: '694c...' }
-  console.log("req.body:", req.body);               // Should show { status: 'approved' } or with reason
-  console.log("Authenticated user:", (req as any).admin); // From authenticateAdmin
-  console.log("==========================================");
     try {
       const flightIdParam = req.params.flightId;
 

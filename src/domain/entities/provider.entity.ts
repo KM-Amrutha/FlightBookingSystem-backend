@@ -25,4 +25,7 @@ export interface IProvider extends Document {
   isVerified: boolean;
   adminApproval: boolean; 
   isProfileComplete: boolean; 
+  profileStatus: 'pending' | 'approved' | 'rejected';
+  rejectionReason?: string |null;
+  rejectionDate?: Date |null;
 }

@@ -1,0 +1,605 @@
+03-01-2026 00:29:57 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 29.446 ms
+03-01-2026 00:29:57 [[32MINFO[39M]: POST /auth/sign-in 200 642 - 425.718 ms
+03-01-2026 00:29:58 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.608 ms
+03-01-2026 00:29:58 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.382 ms
+03-01-2026 00:29:58 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 131.721 ms
+03-01-2026 00:29:58 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 52.359 ms
+03-01-2026 00:30:16 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.370 ms
+03-01-2026 00:30:16 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 2.934 ms
+03-01-2026 00:30:16 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.455 ms
+03-01-2026 00:30:16 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 2.958 ms
+03-01-2026 00:30:16 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 54.858 ms
+03-01-2026 00:30:17 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 59.099 ms
+03-01-2026 00:30:17 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 70.019 ms
+03-01-2026 00:30:17 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 52.178 ms
+03-01-2026 00:30:18 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 1.059 ms
+03-01-2026 00:30:18 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 8.419 ms
+03-01-2026 00:30:19 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 124.374 ms
+03-01-2026 00:30:19 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 61.127 ms
+03-01-2026 00:30:22 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 76.755 ms
+03-01-2026 00:30:22 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 52.325 ms
+03-01-2026 00:30:23 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.467 ms
+03-01-2026 00:30:23 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 7.625 ms
+03-01-2026 00:30:24 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.466 ms
+03-01-2026 00:30:24 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 1.694 ms
+03-01-2026 00:30:24 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 68.314 ms
+03-01-2026 00:30:24 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 56.713 ms
+03-01-2026 00:30:24 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 61.937 ms
+03-01-2026 00:30:24 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 58.996 ms
+03-01-2026 00:30:28 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 56.597 ms
+03-01-2026 00:30:28 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 54.643 ms
+03-01-2026 00:30:33 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.290 ms
+03-01-2026 00:30:33 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.306 ms
+03-01-2026 00:30:33 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.258 ms
+03-01-2026 00:30:33 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.668 ms
+03-01-2026 00:30:33 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 56.292 ms
+03-01-2026 00:30:33 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 52.498 ms
+03-01-2026 00:30:33 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 52.202 ms
+03-01-2026 00:30:33 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 59.578 ms
+03-01-2026 00:30:39 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.227 ms
+03-01-2026 00:30:39 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.265 ms
+03-01-2026 00:30:39 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 57.889 ms
+03-01-2026 00:30:39 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 49.279 ms
+03-01-2026 00:30:41 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 65.190 ms
+03-01-2026 00:30:41 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 62.619 ms
+03-01-2026 00:30:41 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 51.904 ms
+03-01-2026 00:30:41 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 62.287 ms
+03-01-2026 00:32:42 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.343 ms
+03-01-2026 00:32:42 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 2.396 ms
+03-01-2026 00:32:42 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 54.904 ms
+03-01-2026 00:32:42 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 47.814 ms
+03-01-2026 00:33:18 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.239 ms
+03-01-2026 00:33:18 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 2.203 ms
+03-01-2026 00:33:18 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 54.990 ms
+03-01-2026 00:33:18 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 55.864 ms
+03-01-2026 00:33:29 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.276 ms
+03-01-2026 00:33:29 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 5.318 ms
+03-01-2026 00:33:29 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.238 ms
+03-01-2026 00:33:29 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.235 ms
+03-01-2026 00:33:29 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 52.178 ms
+03-01-2026 00:33:29 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 51.795 ms
+03-01-2026 00:33:29 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 50.770 ms
+03-01-2026 00:33:29 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 50.928 ms
+03-01-2026 00:33:31 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 0.374 ms
+03-01-2026 00:33:31 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 0.189 ms
+03-01-2026 00:33:31 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 55.234 ms
+03-01-2026 00:33:31 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 65.424 ms
+03-01-2026 00:34:03 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.277 ms
+03-01-2026 00:34:03 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.373 ms
+03-01-2026 00:34:03 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.363 ms
+03-01-2026 00:34:03 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.610 ms
+03-01-2026 00:34:03 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 56.756 ms
+03-01-2026 00:34:03 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 55.512 ms
+03-01-2026 00:34:03 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 60.509 ms
+03-01-2026 00:34:03 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 51.893 ms
+03-01-2026 00:48:59 [[32MINFO[39M]: OPTIONS /auth/provider/sign-up/ 204 0 - 5.588 ms
+03-01-2026 00:49:04 [[32MINFO[39M]: POST /auth/provider/sign-up/ 200 590 - 5007.875 ms
+03-01-2026 00:49:46 [[32MINFO[39M]: OPTIONS /auth/otp/verify 204 0 - 0.354 ms
+03-01-2026 00:49:46 [[32MINFO[39M]: POST /auth/otp/verify 200 107 - 300.377 ms
+03-01-2026 00:50:02 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.175 ms
+03-01-2026 00:50:03 [[32MINFO[39M]: POST /auth/sign-in 200 840 - 706.712 ms
+03-01-2026 00:55:10 [[32MINFO[39M]: OPTIONS /provider/complete-profile 204 0 - 0.679 ms
+03-01-2026 00:55:15 [[32MINFO[39M]: POST /provider/complete-profile 200 83 - 5261.551 ms
+03-01-2026 00:55:30 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.790 ms
+03-01-2026 00:55:30 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.559 ms
+03-01-2026 00:55:30 [[32MINFO[39M]: GET /provider/profile 200 1176 - 119.708 ms
+03-01-2026 00:55:30 [[32MINFO[39M]: GET /provider/profile 304 - - 108.531 ms
+03-01-2026 00:56:29 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.395 ms
+03-01-2026 00:56:30 [[32MINFO[39M]: POST /auth/sign-in 200 642 - 329.659 ms
+03-01-2026 00:56:31 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 2.356 ms
+03-01-2026 00:56:31 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.808 ms
+03-01-2026 00:56:31 [[32MINFO[39M]: GET /admin/providers/pending 200 1283 - 75.604 ms
+03-01-2026 00:56:31 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 55.099 ms
+03-01-2026 00:56:33 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 58.100 ms
+03-01-2026 00:56:33 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 62.483 ms
+03-01-2026 00:56:33 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 51.889 ms
+03-01-2026 00:56:33 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 65.639 ms
+03-01-2026 00:58:12 [[32MINFO[39M]: OPTIONS /admin/providers/69581a24bf7a1bf3a2289e61/reject 204 0 - 0.383 ms
+03-01-2026 00:58:17 [[32MINFO[39M]: PATCH /admin/providers/69581a24bf7a1bf3a2289e61/reject 200 84 - 4822.197 ms
+03-01-2026 00:58:17 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 3.618 ms
+03-01-2026 00:58:18 [[32MINFO[39M]: GET /admin/providers/pending 200 90 - 107.371 ms
+03-01-2026 00:58:23 [[32MINFO[39M]: PATCH /admin/providers/69581a24bf7a1bf3a2289e61/reject 200 84 - 5205.214 ms
+03-01-2026 00:58:23 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 1.655 ms
+03-01-2026 00:58:23 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 94.771 ms
+03-01-2026 00:59:14 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.619 ms
+03-01-2026 00:59:14 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 1.408 ms
+03-01-2026 00:59:14 [[32MINFO[39M]: GET /provider/profile 400 73 - 115.057 ms
+03-01-2026 00:59:14 [[32MINFO[39M]: GET /provider/profile 400 73 - 121.065 ms
+03-01-2026 00:59:26 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.472 ms
+03-01-2026 00:59:26 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:61:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 00:59:26 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 460.402 ms
+03-01-2026 00:59:37 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.377 ms
+03-01-2026 00:59:38 [[32MINFO[39M]: POST /auth/sign-in 200 1534 - 434.812 ms
+03-01-2026 01:00:55 [[32MINFO[39M]: OPTIONS /provider/complete-profile 204 0 - 0.405 ms
+03-01-2026 01:00:57 [[32MINFO[39M]: POST /provider/complete-profile 200 83 - 2672.770 ms
+03-01-2026 01:01:15 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 1.113 ms
+03-01-2026 01:01:15 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 1.111 ms
+03-01-2026 01:01:15 [[32MINFO[39M]: GET /admin/providers/pending 200 1345 - 56.740 ms
+03-01-2026 01:01:15 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 54.144 ms
+03-01-2026 01:01:30 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 2.451 ms
+03-01-2026 01:01:31 [[32MINFO[39M]: POST /auth/sign-in 200 642 - 332.573 ms
+03-01-2026 01:01:31 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.678 ms
+03-01-2026 01:01:31 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.503 ms
+03-01-2026 01:01:31 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 62.768 ms
+03-01-2026 01:01:32 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 69.600 ms
+03-01-2026 01:01:34 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 52.618 ms
+03-01-2026 01:01:34 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 63.074 ms
+03-01-2026 01:01:34 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 56.391 ms
+03-01-2026 01:01:34 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 64.300 ms
+03-01-2026 01:01:56 [[32MINFO[39M]: OPTIONS /admin/providers/69581a24bf7a1bf3a2289e61/verify 204 0 - 0.442 ms
+03-01-2026 01:01:59 [[32MINFO[39M]: PATCH /admin/providers/69581a24bf7a1bf3a2289e61/verify 200 84 - 3367.400 ms
+03-01-2026 01:01:59 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 3.585 ms
+03-01-2026 01:01:59 [[32MINFO[39M]: GET /admin/providers/pending 200 90 - 76.515 ms
+03-01-2026 01:02:05 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.824 ms
+03-01-2026 01:02:05 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.638 ms
+03-01-2026 01:02:06 [[32MINFO[39M]: GET /provider/profile 400 73 - 109.904 ms
+03-01-2026 01:02:06 [[32MINFO[39M]: GET /provider/profile 400 73 - 106.664 ms
+03-01-2026 01:02:19 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.386 ms
+03-01-2026 01:02:20 [[32MINFO[39M]: POST /auth/sign-in 200 1472 - 353.576 ms
+03-01-2026 13:36:57 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 2.922 ms
+03-01-2026 13:36:57 [[32MINFO[39M]: POST /auth/sign-in 200 1472 - 391.080 ms
+03-01-2026 13:37:05 [[32MINFO[39M]: OPTIONS /provider/aircrafts 204 0 - 1.393 ms
+03-01-2026 13:37:05 [[32MINFO[39M]: OPTIONS /provider/aircrafts 204 0 - 0.272 ms
+03-01-2026 13:37:06 [[32MINFO[39M]: GET /provider/aircrafts 200 84 - 226.108 ms
+03-01-2026 13:37:06 [[32MINFO[39M]: GET /provider/aircrafts 304 - - 204.558 ms
+03-01-2026 13:37:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.345 ms
+03-01-2026 13:37:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.738 ms
+03-01-2026 13:37:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.211 ms
+03-01-2026 13:37:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.493 ms
+03-01-2026 13:37:10 [[32MINFO[39M]: GET /provider/flights 200 93 - 118.522 ms
+03-01-2026 13:37:10 [[32MINFO[39M]: GET /provider/flights 304 - - 93.609 ms
+03-01-2026 13:37:10 [[32MINFO[39M]: GET /provider/flights 304 - - 99.043 ms
+03-01-2026 13:37:10 [[32MINFO[39M]: GET /provider/flights 304 - - 96.637 ms
+03-01-2026 13:39:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 11.604 ms
+03-01-2026 13:39:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.714 ms
+03-01-2026 13:39:10 [[32MINFO[39M]: GET /provider/flights 304 - - 124.153 ms
+03-01-2026 13:39:10 [[32MINFO[39M]: GET /provider/flights 304 - - 110.151 ms
+03-01-2026 13:51:54 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 6.896 ms
+03-01-2026 13:51:54 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.735 ms
+03-01-2026 13:51:54 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 13:51:54 [[32MINFO[39M]: GET /provider/profile 401 133 - 188.343 ms
+03-01-2026 13:51:54 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 13:51:54 [[32MINFO[39M]: GET /provider/profile 401 133 - 7.858 ms
+03-01-2026 13:51:54 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.247 ms
+03-01-2026 13:51:54 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.191 ms
+03-01-2026 13:51:54 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 39.460 ms
+03-01-2026 13:51:54 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 6.310 ms
+03-01-2026 13:51:55 [[32MINFO[39M]: GET /provider/profile 200 1177 - 213.289 ms
+03-01-2026 13:51:55 [[32MINFO[39M]: GET /provider/profile 304 - - 98.901 ms
+03-01-2026 13:51:55 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.354 ms
+03-01-2026 13:51:55 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.267 ms
+03-01-2026 13:51:55 [[32MINFO[39M]: GET /provider/flights 304 - - 119.023 ms
+03-01-2026 13:51:55 [[32MINFO[39M]: GET /provider/flights 304 - - 107.032 ms
+03-01-2026 21:00:35 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 15.201 ms
+03-01-2026 21:00:35 [[32MINFO[39M]: POST /auth/sign-in 200 642 - 296.508 ms
+03-01-2026 21:00:35 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.624 ms
+03-01-2026 21:00:35 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 1.283 ms
+03-01-2026 21:00:35 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 63.935 ms
+03-01-2026 21:00:35 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 45.847 ms
+03-01-2026 21:00:38 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 0.272 ms
+03-01-2026 21:00:38 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 0.298 ms
+03-01-2026 21:00:38 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 75.851 ms
+03-01-2026 21:00:38 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 53.490 ms
+03-01-2026 21:00:54 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.548 ms
+03-01-2026 21:00:54 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 1.172 ms
+03-01-2026 21:00:54 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.704 ms
+03-01-2026 21:00:54 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 1.502 ms
+03-01-2026 21:00:54 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 58.592 ms
+03-01-2026 21:00:54 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 47.901 ms
+03-01-2026 21:00:54 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 52.025 ms
+03-01-2026 21:00:54 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 57.992 ms
+03-01-2026 21:00:56 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 0.381 ms
+03-01-2026 21:00:56 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 60.891 ms
+03-01-2026 21:00:56 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 52.072 ms
+03-01-2026 21:01:22 [[32MINFO[39M]: OPTIONS /admin/flights/694cfc86243dbb1ded74565b/approval 204 0 - 0.722 ms
+03-01-2026 21:01:22 [[32MINFO[39M]: PATCH /admin/flights/694cfc86243dbb1ded74565b/approval 200 1042 - 206.410 ms
+03-01-2026 21:01:31 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.262 ms
+03-01-2026 21:01:31 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 1.177 ms
+03-01-2026 21:01:31 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.228 ms
+03-01-2026 21:01:31 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.460 ms
+03-01-2026 21:01:31 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 51.316 ms
+03-01-2026 21:01:31 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 55.481 ms
+03-01-2026 21:01:31 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 49.931 ms
+03-01-2026 21:01:31 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 60.809 ms
+03-01-2026 21:01:35 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 0.523 ms
+03-01-2026 21:01:35 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 0.462 ms
+03-01-2026 21:01:35 [[32MINFO[39M]: GET /admin/flights/pending-approval 200 93 - 61.077 ms
+03-01-2026 21:01:35 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 46.458 ms
+03-01-2026 21:01:38 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.434 ms
+03-01-2026 21:01:38 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.637 ms
+03-01-2026 21:01:38 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 56.397 ms
+03-01-2026 21:01:38 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 50.655 ms
+03-01-2026 21:01:54 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.281 ms
+03-01-2026 21:01:54 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:61:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 21:01:54 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 256.505 ms
+03-01-2026 21:02:03 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.283 ms
+03-01-2026 21:02:04 [[32MINFO[39M]: POST /auth/sign-in 200 1386 - 287.041 ms
+03-01-2026 21:02:06 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 47.262 ms
+03-01-2026 21:02:06 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.190 ms
+03-01-2026 21:02:06 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.285 ms
+03-01-2026 21:02:06 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.455 ms
+03-01-2026 21:02:06 [[32MINFO[39M]: GET /provider/flights 200 2037 - 123.615 ms
+03-01-2026 21:02:06 [[32MINFO[39M]: GET /provider/flights 304 - - 101.156 ms
+03-01-2026 21:02:06 [[32MINFO[39M]: GET /provider/flights 304 - - 125.480 ms
+03-01-2026 21:02:06 [[32MINFO[39M]: GET /provider/flights 304 - - 107.411 ms
+03-01-2026 21:02:09 [[32MINFO[39M]: GET /provider/flights 304 - - 101.378 ms
+03-01-2026 21:02:09 [[32MINFO[39M]: GET /provider/flights 304 - - 90.752 ms
+03-01-2026 21:43:01 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 11.454 ms
+03-01-2026 21:43:01 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.180 ms
+03-01-2026 21:43:01 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 21:43:01 [[32MINFO[39M]: GET /provider/profile 401 133 - 139.657 ms
+03-01-2026 21:43:01 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 21:43:01 [[32MINFO[39M]: GET /provider/profile 401 133 - 7.250 ms
+03-01-2026 21:43:01 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.280 ms
+03-01-2026 21:43:01 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.232 ms
+03-01-2026 21:43:01 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 63.835 ms
+03-01-2026 21:43:01 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 14.785 ms
+03-01-2026 21:43:03 [[32MINFO[39M]: GET /provider/profile 200 1091 - 1365.811 ms
+03-01-2026 21:43:03 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.160 ms
+03-01-2026 21:43:03 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.227 ms
+03-01-2026 21:43:03 [[32MINFO[39M]: GET /provider/profile 304 - - 159.778 ms
+03-01-2026 21:43:04 [[32MINFO[39M]: GET /provider/flights 304 - - 686.492 ms
+03-01-2026 21:43:04 [[32MINFO[39M]: GET /provider/flights 304 - - 177.682 ms
+03-01-2026 22:04:05 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 13.354 ms
+03-01-2026 22:04:05 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.152 ms
+03-01-2026 22:04:05 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.193 ms
+03-01-2026 22:04:05 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.451 ms
+03-01-2026 22:04:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.253 ms
+03-01-2026 22:04:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.226 ms
+03-01-2026 22:04:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.172 ms
+03-01-2026 22:04:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.202 ms
+03-01-2026 22:04:10 [[31MERROR[39M]: [/provider/flights] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 22:04:10 [[32MINFO[39M]: GET /provider/flights 401 133 - 104.913 ms
+03-01-2026 22:04:10 [[31MERROR[39M]: [/provider/flights] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 22:04:10 [[32MINFO[39M]: GET /provider/flights 401 133 - 4.174 ms
+03-01-2026 22:04:10 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.202 ms
+03-01-2026 22:04:10 [[31MERROR[39M]: [/provider/flights] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 22:04:10 [[32MINFO[39M]: GET /provider/flights 401 133 - 5.573 ms
+03-01-2026 22:04:10 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 7.245 ms
+03-01-2026 22:04:10 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 9.212 ms
+03-01-2026 22:04:10 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 13.256 ms
+03-01-2026 22:04:10 [[31MERROR[39M]: [/provider/flights] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 22:04:10 [[32MINFO[39M]: GET /provider/flights 401 133 - 34.989 ms
+03-01-2026 22:04:10 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 12.886 ms
+03-01-2026 22:04:11 [[32MINFO[39M]: GET /provider/flights 304 - - 792.616 ms
+03-01-2026 22:04:11 [[32MINFO[39M]: GET /provider/flights 304 - - 183.712 ms
+03-01-2026 22:04:12 [[32MINFO[39M]: GET /provider/flights 304 - - 175.063 ms
+03-01-2026 22:04:12 [[32MINFO[39M]: GET /provider/flights 304 - - 180.869 ms
+03-01-2026 22:09:03 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 4.225 ms
+03-01-2026 22:09:03 [[32MINFO[39M]: POST /auth/sign-in 200 1472 - 422.178 ms
+03-01-2026 22:09:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.284 ms
+03-01-2026 22:09:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.280 ms
+03-01-2026 22:09:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.280 ms
+03-01-2026 22:09:10 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.183 ms
+03-01-2026 22:09:10 [[32MINFO[39M]: GET /provider/flights 200 93 - 189.919 ms
+03-01-2026 22:09:11 [[32MINFO[39M]: GET /provider/flights 304 - - 203.131 ms
+03-01-2026 22:09:11 [[32MINFO[39M]: GET /provider/flights 304 - - 183.491 ms
+03-01-2026 22:09:11 [[32MINFO[39M]: GET /provider/flights 304 - - 203.243 ms
+03-01-2026 22:09:26 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=dxb 204 0 - 0.344 ms
+03-01-2026 22:09:26 [[32MINFO[39M]: GET /provider/destinations/search?q=dxb 304 - - 180.474 ms
+03-01-2026 22:09:34 [[32MINFO[39M]: OPTIONS /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9525b4&departureTime=2026-02-03T16:39:00.000Z 204 0 - 0.197 ms
+03-01-2026 22:09:35 [[32MINFO[39M]: GET /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9525b4&departureTime=2026-02-03T16:39:00.000Z 200 94 - 271.031 ms
+03-01-2026 22:09:40 [[32MINFO[39M]: OPTIONS /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9525b4&departureTime=2026-02-03T06:39:00.000Z 204 0 - 0.152 ms
+03-01-2026 22:09:40 [[32MINFO[39M]: GET /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9525b4&departureTime=2026-02-03T06:39:00.000Z 200 94 - 305.274 ms
+03-01-2026 22:09:41 [[32MINFO[39M]: OPTIONS /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9525b4&departureTime=2026-02-03T06:40:00.000Z 204 0 - 0.154 ms
+03-01-2026 22:09:41 [[32MINFO[39M]: GET /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9525b4&departureTime=2026-02-03T06:40:00.000Z 200 94 - 267.983 ms
+03-01-2026 22:09:52 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=sri 204 0 - 0.402 ms
+03-01-2026 22:09:52 [[32MINFO[39M]: GET /provider/destinations/search?q=sri 200 751 - 196.516 ms
+03-01-2026 22:10:01 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=colo 204 0 - 0.164 ms
+03-01-2026 22:10:01 [[32MINFO[39M]: GET /provider/destinations/search?q=colo 200 3818 - 182.775 ms
+03-01-2026 22:10:03 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=colom 204 0 - 0.317 ms
+03-01-2026 22:10:03 [[32MINFO[39M]: GET /provider/destinations/search?q=colom 200 1440 - 207.096 ms
+03-01-2026 22:10:41 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=Dubai+International+Airport+%28DXB 204 0 - 1.070 ms
+03-01-2026 22:10:41 [[32MINFO[39M]: GET /provider/destinations/search?q=Dubai+International+Airport+%28DXB 400 84 - 214.418 ms
+03-01-2026 22:10:44 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=COK 204 0 - 0.184 ms
+03-01-2026 22:10:44 [[32MINFO[39M]: GET /provider/destinations/search?q=COK 200 406 - 169.750 ms
+03-01-2026 22:10:45 [[32MINFO[39M]: OPTIONS /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc95293a&departureTime=2026-02-03T06:40:00.000Z 204 0 - 0.172 ms
+03-01-2026 22:10:46 [[32MINFO[39M]: GET /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc95293a&departureTime=2026-02-03T06:40:00.000Z 200 94 - 286.662 ms
+03-01-2026 22:11:12 [[32MINFO[39M]: OPTIONS /provider/aircrafts 204 0 - 0.212 ms
+03-01-2026 22:11:12 [[32MINFO[39M]: OPTIONS /provider/aircrafts 204 0 - 0.254 ms
+03-01-2026 22:11:12 [[32MINFO[39M]: OPTIONS /provider/aircrafts 204 0 - 0.155 ms
+03-01-2026 22:11:12 [[32MINFO[39M]: OPTIONS /provider/aircrafts 204 0 - 0.177 ms
+03-01-2026 22:11:12 [[32MINFO[39M]: GET /provider/aircrafts 200 84 - 410.253 ms
+03-01-2026 22:11:13 [[32MINFO[39M]: GET /provider/aircrafts 304 - - 301.143 ms
+03-01-2026 22:11:13 [[32MINFO[39M]: GET /provider/aircrafts 304 - - 248.753 ms
+03-01-2026 22:11:13 [[32MINFO[39M]: GET /provider/aircrafts 304 - - 238.442 ms
+03-01-2026 22:11:56 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=dxb 204 0 - 0.226 ms
+03-01-2026 22:11:56 [[32MINFO[39M]: GET /provider/destinations/search?q=dxb 304 - - 182.640 ms
+03-01-2026 22:12:01 [[32MINFO[39M]: GET /provider/destinations/search?q=dxb 304 - - 179.842 ms
+03-01-2026 22:12:12 [[32MINFO[39M]: OPTIONS /provider/aircrafts 204 0 - 0.765 ms
+03-01-2026 22:12:12 [[32MINFO[39M]: POST /provider/aircrafts 201 549 - 567.202 ms
+03-01-2026 22:12:13 [[32MINFO[39M]: OPTIONS /provider/seat-types 204 0 - 0.309 ms
+03-01-2026 22:12:13 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 204 0 - 0.269 ms
+03-01-2026 22:12:13 [[32MINFO[39M]: OPTIONS /provider/seat-types 204 0 - 0.259 ms
+03-01-2026 22:12:13 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 204 0 - 0.195 ms
+03-01-2026 22:12:13 [[32MINFO[39M]: GET /provider/seat-types 200 1465 - 165.473 ms
+03-01-2026 22:12:13 [[32MINFO[39M]: GET /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 200 87 - 163.084 ms
+03-01-2026 22:12:13 [[32MINFO[39M]: GET /provider/seat-types 304 - - 162.833 ms
+03-01-2026 22:12:13 [[32MINFO[39M]: GET /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 304 - - 166.587 ms
+03-01-2026 22:12:30 [[32MINFO[39M]: OPTIONS /provider/seat-layouts 204 0 - 0.175 ms
+03-01-2026 22:12:30 [[32MINFO[39M]: POST /provider/seat-layouts 201 421 - 382.372 ms
+03-01-2026 22:12:30 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 204 0 - 0.507 ms
+03-01-2026 22:12:31 [[32MINFO[39M]: GET /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 200 426 - 175.557 ms
+03-01-2026 22:13:13 [[32MINFO[39M]: OPTIONS /provider/seat-layouts 204 0 - 0.295 ms
+03-01-2026 22:13:13 [[32MINFO[39M]: POST /provider/seat-layouts 201 434 - 854.639 ms
+03-01-2026 22:13:13 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 204 0 - 0.452 ms
+03-01-2026 22:13:14 [[32MINFO[39M]: GET /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 200 779 - 459.184 ms
+03-01-2026 22:13:49 [[32MINFO[39M]: OPTIONS /provider/seat-layouts 204 0 - 0.289 ms
+03-01-2026 22:13:50 [[32MINFO[39M]: POST /provider/seat-layouts 201 447 - 336.816 ms
+03-01-2026 22:13:50 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 204 0 - 0.142 ms
+03-01-2026 22:13:50 [[32MINFO[39M]: GET /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 200 1145 - 180.424 ms
+03-01-2026 22:14:43 [[32MINFO[39M]: OPTIONS /provider/seat-layouts 204 0 - 0.527 ms
+03-01-2026 22:14:43 [[32MINFO[39M]: POST /provider/seat-layouts 201 454 - 344.601 ms
+03-01-2026 22:14:43 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 204 0 - 0.166 ms
+03-01-2026 22:14:44 [[32MINFO[39M]: GET /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 200 1518 - 149.844 ms
+03-01-2026 22:14:56 [[32MINFO[39M]: OPTIONS /provider/seat-layouts/6959477b6fc6ed368ee12934 204 0 - 0.580 ms
+03-01-2026 22:14:56 [[32MINFO[39M]: DELETE /provider/seat-layouts/6959477b6fc6ed368ee12934 200 121 - 335.204 ms
+03-01-2026 22:15:16 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/generate-seats 204 0 - 0.161 ms
+03-01-2026 22:15:17 [[32MINFO[39M]: POST /provider/aircraft/695946e46fc6ed368ee128f7/generate-seats 201 37344 - 1083.377 ms
+03-01-2026 22:15:17 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 204 0 - 0.198 ms
+03-01-2026 22:15:17 [[32MINFO[39M]: GET /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 200 1145 - 177.549 ms
+03-01-2026 22:15:38 [[32MINFO[39M]: OPTIONS /provider/seat-layouts 204 0 - 0.138 ms
+03-01-2026 22:15:39 [[32MINFO[39M]: POST /provider/seat-layouts 201 454 - 343.058 ms
+03-01-2026 22:15:39 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 204 0 - 0.151 ms
+03-01-2026 22:15:39 [[32MINFO[39M]: GET /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 200 1518 - 169.539 ms
+03-01-2026 22:16:35 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.207 ms
+03-01-2026 22:16:35 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.174 ms
+03-01-2026 22:16:36 [[32MINFO[39M]: GET /provider/profile 200 1177 - 169.775 ms
+03-01-2026 22:16:36 [[32MINFO[39M]: OPTIONS /provider/seat-types 204 0 - 0.232 ms
+03-01-2026 22:16:36 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 204 0 - 0.254 ms
+03-01-2026 22:16:36 [[32MINFO[39M]: OPTIONS /provider/seat-types 204 0 - 0.266 ms
+03-01-2026 22:16:36 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 204 0 - 0.277 ms
+03-01-2026 22:16:36 [[32MINFO[39M]: GET /provider/profile 304 - - 176.925 ms
+03-01-2026 22:16:36 [[32MINFO[39M]: GET /provider/seat-types 304 - - 178.117 ms
+03-01-2026 22:16:36 [[32MINFO[39M]: GET /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 304 - - 185.308 ms
+03-01-2026 22:16:36 [[32MINFO[39M]: GET /provider/seat-types 304 - - 163.017 ms
+03-01-2026 22:16:36 [[32MINFO[39M]: GET /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 304 - - 165.055 ms
+03-01-2026 22:16:39 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/generate-seats 204 0 - 0.153 ms
+03-01-2026 22:16:39 [[32MINFO[39M]: POST /provider/aircraft/695946e46fc6ed368ee128f7/generate-seats 400 166 - 317.237 ms
+03-01-2026 22:16:55 [[32MINFO[39M]: OPTIONS /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 204 0 - 0.147 ms
+03-01-2026 22:16:55 [[32MINFO[39M]: GET /provider/aircraft/695946e46fc6ed368ee128f7/seat-layouts 304 - - 198.949 ms
+03-01-2026 22:17:09 [[32MINFO[39M]: OPTIONS /provider/aircrafts 204 0 - 0.184 ms
+03-01-2026 22:17:09 [[32MINFO[39M]: OPTIONS /provider/aircrafts 204 0 - 0.234 ms
+03-01-2026 22:17:10 [[32MINFO[39M]: GET /provider/aircrafts 200 730 - 269.576 ms
+03-01-2026 22:17:10 [[32MINFO[39M]: GET /provider/aircrafts 304 - - 254.067 ms
+03-01-2026 22:19:32 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.267 ms
+03-01-2026 22:19:32 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.235 ms
+03-01-2026 22:19:32 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.223 ms
+03-01-2026 22:19:32 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.248 ms
+03-01-2026 22:19:32 [[31MERROR[39M]: [/provider/flights] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 22:19:32 [[32MINFO[39M]: GET /provider/flights 401 133 - 21.953 ms
+03-01-2026 22:19:32 [[31MERROR[39M]: [/provider/flights] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 22:19:32 [[32MINFO[39M]: GET /provider/flights 401 133 - 15.522 ms
+03-01-2026 22:19:32 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.882 ms
+03-01-2026 22:19:33 [[31MERROR[39M]: [/provider/flights] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 22:19:33 [[32MINFO[39M]: GET /provider/flights 401 133 - 17.619 ms
+03-01-2026 22:19:33 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 14.608 ms
+03-01-2026 22:19:33 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 13.668 ms
+03-01-2026 22:19:33 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 8.582 ms
+03-01-2026 22:19:33 [[31MERROR[39M]: [/provider/flights] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 22:19:33 [[32MINFO[39M]: GET /provider/flights 401 133 - 23.297 ms
+03-01-2026 22:19:33 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 3.267 ms
+03-01-2026 22:19:33 [[32MINFO[39M]: GET /provider/flights 304 - - 139.709 ms
+03-01-2026 22:19:33 [[32MINFO[39M]: GET /provider/flights 304 - - 143.953 ms
+03-01-2026 22:19:33 [[32MINFO[39M]: GET /provider/flights 304 - - 170.243 ms
+03-01-2026 22:19:33 [[32MINFO[39M]: GET /provider/flights 304 - - 161.351 ms
+03-01-2026 22:20:01 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=dxb 204 0 - 0.174 ms
+03-01-2026 22:20:01 [[32MINFO[39M]: GET /provider/destinations/search?q=dxb 304 - - 271.440 ms
+03-01-2026 22:20:06 [[32MINFO[39M]: OPTIONS /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9525b4&departureTime=2026-01-30T16:50:00.000Z 204 0 - 0.123 ms
+03-01-2026 22:20:06 [[32MINFO[39M]: GET /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9525b4&departureTime=2026-01-30T16:50:00.000Z 200 572 - 184.519 ms
+03-01-2026 22:20:07 [[32MINFO[39M]: OPTIONS /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9525b4&departureTime=2026-01-30T06:50:00.000Z 204 0 - 0.131 ms
+03-01-2026 22:20:07 [[32MINFO[39M]: GET /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9525b4&departureTime=2026-01-30T06:50:00.000Z 200 572 - 194.206 ms
+03-01-2026 22:20:11 [[32MINFO[39M]: OPTIONS /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9525b4&departureTime=2026-01-30T06:40:00.000Z 204 0 - 0.093 ms
+03-01-2026 22:20:11 [[32MINFO[39M]: GET /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9525b4&departureTime=2026-01-30T06:40:00.000Z 200 572 - 235.082 ms
+03-01-2026 22:20:26 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=colo 204 0 - 0.215 ms
+03-01-2026 22:20:26 [[32MINFO[39M]: GET /provider/destinations/search?q=colo 304 - - 190.388 ms
+03-01-2026 22:20:34 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=colomb 204 0 - 0.254 ms
+03-01-2026 22:20:34 [[32MINFO[39M]: GET /provider/destinations/search?q=colomb 200 1440 - 199.457 ms
+03-01-2026 22:21:27 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.945 ms
+03-01-2026 22:21:28 [[32MINFO[39M]: POST /provider/flights 201 1023 - 642.480 ms
+03-01-2026 22:22:14 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.183 ms
+03-01-2026 22:22:14 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.213 ms
+03-01-2026 22:22:14 [[32MINFO[39M]: GET /provider/flights 200 1027 - 148.754 ms
+03-01-2026 22:22:15 [[32MINFO[39M]: GET /provider/flights 304 - - 152.648 ms
+03-01-2026 22:36:55 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 19.163 ms
+03-01-2026 22:36:55 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.238 ms
+03-01-2026 22:36:55 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 22:36:55 [[32MINFO[39M]: GET /provider/profile 401 133 - 145.042 ms
+03-01-2026 22:36:55 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 22:36:55 [[32MINFO[39M]: GET /provider/profile 401 133 - 4.344 ms
+03-01-2026 22:36:55 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.204 ms
+03-01-2026 22:36:55 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.159 ms
+03-01-2026 22:36:55 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 11.267 ms
+03-01-2026 22:36:55 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 6.536 ms
+03-01-2026 22:36:55 [[32MINFO[39M]: GET /provider/profile 304 - - 180.801 ms
+03-01-2026 22:36:56 [[32MINFO[39M]: GET /provider/profile 304 - - 100.081 ms
+03-01-2026 22:36:56 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.344 ms
+03-01-2026 22:36:56 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.373 ms
+03-01-2026 22:36:56 [[32MINFO[39M]: GET /provider/flights 304 - - 108.169 ms
+03-01-2026 22:36:56 [[32MINFO[39M]: GET /provider/flights 304 - - 94.987 ms
+03-01-2026 23:02:31 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 6.721 ms
+03-01-2026 23:02:31 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.432 ms
+03-01-2026 23:02:31 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 23:02:31 [[32MINFO[39M]: GET /provider/profile 401 133 - 78.785 ms
+03-01-2026 23:02:31 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 23:02:31 [[32MINFO[39M]: GET /provider/profile 401 133 - 4.811 ms
+03-01-2026 23:02:32 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.552 ms
+03-01-2026 23:02:32 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.592 ms
+03-01-2026 23:02:32 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 13.932 ms
+03-01-2026 23:02:32 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 6.891 ms
+03-01-2026 23:02:32 [[32MINFO[39M]: GET /provider/profile 304 - - 485.294 ms
+03-01-2026 23:02:32 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.219 ms
+03-01-2026 23:02:32 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.363 ms
+03-01-2026 23:02:32 [[32MINFO[39M]: GET /provider/profile 304 - - 97.405 ms
+03-01-2026 23:02:33 [[32MINFO[39M]: GET /provider/flights 304 - - 410.669 ms
+03-01-2026 23:02:33 [[32MINFO[39M]: GET /provider/flights 304 - - 93.392 ms
+03-01-2026 23:22:11 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 9.877 ms
+03-01-2026 23:22:11 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.141 ms
+03-01-2026 23:22:12 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 23:22:12 [[32MINFO[39M]: GET /provider/profile 401 133 - 113.111 ms
+03-01-2026 23:22:12 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 23:22:12 [[32MINFO[39M]: GET /provider/profile 401 133 - 10.254 ms
+03-01-2026 23:22:12 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.290 ms
+03-01-2026 23:22:12 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 28.738 ms
+03-01-2026 23:22:12 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 8.819 ms
+03-01-2026 23:22:13 [[32MINFO[39M]: GET /provider/profile 304 - - 960.569 ms
+03-01-2026 23:22:13 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.415 ms
+03-01-2026 23:22:13 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.207 ms
+03-01-2026 23:22:13 [[32MINFO[39M]: GET /provider/profile 304 - - 100.483 ms
+03-01-2026 23:22:13 [[32MINFO[39M]: GET /provider/flights 304 - - 118.679 ms
+03-01-2026 23:22:13 [[32MINFO[39M]: GET /provider/flights 304 - - 98.042 ms
+03-01-2026 23:41:33 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 24.018 ms
+03-01-2026 23:41:33 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.278 ms
+03-01-2026 23:41:33 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 23:41:33 [[32MINFO[39M]: GET /provider/profile 401 133 - 112.806 ms
+03-01-2026 23:41:33 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:38:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+03-01-2026 23:41:33 [[32MINFO[39M]: GET /provider/profile 401 133 - 10.758 ms
+03-01-2026 23:41:34 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.375 ms
+03-01-2026 23:41:34 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.256 ms
+03-01-2026 23:41:34 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 28.642 ms
+03-01-2026 23:41:34 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 11.755 ms
+03-01-2026 23:41:52 [[32MINFO[39M]: GET /provider/profile 304 - - 18129.989 ms
+03-01-2026 23:41:52 [[32MINFO[39M]: GET /provider/profile 304 - - 154.743 ms
+03-01-2026 23:41:52 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.395 ms
+03-01-2026 23:41:53 [[32MINFO[39M]: GET /provider/flights 304 - - 988.645 ms
+03-01-2026 23:41:53 [[32MINFO[39M]: GET /provider/flights 304 - - 107.535 ms
+03-01-2026 23:43:25 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 9.754 ms
+03-01-2026 23:43:25 [[32MINFO[39M]: POST /auth/sign-in 200 642 - 171.151 ms
+03-01-2026 23:43:25 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.378 ms
+03-01-2026 23:43:25 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.256 ms
+03-01-2026 23:43:25 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 71.647 ms
+03-01-2026 23:43:25 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 48.321 ms
+03-01-2026 23:43:27 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 0.914 ms
+03-01-2026 23:43:27 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 0.292 ms
+03-01-2026 23:43:27 [[32MINFO[39M]: GET /admin/flights/pending-approval 200 1027 - 52.193 ms
+03-01-2026 23:43:27 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 56.754 ms
+03-01-2026 23:43:58 [[32MINFO[39M]: OPTIONS /admin/flights/695949106fc6ed368ee12a0e/approval 204 0 - 4.071 ms
+03-01-2026 23:43:59 [[32MINFO[39M]: PATCH /admin/flights/695949106fc6ed368ee12a0e/approval 200 1072 - 250.726 ms
+03-01-2026 23:44:25 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.188 ms
+03-01-2026 23:44:25 [[32MINFO[39M]: POST /auth/sign-in 200 1472 - 259.198 ms
+03-01-2026 23:44:34 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.284 ms
+03-01-2026 23:44:34 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.545 ms
+03-01-2026 23:44:34 [[32MINFO[39M]: GET /provider/flights 200 1087 - 114.141 ms
+03-01-2026 23:44:34 [[32MINFO[39M]: GET /provider/flights 304 - - 88.446 ms
+03-01-2026 23:44:53 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 1.377 ms
+03-01-2026 23:44:53 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.330 ms
+03-01-2026 23:44:53 [[32MINFO[39M]: GET /provider/flights 304 - - 106.931 ms
+03-01-2026 23:44:53 [[32MINFO[39M]: GET /provider/flights 304 - - 89.962 ms
+03-01-2026 23:44:56 [[32MINFO[39M]: OPTIONS /provider/aircrafts 204 0 - 0.242 ms
+03-01-2026 23:44:56 [[32MINFO[39M]: OPTIONS /provider/aircrafts 204 0 - 0.384 ms
+03-01-2026 23:44:56 [[32MINFO[39M]: GET /provider/aircrafts 304 - - 157.350 ms
+03-01-2026 23:44:56 [[32MINFO[39M]: GET /provider/aircrafts 304 - - 143.285 ms
+03-01-2026 23:45:03 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 1.200 ms
+03-01-2026 23:45:03 [[32MINFO[39M]: OPTIONS /provider/flights 204 0 - 0.196 ms
+03-01-2026 23:45:03 [[32MINFO[39M]: GET /provider/flights 304 - - 102.222 ms
+03-01-2026 23:45:03 [[32MINFO[39M]: GET /provider/flights 304 - - 82.848 ms

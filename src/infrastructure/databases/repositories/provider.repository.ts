@@ -21,7 +21,8 @@ export class ProviderRepository
       providerId,
       {
         ...profileData,
-        isProfileComplete: true
+        isProfileComplete: true,
+        profileStatus: 'pending'
       },
       { new: true }
     ).exec();
@@ -56,7 +57,10 @@ export class ProviderRepository
           updatedAt: 1,
           isActive: 1,
           isVerified: 1,
-          isProfileComplete: 1
+          isProfileComplete: 1,
+          profileStatus: 1,
+          rejectionReason: 1,
+          rejectionDate: 1
         },
       },
     ]);
@@ -93,7 +97,10 @@ export class ProviderRepository
           updatedAt: 1,
           isActive: 1,
           isVerified: 1,
-          isProfileComplete: 1
+          isProfileComplete: 1,
+          profileStatus: 1,
+          rejectionReason: 1,
+          rejectionDate: 1
         },
       },
     ]);
@@ -113,7 +120,7 @@ export class ProviderRepository
           companyName: 1,
           email: 1,
           mobile: 1,
-          airlinCode: 1,
+          airlineCode: 1,
           logoUrl: 1,
           registrationCertificateUrl: 1,
           insuranceProofUrl: 1,
@@ -129,7 +136,10 @@ export class ProviderRepository
           updatedAt: 1,
           isActive: 1,
           isVerified: 1,
-          isProfileComplete: 1
+          isProfileComplete: 1,
+          profileStatus: 1,
+          rejectionReason: 1,
+          rejectionDate: 1
         },
       },
     ]);
@@ -160,7 +170,10 @@ export class ProviderRepository
           updatedAt: 1,
           isActive: 1,
           isVerified: 1,
-          isProfileComplete: 1
+          isProfileComplete: 1,
+          profileStatus: 1,
+          rejectionReason: 1,
+          rejectionDate: 1
         },
       },
     ]).sort({ createdAt: -1 });
@@ -192,7 +205,10 @@ export class ProviderRepository
           updatedAt: 1,
           isActive: 1,
           isVerified: 1,
-          isProfileComplete: 1
+          isProfileComplete: 1,
+          profileStatus: 1,
+          rejectionReason: 1,
+          rejectionDate: 1
         },
       },
     ]).sort({ createdAt: -1 });
@@ -205,7 +221,10 @@ export class ProviderRepository
   }
 
   async createProvider(providerData: CreateProviderDTO): Promise<Provider> {
-    const newProvider = new this.model(providerData);
+    const newProvider = new this.model({
+      ...providerData,
+      profileStatus: 'pending'
+    });
     const savedProvider = await newProvider.save();
     return this.getProviderDetailsById(savedProvider._id);
   }
@@ -241,5 +260,64 @@ export class ProviderRepository
 
   async getProviderByEmailWithPassword(email: string): Promise<IProvider | null> {
   return await ProviderModel.findOne({ email });
+}
+
+async approveProvider(providerId: string): Promise<void> {
+  await this.model.findByIdAndUpdate(
+    providerId,
+    {
+      profileStatus: 'approved',
+      rejectionReason: null,
+      rejectionDate: null
+    },
+    { new: true }
+  ).exec();
+}
+
+async rejectProvider(providerId: string, reason: string): Promise<void> {
+  if (!reason || reason.trim().length < 10) {
+    throw new Error("Reason must be at least 10 characters");
+  }
+
+  await this.model.findByIdAndUpdate(
+    providerId,
+    {
+      profileStatus: 'rejected',
+      rejectionReason: reason.trim(),
+      rejectionDate: new Date()
+    },
+    { new: true }
+  ).exec();
+}
+
+async getAllProviders(): Promise<Provider[]> {
+  const providersData = await this.model.aggregate([
+    {
+      $project: {
+          _id: 1,
+          companyName: 1,
+          email: 1,
+          mobile: 1,
+          airlineCode: 1,
+          logoUrl: 1,
+          registrationCertificateUrl: 1,
+          insuranceProofUrl: 1,
+          establishmentYear: 1,
+          headquartersAddress: 1,
+          countryOfOperation: 1,
+          typeOfOperation: 1,
+          websiteUrl: 1,
+          createdAt: 1,
+          updatedAt: 1,
+          isActive: 1,
+          isVerified: 1,
+          isProfileComplete: 1,
+          profileStatus: 1,
+          rejectionReason: 1,
+          rejectionDate: 1
+        },
+    },]).sort({ createdAt: -1 });
+    return providersData;
+
 }
 }

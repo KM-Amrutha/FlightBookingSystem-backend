@@ -12,6 +12,8 @@ import {
    PasswordResetLinkController,
    ProviderVerificationController,
    GoogleAuthController,
+   UpdateProviderStatusController,
+    GetAllProvidersController,
 
     CompleteProviderProfileController,
     GetProviderProfileController,
@@ -31,7 +33,7 @@ import {
     GetProviderFlightsController,
     PendingFlightsForApprovalController,
     AvailableAircraftsForScheduleController,
-
+    UpdateFlightController,
 
   DeleteSeatLayoutUseCase,
  
@@ -51,6 +53,8 @@ import {
    IVerifyProviderUseCase,
    IGetProviderProfileUseCase,
    ICompleteProviderProfileUseCase,
+   IGetAllProvidersUseCase,
+   IUpdateProviderStatusUseCase,
     ICreateAircraftUseCase,
     IUpdateAircraftUseCase,
     IGetProviderAircraftsUseCase,
@@ -67,17 +71,21 @@ import {
     IPendingFlightsForApprovalUseCase,
     IApproveFlightUseCase,  
     IAvailableAircraftsForScheduleUsecase,
-
-  
-
-    
-      
-   
-
+    IUpdateFlightUseCase
 } from "@di/file-imports-index"
 
-import {TYPES_AUTH_CONTROLLERS, TYPES_ADMIN_CONTROLLERS, TYPES_PROVIDER_CONTROLLERS,TYPES_AIRCRAFT_CONTROLLERS} from "@di/types-controllers";
-import {TYPES_AUTH_USECASES, TYPES_LOGGER_USECASES,TYPES_PROVIDER_USECASES,TYPES_AIRCRAFT_USECASES} from "@di/types-usecases";
+import {TYPES_AUTH_CONTROLLERS,
+   TYPES_ADMIN_CONTROLLERS,
+    TYPES_PROVIDER_CONTROLLERS,
+    TYPES_AIRCRAFT_CONTROLLERS} 
+    from "@di/types-controllers";
+
+import {TYPES_AUTH_USECASES,
+   TYPES_LOGGER_USECASES,
+   TYPES_PROVIDER_USECASES,
+   TYPES_ADMIN_USECASES, 
+   TYPES_AIRCRAFT_USECASES} 
+   from "@di/types-usecases";
 
 
 
@@ -94,6 +102,8 @@ export const googleAuthController = container.get<GoogleAuthController>(TYPES_AU
 
 export const completeProviderProfileController = container.get<CompleteProviderProfileController>(TYPES_PROVIDER_CONTROLLERS.CompleteProviderProfileController);
 export const getProviderProfileController = container.get<GetProviderProfileController>(TYPES_PROVIDER_CONTROLLERS.GetProviderProfileController);
+export const getAllProvidersController = container.get<GetAllProvidersController>(TYPES_ADMIN_CONTROLLERS.GetAllProvidersController);
+export const updateProviderStatusController = container.get<UpdateProviderStatusController>(TYPES_ADMIN_CONTROLLERS.UpdateProviderStatusController);
 
 export const createAircraftController = container.get<CreateAircraftController>(TYPES_AIRCRAFT_CONTROLLERS.CreateAircraftController);
 export const getProviderAircraftsController = container.get<GetProviderAircraftsController>(TYPES_AIRCRAFT_CONTROLLERS.GetProviderAircraftsController);
@@ -112,6 +122,7 @@ export const availableAircraftsForScheduleController = container.get<AvailableAi
 export const getProviderFlightsController = container.get<GetProviderFlightsController>(TYPES_AIRCRAFT_CONTROLLERS.GetProviderFlightsController);
 export const pendingFlightsForApprovalController = container.get<PendingFlightsForApprovalController>(TYPES_AIRCRAFT_CONTROLLERS.PendingFlightsForApprovalController);
 export const approveFlightController = container.get<ApproveFlightController>(TYPES_AIRCRAFT_CONTROLLERS.ApproveFlightController);  
+export const updateFlightController = container.get<UpdateFlightController>(TYPES_AIRCRAFT_CONTROLLERS.UpdateFlightController);
 
 
 export const createUseUseCase = container.get<ICreateUserUseCase>(TYPES_AUTH_USECASES.CreateUserUseCase);
@@ -129,6 +140,10 @@ export const verifyProviderUseCase = container.get<IVerifyProviderUseCase>(TYPES
 export const completeProviderProfileUseCase = container.get<ICompleteProviderProfileUseCase>(TYPES_PROVIDER_USECASES.CompleteProviderProfileUseCase);
 export const getProviderProfileUseCase = container.get<IGetProviderProfileUseCase>(TYPES_PROVIDER_USECASES.GetProviderProfileUseCase);
 
+export const getAllProvidersUseCase = container.get<IGetAllProvidersUseCase>(TYPES_ADMIN_USECASES.GetAllProvidersUseCase);
+export const updateProviderStatusUseCase = container.get<IUpdateProviderStatusUseCase>(TYPES_ADMIN_USECASES.UpdateProviderStatusUseCase);
+
+
 export const createAircraftUseCase = container.get<ICreateAircraftUseCase>(TYPES_AIRCRAFT_USECASES.CreateAircraftUseCase);
 export const updateAircraftUseCase = container.get<IUpdateAircraftUseCase>(TYPES_AIRCRAFT_USECASES.UpdateAircraftUseCase);
 export const getProviderAircraftsUseCase = container.get<IGetProviderAircraftsUseCase>(TYPES_AIRCRAFT_USECASES.GetAircraftsUseCase);
@@ -145,5 +160,4 @@ export const getProviderFlightsUseCase = container.get<IGetProviderFlightsUseCas
 export const pendingFlightsForApprovalUseCase = container.get<IPendingFlightsForApprovalUseCase>(TYPES_AIRCRAFT_USECASES.PendingFlightsForApprovalUseCase);
 export const approveFlightUseCase = container.get<IApproveFlightUseCase>(TYPES_AIRCRAFT_USECASES.ApproveFlightUseCase);   
 export const availableAircraftsForScheduleUseCase = container.get<IAvailableAircraftsForScheduleUsecase>(TYPES_AIRCRAFT_USECASES.AvailableAircraftsForScheduleUseCase); 
-
-
+export const updateFlightUsecase = container.get<IUpdateFlightUseCase>(TYPES_AIRCRAFT_USECASES.UpdateFlightUseCase)

@@ -29,6 +29,7 @@ export {SignInUseCase} from "@application/usecases/auth/signin-user.usecases";
 export {ForgotPasswordUseCase} from "@application/usecases/auth/forgot-password.usecase";
 export{SendPasswordRestLinkUseCase} from "@application/usecases/auth/send-password-reset-link.usecase";
 export {LoggerUseCase} from "@application/usecases/handle-log-usecase";
+export {GoogleAuthUseCase} from "@application/usecases/auth/google-auth.usecase";
 
 // ProviderUseCases
 
@@ -37,7 +38,11 @@ export {RejectProviderUseCase} from "@application/usecases/admin/reject-provider
 export {GetPendingProvidersUseCase} from "@application/usecases/admin/get-pending-provider.usecase";
 
 export {CompleteProviderProfileUseCase} from "@application/usecases/provider/completeProviderProfile.usecase";
-export {GetProviderProfileUseCase} from "@application/usecases/provider/getProviderProfile.usecase"
+export {GetProviderProfileUseCase} from "@application/usecases/provider/getProviderProfile.usecase";
+
+// Admin UseCases
+export {GetAllProvidersUseCase} from "@application/usecases/admin/getAllProvider.usecase";
+export {UpdateProviderStatusUseCase} from "@application/usecases/admin/update-providerStatus.usecase";
 
 // Aircraft UseCases
 export {CreateAircraftUseCase} from "@application/usecases/aircraft/create-aircraft.usecase";
@@ -54,10 +59,11 @@ export {GetSeatLayoutsByAircraftUseCase} from "@application/usecases/aircraft/ge
 export {DeleteSeatLayoutUseCase} from "@application/usecases/aircraft/delete-seatLayout.usecase"
 export {CreateFlightUseCase} from "@application/usecases/flight/create-flight.usecase";
 export {GetProviderFlightsUseCase} from "@application/usecases/flight/getProvider-flightUsecase";   
-export {PendingFlightsForApprovalUseCase} from "@application/usecases/flight/pendingFlightsForApprovalUsecase";
-export {ApproveFlightUseCase} from "@application/usecases/flight/Approve-flight.usecase";
+export {PendingFlightsForApprovalUseCase} from "@application/usecases/flight/pendingFlightsForApproval.usecase";
+export {ApproveFlightUseCase} from "@application/usecases/flight/aproove-flight.usecase";
 export {AvailableAircraftsForScheduleUseCase} from "@application/usecases/flight/availableAircraftForSchedule.usecase";
-export {GoogleAuthUseCase} from "@application/usecases/auth/google-auth.usecase";
+export {UpdateFlightUseCase} from "@application/usecases/flight/update-flight.usecase";
+
 
 
 //   Authentication Controllers 
@@ -75,6 +81,8 @@ export {GoogleAuthController} from "@presentation/controllers/auth/google-auth.c
 // Admin Controllers
 
 export {ProviderVerificationController} from "@presentation/controllers/admin/provider-verification.controller";
+export {GetAllProvidersController} from "@presentation/controllers/admin/get-allProvider.controller";
+export {UpdateProviderStatusController} from "@presentation/controllers/admin/update-providerStatus.controller";
 
 // Provider Controllers
 export {CompleteProviderProfileController} from "@presentation/controllers/provider/completeProviderProfile.controller";
@@ -98,8 +106,7 @@ export {GetProviderFlightsController} from "@presentation/controllers/flight/get
 export {PendingFlightsForApprovalController} from "@presentation/controllers/flight/pendingFlightsForApproval.controller";
 export {ApproveFlightController} from "@presentation/controllers/flight/approveFlights.controller";
 export {AvailableAircraftsForScheduleController} from "@presentation/controllers/flight/availableFlightsForSchedule.controller";    
-
-
+export {UpdateFlightController} from "@presentation/controllers/flight/updateFlight.controller";
 
 
 
@@ -145,12 +152,15 @@ export {ILoggerUseCase} from "@application/interfaces/usecase/ILogger-usecase";
 
 
 
+
 export {IGetPendingProvidersUseCase} from "@application/interfaces/usecase/IGetPendingProviderUsecase";
 export {IRejectProviderUseCase} from "@application/interfaces/usecase/IRejectedProviderUsecase";
 export {IVerifyProviderUseCase} from "@application/interfaces/usecase/IVerifyProviderUsecase";
 
 export {ICompleteProviderProfileUseCase} from "@application/interfaces/usecase/ICompleteProvider-profileUsecase";
 export {IGetProviderProfileUseCase} from "@application/interfaces/usecase/IGetProviderProfileUsecase";
+export {IGetAllProvidersUseCase} from "@application/interfaces/usecase/IGetAllProvidersUsecase";
+export {IUpdateProviderStatusUseCase} from "@application/interfaces/usecase/IUpdate-providerStatus.usecase";
 
 export {ICreateAircraftUseCase} from "@application/interfaces/usecase/aircraft/ICreate-aircraftUsecase";
 export {IUpdateAircraftUseCase} from "@application/interfaces/usecase/aircraft/IUpdate-aircraftUsecase";
@@ -170,3 +180,4 @@ export {IGetProviderFlightsUseCase} from "@application/interfaces/usecase/flight
 export {IPendingFlightsForApprovalUseCase} from "@application/interfaces/usecase/flight/IPending-flightForApprovalUsecase";
 export {IApproveFlightUseCase} from "@application/interfaces/usecase/flight/IApprove-flightUsecase";
 export {IAvailableAircraftsForScheduleUsecase} from "@application/interfaces/usecase/flight/IAvailableAircraftsForSchedule-Usecase";    
+export {IUpdateFlightUseCase} from "@application/interfaces/usecase/flight/IUpdate-flightUsecase";

@@ -9,9 +9,11 @@ import {
 } from "@di/types-controllers"
 
 import { TYPES_AUTH_USECASES,
-     TYPES_LOGGER_USECASES, 
-     TYPES_PROVIDER_USECASES,
-    TYPES_AIRCRAFT_USECASES } from "@di/types-usecases";
+         TYPES_LOGGER_USECASES, 
+         TYPES_PROVIDER_USECASES,
+         TYPES_ADMIN_USECASES,
+         TYPES_AIRCRAFT_USECASES } 
+         from "@di/types-usecases";
 import { TYPES_SERVICES } from "di/types-services"
 
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES }   from "di/types-repositories"
@@ -42,9 +44,12 @@ RefreshAccessTokenController,
  PasswordResetLinkController,
 
  ProviderVerificationController,
+ GetAllProvidersController,
+ UpdateProviderStatusController,
 
  CompleteProviderProfileController,
  GetProviderProfileController,
+ GoogleAuthController,
 
 CreateAircraftController,
 GetProviderAircraftsController,
@@ -62,7 +67,8 @@ CreateFlightController,
 GetProviderFlightsController,
 PendingFlightsForApprovalController,
 AvailableAircraftsForScheduleController,
-GoogleAuthController,
+UpdateFlightController,
+
 
 IUserRepository,
 IOtpRepository,
@@ -120,6 +126,8 @@ VerifyProviderUseCase,
 RejectProviderUseCase,
 CompleteProviderProfileUseCase,
 GetProviderProfileUseCase,
+GetAllProvidersUseCase,
+UpdateProviderStatusUseCase,
 
 CreateAircraftUseCase,
 UpdateAircraftUseCase,
@@ -138,7 +146,7 @@ GetProviderFlightsUseCase,
 PendingFlightsForApprovalUseCase,
 ApproveFlightUseCase,
 AvailableAircraftsForScheduleUseCase,
-
+UpdateFlightUseCase,
 
 
 ICheckUserBlockStatusUseCase,
@@ -155,6 +163,8 @@ IRejectProviderUseCase,
 IVerifyProviderUseCase,
 ICompleteProviderProfileUseCase,
 IGetProviderProfileUseCase,
+IGetAllProvidersUseCase,
+IUpdateProviderStatusUseCase,
 
 
 ICreateAircraftUseCase,
@@ -174,6 +184,7 @@ IGetProviderFlightsUseCase,
 IPendingFlightsForApprovalUseCase,
 IApproveFlightUseCase,
 IAvailableAircraftsForScheduleUsecase,
+IUpdateFlightUseCase,
 } from "@di/file-imports-index";
 
 const container = new Container();
@@ -223,6 +234,11 @@ container.bind<ICompleteProviderProfileUseCase>(TYPES_PROVIDER_USECASES.Complete
 container.bind<IGetProviderProfileUseCase>(TYPES_PROVIDER_USECASES.GetProviderProfileUseCase).to(GetProviderProfileUseCase);
 container.bind<GoogleAuthUseCase>(TYPES_AUTH_USECASES.GoogleAuthUseCase).to(GoogleAuthUseCase);
 
+
+container.bind<IGetAllProvidersUseCase>(TYPES_ADMIN_USECASES.GetAllProvidersUseCase).to(GetAllProvidersUseCase);
+container.bind<IUpdateProviderStatusUseCase>(TYPES_ADMIN_USECASES.UpdateProviderStatusUseCase).to(UpdateProviderStatusUseCase);
+
+
 container.bind<ICreateAircraftUseCase>(TYPES_AIRCRAFT_USECASES.CreateAircraftUseCase).to(CreateAircraftUseCase);
 container.bind<IUpdateAircraftUseCase>(TYPES_AIRCRAFT_USECASES.UpdateAircraftUseCase).to(UpdateAircraftUseCase);
 container.bind<IGetProviderAircraftsUseCase>(TYPES_AIRCRAFT_USECASES.GetAircraftsUseCase).to(GetProviderAircraftsUseCase);
@@ -240,7 +256,7 @@ container.bind<IGetProviderFlightsUseCase>(TYPES_AIRCRAFT_USECASES.GetProviderFl
 container.bind<IPendingFlightsForApprovalUseCase>(TYPES_AIRCRAFT_USECASES.PendingFlightsForApprovalUseCase).to(PendingFlightsForApprovalUseCase);   
 container.bind<IApproveFlightUseCase>(TYPES_AIRCRAFT_USECASES.ApproveFlightUseCase).to(ApproveFlightUseCase);
 container.bind<IAvailableAircraftsForScheduleUsecase>(TYPES_AIRCRAFT_USECASES.AvailableAircraftsForScheduleUseCase).to(AvailableAircraftsForScheduleUseCase);   
-
+container.bind<IUpdateFlightUseCase>(TYPES_AIRCRAFT_USECASES.UpdateFlightUseCase).to(UpdateFlightUseCase);
 
 // Bind Controllers
 container.bind(TYPES_AUTH_CONTROLLERS.SignUpUserController).to(SignUpUserController);
@@ -254,6 +270,8 @@ container.bind(TYPES_AUTH_CONTROLLERS.PasswordResetLinkController).to(PasswordRe
 container.bind(TYPES_AUTH_CONTROLLERS.GoogleAuthController).to(GoogleAuthController);
 
 container.bind(TYPES_ADMIN_CONTROLLERS.ProviderVerificationController).to(ProviderVerificationController);
+container.bind(TYPES_ADMIN_CONTROLLERS.GetAllProvidersController).to(GetAllProvidersController);
+container.bind(TYPES_ADMIN_CONTROLLERS.UpdateProviderStatusController).to(UpdateProviderStatusController);
 
 container.bind(TYPES_PROVIDER_CONTROLLERS.CompleteProviderProfileController).to(CompleteProviderProfileController);
 container.bind(TYPES_PROVIDER_CONTROLLERS.GetProviderProfileController).to(GetProviderProfileController);
@@ -274,7 +292,7 @@ container.bind(TYPES_AIRCRAFT_CONTROLLERS.GetProviderFlightsController).to(GetPr
 container.bind(TYPES_AIRCRAFT_CONTROLLERS.PendingFlightsForApprovalController).to(PendingFlightsForApprovalController);
 container.bind(TYPES_AIRCRAFT_CONTROLLERS.ApproveFlightController).to(ApproveFlightController); 
 container.bind(TYPES_AIRCRAFT_CONTROLLERS.AvailableAircraftsForScheduleController).to(AvailableAircraftsForScheduleController);
-
+container.bind(TYPES_AIRCRAFT_CONTROLLERS.UpdateFlightController).to(UpdateFlightController)
 
 
 export { container };

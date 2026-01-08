@@ -13,10 +13,9 @@ export class GetPendingProvidersUseCase implements IGetPendingProvidersUseCase {
 
   async execute(): Promise<IProvider[]> {
     return await this._providerRepository.findMany({ 
-      isVerified: true,
-      adminApproval: false,
-      isActive: true,
-      isProfileComplete: true
+      isProfileComplete: true,
+      profileStatus: 'pending',  
+      isActive: true
     });
   }
 }

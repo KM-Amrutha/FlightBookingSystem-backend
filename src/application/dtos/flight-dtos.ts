@@ -39,6 +39,8 @@ export interface UpdateFlightDTO {
     
   flightNumber?: string;
   gate?: string;
+  durationMinutes?: number;  // Changing duration affects arrival time
+  arrivalDestinationId?: string;
   baseFare?: {
     economy?: number;
     premiumEconomy?: number;
@@ -55,6 +57,7 @@ export interface UpdateFlightDTO {
     extraChargePerKg?: number;
     maxExtraKg?: number;
   };
+  luggageRuleId?: string | null;
   foodMenuId?: string[];
 }
 

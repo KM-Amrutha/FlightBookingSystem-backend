@@ -1,5 +1,3 @@
-
-
 export const TYPES_AUTH_USECASES = {
     CheckUserBlockStatusUseCase: Symbol.for("CheckUserBlockStatusUseCase"),
     TokenUseCase: Symbol.for("TokenUseCase"),
@@ -23,7 +21,14 @@ export const  TYPES_PROVIDER_USECASES = {
     VerifyProviderUseCase:Symbol.for("VerifyProviderUseCase"),
 
       CompleteProviderProfileUseCase:Symbol.for("CompleteProviderProfileUseCase"),
-      GetProviderProfileUseCase:Symbol.for("GetProviderProfileUseCase")
+      GetProviderProfileUseCase:Symbol.for("GetProviderProfileUseCase"),
+       
+}
+
+export const TYPES_ADMIN_USECASES = {
+
+  GetAllProvidersUseCase: Symbol.for("GetAllProvidersUseCase"),
+  UpdateProviderStatusUseCase: Symbol.for("UpdateProviderStatusUseCase"), 
 }
 
 export const TYPES_AIRCRAFT_USECASES = {
@@ -46,6 +51,7 @@ export const TYPES_AIRCRAFT_USECASES = {
   PendingFlightsForApprovalUseCase: Symbol.for("PendingFlightsForApprovalUseCase"),
   ApproveFlightUseCase: Symbol.for("ApproveFlightUseCase"),
   AvailableAircraftsForScheduleUseCase: Symbol.for("AvailableAircraftsForScheduleUseCase"),
+  UpdateFlightUseCase: Symbol.for("UpdateFlightUseCase"),
 
     
 }

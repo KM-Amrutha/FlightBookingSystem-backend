@@ -3,7 +3,6 @@ import {
   IProviderRepository 
 } from "@di/file-imports-index";
 import { AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
-import { IAircraft } from "@domain/entities/aircraft.entity";
 import { AUTH_MESSAGES, APPLICATION_MESSAGES, AIRCRAFT_MESSAGES } from "@shared/constants/index.constants";
 import { validationError, NotFoundError, ForbiddenError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";

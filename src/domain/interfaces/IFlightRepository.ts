@@ -11,6 +11,7 @@ import {
 export interface IFlightRepository extends IBaseRepository<IFlight> {
   createFlight(data: CreateFlightDTO): Promise<FlightDetailsDTO>;
   getFlightsByProvider(providerId: string): Promise<FlightDetailsDTO[]>;
+  updateFlight(flightId: string, data: UpdateFlightDTO): Promise<FlightDetailsDTO | null>;
   getPendingFlightsByProvider(providerId: string): Promise<FlightDetailsDTO[]>;
   approveFlight(flightId: string, data: ApproveFlightDTO): Promise<FlightDetailsDTO | null>;
   getPendingFlightsForApproval(): Promise<FlightDetailsDTO[]>;

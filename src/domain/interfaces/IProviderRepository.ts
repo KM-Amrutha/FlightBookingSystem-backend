@@ -19,4 +19,7 @@ import { Provider,
  completeProviderProfile(providerId: string, profileData: UpdateProviderDTO): Promise<void>;
 
   getProviderByEmailWithPassword(email: string): Promise<IProvider | null>;
+  approveProvider(providerId: string): Promise<void>;
+  rejectProvider(providerId: string, reason: string): Promise<void>;
+  getAllProviders(): Promise<Provider[]>;
       }

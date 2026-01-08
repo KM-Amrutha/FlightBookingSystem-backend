@@ -151,6 +151,36 @@ export class CreateSeatLayoutUseCase implements ICreateSeatLayoutUseCase {
     }
   }
 
+  private async validateTotalSeatCapacity(
+  aircraftId: string,
+  newStartRow: number,
+  newEndRow: number,
+  newSeatsPerRow: number
+): Promise<void> {
+  const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
+  if (!aircraft) {
+    throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
+  }
+
+  const newLayoutSeats = (newEndRow - newStartRow + 1) * newSeatsPerRow;
+
+  // Get all existing layouts for this aircraft
+  const existingLayouts = await this._seatLayoutRepository.getSeatLayoutsByAircraftId(aircraftId);
+
+  let existingTotalSeats = 0;
+  for (const layout of existingLayouts) {
+    existingTotalSeats += (layout.endRow - layout.startRow + 1) * layout.seatsPerRow;
+  }
+
+  const projectedTotal = existingTotalSeats + newLayoutSeats;
+
+  if (projectedTotal > aircraft.seatCapacity) {
+    throw new validationError(
+      `Total seats (${projectedTotal}) would exceed aircraft capacity (${aircraft.seatCapacity})`
+    );
+  }
+}
+
   private enrichLayoutData(data: CreateSeatLayoutDTO): CreateSeatLayoutDTO {
     const layoutConfig = getLayoutConfig(data.layout);
 
@@ -212,6 +242,14 @@ export class CreateSeatLayoutUseCase implements ICreateSeatLayoutUseCase {
 
     const enrichedData = this.enrichLayoutData(data);
 
+      await this.validateTotalSeatCapacity(
+      data.aircraftId,
+      data.startRow,
+      data.endRow,
+      enrichedData.seatsPerRow
+    );
+
+    
     try {
       const seatLayout = await this._seatLayoutRepository.createSeatLayout(enrichedData);
       return seatLayout;

@@ -16,7 +16,8 @@ import { completeProviderProfileController,
     deletleSeatLayoutController,
     availableAircraftsForScheduleController,
     createFlightController,
-      getProviderFlightsController
+      getProviderFlightsController,
+      updateFlightController
     
 
  } from "@di/container-resolver";
@@ -47,6 +48,6 @@ providerRoutes.post('/flights', authenticate, asyncHandler(createFlightControlle
 providerRoutes.get('/aircraft/available-aircrafts', authenticate, asyncHandler(availableAircraftsForScheduleController.handle.bind(availableAircraftsForScheduleController)));
 
 providerRoutes.get('/flights', authenticate,asyncHandler(getProviderFlightsController.handle.bind(getProviderFlightsController)));
-
+providerRoutes.put('/update-flights/:flightId',authenticate,asyncHandler(updateFlightController.handle.bind(updateFlightController)))
 export default providerRoutes;
 

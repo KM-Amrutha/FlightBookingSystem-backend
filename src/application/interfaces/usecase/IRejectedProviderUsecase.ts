@@ -1,3 +1,3 @@
 export interface IRejectProviderUseCase {
-  execute(providerId: string): Promise<void>;
+  execute(providerId: string, reason: string): Promise<void>;
 }

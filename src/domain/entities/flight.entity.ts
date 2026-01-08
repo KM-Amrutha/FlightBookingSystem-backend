@@ -40,7 +40,7 @@ export interface IFlight extends Document {
    adminApproval: {
     status: "pending" | "approved" | "rejected";
     reviewedAt?: Date;
-    reason?: string;       // rejection reason
+    reason?: string|null;       // rejection reason
   };
   createdAt: Date;
   updatedAt: Date;

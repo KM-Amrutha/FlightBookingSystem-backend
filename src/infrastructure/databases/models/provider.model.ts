@@ -98,6 +98,19 @@ const providerSchema = new Schema<IProvider>(
  isProfileComplete: {
     type: Boolean,
     default: false 
+  },
+  profileStatus: {
+    type: String,
+    enum: ['pending', 'approved', 'rejected'],
+    default: 'pending'
+  },
+  rejectionReason: {
+    type: String,
+    default: null
+  },
+  rejectionDate: {
+    type: Date,
+    default: null
   }
   },
   {

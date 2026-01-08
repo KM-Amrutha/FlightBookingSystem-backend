@@ -47,17 +47,29 @@ export class FlightRepository
       .exec();
   }
 
-  async updateFlight(
-    flightId: string,
-    data: UpdateFlightDTO
-  ): Promise<FlightDetailsDTO | null> {
-    const updated = await this.model
-      .findOneAndUpdate({ flightId }, data, { new: true })
-      .exec();
+async updateFlight(
+  flightId: string,
+  data: UpdateFlightDTO,
+): Promise<FlightDetailsDTO | null> {
+  // Use dot notation for nested fields - this is the only way that works with strict TS
+  const updateObj = {
+    ...data,
+    "adminApproval.status": "pending",
+    "adminApproval.reason": null,
+    "adminApproval.reviewedAt": null  // Mongoose accepts null for Date fields to clear them
+  };
+  // Mongoose update accepts this object structure
+  const updated = await this.model.findByIdAndUpdate(
+    flightId,
+    updateObj,
+    { new: true }
+  ).exec();
 
-    if (!updated) return null;
-    return await this.getFlightDetails(updated._id.toString());
-  }
+  if (!updated) return null;
+
+  return await this.getFlightDetails(updated._id.toString());
+}
+
 
   async getFlightsByProvider(providerId: string): Promise<FlightDetailsDTO[]> {
     const flights = await this.model.aggregate([
@@ -207,7 +219,7 @@ export class FlightRepository
           flightId: 1,
           flightNumber: 1,
           aircraftName: 1,
-          providerId: 1,
+          providerId: { $toString: "$providerId" },
           aircraftId: 1,
           seatLayoutId: 1,
           departureDestinationId: 1,
