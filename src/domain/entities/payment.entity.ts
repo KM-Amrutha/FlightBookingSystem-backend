@@ -1,6 +1,4 @@
-import mongoose, { Document } from "mongoose";
-
-export interface IPayment extends Document {
+export interface IPayment {
   _id: string;
   segmentId: string;
   amount: number;

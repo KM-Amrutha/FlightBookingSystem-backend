@@ -3,12 +3,14 @@ import {
   IProviderRepository 
 } from "@di/file-imports-index";
 import { AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
-import { IAircraft } from "@domain/entities/aircraft.entity";
-import { AUTH_MESSAGES, APPLICATION_MESSAGES, AIRCRAFT_MESSAGES } from "@shared/constants/index.constants";
+import { AUTH_MESSAGES, APPLICATION_MESSAGES } from "@shared/constants/index.constants";
 import { validationError, NotFoundError, ForbiddenError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { IGetProviderAircraftsUseCase } from "@di/file-imports-index";
+import { AircraftMapper } from "@application/mappers/aircraftMapper";
+import { PaginationDTO } from "@application/dtos/utility-dtos";
+import { IAircraft } from "@domain/entities/aircraft.entity";
 
 @injectable()
 export class GetProviderAircraftsUseCase implements IGetProviderAircraftsUseCase {
@@ -24,72 +26,49 @@ export class GetProviderAircraftsUseCase implements IGetProviderAircraftsUseCase
       this._providerRepository.getProviderDetailsById(providerId),
       this._providerRepository.isProviderBlocked(providerId)
     ]);
-
-    if (!provider) {
-      throw new NotFoundError("Provider not found");
-    }
-
-    if (isBlocked) {
-      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
-    }
-
-    if (!provider.isVerified) {
-      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
-    }
+    if (!provider) throw new NotFoundError("Provider not found");
+    if (isBlocked) throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
+    if (!provider.isVerified) throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
   }
 
-  private sortAircraftsByStatus(aircrafts: AircraftDetailsDTO[]): AircraftDetailsDTO[] {
+  private sortAircraftsByStatus(aircrafts: IAircraft[]): IAircraft[] {
     const statusOrder = { active: 1, maintenance: 2, inactive: 3 };
-    
-    return aircrafts.sort((a, b) => {
+    return [...aircrafts].sort((a, b) => {
       const statusComparison = statusOrder[a.status] - statusOrder[b.status];
       if (statusComparison !== 0) return statusComparison;
-      
       return a.aircraftName.localeCompare(b.aircraftName);
     });
   }
 
-  private validateAircraftData(aircrafts: AircraftDetailsDTO[]): void {
-    if (aircrafts.length === 0) {
-      throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
-    }
-
-    aircrafts.forEach(aircraft => {
-      if (!aircraft.providerId) {
-        throw new validationError("Invalid aircraft data: missing provider ID");
-      }
-    });
-  }
-
-  async execute(providerId: string): Promise<AircraftDetailsDTO[]> {
-     console.log('USE CASE CALLED with', providerId);
+  async execute(
+    providerId: string,
+    page: number = 1,
+    limit: number = 4
+  ): Promise<{
+    aircraftsList: AircraftDetailsDTO[];
+    paginationData: PaginationDTO;
+  }> {
     if (!providerId) {
       throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
 
     await this.validateProvider(providerId);
-
-    try {
-      const aircrafts = await this._aircraftRepository.getAircraftsByProvider(providerId);
-        console.log('FIRST AIRCRAFT FROM USE CASE:', aircrafts[0]);
-      if (aircrafts.length === 0) {
-        return [];
-      }
-
-      this.validateAircraftData(aircrafts);
+     const result =await this._aircraftRepository.findByProviderId(providerId, page, limit);
+    const { aircrafts, totalPages, currentPage } = result
       
-      const sortedAircrafts = this.sortAircraftsByStatus(aircrafts);
 
-      return sortedAircrafts;
-    } catch (error) {
-      if (
-        error instanceof validationError || 
-        error instanceof NotFoundError || 
-        error instanceof ForbiddenError
-      ) {
-        throw error;
-      }
-      throw new validationError("Failed to fetch provider aircrafts");
+    if (aircrafts.length === 0) {
+      return {
+        aircraftsList: [],
+        paginationData: { totalPages: 0, currentPage: page },
+      };
     }
+
+    const sorted = this.sortAircraftsByStatus(aircrafts);
+
+    return {
+      aircraftsList: AircraftMapper.toAircraftDTOs(sorted),
+      paginationData: { totalPages, currentPage },
+    };
   }
 }

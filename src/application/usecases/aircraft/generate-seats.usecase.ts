@@ -5,13 +5,19 @@ import {
   IAircraftRepository,
   IProviderRepository
 } from "@di/file-imports-index";
-import { SeatDetailsDTO, CreateSeatDTO,SeatLayoutDetailsDTO } from "@application/dtos/seat-dtos";
-import { validationError, NotFoundError, ForbiddenError, ConflictError } from "@presentation/middlewares/error.middleware";
+import { SeatDetailsDTO, 
+  CreateSeatDTO } from "@application/dtos/seat-dtos";
+import { validationError, NotFoundError, ForbiddenError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { IGenerateSeatsUseCase } from "@di/file-imports-index";
 import { getLayoutConfig } from "@shared/utils/seat-layout.constants";
-import { APPLICATION_MESSAGES, AUTH_MESSAGES,PROVIDER_MESSAGES, AIRCRAFT_MESSAGES } from "@shared/constants/index.constants";
+import { APPLICATION_MESSAGES, 
+  AUTH_MESSAGES,
+  PROVIDER_MESSAGES, 
+  AIRCRAFT_MESSAGES } from "@shared/constants/index.constants";
+import { SeatMapper } from "@application/mappers/seatMapper";
+import { ISeatLayout } from "@domain/entities/seatLayout.entity";
 
 @injectable()
 export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
@@ -62,16 +68,10 @@ export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
     }
   }
 
-  private async checkExistingSeats(aircraftId: string): Promise<void> {
-    const existingSeats = await this._seatRepository.getSeatsByAircraftId(aircraftId);
-
-    if (existingSeats.length > 0) {
-      throw new ConflictError(
-        `Seats already exist for this aircraft (${existingSeats.length} seats found). ` +
-        `Delete existing seats first if you want to regenerate.`
-      );
-    }
-  }
+private async getExistingRowNumbers(aircraftId: string): Promise<Set<number>> {
+  const existingSeats = await this._seatRepository.getSeatsByAircraftId(aircraftId);
+  return new Set(existingSeats.map((seat) => seat.rowNumber));
+}
 
   private async validateSeatLayouts(aircraftId: string): Promise<void> {
     const layouts = await this._seatLayoutRepository.getSeatLayoutsByAircraftId(aircraftId);
@@ -150,7 +150,7 @@ export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
 
   private async generateSeatsForLayout(
     aircraftId: string,
-    layout: SeatLayoutDetailsDTO,
+    layout: ISeatLayout,
     seatTypeId: string,
     totalAircraftRows: number
   ): Promise<CreateSeatDTO[]> {
@@ -180,6 +180,7 @@ export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
         seats.push({
           aircraftId,
           seatTypeId,
+          cabinClass: layout.cabinClass,
           seatNumber,
           rowNumber: row,
           columnPosition: column,
@@ -187,7 +188,8 @@ export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
           position,
           isExitRow,
           isBlocked: false,
-          features
+          features,
+          
         });
       }
     }
@@ -195,7 +197,7 @@ export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
     return seats;
   }
 
-  private calculateTotalRows(layouts: SeatLayoutDetailsDTO[]): number {
+  private calculateTotalRows(layouts: ISeatLayout[]): number {
     if (layouts.length === 0) return 0;
     return Math.max(...layouts.map(layout => layout.endRow));
   }
@@ -215,27 +217,34 @@ export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
     await Promise.all([
       this.validateProvider(providerId),
       this.validateAircraftOwnership(aircraftId, providerId),
-      this.checkExistingSeats(aircraftId),
       this.validateSeatLayouts(aircraftId)
     ]);
 
     const layouts = await this._seatLayoutRepository.getSeatLayoutsByAircraftId(aircraftId);
     const totalAircraftRows = this.calculateTotalRows(layouts);
+    const existingRowNumbers = await this.getExistingRowNumbers(aircraftId);
 
     const allSeats: CreateSeatDTO[] = [];
 
-    // Generate seats for each cabin class layout
     for (const layout of layouts) {
-      const seatType = await this._seatTypeRepository.getSeatTypeByClass(layout.cabinClass);
+  
+  const allRowsExist = Array.from(
+    { length: layout.endRow - layout.startRow + 1 },
+    (_, i) => layout.startRow + i
+  ).every((row) => existingRowNumbers.has(row));
 
-      if (!seatType) {
-        throw new NotFoundError(`Seat type not found for class: ${layout.cabinClass}`);
-      }
+  if (allRowsExist) continue; 
+
+  const seatType = await this._seatTypeRepository.getSeatTypeByClass(layout.cabinClass);
+
+  if (!seatType) {
+    throw new NotFoundError(`Seat type not found for class: ${layout.cabinClass}`);
+  }
 
       const layoutSeats = await this.generateSeatsForLayout(
         aircraftId,
         layout,
-        seatType._id,
+        seatType.id,
         totalAircraftRows
       );
 
@@ -245,20 +254,7 @@ export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
     if (allSeats.length === 0) {
       throw new validationError("No seats generated. Check your layout configuration.");
     }
-
-    try {
-      const createdSeats = await this._seatRepository.createSeats(allSeats);
-      return createdSeats;
-    } catch (error) {
-      if (
-        error instanceof validationError ||
-        error instanceof NotFoundError ||
-        error instanceof ForbiddenError ||
-        error instanceof ConflictError
-      ) {
-        throw error;
-      }
-      throw new validationError("Failed to generate seats");
-    }
+  const createdSeats = await this._seatRepository.createSeats(allSeats);
+    return SeatMapper.toSeatDTOs(createdSeats);  
   }
 }

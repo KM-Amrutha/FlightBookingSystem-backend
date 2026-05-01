@@ -1,16 +1,12 @@
 import jwt from 'jsonwebtoken';
 import ms from 'ms';
-import dotenv from 'dotenv';
 import { APPLICATION_MESSAGES } from '@shared/constants/index.constants';
 import { validationError } from '@presentation/middlewares/error.middleware';
 import { TokenPayload  } from '@application/dtos/service/auth.service';
 import { IAuthService } from '@application/interfaces/service/auth/IAuth.service';
 import { injectable } from 'inversify';
-dotenv.config();
-
 
 @injectable()
-
 export class JwtService implements IAuthService {
     private readonly _jwtSecret = process.env.JWT_SECRET!;
       private readonly _jwtExpiration = process.env.JWT_EXPIRATION!;

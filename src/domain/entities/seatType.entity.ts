@@ -1,7 +1,5 @@
-import mongoose, { Document } from "mongoose";
-
-export interface ISeatType extends Document {
-  _id: string;
+export interface ISeatType {
+  id: string;
   seatTypeName: string; // "Economy", "Premium Economy", "Business", "First"
   cabinClass: string; // "economy" | "premium_economy" | "business" | "first"
   basePriceMultiplier: number;

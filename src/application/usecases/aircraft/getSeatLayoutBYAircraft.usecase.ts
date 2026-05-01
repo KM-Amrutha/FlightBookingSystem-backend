@@ -4,6 +4,7 @@ import { validationError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { IGetSeatLayoutsByAircraftUseCase } from "@di/file-imports-index";
+import { SeatMapper } from "@application/mappers/seatMapper";
 
 @injectable()
 export class GetSeatLayoutsByAircraftUseCase implements IGetSeatLayoutsByAircraftUseCase {
@@ -13,23 +14,16 @@ export class GetSeatLayoutsByAircraftUseCase implements IGetSeatLayoutsByAircraf
   ) {}
 
   async execute(aircraftId: string): Promise<SeatLayoutDetailsDTO[]> {
-    try {
+  
       if (!aircraftId) {
         throw new validationError("Aircraft ID is required");
       }
 
       const seatLayouts = await this._seatLayoutRepository.getSeatLayoutsByAircraftId(aircraftId);
 
-      if (!seatLayouts || seatLayouts.length === 0) {
-        return []; // Return empty array, no error
-      }
+      if (!seatLayouts || seatLayouts.length === 0) return [];
 
-      return seatLayouts;
-    } catch (error) {
-      if (error instanceof validationError) {
-        throw error;
-      }
-      throw new validationError("Failed to retrieve seat layouts");
-    }
+      return SeatMapper.toSeatLayoutDTOs(seatLayouts);
+   
   }
 }

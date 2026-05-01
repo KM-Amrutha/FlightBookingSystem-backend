@@ -9,6 +9,8 @@ import { validationError, NotFoundError, ForbiddenError, ConflictError } from "@
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { IUpdateAircraftLocationUseCase } from "@di/file-imports-index";
+import { IAircraft } from "@domain/entities/aircraft.entity";
+import { AircraftMapper } from "@application/mappers/aircraftMapper";
 
 @injectable()
 export class UpdateAircraftLocationUseCase implements IUpdateAircraftLocationUseCase {
@@ -43,7 +45,7 @@ export class UpdateAircraftLocationUseCase implements IUpdateAircraftLocationUse
   private async validateOwnership(
     aircraftId: string, 
     providerId: string
-  ): Promise<AircraftDetailsDTO> {
+  ): Promise<IAircraft> {
     const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
     
     if (!aircraft) {
@@ -69,7 +71,7 @@ export class UpdateAircraftLocationUseCase implements IUpdateAircraftLocationUse
     }
   }
 
-  private validateAircraftStatus(aircraft: AircraftDetailsDTO): void {
+  private validateAircraftStatus(aircraft: IAircraft): void {
     if (aircraft.status === "maintenance") {
       throw new ConflictError(
         "Cannot change location for aircraft under maintenance. Complete maintenance first"
@@ -191,15 +193,12 @@ export class UpdateAircraftLocationUseCase implements IUpdateAircraftLocationUse
     data.currentLocationId
   );
 
-  try {
     const updatedAircraft = await this._aircraftRepository.updateAircraft(
       data.aircraftId,
       { currentLocationId: data.currentLocationId }
     );
 
-    if (!updatedAircraft) {
-      throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
-    }
+    if (!updatedAircraft)  throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
 
     await this.logLocationChange(
       data.aircraftId,
@@ -207,18 +206,6 @@ export class UpdateAircraftLocationUseCase implements IUpdateAircraftLocationUse
       data.currentLocationId,
       providerId
     );
-
-    return updatedAircraft;
-    } catch (error) {
-      if (
-        error instanceof validationError || 
-        error instanceof NotFoundError || 
-        error instanceof ForbiddenError ||
-        error instanceof ConflictError
-      ) {
-        throw error;
-      }
-      throw new validationError("Failed to update aircraft location");
-    }
+   return AircraftMapper.toAircraftDTO(updatedAircraft);
   }
 }

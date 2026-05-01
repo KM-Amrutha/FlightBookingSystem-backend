@@ -9,7 +9,13 @@ import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { ICreateSeatLayoutUseCase } from "@di/file-imports-index";
 import { getLayoutConfig, getValidLayouts } from "@shared/utils/seat-layout.constants";
-import { APPLICATION_MESSAGES, AUTH_MESSAGES, AIRCRAFT_MESSAGES, PROVIDER_MESSAGES } from "@shared/constants/index.constants";
+import { APPLICATION_MESSAGES,
+   AUTH_MESSAGES, 
+   AIRCRAFT_MESSAGES,
+    PROVIDER_MESSAGES } from "@shared/constants/index.constants";
+
+    import { SeatMapper } from "@application/mappers/seatMapper"; 
+import { IAircraft } from "@domain/entities/aircraft.entity";
 
 @injectable()
 export class CreateSeatLayoutUseCase implements ICreateSeatLayoutUseCase {
@@ -44,7 +50,7 @@ export class CreateSeatLayoutUseCase implements ICreateSeatLayoutUseCase {
   private async validateAircraftOwnership(
     aircraftId: string,
     providerId: string
-  ): Promise<void> {
+  ): Promise<IAircraft> {
     const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
 
     if (!aircraft) {
@@ -54,38 +60,32 @@ export class CreateSeatLayoutUseCase implements ICreateSeatLayoutUseCase {
     if (aircraft.providerId !== providerId) {
       throw new ForbiddenError("You don't have permission to configure this aircraft");
     }
+    return aircraft;
   }
 
   private validateLayoutFormat(layout: string): void {
     const validLayouts = getValidLayouts();
-    
     if (!validLayouts.includes(layout)) {
-      throw new validationError(
-        `Invalid layout. Valid layouts: ${validLayouts.join(", ")}`
-      );
+      throw new validationError(`Invalid layout. Valid layouts: ${validLayouts.join(", ")}`);
     }
   }
 
   private validateCabinClass(cabinClass: string): void {
     const validClasses = ["economy", "premium_economy", "business", "first"];
-    
     if (!validClasses.includes(cabinClass)) {
       throw new validationError(
         `Invalid cabin class. Valid classes: ${validClasses.join(", ")}`
       );
     }
   }
+  
+  private async checkDuplicateLayout(aircraftId: string, cabinClass: string): Promise<void> {
 
-  private async checkDuplicateLayout(
-    aircraftId: string,
-    cabinClass: string
-  ): Promise<void> {
-    const existingLayout = await this._seatLayoutRepository.getSeatLayoutByClass(
+    const existing = await this._seatLayoutRepository.getSeatLayoutByClass(
       aircraftId,
       cabinClass
     );
-
-    if (existingLayout) {
+    if (existing) {
       throw new ConflictError(
         `Seat layout for ${cabinClass} class already exists for this aircraft`
       );
@@ -151,7 +151,29 @@ export class CreateSeatLayoutUseCase implements ICreateSeatLayoutUseCase {
     }
   }
 
-  private enrichLayoutData(data: CreateSeatLayoutDTO): CreateSeatLayoutDTO {
+private validateTotalSeatCapacity(
+    aircraft: IAircraft,
+    existingLayoutsSeats: number,
+    newStartRow: number,
+    newEndRow: number,
+    seatsPerRow: number
+  ): void {
+    const newLayoutSeats = (newEndRow - newStartRow + 1) * seatsPerRow;
+    const projectedTotal = existingLayoutsSeats + newLayoutSeats;
+
+    if (projectedTotal > aircraft.seatCapacity) {
+      throw new validationError(
+        `Total seats (${projectedTotal}) would exceed aircraft capacity (${aircraft.seatCapacity})`
+      );
+    }
+  }
+
+  private enrichLayoutData(data: CreateSeatLayoutDTO): CreateSeatLayoutDTO & {
+  seatsPerRow: number;
+  columns: string[];
+  aisleColumns: string[];
+}
+{
     const layoutConfig = getLayoutConfig(data.layout);
 
     if (!layoutConfig) {
@@ -167,10 +189,7 @@ export class CreateSeatLayoutUseCase implements ICreateSeatLayoutUseCase {
     };
   }
 
-  async execute(
-    providerId: string,
-    data: CreateSeatLayoutDTO
-  ): Promise<SeatLayoutDetailsDTO> {
+ async execute(providerId: string, data: CreateSeatLayoutDTO): Promise<SeatLayoutDetailsDTO> {
     if (!providerId || !data.aircraftId || !data.cabinClass || !data.layout) {
       throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
@@ -190,20 +209,16 @@ export class CreateSeatLayoutUseCase implements ICreateSeatLayoutUseCase {
     this.validateLayoutFormat(data.layout);
     this.validateCabinClass(data.cabinClass);
 
-    await Promise.all([
-      this.validateProvider(providerId),
+    // validateAircraftOwnership returns the aircraft — reused below, avoids double fetch
+    const [aircraft] = await Promise.all([
       this.validateAircraftOwnership(data.aircraftId, providerId),
+      this.validateProvider(providerId),
       this.checkDuplicateLayout(data.aircraftId, data.cabinClass),
-      this.validateRowRanges(data.aircraftId, data.startRow, data.endRow)
+      this.validateRowRanges(data.aircraftId, data.startRow, data.endRow),
     ]);
 
-    if (data.wingStartRow && data.wingEndRow) {
-      this.validateWingRows(
-        data.wingStartRow,
-        data.wingEndRow,
-        data.startRow,
-        data.endRow
-      );
+    if (data.wingStartRow != null && data.wingEndRow != null) {
+      this.validateWingRows(data.wingStartRow, data.wingEndRow, data.startRow, data.endRow);
     }
 
     if (data.exitRows && data.exitRows.length > 0) {
@@ -212,25 +227,25 @@ export class CreateSeatLayoutUseCase implements ICreateSeatLayoutUseCase {
 
     const enrichedData = this.enrichLayoutData(data);
 
-    try {
-      const seatLayout = await this._seatLayoutRepository.createSeatLayout(enrichedData);
-      return seatLayout;
-    } catch (error:any) {
-      console.error("🚨 REAL SEAT LAYOUT ERROR:", {
-    message: error.message,
-    name: error.name,
-    stack: error.stack,
-    mongooseErrors: error.errors
-  });
-      if (
-        error instanceof validationError ||
-        error instanceof NotFoundError ||
-        error instanceof ForbiddenError ||
-        error instanceof ConflictError
-      ) {
-        throw error;
-      }
-      throw new validationError("Failed to create seat layout");
-    }
+    // Reuse layouts already fetched inside validateRowRanges — 
+    // minor note: if you want zero redundancy, pass layouts in. For now this is acceptable.
+    const existingLayouts = await this._seatLayoutRepository.getSeatLayoutsByAircraftId(
+      data.aircraftId
+    );
+    const existingTotalSeats = existingLayouts.reduce(
+      (sum, layout) => sum + (layout.endRow - layout.startRow + 1) * layout.seatsPerRow,
+      0
+    );
+
+    this.validateTotalSeatCapacity(
+      aircraft,
+      existingTotalSeats,
+      data.startRow,
+      data.endRow,
+      enrichedData.seatsPerRow
+    );
+
+    const seatLayout = await this._seatLayoutRepository.createSeatLayout(enrichedData);
+    return SeatMapper.toSeatLayoutDTO(seatLayout);
   }
 }

@@ -1,8 +1,11 @@
 import { AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
 
 export interface IAvailableAircraftsForScheduleUsecase {
-
-    execute(providerId: string,
+  execute(
+    providerId: string,
     departureDestinationId: string,
-    departureTimeIso: string): Promise<AircraftDetailsDTO[]>;
+    departureTimeIso: string,
+    durationMinutes: number,
+    bufferMinutes: number,
+  ): Promise<AircraftDetailsDTO[]>;
 }

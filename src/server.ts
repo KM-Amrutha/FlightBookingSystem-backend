@@ -1,14 +1,14 @@
 import express from 'express'
-import dotenv from 'dotenv';
 import cors from "cors";
 import { Request,Response } from 'express';
-dotenv.config();
+
 
 import cookieParser from "cookie-parser";
 
 import authRoutes from './presentation/routes/auth.routes'; 
 import adminRoutes from '@presentation/routes/admin.routes';
 import providerRoutes from '@presentation/routes/provider.routes';
+import userRoutes from '@presentation/routes/user.routes';
 
 
 import morganMiddleware from "@infrastructure/services/logging/morgan.services";
@@ -35,6 +35,7 @@ app.use('/',rateLimiter);
 app.use('/auth', authRoutes);
 app.use('/admin',adminRoutes)
 app.use('/provider',providerRoutes);
+app.use('/user',userRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   console.log("comes to root route")

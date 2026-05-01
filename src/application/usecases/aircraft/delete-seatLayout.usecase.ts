@@ -1,5 +1,6 @@
 import { 
-  ISeatLayoutRepository 
+  ISeatLayoutRepository ,
+  ISeatRepository
 } from "@di/file-imports-index";
 import { NotFoundError, validationError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
@@ -10,7 +11,9 @@ import { IDeleteSeatLayoutUseCase } from "@di/file-imports-index";
 export class DeleteSeatLayoutUseCase implements IDeleteSeatLayoutUseCase {
   constructor(
     @inject(TYPES_AIRCRAFT_REPOSITORIES.SeatLayoutRepository) 
-    private _seatLayoutRepository: ISeatLayoutRepository
+    private _seatLayoutRepository: ISeatLayoutRepository,
+    @inject(TYPES_AIRCRAFT_REPOSITORIES.SeatRepository) 
+    private _seatRepository: ISeatRepository
   ) {}
 
   async execute(layoutId: string): Promise<void> {
@@ -28,6 +31,12 @@ export class DeleteSeatLayoutUseCase implements IDeleteSeatLayoutUseCase {
       throw new NotFoundError('Seat layout not found');
     }
 
+    await this._seatRepository.deleteSeatsByRowRange(
+      layout.aircraftId,
+      layout.startRow,
+      layout.endRow
+    );
+    
     const deleted = await this._seatLayoutRepository.deleteSeatLayout(layoutId);
     
     if (!deleted) {

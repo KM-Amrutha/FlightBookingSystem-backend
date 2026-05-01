@@ -1,0 +1,296 @@
+22-04-2026 12:05:57 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 8.386 ms
+22-04-2026 12:05:57 [[32MINFO[39M]: POST /auth/sign-in 200 1362 - 560.325 ms
+22-04-2026 12:06:01 [[32MINFO[39M]: OPTIONS /provider/flights?page=1&limit=4 204 0 - 0.342 ms
+22-04-2026 12:06:01 [[32MINFO[39M]: OPTIONS /provider/flights?page=1&limit=4 204 0 - 0.340 ms
+22-04-2026 12:06:01 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 198.358 ms
+22-04-2026 12:06:01 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 159.627 ms
+22-04-2026 12:16:18 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 7.462 ms
+22-04-2026 12:16:18 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.715 ms
+22-04-2026 12:16:18 [[31MERROR[39M]: [/provider/aircrafts?page=1&limit=4] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 12:16:18 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 401 133 - 341.724 ms
+22-04-2026 12:16:19 [[31MERROR[39M]: [/provider/aircrafts?page=1&limit=4] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 12:16:19 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 401 133 - 75.275 ms
+22-04-2026 12:16:19 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.423 ms
+22-04-2026 12:16:19 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.487 ms
+22-04-2026 12:16:19 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 29.842 ms
+22-04-2026 12:16:19 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 45.163 ms
+22-04-2026 12:16:19 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 581.227 ms
+22-04-2026 12:16:19 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 161.873 ms
+22-04-2026 12:16:26 [[32MINFO[39M]: OPTIONS /provider/flights?page=1&limit=4 204 0 - 0.275 ms
+22-04-2026 12:16:26 [[32MINFO[39M]: OPTIONS /provider/flights?page=1&limit=4 204 0 - 1.130 ms
+22-04-2026 12:16:27 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 266.511 ms
+22-04-2026 12:16:27 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 137.364 ms
+22-04-2026 12:16:35 [[32MINFO[39M]: OPTIONS /auth/sign-out/ 204 0 - 0.333 ms
+22-04-2026 12:16:35 [[32MINFO[39M]: POST /auth/sign-out/ 200 137 - 4.697 ms
+22-04-2026 12:16:35 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.264 ms
+22-04-2026 12:16:35 [[32MINFO[39M]: GET /provider/profile 200 1137 - 119.372 ms
+22-04-2026 12:16:50 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.208 ms
+22-04-2026 12:16:51 [[31MERROR[39M]: [/auth/sign-in] The password you entered is incorrect. Please try again.: The password you entered is incorrect. Please try again.
+Error: The password you entered is incorrect. Please try again.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:79:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+22-04-2026 12:16:51 [[32MINFO[39M]: POST /auth/sign-in 400 111 - 270.432 ms
+22-04-2026 12:16:59 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.210 ms
+22-04-2026 12:16:59 [[32MINFO[39M]: POST /auth/sign-in 200 760 - 154.767 ms
+22-04-2026 12:23:09 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 2.559 ms
+22-04-2026 12:23:09 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:65:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 12:23:09 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 398.548 ms
+22-04-2026 12:23:13 [[32MINFO[39M]: POST /auth/sign-in 200 1362 - 295.121 ms
+22-04-2026 12:23:16 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.406 ms
+22-04-2026 12:23:16 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.259 ms
+22-04-2026 12:23:16 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 206.057 ms
+22-04-2026 12:23:16 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 190.154 ms
+22-04-2026 12:23:24 [[32MINFO[39M]: OPTIONS /provider/flights?page=1&limit=4 204 0 - 12.308 ms
+22-04-2026 12:23:24 [[32MINFO[39M]: OPTIONS /provider/flights?page=1&limit=4 204 0 - 0.285 ms
+22-04-2026 12:23:24 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 158.262 ms
+22-04-2026 12:23:24 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 131.011 ms
+22-04-2026 12:23:48 [[32MINFO[39M]: OPTIONS /auth/sign-out/ 204 0 - 0.203 ms
+22-04-2026 12:23:48 [[32MINFO[39M]: POST /auth/sign-out/ 200 137 - 2.210 ms
+22-04-2026 12:23:48 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.195 ms
+22-04-2026 12:23:48 [[32MINFO[39M]: GET /provider/profile 304 - - 105.460 ms
+22-04-2026 12:24:15 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.258 ms
+22-04-2026 12:24:16 [[32MINFO[39M]: POST /auth/sign-in 200 1365 - 303.514 ms
+22-04-2026 12:24:45 [[32MINFO[39M]: OPTIONS /auth/password/change 204 0 - 0.322 ms
+22-04-2026 12:24:46 [[32MINFO[39M]: PATCH /auth/password/change 200 83 - 948.922 ms
+22-04-2026 12:24:59 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.260 ms
+22-04-2026 12:24:59 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.273 ms
+22-04-2026 12:24:59 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 200 1909 - 185.885 ms
+22-04-2026 12:24:59 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 158.376 ms
+22-04-2026 12:25:07 [[32MINFO[39M]: OPTIONS /provider/flights?page=1&limit=4 204 0 - 0.404 ms
+22-04-2026 12:25:07 [[32MINFO[39M]: OPTIONS /provider/flights?page=1&limit=4 204 0 - 0.503 ms
+22-04-2026 12:25:08 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 200 1859 - 203.856 ms
+22-04-2026 12:25:08 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 180.544 ms
+22-04-2026 12:25:22 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.690 ms
+22-04-2026 12:25:22 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 1.010 ms
+22-04-2026 12:25:22 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 188.446 ms
+22-04-2026 12:25:23 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 160.221 ms
+22-04-2026 12:26:06 [[32MINFO[39M]: OPTIONS /provider/flights?page=1&limit=4 204 0 - 1.306 ms
+22-04-2026 12:26:06 [[32MINFO[39M]: OPTIONS /provider/flights?page=1&limit=4 204 0 - 0.757 ms
+22-04-2026 12:26:07 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 150.545 ms
+22-04-2026 12:26:07 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 161.601 ms
+22-04-2026 12:26:30 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 24.507 ms
+22-04-2026 12:26:30 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.234 ms
+22-04-2026 12:26:30 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 223.997 ms
+22-04-2026 12:26:30 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 154.970 ms
+22-04-2026 12:27:03 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.559 ms
+22-04-2026 12:27:03 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:65:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 12:27:03 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 125.538 ms
+22-04-2026 12:27:10 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.321 ms
+22-04-2026 12:27:10 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:65:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 12:27:10 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 92.280 ms
+22-04-2026 12:27:17 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.181 ms
+22-04-2026 12:27:17 [[32MINFO[39M]: POST /auth/sign-in 200 524 - 184.038 ms
+22-04-2026 12:27:17 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.211 ms
+22-04-2026 12:27:17 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.861 ms
+22-04-2026 12:27:17 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 83.865 ms
+22-04-2026 12:27:17 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 37.488 ms
+22-04-2026 12:27:19 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 0.954 ms
+22-04-2026 12:27:19 [[32MINFO[39M]: OPTIONS /admin/flights/pending-approval 204 0 - 2.074 ms
+22-04-2026 12:27:19 [[32MINFO[39M]: GET /admin/flights/pending-approval 200 93 - 58.117 ms
+22-04-2026 12:27:19 [[32MINFO[39M]: GET /admin/flights/pending-approval 304 - - 40.831 ms
+22-04-2026 12:29:19 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=bom 204 0 - 0.159 ms
+22-04-2026 12:29:19 [[32MINFO[39M]: GET /provider/destinations/search?q=bom 200 831 - 158.746 ms
+22-04-2026 12:29:22 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=cok 204 0 - 0.208 ms
+22-04-2026 12:29:22 [[32MINFO[39M]: GET /provider/destinations/search?q=cok 200 320 - 104.279 ms
+22-04-2026 12:29:37 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.835 ms
+22-04-2026 12:29:37 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.820 ms
+22-04-2026 12:29:38 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 217.453 ms
+22-04-2026 12:29:38 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 146.256 ms
+22-04-2026 12:30:08 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=obm 204 0 - 0.241 ms
+22-04-2026 12:30:08 [[32MINFO[39M]: GET /provider/destinations/search?q=obm 200 87 - 91.185 ms
+22-04-2026 12:30:10 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=bom 204 0 - 0.435 ms
+22-04-2026 12:30:11 [[32MINFO[39M]: GET /provider/destinations/search?q=bom 304 - - 100.989 ms
+22-04-2026 12:30:14 [[32MINFO[39M]: OPTIONS /provider/destinations/search?q=cok 204 0 - 0.219 ms
+22-04-2026 12:30:14 [[32MINFO[39M]: GET /provider/destinations/search?q=cok 304 - - 90.241 ms
+22-04-2026 12:30:18 [[32MINFO[39M]: OPTIONS /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9528d2&departureTime=2026-04-30T07:00:00.000Z&durationMinutes=120 204 0 - 0.235 ms
+22-04-2026 12:30:19 [[32MINFO[39M]: GET /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9528d2&departureTime=2026-04-30T07:00:00.000Z&durationMinutes=120 200 94 - 206.293 ms
+22-04-2026 12:30:20 [[32MINFO[39M]: OPTIONS /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9528d2&departureTime=2026-04-30T10:00:00.000Z&durationMinutes=120 204 0 - 0.339 ms
+22-04-2026 12:30:20 [[32MINFO[39M]: GET /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9528d2&departureTime=2026-04-30T10:00:00.000Z&durationMinutes=120 200 94 - 202.966 ms
+22-04-2026 12:30:23 [[32MINFO[39M]: OPTIONS /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9528d2&departureTime=2026-04-30T10:03:00.000Z&durationMinutes=120 204 0 - 0.535 ms
+22-04-2026 12:30:23 [[32MINFO[39M]: GET /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9528d2&departureTime=2026-04-30T10:03:00.000Z&durationMinutes=120 200 94 - 254.617 ms
+22-04-2026 12:30:24 [[32MINFO[39M]: OPTIONS /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9528d2&departureTime=2026-04-29T22:03:00.000Z&durationMinutes=120 204 0 - 0.244 ms
+22-04-2026 12:30:25 [[32MINFO[39M]: GET /provider/aircraft/available-aircrafts?departureDestinationId=691a06c68e235e91fc9528d2&departureTime=2026-04-29T22:03:00.000Z&durationMinutes=120 200 94 - 220.402 ms
+22-04-2026 12:30:55 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.524 ms
+22-04-2026 12:30:55 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 12.384 ms
+22-04-2026 12:30:55 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 171.817 ms
+22-04-2026 12:30:55 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 147.464 ms
+22-04-2026 12:51:06 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 6.868 ms
+22-04-2026 12:51:06 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.563 ms
+22-04-2026 12:51:07 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 12:51:07 [[32MINFO[39M]: GET /provider/profile 401 133 - 329.823 ms
+22-04-2026 12:51:07 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 12:51:07 [[32MINFO[39M]: GET /provider/profile 401 133 - 29.780 ms
+22-04-2026 12:51:07 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 1.674 ms
+22-04-2026 12:51:07 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.489 ms
+22-04-2026 12:51:07 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 20.407 ms
+22-04-2026 12:51:07 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 7.647 ms
+22-04-2026 12:51:08 [[32MINFO[39M]: GET /provider/profile 200 1140 - 641.433 ms
+22-04-2026 12:51:08 [[32MINFO[39M]: GET /provider/profile 304 - - 89.120 ms
+22-04-2026 12:51:08 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.307 ms
+22-04-2026 12:51:08 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.334 ms
+22-04-2026 12:51:09 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 613.357 ms
+22-04-2026 12:51:09 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 369.134 ms
+22-04-2026 12:55:57 [[32MINFO[39M]: OPTIONS /provider/aircraft/69e6205896090fe0b0815e20 204 0 - 26.278 ms
+22-04-2026 12:56:00 [[32MINFO[39M]: DELETE /provider/aircraft/69e6205896090fe0b0815e20 200 83 - 2678.923 ms
+22-04-2026 12:56:00 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.222 ms
+22-04-2026 12:56:00 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 200 1313 - 165.485 ms
+22-04-2026 13:09:22 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 2.906 ms
+22-04-2026 13:09:22 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 1.136 ms
+22-04-2026 13:09:22 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 13:09:22 [[32MINFO[39M]: GET /provider/profile 401 133 - 59.592 ms
+22-04-2026 13:09:22 [[31MERROR[39M]: [/provider/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 13:09:22 [[32MINFO[39M]: GET /provider/profile 401 133 - 5.310 ms
+22-04-2026 13:09:22 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.149 ms
+22-04-2026 13:09:22 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.157 ms
+22-04-2026 13:09:22 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 11.943 ms
+22-04-2026 13:09:22 [[32MINFO[39M]: POST /auth/refresh-token 200 356 - 4.667 ms
+22-04-2026 13:09:23 [[32MINFO[39M]: GET /provider/profile 304 - - 222.271 ms
+22-04-2026 13:09:23 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.168 ms
+22-04-2026 13:09:23 [[32MINFO[39M]: OPTIONS /provider/aircrafts?page=1&limit=4 204 0 - 0.174 ms
+22-04-2026 13:09:23 [[32MINFO[39M]: GET /provider/profile 304 - - 85.324 ms
+22-04-2026 13:09:23 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 200 139 - 173.839 ms
+22-04-2026 13:09:23 [[32MINFO[39M]: GET /provider/aircrafts?page=1&limit=4 304 - - 146.065 ms
+22-04-2026 13:09:27 [[32MINFO[39M]: OPTIONS /provider/flights?page=1&limit=4 204 0 - 0.165 ms
+22-04-2026 13:09:27 [[32MINFO[39M]: OPTIONS /provider/flights?page=1&limit=4 204 0 - 0.158 ms
+22-04-2026 13:09:27 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 200 148 - 151.486 ms
+22-04-2026 13:09:27 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 124.382 ms
+22-04-2026 13:09:34 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.176 ms
+22-04-2026 13:09:34 [[32MINFO[39M]: OPTIONS /admin/providers/pending 204 0 - 0.208 ms
+22-04-2026 13:09:34 [[31MERROR[39M]: [/admin/providers/pending] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\admin.middleware.ts:28:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\admin.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 13:09:34 [[32MINFO[39M]: GET /admin/providers/pending 401 133 - 40.758 ms
+22-04-2026 13:09:34 [[31MERROR[39M]: [/admin/providers/pending] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\admin.middleware.ts:28:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\admin.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 13:09:34 [[32MINFO[39M]: GET /admin/providers/pending 401 133 - 48.461 ms
+22-04-2026 13:09:34 [[32MINFO[39M]: OPTIONS /auth/refresh-token 204 0 - 0.206 ms
+22-04-2026 13:09:34 [[32MINFO[39M]: POST /auth/refresh-token 200 352 - 11.869 ms
+22-04-2026 13:09:34 [[32MINFO[39M]: POST /auth/refresh-token 200 352 - 7.672 ms
+22-04-2026 13:09:35 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 171.294 ms
+22-04-2026 13:09:35 [[32MINFO[39M]: GET /admin/providers/pending 304 - - 66.271 ms
+22-04-2026 13:09:42 [[32MINFO[39M]: OPTIONS /auth/sign-out/ 204 0 - 0.272 ms
+22-04-2026 13:09:42 [[32MINFO[39M]: POST /auth/sign-out/ 200 137 - 11.034 ms
+22-04-2026 13:09:42 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.130 ms
+22-04-2026 13:09:42 [[32MINFO[39M]: GET /provider/profile 304 - - 97.673 ms
+22-04-2026 13:09:55 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.409 ms
+22-04-2026 13:09:55 [[32MINFO[39M]: POST /auth/sign-in 200 1362 - 316.843 ms
+22-04-2026 13:10:03 [[32MINFO[39M]: OPTIONS /auth/sign-out/ 204 0 - 0.179 ms
+22-04-2026 13:10:03 [[32MINFO[39M]: POST /auth/sign-out/ 200 137 - 0.782 ms
+22-04-2026 13:10:03 [[32MINFO[39M]: OPTIONS /provider/profile 204 0 - 0.160 ms
+22-04-2026 13:10:03 [[32MINFO[39M]: GET /provider/profile 200 1137 - 91.366 ms
+22-04-2026 13:10:46 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.294 ms
+22-04-2026 13:10:46 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:65:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 13:10:46 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 218.979 ms
+22-04-2026 13:10:53 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.198 ms
+22-04-2026 13:10:53 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:65:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 13:10:53 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 184.224 ms
+22-04-2026 13:11:05 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.187 ms
+22-04-2026 13:11:05 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:65:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 13:11:05 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 204.680 ms
+22-04-2026 13:11:10 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.161 ms
+22-04-2026 13:11:11 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:65:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 13:11:11 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 233.560 ms
+22-04-2026 13:11:40 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.288 ms
+22-04-2026 13:11:40 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:65:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 13:11:40 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 219.240 ms
+22-04-2026 13:11:47 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.263 ms
+22-04-2026 13:11:47 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:65:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 13:11:47 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 221.382 ms
+22-04-2026 13:11:51 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:65:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 13:11:51 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 219.291 ms
+22-04-2026 13:11:55 [[32MINFO[39M]: OPTIONS /auth/sign-in 204 0 - 0.361 ms
+22-04-2026 13:11:55 [[31MERROR[39M]: [/auth/sign-in] We could not find an account associated with the provided email address.: We could not find an account associated with the provided email address.
+Error: We could not find an account associated with the provided email address.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:65:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+22-04-2026 13:11:55 [[32MINFO[39M]: POST /auth/sign-in 400 127 - 196.255 ms

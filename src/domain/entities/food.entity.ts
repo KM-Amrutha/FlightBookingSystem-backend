@@ -1,14 +1,15 @@
-import mongoose, { Document } from "mongoose";
-
-export interface IFoods extends Document {
-  _id: string;
-  aircraftType: string;
-  foodType: string;
+export interface IFood {
+  id: string;
+  aircraftId: string;
+  providerId: string;
   foodName: string;
-  vegNonveg: string;
+  foodType: string;
+  vegNonveg: "veg" | "non-veg";
   serveMethod: string;
   isComplimentary: boolean;
   foodPrice: number;
-  addImage: string;
+  image: string | null;
+  isActive: boolean;
   createdAt: Date;
+  updatedAt: Date;
 }

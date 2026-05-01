@@ -6,7 +6,7 @@ import { IUserRepository,
   IOtpService,
 ICreateUserUseCase, } from "@di/file-imports-index";
 
-import { CreateUserDTO } from "@application/dtos/user-dtos";
+import { CreateUserDTO, userListDTO } from "@application/dtos/user-dtos";
 import { IUser } from "@domain/entities/user.entity";
 import { APPLICATION_MESSAGES,
      AUTH_MESSAGES } 
@@ -15,6 +15,7 @@ import { validationError } from "@presentation/middlewares/error.middleware";
 import {injectable,inject} from "inversify";
 import { TYPES_SERVICES } from "@di/types-services";
 import { TYPES_REPOSITORIES } from "@di/types-repositories";
+import { UserMapper } from "@application/mappers/userMapper";
 
 
 @injectable()
@@ -47,7 +48,7 @@ export class CreateUserUseCase implements ICreateUserUseCase {
     lastName,
     email,
     password,
-  }: CreateUserDTO): Promise<IUser> {
+  }: CreateUserDTO): Promise<userListDTO> {
     if (!firstName || !lastName || !email || !password) {
       throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
@@ -67,7 +68,9 @@ export class CreateUserUseCase implements ICreateUserUseCase {
     }
     if (existinguser && !existinguser.otpVerified) {
       await this.sendOtpEmail(email);
-      return existinguser;
+      
+      return UserMapper.toUserListDTO(existinguser);
+      
     }
 
     const hashedPassword = await this._encryptionService.hash(password);
@@ -76,6 +79,7 @@ export class CreateUserUseCase implements ICreateUserUseCase {
       password: hashedPassword,
     });
     await this.sendOtpEmail(email);
-    return userData;
+     return UserMapper.toUserListDTO(userData);
+   
   }
 }

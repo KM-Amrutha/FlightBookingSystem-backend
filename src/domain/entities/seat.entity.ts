@@ -1,9 +1,8 @@
-import mongoose, { Document } from "mongoose";
-
-export interface ISeat extends Document {
-  _id: string;
+export interface ISeat  {
+  id: string;
   aircraftId: string;
   seatTypeId: string;
+  cabinClass?: string;
   seatNumber: string; // "12A", "15F"
   rowNumber: number; // 12
   columnPosition: string; // "A"
@@ -15,4 +14,7 @@ export interface ISeat extends Document {
   features: string[]; // ["extra legroom", "power outlet"]
   createdAt: Date;
   updatedAt: Date; 
+
+   seatTypeName?: string;
+  
 }

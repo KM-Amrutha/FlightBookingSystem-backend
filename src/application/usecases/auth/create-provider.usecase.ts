@@ -10,12 +10,14 @@ IProviderRepository,
  import { APPLICATION_MESSAGES,
          AUTH_MESSAGES
  } from "@shared/constants/index.constants";
-import { Provider, CreateProviderDTO } from "@application/dtos/provider-dtos";
+import { CreateProviderDTO, Provider } from "@application/dtos/provider-dtos";
 import {validationError} from "@presentation/middlewares/error.middleware";
-import {IUser} from "@domain/entities/user.entity";
 import { inject,injectable } from "inversify";
 import { TYPES_REPOSITORIES } from "@di/types-repositories";
 import { TYPES_SERVICES } from "@di/types-services";
+import { ProviderMapper } from "@application/mappers/providerMapper";
+import { UserMapper } from "@application/mappers/userMapper";
+import { userListDTO } from "@application/dtos/user-dtos";
 
 
 
@@ -55,7 +57,7 @@ export class CreateProviderUseCase implements ICreateProviderUseCase {
     airlineCode,
     isActive,
   isVerified
-  }: CreateProviderDTO): Promise<Provider | IUser> {
+  }: CreateProviderDTO): Promise<Provider | userListDTO> {
     if (
         !companyName ||
         !email ||
@@ -66,10 +68,10 @@ export class CreateProviderUseCase implements ICreateProviderUseCase {
       throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
 
-    const existinguser = await this._userRepository.findOne({
+    const existingUser = await this._userRepository.findOne({
       email: email,
     });
-    if (existinguser && existinguser.otpVerified) {
+    if (existingUser && existingUser.otpVerified) {
       throw new validationError(AUTH_MESSAGES.EMAIL_CONFLICT);
     }
 
@@ -78,9 +80,12 @@ export class CreateProviderUseCase implements ICreateProviderUseCase {
       throw new validationError("Airline code already exists");
     }
    
-    if (existinguser && !existinguser.otpVerified) {
+    if (existingUser && !existingUser.otpVerified) {
       await this.sendOtpEmail(email);
-      return existinguser;
+
+      return UserMapper.toUserListDTO(existingUser);
+       
+      
     }
      const hashedPassword = await this._encryptionService.hash(password);
 
@@ -98,8 +103,9 @@ export class CreateProviderUseCase implements ICreateProviderUseCase {
     const createdProvider = await this._providerRepository.createProvider(providerData);
 
     await this.sendOtpEmail(email);
-
-    return createdProvider;
+    return ProviderMapper.toProviderDTO(createdProvider)
+ 
+    
   }
    
     

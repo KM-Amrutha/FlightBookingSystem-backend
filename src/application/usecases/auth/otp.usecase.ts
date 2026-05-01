@@ -8,12 +8,15 @@ import { IOtpRepository ,
 } from "@di/file-imports-index";
 
 import { OtpDTO } from "@application/dtos/auth-dtos";
+import { IOtp } from "@domain/entities/otp.entity";
+
 import { OTP_MESSAGES } from "@shared/constants/index.constants";
 import { validationError } from "@presentation/middlewares/error.middleware";
-import { IOtp } from "@domain/entities/otp.entity";
+
 import { injectable, inject } from "inversify";
 import { TYPES_REPOSITORIES } from "@di/types-repositories";
 import { TYPES_SERVICES } from "@di/types-services";
+
 
 @injectable()
 export class OtpUseCase implements IOtpUseCase {
@@ -30,8 +33,8 @@ export class OtpUseCase implements IOtpUseCase {
     private _otpService: IOtpService
   ) {}
 
-  async createOtp({ email, otp }: OtpDTO): Promise<IOtp> {
-    return await this._otpRepository.create({ email, otp });
+  async createOtp({ email, otp }: OtpDTO): Promise<void> {
+     await this._otpRepository.create({ email, otp });
   }
 
   async verifyOtp({ email, otp }: OtpDTO): Promise<void> {
@@ -47,20 +50,18 @@ export class OtpUseCase implements IOtpUseCase {
     const providerData = await this._providerRepository.getProviderByEmail(userEmail);
 
     if (userData) {
-      await this._userRepository.updateUserVerificationStatus({
-        email: userEmail,
-      });
+      await this._userRepository.updateUserVerificationStatus( userEmail );
     }
 
     if (providerData) {
-      await this._providerRepository.updateVerificationStatus(providerData._id, true);
+      await this._providerRepository.updateVerificationStatus(providerData.id, true);
     }
 
     if (!userData && !providerData) {
       throw new validationError("No user or provider found with this email");
     }
 
-    await this._otpRepository.delete(String(otpData?._id));
+    await this._otpRepository.delete(String(otpData?.id));
   }
 
   async resendOtp({ email }: { email: string }): Promise<void> {
@@ -80,7 +81,7 @@ export class OtpUseCase implements IOtpUseCase {
     
     const existingOtp = await this._otpRepository.findOne({ email });
     if (existingOtp) {
-      await this._otpRepository.delete(String(existingOtp._id));
+      await this._otpRepository.delete(String(existingOtp.id));
     }
 
     await this._otpRepository.create({ email, otp: newOtp });

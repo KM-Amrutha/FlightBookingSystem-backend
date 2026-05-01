@@ -1,8 +1,6 @@
-import { IProvider } from "@domain/entities/provider.entity";
-
 import mongoose, {Schema} from "mongoose";
 
-const providerSchema = new Schema<IProvider>(
+const providerSchema = new Schema(
     {
 
     companyName: {
@@ -98,6 +96,19 @@ const providerSchema = new Schema<IProvider>(
  isProfileComplete: {
     type: Boolean,
     default: false 
+  },
+  profileStatus: {
+    type: String,
+    enum: ['pending', 'approved', 'rejected'],
+    default: 'pending'
+  },
+  rejectionReason: {
+    type: String,
+    default: null
+  },
+  rejectionDate: {
+    type: Date,
+    default: null
   }
   },
   {
@@ -105,10 +116,7 @@ const providerSchema = new Schema<IProvider>(
   }
 );
 
-// Indexes
-providerSchema.index({ email: 1 });
-providerSchema.index({ airlineCode: 1 });
 providerSchema.index({ isActive: 1, isVerified: 1 });
 
-const ProviderModel = mongoose.model<IProvider>("Provider",providerSchema);
+const ProviderModel = mongoose.model("Provider",providerSchema);
 export default ProviderModel;

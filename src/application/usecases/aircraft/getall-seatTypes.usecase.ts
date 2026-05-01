@@ -4,6 +4,7 @@ import { validationError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { IGetAllSeatTypesUseCase } from "@di/file-imports-index";
+import { SeatMapper } from "@application/mappers/seatMapper";
 
 @injectable()
 export class GetAllSeatTypesUseCase implements IGetAllSeatTypesUseCase {
@@ -13,21 +14,13 @@ export class GetAllSeatTypesUseCase implements IGetAllSeatTypesUseCase {
   ) {}
 
   async execute(): Promise<SeatTypeDTO[]> {
-    try {
-      const seatTypes = await this._seatTypeRepository.getAllSeatTypes();
+  const seatTypes = await this._seatTypeRepository.getAllSeatTypes();
 
-      if (!seatTypes || seatTypes.length === 0) {
-        throw new validationError(
-          "No seat types found. Please run the seat types seeder."
-        );
-      }
-
-      return seatTypes;
-    } catch (error) {
-      if (error instanceof validationError) {
-        throw error;
-      }
-      throw new validationError("Failed to retrieve seat types");
-    }
+  if (!seatTypes || seatTypes.length === 0) {
+    throw new validationError("No seat types found. Please run the seat types seeder.");
   }
+
+  return SeatMapper.toSeatTypeDTOs(seatTypes); 
+}
+  
 }

@@ -1,5 +1,6 @@
 export const FLIGHT_MESSAGES = {
   CREATED: 'Flight has been successfully scheduled.',
+  SEARCH_SUCCESS: "Flights fetched successfully",
   CREATION_FAILED: 'Failed to schedule flight. Please try again later.',
   ID_REQUIRED: 'Flight ID is required.',
   RETRIEVED: 'Flights have been successfully retrieved.',
@@ -16,4 +17,5 @@ export const FLIGHT_MESSAGES = {
   LAYOUT_INVALID: 'Invalid seat layout for this aircraft.',
   INVALID_TIME: 'Departure and arrival times are invalid.',
   APPROVAL_REASON_REQUIRED: 'Reason is required when rejecting a flight.',
+  SEATS_RETRIEVED: 'Flight seat map retrieved successfully.',
 } as const

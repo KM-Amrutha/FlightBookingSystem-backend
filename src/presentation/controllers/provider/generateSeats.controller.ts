@@ -14,7 +14,7 @@ export class GenerateSeatsController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const providerId = (req as any).user._id;
+      const providerId = req.user!._id;
       const aircraftId = req.params.aircraftId;
 
       if (!aircraftId) {

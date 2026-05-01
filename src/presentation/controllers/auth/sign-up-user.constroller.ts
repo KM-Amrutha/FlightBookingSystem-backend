@@ -2,7 +2,7 @@ import { Request,Response } from "express";
 import { inject,injectable } from "inversify";
 import { sendResponse } from "@shared/utils/http.response";
 import { AUTH_MESSAGES,StatusCodes } from "@shared/constants/index.constants";
-import { CreateUserUseCase } from "@application/usecases/auth/create-user.usecases";
+import { CreateUserUseCase } from "@di/file-imports-index";
 import { TYPES_AUTH_USECASES } from "@di/types-usecases";
 
 @injectable()

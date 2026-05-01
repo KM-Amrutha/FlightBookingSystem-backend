@@ -3,7 +3,7 @@ import { injectable, inject } from "inversify";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { sendResponse } from "@shared/utils/http.response";
 import { StatusCodes, PASSWORD_MESSAGES } from "@shared/constants/index.constants";
-import { ForgotPasswordUseCase } from "@application/usecases/auth/forgot-password.usecase";
+import { ForgotPasswordUseCase } from "@di/file-imports-index";
 import { TYPES_AUTH_USECASES } from "@di/types-usecases";
 
 @injectable()

@@ -1,6 +1,4 @@
 import nodemailer, { Transporter } from "nodemailer";
-import dotenv from "dotenv";
-dotenv.config();
 import { injectable } from "inversify";
 import{
     APPLICATION_MESSAGES
@@ -19,20 +17,36 @@ export class EmailService implements IEmailService {
     this._transporter = this.createTransporter();
   }
 
+  // private createTransporter(): Transporter {
+  //   return nodemailer.createTransport({
+  //     service: "gmail",
+  //     port: 567,
+  //     secure: false,
+  //     auth: {
+  //       user: this._emailUser,
+  //       pass: this._emailPass,
+  //     },
+  //     tls: {
+  //       rejectUnauthorized: true,
+  //     },
+  //   });
+  // }
+
   private createTransporter(): Transporter {
-    return nodemailer.createTransport({
-      service: "gmail",
-      port: 465,
-      secure: true,
-      auth: {
-        user: this._emailUser,
-        pass: this._emailPass,
-      },
-      tls: {
-        rejectUnauthorized: true,
-      },
-    });
-  }
+  return nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: this._emailUser,
+      pass: this._emailPass,
+    },
+    tls: {
+      rejectUnauthorized: true,
+    },
+  });
+}
+
   private validateEnv(): void {
     if (!this._emailUser || !this._emailPass) {
       throw new validationError(

@@ -3,9 +3,9 @@ import { TYPES_REPOSITORIES } from "@di/types-repositories";
 import { TYPES_SERVICES } from "@di/types-services";
 import { IProviderRepository } from "@domain/interfaces/IProviderRepository";
 import { ICloudStorageService } from "@di/file-imports-index";
-import { UpdateProviderDTO } from "@application/dtos/provider-dtos";
+import { IProvider } from "@domain/entities/provider.entity";
 import { validationError } from "@presentation/middlewares/error.middleware";
-import { ICompleteProviderProfileUseCase } from "@application/interfaces/usecase/ICompleteProvider-profileUsecase";
+import { ICompleteProviderProfileUseCase } from "@application/interfaces/usecase/provider/ICompleteProvider-profile.usecase";
 
 @injectable()
 export class CompleteProviderProfileUseCase implements ICompleteProviderProfileUseCase {
@@ -126,7 +126,7 @@ export class CompleteProviderProfileUseCase implements ICompleteProviderProfileU
     }
 
     // Build update data
-    const updateData: Partial<UpdateProviderDTO> = {
+    const updateData: Partial<IProvider> = {
       establishmentYear: Number(establishmentYear),
       licenseExpiryDate: new Date(licenseExpiryDate),
       headquartersAddress,
@@ -141,15 +141,13 @@ export class CompleteProviderProfileUseCase implements ICompleteProviderProfileU
     if (logoUrl) updateData.logoUrl = logoUrl;
     if (registrationCertificateUrl) updateData.registrationCertificateUrl = registrationCertificateUrl;
     if (insuranceProofUrl) updateData.insuranceProofUrl = insuranceProofUrl;
-
-
     if (companyName) updateData.companyName = companyName;
     if (email) updateData.email = email;
     if (mobile) updateData.mobile = mobile;
     if (airlineCode) updateData.airlineCode = airlineCode;
 
     // Update profile in database
-    await this._providerRepository.completeProviderProfile(providerId, updateData as UpdateProviderDTO);
+    await this._providerRepository.completeProviderProfile(providerId, updateData);
   }
 
   private isValidUrl(url: string): boolean {

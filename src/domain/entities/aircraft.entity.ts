@@ -1,7 +1,5 @@
-import mongoose,{Document} from "mongoose";
-
-export interface IAircraft extends Document {
- _id: string;
+export interface IAircraft {
+  id: string;
   providerId: string;
   aircraftType: string;
   aircraftName: string;
@@ -18,6 +16,19 @@ export interface IAircraft extends Document {
   status: "active" | "inactive" | "maintenance";
   createdAt: Date; 
   updatedAt: Date;
+  
+   baseStation?: {
+    id: string;
+    name: string;
+    municipality: string;
+    isoCountry: string;
+  };
+  currentLocation?: {
+    id: string;
+    name: string;
+    municipality: string;
+    isoCountry: string;
+  };
 }
 
 

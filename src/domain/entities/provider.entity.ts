@@ -1,7 +1,5 @@
-import mongoose, { Document } from "mongoose"
-
-export interface IProvider extends Document {
-  _id: string;
+export interface IProvider {
+  id: string;
   companyName: string;
   email: string;
   mobile: string;
@@ -25,4 +23,7 @@ export interface IProvider extends Document {
   isVerified: boolean;
   adminApproval: boolean; 
   isProfileComplete: boolean; 
+  profileStatus: 'pending' | 'approved' | 'rejected';
+  rejectionReason?: string |null;
+  rejectionDate?: Date |null;
 }

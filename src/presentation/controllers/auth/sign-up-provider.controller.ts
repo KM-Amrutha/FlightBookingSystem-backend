@@ -3,7 +3,7 @@ import { inject,injectable } from 'inversify'
 import { sendResponse } from "@shared/utils/http.response";
 import { AUTH_MESSAGES, StatusCodes} from "@shared/constants/index.constants";
 import { TYPES_AUTH_USECASES } from "@di/types-usecases";
-import { CreateProviderUseCase } from '@application/usecases/auth/create-provider.usecase';
+import { CreateProviderUseCase } from '@di/file-imports-index';
 
 
 @injectable()

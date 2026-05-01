@@ -5,16 +5,23 @@ import {
     TYPES_ADMIN_CONTROLLERS,
     TYPES_PROVIDER_CONTROLLERS,
     TYPES_AIRCRAFT_CONTROLLERS,
+    TYPES_FLIGHT_CONTROLLERS,
+    TYPES_USER_CONTROLLERS,
 
 } from "@di/types-controllers"
 
 import { TYPES_AUTH_USECASES,
-     TYPES_LOGGER_USECASES, 
-     TYPES_PROVIDER_USECASES,
-    TYPES_AIRCRAFT_USECASES } from "@di/types-usecases";
+         TYPES_LOGGER_USECASES, 
+         TYPES_PROVIDER_USECASES,
+         TYPES_ADMIN_USECASES,
+         TYPES_AIRCRAFT_USECASES,
+         TYPES_FLIGHT_USECASES,
+         TYPES_USER_USECASES
+        } 
+         from "@di/types-usecases";
 import { TYPES_SERVICES } from "di/types-services"
 
-import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES }   from "di/types-repositories"
+import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES, TYPES_BOOKING_REPOSITORIES }   from "di/types-repositories"
 
 import {
 OtpRepository,
@@ -28,6 +35,9 @@ SeatRepository,
 SeatLayoutRepository,
 SeatTypeRepository,
 FlightRepository,
+FlightSeatRepository,
+BookingRepository,
+FoodRepository,
 
 
 // controllers
@@ -40,11 +50,20 @@ SignOutController,
 RefreshAccessTokenController,
  ForgotPasswordController,
  PasswordResetLinkController,
+ ChangePasswordController,
 
  ProviderVerificationController,
+ GetAllProvidersController,
+ UpdateProviderStatusController,
+ UpdateUserStatusController,
+
+ GetUserProfileController,
+ UpdateUserProfileController,
 
  CompleteProviderProfileController,
  GetProviderProfileController,
+ GoogleAuthController,
+ GetAllUsersController,
 
 CreateAircraftController,
 GetProviderAircraftsController,
@@ -62,7 +81,15 @@ CreateFlightController,
 GetProviderFlightsController,
 PendingFlightsForApprovalController,
 AvailableAircraftsForScheduleController,
-GoogleAuthController,
+UpdateFlightController,
+GetFlightByIdController,
+SearchFlightsController,
+DeleteFlightController,
+GetFlightSeatsController,
+GetFlightSeatsForUserController,
+CreateRecurringFlightController,
+GetAllFlightsForAdminController,
+RejectSingleFlightController,
 
 IUserRepository,
 IOtpRepository,
@@ -75,6 +102,10 @@ ISeatRepository,
 ISeatLayoutRepository,
 ISeatTypeRepository,
 IFlightRepository,
+IFlightSeatRepository,
+IBookingRepository,
+IFoodRepository,
+
 
 IAuthService,
 IEncryptionService,
@@ -84,9 +115,7 @@ IEmailService,
 ICloudStorageService,
 ILoggerService,
 IGoogleAuthService,
-
-
-
+IRedisService,
 
 } from"@di/file-imports-index";
 
@@ -101,6 +130,7 @@ EmailService,
 CloudinaryService,
 LoggerService,
 GoogleAuthService,
+RedisService,
 } from "@di/file-imports-index";
 
 import {
@@ -114,12 +144,20 @@ ForgotPasswordUseCase,
 SendPasswordRestLinkUseCase,
 LoggerUseCase,
 GoogleAuthUseCase,
+ChangePasswordUseCase,
 
 GetPendingProvidersUseCase,
 VerifyProviderUseCase,
 RejectProviderUseCase,
 CompleteProviderProfileUseCase,
 GetProviderProfileUseCase,
+GetAllProvidersUseCase,
+UpdateProviderStatusUseCase,
+GetAllUsersUseCase,
+UpdateUserStatusUseCase,
+
+GetUserProfileUseCase,
+UpdateUserProfileUseCase,
 
 CreateAircraftUseCase,
 UpdateAircraftUseCase,
@@ -138,9 +176,20 @@ GetProviderFlightsUseCase,
 PendingFlightsForApprovalUseCase,
 ApproveFlightUseCase,
 AvailableAircraftsForScheduleUseCase,
+UpdateFlightUseCase,
+GetFlightByIdUseCase,
+SearchFlightsUseCase,
+DeleteFlightUseCase,
+GetFlightSeatsUseCase,
+CreateRecurringFlightUseCase,
+GetAllFlightsForAdminUseCase,
+RejectSingleFlightUseCase,
 
 
 
+
+IGetUserProfileUseCase,
+IUpdateUserProfileUseCase,
 ICheckUserBlockStatusUseCase,
 ICreateProviderUseCase,
 ICreateUserUseCase,
@@ -155,6 +204,10 @@ IRejectProviderUseCase,
 IVerifyProviderUseCase,
 ICompleteProviderProfileUseCase,
 IGetProviderProfileUseCase,
+IGetAllProvidersUseCase,
+IUpdateProviderStatusUseCase,
+IGetAllUsersUseCase,
+IUpdateUserStatusUseCase,
 
 
 ICreateAircraftUseCase,
@@ -174,6 +227,17 @@ IGetProviderFlightsUseCase,
 IPendingFlightsForApprovalUseCase,
 IApproveFlightUseCase,
 IAvailableAircraftsForScheduleUsecase,
+IUpdateFlightUseCase,
+IGetFlightByIdUseCase,
+ISearchFlightsUseCase,
+IDeleteFlightUseCase,
+IChangePasswordUseCase,
+IGetFlightSeatsUseCase,
+IGetAllFlightsForAdminUseCase,
+IRejectSingleFlightUseCase,
+ICreateRecurringFlightUseCase,
+
+
 } from "@di/file-imports-index";
 
 const container = new Container();
@@ -190,10 +254,9 @@ container.bind<ISeatRepository>(TYPES_AIRCRAFT_REPOSITORIES.SeatRepository).to(S
 container.bind<ISeatLayoutRepository>(TYPES_AIRCRAFT_REPOSITORIES.SeatLayoutRepository).to(SeatLayoutRepository);
 container.bind<ISeatTypeRepository>(TYPES_AIRCRAFT_REPOSITORIES.SeatTypeRepository).to(SeatTypeRepository);
 container.bind<IFlightRepository>(TYPES_AIRCRAFT_REPOSITORIES.FlightRepository).to(FlightRepository);
-
-
-
-
+container.bind<IFlightSeatRepository>(TYPES_AIRCRAFT_REPOSITORIES.FlightSeatRepository).to(FlightSeatRepository);
+container.bind<IBookingRepository>(TYPES_BOOKING_REPOSITORIES.BookingRepository).to(BookingRepository);
+container.bind<IFoodRepository>(TYPES_BOOKING_REPOSITORIES.FoodRepository).to(FoodRepository);
 
 // Bind Services
 container.bind<IAuthService>(TYPES_SERVICES.JwtService).to(JwtService);
@@ -204,6 +267,8 @@ container.bind<IEmailService>(TYPES_SERVICES.EmailService).to(EmailService);
 container.bind<ICloudStorageService>(TYPES_SERVICES.CloudinaryService).to(CloudinaryService);
 container.bind<ILoggerService>(TYPES_SERVICES.LoggerService).to(LoggerService);
 container.bind<IGoogleAuthService>(TYPES_SERVICES.GoogleAuthService).to(GoogleAuthService);
+container.bind<IRedisService>(TYPES_SERVICES.RedisService).to(RedisService);
+
 
 
 // Bind UseCases
@@ -222,6 +287,17 @@ container.bind<IVerifyProviderUseCase>(TYPES_PROVIDER_USECASES.VerifyProviderUse
 container.bind<ICompleteProviderProfileUseCase>(TYPES_PROVIDER_USECASES.CompleteProviderProfileUseCase).to(CompleteProviderProfileUseCase);
 container.bind<IGetProviderProfileUseCase>(TYPES_PROVIDER_USECASES.GetProviderProfileUseCase).to(GetProviderProfileUseCase);
 container.bind<GoogleAuthUseCase>(TYPES_AUTH_USECASES.GoogleAuthUseCase).to(GoogleAuthUseCase);
+container.bind<IChangePasswordUseCase>(TYPES_AUTH_USECASES.ChangePasswordUseCase).to(ChangePasswordUseCase)
+
+
+container.bind<IGetAllProvidersUseCase>(TYPES_ADMIN_USECASES.GetAllProvidersUseCase).to(GetAllProvidersUseCase);
+container.bind<IUpdateProviderStatusUseCase>(TYPES_ADMIN_USECASES.UpdateProviderStatusUseCase).to(UpdateProviderStatusUseCase);
+container.bind<IGetAllUsersUseCase>(TYPES_ADMIN_USECASES.GetAllUsersUseCase).to(GetAllUsersUseCase);
+container.bind<IUpdateUserStatusUseCase>(TYPES_ADMIN_USECASES.UpdateUserStatusUseCase).to(UpdateUserStatusUseCase);
+
+container.bind<IGetUserProfileUseCase>(TYPES_USER_USECASES.GetUserProfileUseCase).to(GetUserProfileUseCase);
+container.bind<IUpdateUserProfileUseCase>(TYPES_USER_USECASES.UpdateUserProfileUseCase).to(UpdateUserProfileUseCase);
+
 
 container.bind<ICreateAircraftUseCase>(TYPES_AIRCRAFT_USECASES.CreateAircraftUseCase).to(CreateAircraftUseCase);
 container.bind<IUpdateAircraftUseCase>(TYPES_AIRCRAFT_USECASES.UpdateAircraftUseCase).to(UpdateAircraftUseCase);
@@ -235,11 +311,21 @@ container.bind<IGenerateSeatsUseCase>(TYPES_AIRCRAFT_USECASES.GenerateSeatsUseCa
 container.bind<IGetAllSeatTypesUseCase>(TYPES_AIRCRAFT_USECASES.GetAllSeatTypesUseCase).to(GetAllSeatTypesUseCase);
 container.bind<IGetSeatLayoutsByAircraftUseCase>(TYPES_AIRCRAFT_USECASES.GetSeatLayoutsByAircraftUseCase).to(GetSeatLayoutsByAircraftUseCase)
 container.bind<IDeleteSeatLayoutUseCase>(TYPES_AIRCRAFT_USECASES.DeleteSeatLayoutUseCase).to(DeleteSeatLayoutUseCase)
-container.bind<ICreateFlightUseCase>(TYPES_AIRCRAFT_USECASES.CreateFlightUseCase).to(CreateFlightUseCase);
-container.bind<IGetProviderFlightsUseCase>(TYPES_AIRCRAFT_USECASES.GetProviderFlightsUseCase).to(GetProviderFlightsUseCase);
-container.bind<IPendingFlightsForApprovalUseCase>(TYPES_AIRCRAFT_USECASES.PendingFlightsForApprovalUseCase).to(PendingFlightsForApprovalUseCase);   
-container.bind<IApproveFlightUseCase>(TYPES_AIRCRAFT_USECASES.ApproveFlightUseCase).to(ApproveFlightUseCase);
-container.bind<IAvailableAircraftsForScheduleUsecase>(TYPES_AIRCRAFT_USECASES.AvailableAircraftsForScheduleUseCase).to(AvailableAircraftsForScheduleUseCase);   
+
+
+container.bind<ICreateFlightUseCase>(TYPES_FLIGHT_USECASES.CreateFlightUseCase).to(CreateFlightUseCase);
+container.bind<IGetProviderFlightsUseCase>(TYPES_FLIGHT_USECASES.GetProviderFlightsUseCase).to(GetProviderFlightsUseCase);
+container.bind<IPendingFlightsForApprovalUseCase>(TYPES_FLIGHT_USECASES.PendingFlightsForApprovalUseCase).to(PendingFlightsForApprovalUseCase);   
+container.bind<IApproveFlightUseCase>(TYPES_FLIGHT_USECASES.ApproveFlightUseCase).to(ApproveFlightUseCase);
+container.bind<IAvailableAircraftsForScheduleUsecase>(TYPES_FLIGHT_USECASES.AvailableAircraftsForScheduleUseCase).to(AvailableAircraftsForScheduleUseCase);   
+container.bind<IUpdateFlightUseCase>(TYPES_FLIGHT_USECASES.UpdateFlightUseCase).to(UpdateFlightUseCase);
+container.bind<IGetFlightByIdUseCase>(TYPES_FLIGHT_USECASES.GetFlightByIdUseCase).to(GetFlightByIdUseCase);
+container.bind<ISearchFlightsUseCase>(TYPES_FLIGHT_USECASES.SearchFlightsUseCase).to(SearchFlightsUseCase); 
+container.bind<IDeleteFlightUseCase>(TYPES_FLIGHT_USECASES.DeleteFlightUseCase).to(DeleteFlightUseCase);
+container.bind<IGetFlightSeatsUseCase>(TYPES_FLIGHT_USECASES.GetFlightSeatsUseCase).to(GetFlightSeatsUseCase);
+container.bind<ICreateRecurringFlightUseCase>(TYPES_FLIGHT_USECASES.CreateRecurringFlightUseCase).to(CreateRecurringFlightUseCase); 
+container.bind<IGetAllFlightsForAdminUseCase>(TYPES_FLIGHT_USECASES.GetAllFlightsForAdminUseCase).to(GetAllFlightsForAdminUseCase);
+container.bind<IRejectSingleFlightUseCase>(TYPES_FLIGHT_USECASES.RejectSingleFlightUseCase).to(RejectSingleFlightUseCase);
 
 
 // Bind Controllers
@@ -252,8 +338,13 @@ container.bind(TYPES_AUTH_CONTROLLERS.RefreshAccessTokenController).to(RefreshAc
 container.bind(TYPES_AUTH_CONTROLLERS.ForgotPasswordController).to( ForgotPasswordController);
 container.bind(TYPES_AUTH_CONTROLLERS.PasswordResetLinkController).to(PasswordResetLinkController);
 container.bind(TYPES_AUTH_CONTROLLERS.GoogleAuthController).to(GoogleAuthController);
+container.bind(TYPES_AUTH_CONTROLLERS.ChangePasswordController).to(ChangePasswordController)
 
 container.bind(TYPES_ADMIN_CONTROLLERS.ProviderVerificationController).to(ProviderVerificationController);
+container.bind(TYPES_ADMIN_CONTROLLERS.GetAllProvidersController).to(GetAllProvidersController);
+container.bind(TYPES_ADMIN_CONTROLLERS.UpdateProviderStatusController).to(UpdateProviderStatusController);
+container.bind(TYPES_ADMIN_CONTROLLERS.GetAllUsersController).to(GetAllUsersController);
+container.bind(TYPES_ADMIN_CONTROLLERS.UpdateUserStatusController).to(UpdateUserStatusController);
 
 container.bind(TYPES_PROVIDER_CONTROLLERS.CompleteProviderProfileController).to(CompleteProviderProfileController);
 container.bind(TYPES_PROVIDER_CONTROLLERS.GetProviderProfileController).to(GetProviderProfileController);
@@ -269,12 +360,24 @@ container.bind(TYPES_AIRCRAFT_CONTROLLERS.GenerateSeatsController).to(GenerateSe
 container.bind(TYPES_AIRCRAFT_CONTROLLERS.GetSeatLayoutsController).to(GetSeatLayoutsController);
 container.bind(TYPES_AIRCRAFT_CONTROLLERS.DeleteSeatLayoutController).to(DeleteSeatLayoutController)
 
-container.bind(TYPES_AIRCRAFT_CONTROLLERS.CreateFlightController).to(CreateFlightController);
-container.bind(TYPES_AIRCRAFT_CONTROLLERS.GetProviderFlightsController).to(GetProviderFlightsController);
-container.bind(TYPES_AIRCRAFT_CONTROLLERS.PendingFlightsForApprovalController).to(PendingFlightsForApprovalController);
-container.bind(TYPES_AIRCRAFT_CONTROLLERS.ApproveFlightController).to(ApproveFlightController); 
-container.bind(TYPES_AIRCRAFT_CONTROLLERS.AvailableAircraftsForScheduleController).to(AvailableAircraftsForScheduleController);
+container.bind(TYPES_FLIGHT_CONTROLLERS.CreateFlightController).to(CreateFlightController);
+container.bind(TYPES_FLIGHT_CONTROLLERS.GetProviderFlightsController).to(GetProviderFlightsController);
+container.bind(TYPES_FLIGHT_CONTROLLERS.PendingFlightsForApprovalController).to(PendingFlightsForApprovalController);
+container.bind(TYPES_FLIGHT_CONTROLLERS.ApproveFlightController).to(ApproveFlightController); 
+container.bind(TYPES_FLIGHT_CONTROLLERS.AvailableAircraftsForScheduleController).to(AvailableAircraftsForScheduleController);
+container.bind(TYPES_FLIGHT_CONTROLLERS.UpdateFlightController).to(UpdateFlightController);
+container.bind(TYPES_FLIGHT_CONTROLLERS.GetFlightByIdController).to(GetFlightByIdController);
+container.bind(TYPES_FLIGHT_CONTROLLERS.SearchFlightsController).to(SearchFlightsController);  
+container.bind(TYPES_FLIGHT_CONTROLLERS.DeleteFlightController).to(DeleteFlightController);
+container.bind(TYPES_FLIGHT_CONTROLLERS.GetFlightSeatsController).to(GetFlightSeatsController);
+container.bind(TYPES_FLIGHT_CONTROLLERS.GetFlightSeatsForUserController).to(GetFlightSeatsForUserController);
+container.bind(TYPES_FLIGHT_CONTROLLERS.CreateRecurringFlightController).to(CreateRecurringFlightController);   
+container.bind(TYPES_FLIGHT_CONTROLLERS.GetAllFlightsForAdminController).to(GetAllFlightsForAdminController);
+container.bind(TYPES_FLIGHT_CONTROLLERS.RejectSingleFlightController).to(RejectSingleFlightController); 
 
+
+container.bind(TYPES_USER_CONTROLLERS.GetUserProfileController).to(GetUserProfileController);
+container.bind(TYPES_USER_CONTROLLERS.UpdateUserProfileController).to(UpdateUserProfileController); 
 
 
 export { container };

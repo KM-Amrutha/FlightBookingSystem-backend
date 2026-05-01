@@ -1,5 +1,5 @@
-import { IDestination } from "@domain/entities/destination.entity";
+import { DestinationDTO } from "@application/dtos/destination-dtos";
 
 export interface ISearchDestinationsUseCase {
-  execute(searchTerm: string): Promise<IDestination[]>;
+  execute(searchTerm: string): Promise<DestinationDTO[]>;
 }

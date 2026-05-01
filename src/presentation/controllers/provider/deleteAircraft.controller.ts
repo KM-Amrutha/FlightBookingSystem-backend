@@ -14,7 +14,7 @@ export class DeleteAircraftController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const providerId = (req as any).user._id;
+      const providerId = req.user!._id;
       const aircraftId = req.params.aircraftId;
 
       if (!aircraftId) {
@@ -27,7 +27,7 @@ export class DeleteAircraftController {
         return;
       }
 
-      await this._deleteAircraftUseCase.execute(providerId, aircraftId);
+      await this._deleteAircraftUseCase.execute(aircraftId,providerId);
 
       sendResponse(
         res,

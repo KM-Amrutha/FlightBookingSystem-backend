@@ -1,7 +1,6 @@
-import { IDestination } from "@domain/entities/destination.entity";
 import mongoose, { Schema } from "mongoose";
 
-const destinationSchema = new Schema<IDestination>(
+const destinationSchema = new Schema(
   {
     name: { 
       type: String, 
@@ -61,6 +60,6 @@ destinationSchema.index({ iataCode: 1 });
 destinationSchema.index({ name: "text", municipality: "text", isoCountry: "text" });
 destinationSchema.index({ isActive: 1 });
 
-const DestinationModel = mongoose.model<IDestination>("Destination", destinationSchema);
+const DestinationModel = mongoose.model("Destination", destinationSchema);
 
 export default DestinationModel;

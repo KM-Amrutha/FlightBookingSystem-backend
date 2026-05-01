@@ -1,9 +1,10 @@
 import { IDestinationRepository } from "@di/file-imports-index";
-import { IDestination } from "@domain/entities/destination.entity";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { ISearchDestinationsUseCase } from "@di/file-imports-index";
+import { DestinationMapper } from "@application/mappers/destinationMapper";
+import { DestinationDTO } from "@application/dtos/destination-dtos";
 
 @injectable()
 export class SearchDestinationsUseCase implements ISearchDestinationsUseCase {
@@ -12,18 +13,15 @@ export class SearchDestinationsUseCase implements ISearchDestinationsUseCase {
     private _destinationRepository: IDestinationRepository
   ) {}
 
-  async execute(searchTerm: string): Promise<IDestination[]> {
+  async execute(searchTerm: string): Promise<DestinationDTO[]> {
     if (!searchTerm || searchTerm.trim().length < 2) {
       throw new validationError("Search term must be at least 2 characters");
     }
 
     const trimmedSearch = searchTerm.trim();
 
-    try {
       const destinations = await this._destinationRepository.searchDestinations(trimmedSearch);
-      return destinations;
-    } catch (error) {
-      throw new validationError("Failed to search destinations");
-    }
+      return DestinationMapper.toDestinationDTOs(destinations);  
+   
   }
 }

@@ -74,6 +74,7 @@ export class ProviderVerificationController {
   async rejectProvider(req: Request, res: Response): Promise<void> {
     try {
       const { providerId } = req.params;
+      const {reason} = req.body;
       
       if (!providerId) {
         sendResponse(
@@ -84,8 +85,17 @@ export class ProviderVerificationController {
         );
         return;
       }
+      if (!reason || typeof reason !== 'string' || reason.trim().length < 10) {
+      sendResponse(
+        res,
+        "Rejection reason is required and must be at least 10 characters long",
+        null,
+        StatusCodes.BAD_REQUEST
+      );
+      return;
+    }
       
-      await this._rejectProviderUseCase.execute(providerId);
+      await this._rejectProviderUseCase.execute(providerId,reason.trim());
       sendResponse(
         res,
         "Provider rejected successfully",

@@ -15,10 +15,8 @@ export class CreateAircraftController {
 
   
   async handle(req: Request, res: Response): Promise<void> {
-    console.log('ivide ethiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
-    console.log("CreateAircraftController.handle called with body:", req.body);
     try {
-      const providerId = (req as any).user._id;
+      const providerId = req.user!._id;
 
       const aircraftData: CreateAircraftDTO = {
         providerId: providerId,
@@ -35,7 +33,7 @@ export class CreateAircraftController {
         availableFrom: new Date(),
         status: "active"
       };
-      console.log('aircraft data is:',aircraftData)
+      
 
       const aircraft = await this._createAircraftUseCase.execute(aircraftData);
 

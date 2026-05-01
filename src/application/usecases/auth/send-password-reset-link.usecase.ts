@@ -6,7 +6,7 @@ IHashService,
  } from "@di/file-imports-index";
 
 import { CreatePassResetTokenDTO } from "@application/dtos/auth-dtos";
-import { IPasswordResetToken } from "@domain/entities/pass-reset-token.entity";
+
 import { AUTH_MESSAGES } from "@shared/constants/index.constants";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { injectable, inject } from "inversify";
@@ -28,8 +28,8 @@ export class SendPasswordRestLinkUseCase implements ISendPasswordRestLinkUseCase
 
   async execute({
     email,
-  }: CreatePassResetTokenDTO): Promise<IPasswordResetToken> {
-    const userData = await this._userRepository.findOne({ email: email });
+  }: CreatePassResetTokenDTO): Promise<void> {
+    const userData = await this._userRepository.findOne({ email });
     if (!userData) {
       throw new validationError(AUTH_MESSAGES.EMAIL_NOT_FOUND);
     }
@@ -50,14 +50,14 @@ export class SendPasswordRestLinkUseCase implements ISendPasswordRestLinkUseCase
       `${resetURL}\n\n` +
       `If you did not request this, please ignore this email and your password will remain unchanged.`;
 
-    const [tokenData, _] = await Promise.all([
-      this._passwordResetRepository.createToken({
+    await Promise.all([
+      this._passwordResetRepository.createToken(
         email,
-        resetToken: hashedToken,
-      }),
+       hashedToken,
+      ),
       this._emailService.sendEmail({ to: email, subject, text }),
     ]);
 
-    return tokenData;
+  
   }
 }

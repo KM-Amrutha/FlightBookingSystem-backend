@@ -1,8 +1,6 @@
-import mongoose, {Document} from "mongoose"
 
-
-export interface IUser extends Document {
-    _id:mongoose.Schema.Types.ObjectId;
+export interface IUser {
+    id:string;
     role:"user"
     firstName:string;
     lastName:string;
@@ -18,6 +16,8 @@ export interface IUser extends Document {
     address1:string;
     address2?:string;
     isVerified:boolean;
+    createdAt:Date;
+    updatedAt:Date;
 }
 
 

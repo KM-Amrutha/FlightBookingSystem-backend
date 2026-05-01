@@ -11,6 +11,8 @@ import { IUser } from "@domain/entities/user.entity";
 import { injectable, inject } from "inversify";
 import { TYPES_REPOSITORIES } from "@di/types-repositories";
 import { TYPES_SERVICES } from "@di/types-services";
+import { UserMapper } from "@application/mappers/userMapper";
+import { userListDTO } from "@application/dtos/user-dtos";
 
 /*  
     Purpose: Handles the Google authentication process. It verifies the provided Google token, 
@@ -38,20 +40,21 @@ export class GoogleAuthUseCase {
 
   private generateAccessToken(user: IUser): string {
     return this.authService.generateAccessToken({
-      _id: user._id.toString(),
+      _id: user.id.toString(),
       role: user.role,
     });
   }
   private generateRefreshToken(user: IUser): string {
     return this.authService.generateRefreshToken({
-      _id: user._id.toString(),
+      _id: user.id.toString(),
       role: user.role,
     });
   }
 async execute({ token }: GoogleTokenDTO): Promise<{
   accessToken: string;
   refreshToken: string;
-  userData: IUser;
+   userData: userListDTO;
+  
 }> {
   const payload = await this.googleAuthService.verifyToken(token);
 
@@ -69,14 +72,14 @@ async execute({ token }: GoogleTokenDTO): Promise<{
 
  if (userData) {
   if (!userData.googleVerified) {
-    await this.userRepository.update(userData._id.toString(), { googleVerified: true });
+    await this.userRepository.update(userData.id.toString(), { googleVerified: true });
     userData.googleVerified = true;
   }
 
   const accessToken = this.generateAccessToken(userData);
   const refreshToken = this.generateRefreshToken(userData);
-
-  return { accessToken, refreshToken, userData }
+ return UserMapper.toLoginResponse( userData, accessToken, refreshToken);
+  
 
 }
 
@@ -111,7 +114,8 @@ userData = await this.userRepository.create(userObj);
 const accessToken = this.generateAccessToken(userData);
 const refreshToken = this.generateRefreshToken(userData);
 
-return { accessToken, refreshToken, userData };
+ return UserMapper.toLoginResponse(userData, accessToken, refreshToken);
+
 }
   
 }

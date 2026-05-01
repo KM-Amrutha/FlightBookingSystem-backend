@@ -1,24 +1,37 @@
-import mongoose, { Document } from "mongoose";
-
-export interface IFlight extends Document {
-  _id: string;
+export interface IFlight {
+  id: string;
   aircraftName: string;
   flightId: string;
   flightNumber: string;
   providerId: string;
   aircraftId: string;
   seatLayoutId: string;
+  
+  flightType: "outbound" | "return" | "recurring";
+  parentFlightId?: string;
+  recurringGroupId?: string;
+  recurringDays?: number[];
 
   departureDestinationId: string;
   arrivalDestinationId: string;
   departureTime: Date;
   arrivalTime: Date;
   durationMinutes: number;
+  bufferMinutes: number; // new field for buffer time around flight times
+
+   departureDestination?: {
+    name: string;
+    iataCode: string;
+  };
+  arrivalDestination?: {
+    name: string;
+    iataCode: string;
+  };
 
   gate: string;
   baseFare: {
     economy?: number;
-    premiumEconomy?: number;
+    premium_economy?: number;
     business?: number;
     first?: number;
   };
@@ -29,19 +42,21 @@ export interface IFlight extends Document {
   };
 
   baggageRules?: {
-    freeCabinKg: number;          // e.g. 7
-    extraChargePerKg: number;    // charge per 2kg block above free limit
+    freeCabinKg?: number;          // e.g. 7
+    extraChargePerKg?: number;    // charge per 2kg block above free limit
     maxExtraKg?: number;          // optional upper cap, e.g. 23 or 30
   };
- luggageRuleId?: string; // if you later create a luggage rule entity
-  foodMenuId?: [];
+ luggageRuleId?: string|null; // if you later create a luggage rule entity
+  foodMenuId?: string[];
   flightStatus: "scheduled"| "cancelled" | "completed";
   
    adminApproval: {
     status: "pending" | "approved" | "rejected";
     reviewedAt?: Date;
-    reason?: string;       // rejection reason
+    reason?: string|null;       // rejection reason
   };
   createdAt: Date;
   updatedAt: Date;
+
+  
 }

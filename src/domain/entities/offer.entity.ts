@@ -1,6 +1,5 @@
-import mongoose, { Document } from "mongoose";
 
-export interface IOffer extends Document {
+export interface IOffer {
   _id: string;
   offerCode: string;
   discountAmount: number;

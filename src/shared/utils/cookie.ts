@@ -1,6 +1,4 @@
 import { Response } from "express";
-import dotenv from "dotenv";
-dotenv.config();
 
 const mode = process.env.NODE_ENV === "development";
 

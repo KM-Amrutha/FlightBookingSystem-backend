@@ -20,6 +20,7 @@ export interface SeatDetailsDTO {
 export interface CreateSeatDTO {
   aircraftId: string;
   seatTypeId: string;
+  cabinClass:string;
   seatNumber: string;
   rowNumber: number;
   columnPosition: string;
@@ -29,6 +30,7 @@ export interface CreateSeatDTO {
   isBlocked: boolean;
   blockReason?: string;
   features: string[];
+  
 }
 
 export interface UpdateSeatDTO {

@@ -1,7 +1,8 @@
 import { 
   IAircraftRepository, 
   IProviderRepository,
-  IDestinationRepository 
+  IDestinationRepository, 
+  IFlightRepository
 } from "@di/file-imports-index";
 import { UpdateAircraftDTO, AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
 import { AIRCRAFT_MESSAGES, AUTH_MESSAGES, APPLICATION_MESSAGES } from "@shared/constants/index.constants";
@@ -9,6 +10,8 @@ import { validationError, NotFoundError, ForbiddenError } from "@presentation/mi
 import { inject, injectable } from "inversify";
 import {TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { IUpdateAircraftUseCase } from "@di/file-imports-index";
+import { AircraftMapper } from "@application/mappers/aircraftMapper";
+import { IAircraft } from "@domain/entities/aircraft.entity";
 
 @injectable()
 export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
@@ -18,7 +21,9 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
     @inject(TYPES_REPOSITORIES.ProviderRepository)
     private _providerRepository: IProviderRepository,
     @inject(TYPES_AIRCRAFT_REPOSITORIES.DestionationRepository)
-    private _destinationRepository: IDestinationRepository
+    private _destinationRepository: IDestinationRepository,
+    @inject(TYPES_AIRCRAFT_REPOSITORIES.FlightRepository)
+    private _flightRepository: IFlightRepository
   ) {}
 
   private async validateProvider(providerId: string): Promise<void> {
@@ -40,7 +45,7 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
     }
   }
 
-  private async validateOwnership(aircraftId: string, providerId: string): Promise<AircraftDetailsDTO> {
+  private async validateOwnership(aircraftId: string, providerId: string): Promise<IAircraft> {
     const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
     
     if (!aircraft) {
@@ -54,23 +59,24 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
     return aircraft;
   }
 
-  private async validateAircraftName(
-    aircraftName: string, 
-    providerId: string, 
-    currentAircraftId: string
-  ): Promise<void> {
-    const providerAircrafts = await this._aircraftRepository.findByProviderId(providerId);
-    
-    const nameExists = providerAircrafts.some(
-      aircraft => 
-        aircraft.aircraftName.toLowerCase() === aircraftName.toLowerCase() &&
-        aircraft._id.toString() !== currentAircraftId
-    );
 
-    if (nameExists) {
-      throw new validationError(AIRCRAFT_MESSAGES.ALREADY_EXISTS);
-    }
+ private async validateAircraftName(
+  aircraftName: string,
+  providerId: string,
+  currentAircraftId: string
+): Promise<void> {
+  const { aircrafts: providerAircrafts } = await this._aircraftRepository.findByProviderId(providerId);
+
+  const nameExists = providerAircrafts.some(
+    (aircraft: IAircraft) =>
+      aircraft.aircraftName.toLowerCase() === aircraftName.toLowerCase() &&
+      aircraft.id.toString() !== currentAircraftId
+  );
+
+  if (nameExists) {
+    throw new validationError(AIRCRAFT_MESSAGES.ALREADY_EXISTS);
   }
+}
 
   private async validateDestination(destinationId: string): Promise<void> {
     const destination = await this._destinationRepository.findById(destinationId);
@@ -169,23 +175,16 @@ export class UpdateAircraftUseCase implements IUpdateAircraftUseCase {
     this.validateUpdateData(data);
     await this.performParallelValidations(data, providerId, aircraftId);
 
-    try {
-      const updatedAircraft = await this._aircraftRepository.updateAircraft(aircraftId, data);
-      
-      if (!updatedAircraft) {
-        throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
-      }
+    
 
-      return updatedAircraft;
-    } catch (error) {
-      if (
-        error instanceof validationError || 
-        error instanceof NotFoundError || 
-        error instanceof ForbiddenError
-      ) {
-        throw error;
-      }
-      throw new validationError(AIRCRAFT_MESSAGES.UPDATE_FAILED);
-    }
+const hasActiveFlights = await this._flightRepository.hasActiveFlightsForAircraft(aircraftId);
+if (hasActiveFlights) {
+  throw new validationError("Cannot update aircraft that has active or scheduled flights");
+}
+    
+      const updatedAircraft = await this._aircraftRepository.updateAircraft(aircraftId, data);
+      if (!updatedAircraft)  throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
+      
+      return AircraftMapper.toAircraftDTO(updatedAircraft);
   }
 }

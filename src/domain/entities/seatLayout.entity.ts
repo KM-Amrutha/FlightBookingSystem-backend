@@ -1,7 +1,5 @@
-import mongoose, { Document } from "mongoose";
-
-export interface ISeatLayout extends Document {
-  _id: string;
+export interface ISeatLayout {
+  id: string;
   aircraftId: string;
   cabinClass: string; // "economy" | "premium_economy" | "business" | "first"
   layout: string; // "3-3", "2-4-2", "3-3-3", "1-2-1"
