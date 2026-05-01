@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { injectable, inject } from "inversify";
 import { sendResponse } from "@shared/utils/http.response";
 import { StatusCodes } from "@shared/constants/index.constants";
-import { TYPES_AIRCRAFT_USECASES } from "@di/types-usecases";
+import { TYPES_FLIGHT_USECASES } from "@di/types-usecases";
 import { IApproveFlightUseCase } from "@di/file-imports-index";
 import { ApproveFlightDTO } from "@application/dtos/flight-dtos";
 import { FLIGHT_MESSAGES } from "@shared/constants/flightMessages/flight.messges";
@@ -10,7 +10,7 @@ import { FLIGHT_MESSAGES } from "@shared/constants/flightMessages/flight.messges
 @injectable()
 export class ApproveFlightController {
   constructor(
-    @inject(TYPES_AIRCRAFT_USECASES.ApproveFlightUseCase)
+    @inject(TYPES_FLIGHT_USECASES.ApproveFlightUseCase)
     private _approveFlightUseCase: IApproveFlightUseCase
   ) {}
 

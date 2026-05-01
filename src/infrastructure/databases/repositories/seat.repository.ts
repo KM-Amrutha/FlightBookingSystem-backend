@@ -1,76 +1,30 @@
 import { ISeat } from "@domain/entities/seat.entity";
 import SeatModel from "@infrastructure/databases/models/seat.model";
-import { Model } from "mongoose";
 import { BaseRepository } from "@infrastructure/databases/repositories/base.repository";
 import { ISeatRepository } from "@domain/interfaces/ISeatRepository";
-import { SeatDetailsDTO, CreateSeatDTO, UpdateSeatDTO } from "@application/dtos/seat-dtos";
+// import { SeatDetailsDTO, CreateSeatDTO, UpdateSeatDTO } from "@application/dtos/seat-dtos";
 
 export class SeatRepository
   extends BaseRepository<ISeat>
   implements ISeatRepository
 {
-  constructor(model: Model<ISeat> = SeatModel) {
-    super(model);
+  constructor() {
+    super(SeatModel);
   }
 
-  async createSeats(seats: CreateSeatDTO[]): Promise<SeatDetailsDTO[]> {
-    const createdSeats = await this.model.insertMany(seats);
-    const seatIds = createdSeats.map(seat => seat._id);
+  async createSeats(seats: Partial<ISeat>[]): Promise<ISeat[]> {
+    const createdSeats = await SeatModel.insertMany(seats);
+    const seatIds = createdSeats.map((seat) => seat._id.toString());
     return await this.getSeatsByIds(seatIds);
   }
 
-  private async getSeatsByIds(seatIds: string[]): Promise<SeatDetailsDTO[]> {
-    const seatsData = await this.model.aggregate([
-      {
-        $match: {
-          _id: { $in: seatIds.map(id => this.parseId(id)) }
-        }
-      },
-      {
-        $lookup: {
-          from: "seattypes",
-          localField: "seatTypeId",
-          foreignField: "_id",
-          as: "seatType"
-        }
-      },
-      {
-        $unwind: {
-          path: "$seatType",
-          preserveNullAndEmptyArrays: true
-        }
-      },
-      {
-        $project: {
-          _id: 1,
-          aircraftId: 1,
-          seatTypeId: 1,
-          seatTypeName: "$seatType.seatTypeName",
-          cabinClass: "$seatType.cabinClass",
-          seatNumber: 1,
-          rowNumber: 1,
-          columnPosition: 1,
-          section: 1,
-          position: 1,
-          isExitRow: 1,
-          isBlocked: 1,
-          blockReason: 1,
-          features: 1,
-          createdAt: 1,
-          updatedAt: 1
-        }
-      }
-    ]).sort({ rowNumber: 1, columnPosition: 1 });
-    return seatsData;
-  }
 
   
-
-  async getSeatsByAircraftId(aircraftId: string): Promise<SeatDetailsDTO[]> {
-    const seatsData = await this.model.aggregate([
+  private async getSeatsByIds(seatIds: string[]): Promise<ISeat[]> {
+    const seatsData = await SeatModel.aggregate([
       {
         $match: {
-          aircraftId: aircraftId
+          _id: { $in: seatIds.map((id) => this.parseId(id)) }
         }
       },
       {
@@ -81,19 +35,14 @@ export class SeatRepository
           as: "seatType"
         }
       },
-      {
-        $unwind: {
-          path: "$seatType",
-          preserveNullAndEmptyArrays: true
-        }
-      },
+      { $unwind: { path: "$seatType", preserveNullAndEmptyArrays: true } },
       {
         $project: {
           _id: 1,
           aircraftId: 1,
           seatTypeId: 1,
           seatTypeName: "$seatType.seatTypeName",
-          cabinClass: "$seatType.cabinClass",
+          cabinClass: 1,
           seatNumber: 1,
           rowNumber: 1,
           columnPosition: 1,
@@ -108,19 +57,12 @@ export class SeatRepository
         }
       }
     ]).sort({ rowNumber: 1, columnPosition: 1 });
-    return seatsData;
+    return seatsData.map((s) => ({ ...s, id: s._id.toString() }));
   }
 
-
-  // need to use in flights....!!
-
-  async getSeatById(seatId: string): Promise<SeatDetailsDTO | null> {
-    const seatData = await this.model.aggregate([
-      {
-        $match: {
-          _id: this.parseId(seatId)
-        }
-      },
+  async getSeatsByAircraftId(aircraftId: string): Promise<ISeat[]> {
+    const seatsData = await SeatModel.aggregate([
+      { $match: { aircraftId } },
       {
         $lookup: {
           from: "seattypes",
@@ -129,19 +71,50 @@ export class SeatRepository
           as: "seatType"
         }
       },
-      {
-        $unwind: {
-          path: "$seatType",
-          preserveNullAndEmptyArrays: true
-        }
-      },
+      { $unwind: { path: "$seatType", preserveNullAndEmptyArrays: true } },
       {
         $project: {
           _id: 1,
           aircraftId: 1,
           seatTypeId: 1,
           seatTypeName: "$seatType.seatTypeName",
-          cabinClass: "$seatType.cabinClass",
+          cabinClass:1,
+          seatNumber: 1,
+          rowNumber: 1,
+          columnPosition: 1,
+          section: 1,
+          position: 1,
+          isExitRow: 1,
+          isBlocked: 1,
+          blockReason: 1,
+          features: 1,
+          createdAt: 1,
+          updatedAt: 1
+        }
+      }
+    ]).sort({ rowNumber: 1, columnPosition: 1 });
+    return seatsData.map((s) => ({ ...s, id: s._id.toString() }));
+  }
+
+  async getSeatById(seatId: string): Promise<ISeat | null> {
+    const seatData = await SeatModel.aggregate([
+      { $match: { _id: this.parseId(seatId) } },
+      {
+        $lookup: {
+          from: "seattypes",
+          localField: "seatTypeId",
+          foreignField: "_id",
+          as: "seatType"
+        }
+      },
+      { $unwind: { path: "$seatType", preserveNullAndEmptyArrays: true } },
+      {
+        $project: {
+          _id: 1,
+          aircraftId: 1,
+          seatTypeId: 1,
+          seatTypeName: "$seatType.seatTypeName",
+          cabinClass: 1,
           seatNumber: 1,
           rowNumber: 1,
           columnPosition: 1,
@@ -156,22 +129,22 @@ export class SeatRepository
         }
       }
     ]);
-    return seatData.length > 0 ? seatData[0] : null;
+    if (!seatData[0]) return null;
+    return { ...seatData[0], id: seatData[0]._id.toString() };
   }
 
-  async updateSeat(seatId: string, data: UpdateSeatDTO): Promise<SeatDetailsDTO | null> {
-    const updatedSeat = await this.model.findByIdAndUpdate(
+  async updateSeat(seatId: string, data: Partial<ISeat>): Promise<ISeat | null> {
+    const updatedSeat = await SeatModel.findByIdAndUpdate(
       seatId,
       data,
       { new: true }
     ).exec();
-    
     if (!updatedSeat) return null;
-    return await this.getSeatById(updatedSeat._id);
+    return await this.getSeatById(updatedSeat._id.toString());
   }
 
   async blockSeat(seatId: string, reason: string): Promise<boolean> {
-    const result = await this.model.findByIdAndUpdate(
+    const result = await SeatModel.findByIdAndUpdate(
       seatId,
       { isBlocked: true, blockReason: reason },
       { new: true }
@@ -180,7 +153,7 @@ export class SeatRepository
   }
 
   async unblockSeat(seatId: string): Promise<boolean> {
-    const result = await this.model.findByIdAndUpdate(
+    const result = await SeatModel.findByIdAndUpdate(
       seatId,
       { isBlocked: false, blockReason: "" },
       { new: true }
@@ -188,19 +161,22 @@ export class SeatRepository
     return result !== null;
   }
 
-  async deleteSeats(aircraftId: string): Promise<boolean> {
-    const result = await this.model.deleteMany({ aircraftId }).exec();
+  async deleteSeatsByAircraftId(aircraftId: string): Promise<boolean> {
+    const result = await SeatModel.deleteMany({ aircraftId }).exec();
     return result.deletedCount > 0;
   }
 
-  async getSeatsByClass(aircraftId: string, seatTypeId: string): Promise<SeatDetailsDTO[]> {
-    const seatsData = await this.model.aggregate([
-      {
-        $match: {
-          aircraftId: aircraftId,
-          seatTypeId: seatTypeId
-        }
-      },
+  async deleteSeatsByRowRange(aircraftId: string,startRow: number,endRow: number): Promise<boolean> {
+  const result = await SeatModel.deleteMany({
+    aircraftId,
+    rowNumber: { $gte: startRow, $lte: endRow }
+  }).exec();
+  return result.deletedCount > 0;
+}
+
+  async getSeatsByClass(aircraftId: string, seatTypeId: string): Promise<ISeat[]> {
+    const seatsData = await SeatModel.aggregate([
+      { $match: { aircraftId, seatTypeId } },
       {
         $lookup: {
           from: "seattypes",
@@ -209,19 +185,14 @@ export class SeatRepository
           as: "seatType"
         }
       },
-      {
-        $unwind: {
-          path: "$seatType",
-          preserveNullAndEmptyArrays: true
-        }
-      },
+      { $unwind: { path: "$seatType", preserveNullAndEmptyArrays: true } },
       {
         $project: {
           _id: 1,
           aircraftId: 1,
           seatTypeId: 1,
           seatTypeName: "$seatType.seatTypeName",
-          cabinClass: "$seatType.cabinClass",
+          cabinClass: 1,
           seatNumber: 1,
           rowNumber: 1,
           columnPosition: 1,
@@ -236,17 +207,12 @@ export class SeatRepository
         }
       }
     ]).sort({ rowNumber: 1, columnPosition: 1 });
-    return seatsData;
+    return seatsData.map((s) => ({ ...s, id: s._id.toString() }));
   }
 
-  async getAvailableSeats(aircraftId: string): Promise<SeatDetailsDTO[]> {
-    const seatsData = await this.model.aggregate([
-      {
-        $match: {
-          aircraftId: aircraftId,
-          isBlocked: false
-        }
-      },
+  async getAvailableSeats(aircraftId: string): Promise<ISeat[]> {
+    const seatsData = await SeatModel.aggregate([
+      { $match: { aircraftId, isBlocked: false } },
       {
         $lookup: {
           from: "seattypes",
@@ -255,19 +221,14 @@ export class SeatRepository
           as: "seatType"
         }
       },
-      {
-        $unwind: {
-          path: "$seatType",
-          preserveNullAndEmptyArrays: true
-        }
-      },
+      { $unwind: { path: "$seatType", preserveNullAndEmptyArrays: true } },
       {
         $project: {
           _id: 1,
           aircraftId: 1,
           seatTypeId: 1,
           seatTypeName: "$seatType.seatTypeName",
-          cabinClass: "$seatType.cabinClass",
+          cabinClass: 1,
           seatNumber: 1,
           rowNumber: 1,
           columnPosition: 1,
@@ -275,12 +236,13 @@ export class SeatRepository
           position: 1,
           isExitRow: 1,
           isBlocked: 1,
+          blockReason: 1,
           features: 1,
           createdAt: 1,
           updatedAt: 1
         }
       }
     ]).sort({ rowNumber: 1, columnPosition: 1 });
-    return seatsData;
+    return seatsData.map((s) => ({ ...s, id: s._id.toString() }));
   }
 }

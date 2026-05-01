@@ -13,7 +13,7 @@ export class CompleteProviderProfileController {
   ) {}
 
   async handle(req: Request, res: Response): Promise<void> {
-    const providerId = (req as any).user._id;
+    const providerId = req.user!._id;
     
     await this._completeProviderProfileUseCase.execute(providerId, req.body);
 

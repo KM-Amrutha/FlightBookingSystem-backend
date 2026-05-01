@@ -1,6 +1,5 @@
-import mongoose, { Document } from "mongoose";
 
-export interface INotificationTemplate extends Document {
+export interface INotificationTemplate {
   _id: string;
   providerId: string;
   notificationType: string;

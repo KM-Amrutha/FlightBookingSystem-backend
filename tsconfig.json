@@ -58,8 +58,9 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "typeRoots": ["./src/types", "./node_modules/@types"]
   },
     // "include": ["src"],
-     "include": ["src/**/*.ts"],
+     "include": ["src/**/*.ts", "src/domain/entities/flightSeat.entity.ts"],
   "exclude": ["node_modules"]
 }

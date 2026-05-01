@@ -1,11 +1,10 @@
-// @application/usecases/RejectProviderUseCase.ts
 
 import { injectable, inject } from "inversify";
 import { TYPES_REPOSITORIES } from "@di/types-repositories";
 import { TYPES_SERVICES } from "@di/types-services";
 import { IProviderRepository } from "@domain/interfaces/IProviderRepository";
 import { IEmailService } from "@application/interfaces/service/communication/IEmail.service";
-import { IRejectProviderUseCase } from "@application/interfaces/usecase/IRejectedProviderUsecase";
+import { IRejectProviderUseCase } from "@application/interfaces/usecase/admin/IRejectedProvider.usecase";
 import { validationError } from "@presentation/middlewares/error.middleware";
 
 @injectable()

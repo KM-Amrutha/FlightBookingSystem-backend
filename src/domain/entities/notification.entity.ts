@@ -1,6 +1,4 @@
-import mongoose, { Document } from "mongoose";
-
-export interface INotification extends Document {
+export interface INotification {
   _id: string;
   userId: string;
   providerId: string;

@@ -8,6 +8,8 @@ import { validationError, NotFoundError, ForbiddenError, ConflictError } from "@
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { IUpdateAircraftStatusUseCase } from "@di/file-imports-index";
+import { IAircraft } from "@domain/entities/aircraft.entity";
+import { AircraftMapper } from "@application/mappers/aircraftMapper";
 
 @injectable()
 export class UpdateAircraftStatusUseCase implements IUpdateAircraftStatusUseCase {
@@ -40,7 +42,7 @@ export class UpdateAircraftStatusUseCase implements IUpdateAircraftStatusUseCase
   private async validateOwnership(
     aircraftId: string, 
     providerId: string
-  ): Promise<AircraftDetailsDTO> {
+  ): Promise<IAircraft> {
     const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
     
     if (!aircraft) {
@@ -97,7 +99,7 @@ export class UpdateAircraftStatusUseCase implements IUpdateAircraftStatusUseCase
   }
 
   private validateAircraftAvailability(
-    aircraft: AircraftDetailsDTO,
+    aircraft: IAircraft,
     newStatus: string
   ): void {
     if (newStatus === "active") {
@@ -111,23 +113,21 @@ export class UpdateAircraftStatusUseCase implements IUpdateAircraftStatusUseCase
       }
     }
   }
+private async verifyProviderCanActivateAircraft(
+  providerId: string,
+  newStatus: string
+): Promise<void> {
+  if (newStatus === "active") {
+    const { aircrafts } = await this._aircraftRepository.findByProviderId(providerId);
+    const activeCount = aircrafts.filter((a: IAircraft) => a.status === "active").length;
 
-  private async verifyProviderCanActivateAircraft(
-    providerId: string,
-    newStatus: string
-  ): Promise<void> {
-    if (newStatus === "active") {
-      const activeAircrafts = await this._aircraftRepository.findByProviderId(providerId);
-      const activeCount = activeAircrafts.filter(a => a.status === "active").length;
-
-      // Business rule: Provider can have max 50 active aircrafts
-      if (activeCount >= 50) {
-        throw new ConflictError(
-          "Maximum active aircraft limit (50) reached. Deactivate another aircraft first"
-        );
-      }
+    if (activeCount >= 50) {
+      throw new ConflictError(
+        "Maximum active aircraft limit (50) reached. Deactivate another aircraft first"
+      );
     }
   }
+}
 
   private validateStatusValue(status: string): void {
     const validStatuses = ["active", "inactive", "maintenance"];
@@ -163,27 +163,12 @@ export class UpdateAircraftStatusUseCase implements IUpdateAircraftStatusUseCase
 
     await this.checkUpcomingFlightsForStatusChange(data.aircraftId, data.status);
 
-    try {
+
       const updatedAircraft = await this._aircraftRepository.updateAircraft(
         data.aircraftId,
         { status: data.status }
       );
-
-      if (!updatedAircraft) {
-        throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
-      }
-
-      return updatedAircraft;
-    } catch (error) {
-      if (
-        error instanceof validationError || 
-        error instanceof NotFoundError || 
-        error instanceof ForbiddenError ||
-        error instanceof ConflictError
-      ) {
-        throw error;
-      }
-      throw new validationError("Failed to update aircraft status");
-    }
+      if (!updatedAircraft) throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
+      return AircraftMapper.toAircraftDTO(updatedAircraft);
   }
 }

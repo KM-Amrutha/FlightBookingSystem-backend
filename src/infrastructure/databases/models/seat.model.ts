@@ -1,20 +1,27 @@
-import mongoose, { Schema, model } from "mongoose";
-import { ISeat } from "@domain/entities/seat.entity";
+import mongoose, { Schema } from "mongoose";
 
-const seatSchema = new Schema<ISeat>(
+
+const seatSchema = new Schema(
   {
     aircraftId: {
       type: String,
       required: [true, "Aircraft ID is required"],
       ref: "Aircraft",
-      index: true
     },
     seatTypeId: {
       type: String,
       required: [true, "Seat type ID is required"],
       ref: "SeatType",
-      index: true
     },
+    cabinClass: {
+  type: String,
+  required: [true, "Cabin class is required"],
+  lowercase: true,
+  enum: {
+    values: ["economy", "premium_economy", "business", "first"],
+    message: "{VALUE} is not a valid cabin class"
+  },
+},
     seatNumber: {
       type: String,
       required: [true, "Seat number is required"],
@@ -83,5 +90,5 @@ seatSchema.index({ aircraftId: 1, rowNumber: 1 });
 seatSchema.index({ aircraftId: 1, seatTypeId: 1 });
 seatSchema.index({ aircraftId: 1, isBlocked: 1 });
 
-const Seat = model<ISeat>("Seat", seatSchema);
+const Seat = mongoose.model("Seat", seatSchema);
 export default Seat;

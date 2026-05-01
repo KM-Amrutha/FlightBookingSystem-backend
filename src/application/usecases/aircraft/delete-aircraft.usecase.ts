@@ -1,6 +1,10 @@
 import { 
   IAircraftRepository, 
-  IProviderRepository 
+  IFlightRepository, 
+  IFlightSeatRepository, 
+  IProviderRepository, 
+  ISeatLayoutRepository,
+  ISeatRepository
 } from "@di/file-imports-index";
 import { AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
 import { AIRCRAFT_MESSAGES, AUTH_MESSAGES, APPLICATION_MESSAGES } from "@shared/constants/index.constants";
@@ -8,6 +12,9 @@ import { validationError, NotFoundError, ForbiddenError, ConflictError } from "@
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { IDeleteAircraftUseCase } from "@di/file-imports-index";
+import { AircraftMapper } from "@application/mappers/aircraftMapper";
+import { IAircraft } from "@domain/entities/aircraft.entity";
+
 
 @injectable()
 export class DeleteAircraftUseCase implements IDeleteAircraftUseCase {
@@ -15,7 +22,15 @@ export class DeleteAircraftUseCase implements IDeleteAircraftUseCase {
     @inject(TYPES_AIRCRAFT_REPOSITORIES.AircraftRepository)
     private _aircraftRepository: IAircraftRepository,
     @inject(TYPES_REPOSITORIES.ProviderRepository)
-    private _providerRepository: IProviderRepository
+    private _providerRepository: IProviderRepository,
+    @inject(TYPES_AIRCRAFT_REPOSITORIES.FlightRepository)
+    private _flightRepository: IFlightRepository,
+    @inject(TYPES_AIRCRAFT_REPOSITORIES.SeatRepository)
+    private _seatRepository: ISeatRepository,
+    @inject(TYPES_AIRCRAFT_REPOSITORIES.SeatLayoutRepository)
+    private _seatLayoutRepository: ISeatLayoutRepository,
+    @inject(TYPES_AIRCRAFT_REPOSITORIES.FlightSeatRepository)
+    private _flightSeatRepository: IFlightSeatRepository
   ) {}
 
   private async validateProvider(providerId: string): Promise<void> {
@@ -37,40 +52,23 @@ export class DeleteAircraftUseCase implements IDeleteAircraftUseCase {
     }
   }
 
-  private async validateOwnershipAndStatus(
-    aircraftId: string, 
-    providerId: string
-  ): Promise<AircraftDetailsDTO> {
-    const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
-    
-    if (!aircraft) {
-      throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
-    }
+ private async validateOwnershipAndStatus(aircraftId: string, providerId: string): Promise<IAircraft> {
+  const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
+  if (!aircraft) throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
+  if (aircraft.providerId !== providerId)
+    throw new ForbiddenError("You don't have permission to delete this aircraft");
+  return aircraft;
+}
 
-    if (aircraft.providerId !== providerId) {
-      throw new ForbiddenError("You don't have permission to delete this aircraft");
-    }
 
-    return aircraft;
+ private async checkForUpcomingFlights(aircraftId: string): Promise<void> {
+  const hasFlights = await this._flightRepository.hasActiveFlightsForAircraft(aircraftId);
+  if (hasFlights) {
+    throw new ConflictError(
+      "Cannot delete aircraft with scheduled flights. Cancel or complete all flights first."
+    );
   }
-
-  private validateAircraftDeletionEligibility(aircraft: AircraftDetailsDTO): void {
-    if (aircraft.status === "active") {
-      throw new ConflictError(
-        "Cannot delete active aircraft. Please set status to inactive first"
-      );
-    }
-
-    if (aircraft.status === "maintenance") {
-      throw new ConflictError(
-        "Cannot delete aircraft currently under maintenance. Complete maintenance first"
-      );
-    }
-  }
-
-  private async checkForUpcomingFlights(aircraftId: string): Promise<void> {
-
-  }
+}
 
   private async checkForActiveBookings(aircraftId: string): Promise<void> {
   
@@ -83,15 +81,16 @@ export class DeleteAircraftUseCase implements IDeleteAircraftUseCase {
     ]);
   }
 
-  private async verifyProviderAircraftCount(providerId: string): Promise<void> {
-    const providerAircrafts = await this._aircraftRepository.findByProviderId(providerId);
-    
-    if (providerAircrafts.length === 1) {
-      throw new ConflictError(
-        "Cannot delete your only aircraft. Providers must have at least one aircraft"
-      );
-    }
+private async verifyProviderAircraftCount(providerId: string): Promise<void> {
+  const { totalCount } = await this._aircraftRepository.findByProviderId(providerId);
+
+  if (totalCount === 1) {
+    throw new ConflictError(
+      "Cannot delete your only aircraft. Providers must have at least one aircraft"
+    );
   }
+}
+
 
  async execute(aircraftId: string, providerId: string): Promise<AircraftDetailsDTO> {
 
@@ -109,30 +108,18 @@ export class DeleteAircraftUseCase implements IDeleteAircraftUseCase {
       this.verifyProviderAircraftCount(providerId)
     ]);
 
-    this.validateAircraftDeletionEligibility(aircraft);
-
     await this.performDeletionChecks(aircraftId);
 
-    try {
-   const deletedAircraft = await this._aircraftRepository.deleteAircraft(aircraftId);
-
-if (!deletedAircraft) {
-  throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
-}
-
-return aircraft; 
+    await Promise.all([
+      this._seatRepository.deleteSeatsByAircraftId(aircraftId),
+      this._seatLayoutRepository.deleteSeatLayoutsByAircraftId(aircraftId),
+    
+    ]);
 
 
-    } catch (error) {
-      if (
-        error instanceof validationError || 
-        error instanceof NotFoundError || 
-        error instanceof ForbiddenError ||
-        error instanceof ConflictError
-      ) {
-        throw error;
-      }
-      throw new validationError(AIRCRAFT_MESSAGES.DELETE_FAILED);
-    }
+  const deleted = await this._aircraftRepository.deleteAircraft(aircraftId);
+  if (!deleted) throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
+
+  return AircraftMapper.toAircraftDTO(aircraft);
   }
 }

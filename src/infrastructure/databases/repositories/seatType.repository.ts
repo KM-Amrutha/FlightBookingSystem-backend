@@ -1,20 +1,19 @@
 import { ISeatType } from "@domain/entities/seatType.entity";
 import SeatTypeModel from "@infrastructure/databases/models/seatType.model";
-import { Model } from "mongoose";
 import { BaseRepository } from "@infrastructure/databases/repositories/base.repository";
 import { ISeatTypeRepository } from "@domain/interfaces/ISeatTypeRepository";
-import { SeatTypeDTO } from "@application/dtos/seat-dtos";
+
 
 export class SeatTypeRepository
   extends BaseRepository<ISeatType>
   implements ISeatTypeRepository
 {
-  constructor(model: Model<ISeatType> = SeatTypeModel) {
-    super(model);
+  constructor() {
+    super(SeatTypeModel);
   }
 
-  async getAllSeatTypes(): Promise<SeatTypeDTO[]> {
-    const seatTypesData = await this.model.aggregate([
+  async getAllSeatTypes(): Promise<ISeatType[]> {
+    const seatTypesData = await SeatTypeModel.aggregate([
       {
         $project: {
           _id: 1,
@@ -29,13 +28,14 @@ export class SeatTypeRepository
         }
       }
     ]).sort({ basePriceMultiplier: 1 });
-    return seatTypesData;
+   return seatTypesData.map((s) => ({ ...s, id: s._id.toString() }));
+    
   }
 
   // need to use all in flight
 
-  async getSeatTypeById(seatTypeId: string): Promise<SeatTypeDTO | null> {
-    const seatTypeData = await this.model.aggregate([
+  async getSeatTypeById(seatTypeId: string): Promise<ISeatType | null> {
+    const seatTypeData = await SeatTypeModel.aggregate([
       {
         $match: {
           _id: this.parseId(seatTypeId)
@@ -55,11 +55,13 @@ export class SeatTypeRepository
         }
       }
     ]);
-    return seatTypeData.length > 0 ? seatTypeData[0] : null;
+  
+    if (!seatTypeData[0]) return null;
+  return { ...seatTypeData[0], id: seatTypeData[0]._id.toString() };
   }
 
-  async getSeatTypeByClass(cabinClass: string): Promise<SeatTypeDTO | null> {
-    const seatTypeData = await this.model.aggregate([
+  async getSeatTypeByClass(cabinClass: string): Promise<ISeatType | null> {
+    const seatTypeData = await SeatTypeModel.aggregate([
       {
         $match: {
           cabinClass: cabinClass
@@ -79,6 +81,7 @@ export class SeatTypeRepository
         }
       }
     ]);
-    return seatTypeData.length > 0 ? seatTypeData[0] : null;
+    if (!seatTypeData[0]) return null;
+  return { ...seatTypeData[0], id: seatTypeData[0]._id.toString() };
   }
 }

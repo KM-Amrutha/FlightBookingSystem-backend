@@ -1,6 +1,4 @@
-import mongoose, { Document } from "mongoose";
-
-export interface IAdminRevenueShare extends Document {
+export interface IAdminRevenueShare {
   _id: string;
   adminId: string;
   bookingDetailId: string;

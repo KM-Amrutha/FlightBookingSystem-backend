@@ -1,9 +1,9 @@
 import {
-  FlightDetailsDTO,
+  FlightListDTO,
 
 } from "@application/dtos/flight-dtos";
 
 
 export interface IPendingFlightsForApprovalUseCase {
-  execute(): Promise<FlightDetailsDTO[]>;
+  execute(): Promise<FlightListDTO[]>;
 }

@@ -25,7 +25,7 @@ export interface UpdatePasswordDTO {
   email: string;
   password: string;
   newPassword?: string;
-}
+} 
 
 
 export enum RoleType {

@@ -1,12 +1,13 @@
-import { SeatLayoutDetailsDTO, CreateSeatLayoutDTO } from "@application/dtos/seat-dtos";
+import { IBaseRepository } from "./IBaseRepository";
+import { ISeatLayout } from "@domain/entities/seatLayout.entity";
 
-export interface ISeatLayoutRepository {
-  createSeatLayout(data: CreateSeatLayoutDTO): Promise<SeatLayoutDetailsDTO>;
-  getSeatLayoutsByAircraftId(aircraftId: string): Promise<SeatLayoutDetailsDTO[]>;
-  getSeatLayoutById(layoutId: string): Promise<SeatLayoutDetailsDTO | null>;
-  getSeatLayoutByClass(aircraftId: string, cabinClass: string): Promise<SeatLayoutDetailsDTO | null>;
-  updateSeatLayout(layoutId: string, data: Partial<CreateSeatLayoutDTO>): Promise<SeatLayoutDetailsDTO | null>;
-  deleteSeatLayouts(aircraftId: string): Promise<boolean>;
- deleteSeatLayout(layoutId: string): Promise<boolean>;
-  findById(layoutId: string): Promise<SeatLayoutDetailsDTO | null>;
+export interface ISeatLayoutRepository extends IBaseRepository<ISeatLayout> {
+  createSeatLayout(data: Partial<ISeatLayout>): Promise<ISeatLayout>;
+  getSeatLayoutsByAircraftId(aircraftId: string): Promise<ISeatLayout[]>;
+  getSeatLayoutById(layoutId: string): Promise<ISeatLayout | null>;
+  getSeatLayoutByClass(aircraftId: string, cabinClass: string): Promise<ISeatLayout | null>;
+  updateSeatLayout(layoutId: string, data: Partial<ISeatLayout>): Promise<ISeatLayout | null>;
+  deleteSeatLayoutsByAircraftId(aircraftId: string): Promise<boolean>;
+  deleteSeatLayout(layoutId: string): Promise<boolean>;
+  findById(layoutId: string): Promise<ISeatLayout | null>;
 }

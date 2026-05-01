@@ -6,6 +6,8 @@ import { validationError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES,TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { ICreateAircraftUseCase } from "@di/file-imports-index";
+import { AircraftMapper } from "@application/mappers/aircraftMapper"
+import { IAircraft } from "@domain/entities/aircraft.entity";
 
 @injectable()
 export class CreateAircraftUseCase implements ICreateAircraftUseCase {
@@ -35,26 +37,34 @@ export class CreateAircraftUseCase implements ICreateAircraftUseCase {
       throw new validationError(AIRCRAFT_MESSAGES.PROVIDER_NOT_FOUND);
     }
 
+if (!provider.adminApproval || provider.profileStatus !== 'approved') {
+  throw new validationError("Your profile must be approved by admin before adding aircraft");
+}
+    
+    if (provider.licenseExpiryDate) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const expiryDate = new Date(provider.licenseExpiryDate);
+  expiryDate.setHours(0, 0, 0, 0);
+  if (expiryDate < today) {
+    throw new validationError("Your license has expired. Please renew it before adding aircraft.");
+  }
+}
+
     const isProviderBlocked = await this._providerRepository.isProviderBlocked(data.providerId);
     if (isProviderBlocked) {
       throw new validationError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
     }
-
-    const existingAircrafts = await this._aircraftRepository.findByProviderId(data.providerId);
-    const nameExists = existingAircrafts.some(
-      aircraft => aircraft.aircraftName.toLowerCase() === data.aircraftName.toLowerCase()
-    );
+const { aircrafts: existingAircrafts } = await this._aircraftRepository.findByProviderId(data.providerId);
+const nameExists = existingAircrafts.some(
+  (aircraft: IAircraft) => aircraft.aircraftName.toLowerCase() === data.aircraftName.toLowerCase()
+);
     
     if (nameExists) {
       throw new validationError(AIRCRAFT_MESSAGES.ALREADY_EXISTS);
     }
 
-    try {
-      return await this._aircraftRepository.createAircraft(data);
-    } catch (error) {
-       console.error("❌ ACTUAL REPOSITORY ERROR:", error);
-       
-      throw new validationError(AIRCRAFT_MESSAGES.CREATION_FAILED);
-    }
+   const aircraft = await this._aircraftRepository.createAircraft(data);
+   return AircraftMapper.toAircraftDTO(aircraft);
   }
 }

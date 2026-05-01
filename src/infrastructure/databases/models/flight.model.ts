@@ -1,4 +1,3 @@
-import { IFlight } from "@domain/entities/flight.entity";
 import mongoose, { Schema } from "mongoose";
 
 const flightSchema: Schema = new Schema({
@@ -24,6 +23,25 @@ const flightSchema: Schema = new Schema({
      ref: 'SeatLayout',
       // required: true
      },
+       flightType: {
+      type: String,
+      enum: ["outbound", "return", "recurring"],
+      default: "outbound",
+      required: true,
+    },
+    parentFlightId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Flight",
+      default: null,
+    },
+    recurringGroupId: {
+      type: String,
+      default: null,
+    },
+    recurringDays: {
+      type: [Number],
+      default: null,
+    },
   departureDestinationId: { type: mongoose.Schema.Types.ObjectId,
      ref: 'Destination', 
      required: true 
@@ -41,12 +59,15 @@ const flightSchema: Schema = new Schema({
   durationMinutes: { type: Number, 
     required: true
    },
+   bufferMinutes: { type: Number, 
+    default: null
+   },
   gate: { type: String 
 
   },
   baseFare: {
     economy: Number,
-    premiumEconomy: Number,
+    premium_economy: Number,
     business: Number,
     first: Number
   },
@@ -82,9 +103,14 @@ const flightSchema: Schema = new Schema({
 
 flightSchema.index({ flightNumber: 1 });
 flightSchema.index({ providerId: 1 });
+flightSchema.index({ aircraftId: 1 });
 flightSchema.index({ departureTime: 1 });
+flightSchema.index({ flightType: 1 });
+flightSchema.index({ parentFlightId: 1 });
+flightSchema.index({ recurringGroupId: 1 });
 flightSchema.index({ departureDestinationId: 1, arrivalDestinationId: 1 });
-flightSchema.index({ status: 1 });
+flightSchema.index({ flightStatus: 1 });
 
-const FlightModel = mongoose.model<IFlight>("Flight", flightSchema);
+
+const FlightModel = mongoose.model("Flight", flightSchema);
 export default FlightModel;

@@ -1,6 +1,4 @@
-import mongoose, { Document } from "mongoose";
-
-export interface IProviderWallet extends Document {
+export interface IProviderWallet {
   _id: string;
   providerId: string;
   balance: number;

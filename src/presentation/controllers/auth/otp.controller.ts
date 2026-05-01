@@ -7,7 +7,7 @@ import {
     OTP_MESSAGES
 } from "@shared/constants/index.constants";
 
-import { OtpUseCase } from "@application/usecases/auth/otp.usecase";
+import { OtpUseCase } from "@di/file-imports-index";
 import { TYPES_AUTH_USECASES } from "@di/types-usecases";
 
 @injectable()

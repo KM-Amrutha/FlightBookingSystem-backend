@@ -1,37 +1,27 @@
 import { ISeatLayout } from "@domain/entities/seatLayout.entity";
 import SeatLayoutModel from "@infrastructure/databases/models/seatLayout.model";
-import { Model } from "mongoose";
 import { BaseRepository } from "@infrastructure/databases/repositories/base.repository";
 import { ISeatLayoutRepository } from "@domain/interfaces/ISeatLayoutRepository";
-import { SeatLayoutDetailsDTO, CreateSeatLayoutDTO } from "@application/dtos/seat-dtos";
 
 export class SeatLayoutRepository
   extends BaseRepository<ISeatLayout>
   implements ISeatLayoutRepository
 {
-  constructor(model: Model<ISeatLayout> = SeatLayoutModel) {
-    super(model);
+  constructor() {
+    super(SeatLayoutModel);
   }
-async createSeatLayout(data: CreateSeatLayoutDTO): Promise<SeatLayoutDetailsDTO> {
-  const seatLayout = new this.model(data);
-  const savedLayout = await seatLayout.save();
-  
-  const layoutDetails = await this.getSeatLayoutById(savedLayout._id);
-  
-  if (!layoutDetails) {
-    throw new Error("Failed to retrieve created seat layout");
-  }
-  
-  return layoutDetails;
-}
 
-  async getSeatLayoutById(layoutId: string): Promise<SeatLayoutDetailsDTO | null> {
-    const layoutData = await this.model.aggregate([
-      {
-        $match: {
-          _id: this.parseId(layoutId)
-        }
-      },
+  async createSeatLayout(data: Partial<ISeatLayout>): Promise<ISeatLayout> {
+    const seatLayout = new SeatLayoutModel(data);
+    const savedLayout = await seatLayout.save();
+    const layoutDetails = await this.getSeatLayoutById(savedLayout._id.toString());
+    if (!layoutDetails) throw new Error("Failed to retrieve created seat layout");
+    return layoutDetails;
+  }
+
+  async getSeatLayoutById(layoutId: string): Promise<ISeatLayout | null> {
+    const layoutData = await SeatLayoutModel.aggregate([
+      { $match: { _id: this.parseId(layoutId) } },
       {
         $project: {
           _id: 1,
@@ -52,17 +42,13 @@ async createSeatLayout(data: CreateSeatLayoutDTO): Promise<SeatLayoutDetailsDTO>
         }
       }
     ]);
-    return layoutData.length > 0 ? layoutData[0] : null;
+    if (!layoutData[0]) return null;
+    return { ...layoutData[0], id: layoutData[0]._id.toString() };
   }
 
-
-  async getSeatLayoutsByAircraftId(aircraftId: string): Promise<SeatLayoutDetailsDTO[]> {
-    const layoutsData = await this.model.aggregate([
-      {
-        $match: {
-          aircraftId: aircraftId
-        }
-      },
+  async getSeatLayoutsByAircraftId(aircraftId: string): Promise<ISeatLayout[]> {
+    const layoutsData = await SeatLayoutModel.aggregate([
+      { $match: { aircraftId } },
       {
         $project: {
           _id: 1,
@@ -83,22 +69,12 @@ async createSeatLayout(data: CreateSeatLayoutDTO): Promise<SeatLayoutDetailsDTO>
         }
       }
     ]).sort({ startRow: 1 });
-    return layoutsData;
+    return layoutsData.map((l) => ({ ...l, id: l._id.toString() }));
   }
 
-  // need to use it in flight
-
-  async getSeatLayoutByClass(
-    aircraftId: string,
-    cabinClass: string
-  ): Promise<SeatLayoutDetailsDTO | null> {
-    const layoutData = await this.model.aggregate([
-      {
-        $match: {
-          aircraftId: aircraftId,
-          cabinClass: cabinClass
-        }
-      },
+  async getSeatLayoutByClass(aircraftId: string, cabinClass: string): Promise<ISeatLayout | null> {
+    const layoutData = await SeatLayoutModel.aggregate([
+      { $match: { aircraftId, cabinClass } },
       {
         $project: {
           _id: 1,
@@ -119,34 +95,31 @@ async createSeatLayout(data: CreateSeatLayoutDTO): Promise<SeatLayoutDetailsDTO>
         }
       }
     ]);
-    return layoutData.length > 0 ? layoutData[0] : null;
+    if (!layoutData[0]) return null;
+    return { ...layoutData[0], id: layoutData[0]._id.toString() };
   }
 
-  async updateSeatLayout(
-    layoutId: string,
-    data: Partial<CreateSeatLayoutDTO>
-  ): Promise<SeatLayoutDetailsDTO | null> {
-    const updatedLayout = await this.model.findByIdAndUpdate(
+  async updateSeatLayout(layoutId: string, data: Partial<ISeatLayout>): Promise<ISeatLayout | null> {
+    const updatedLayout = await SeatLayoutModel.findByIdAndUpdate(
       layoutId,
       data,
       { new: true }
     ).exec();
-    
     if (!updatedLayout) return null;
-    return await this.getSeatLayoutById(updatedLayout._id);
+    return await this.getSeatLayoutById(updatedLayout._id.toString());
   }
 
-  async deleteSeatLayouts(aircraftId: string): Promise<boolean> {
-    const result = await this.model.deleteMany({ aircraftId }).exec();
+  async deleteSeatLayoutsByAircraftId(aircraftId: string): Promise<boolean> {
+    const result = await SeatLayoutModel.deleteMany({ aircraftId }).exec();
     return result.deletedCount > 0;
   }
 
   async deleteSeatLayout(layoutId: string): Promise<boolean> {
-  try {
-    const result = await SeatLayoutModel.findByIdAndDelete(layoutId);
+    const result = await SeatLayoutModel.findByIdAndDelete(layoutId).exec();
     return result !== null;
-  } catch (error) {
-    throw new Error(`Failed to delete seat layout: ${error}`);
   }
-}
+
+  async findById(layoutId: string): Promise<ISeatLayout | null> {
+    return await this.getSeatLayoutById(layoutId);
+  }
 }

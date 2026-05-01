@@ -14,6 +14,12 @@ import {
    GoogleAuthController,
    UpdateProviderStatusController,
     GetAllProvidersController,
+    GetAllUsersController,
+    UpdateUserStatusController,
+    ChangePasswordController,
+
+    GetUserProfileController,
+    UpdateUserProfileController,
 
     CompleteProviderProfileController,
     GetProviderProfileController,
@@ -34,6 +40,13 @@ import {
     PendingFlightsForApprovalController,
     AvailableAircraftsForScheduleController,
     UpdateFlightController,
+    GetFlightByIdController,
+    DeleteFlightController,
+    GetFlightSeatsController,
+    GetFlightSeatsForUserController,
+    CreateRecurringFlightController,
+    GetAllFlightsForAdminController,
+    RejectSingleFlightController,
 
   DeleteSeatLayoutUseCase,
  
@@ -49,12 +62,15 @@ import {
    ITokenUseCase,
    ILoggerUseCase,
    IGetPendingProvidersUseCase,
+   IUpdateUserStatusUseCase,
    IRejectProviderUseCase,
    IVerifyProviderUseCase,
    IGetProviderProfileUseCase,
    ICompleteProviderProfileUseCase,
    IGetAllProvidersUseCase,
    IUpdateProviderStatusUseCase,
+   IChangePasswordUseCase,
+   IGetAllUsersUseCase,
     ICreateAircraftUseCase,
     IUpdateAircraftUseCase,
     IGetProviderAircraftsUseCase,
@@ -71,20 +87,38 @@ import {
     IPendingFlightsForApprovalUseCase,
     IApproveFlightUseCase,  
     IAvailableAircraftsForScheduleUsecase,
-    IUpdateFlightUseCase
+    IUpdateFlightUseCase,
+    ISearchFlightsUseCase,
+    SearchFlightsController,
+    IUpdateUserProfileUseCase,
+    IGetFlightByIdUseCase,
+    IGetUserProfileUseCase,
+    IDeleteFlightUseCase,
+    IGetFlightSeatsUseCase,
+    ICreateRecurringFlightUseCase,
+    IGetAllFlightsForAdminUseCase,
+    IRejectSingleFlightUseCase
+
 } from "@di/file-imports-index"
 
 import {TYPES_AUTH_CONTROLLERS,
    TYPES_ADMIN_CONTROLLERS,
     TYPES_PROVIDER_CONTROLLERS,
-    TYPES_AIRCRAFT_CONTROLLERS} 
+    TYPES_AIRCRAFT_CONTROLLERS,
+     TYPES_FLIGHT_CONTROLLERS,
+       TYPES_USER_CONTROLLERS,
+
+   } 
     from "@di/types-controllers";
 
 import {TYPES_AUTH_USECASES,
    TYPES_LOGGER_USECASES,
    TYPES_PROVIDER_USECASES,
    TYPES_ADMIN_USECASES, 
-   TYPES_AIRCRAFT_USECASES} 
+   TYPES_AIRCRAFT_USECASES,
+   TYPES_FLIGHT_USECASES,
+   TYPES_USER_USECASES
+} 
    from "@di/types-usecases";
 
 
@@ -99,11 +133,17 @@ export const  forgotPasswordController = container.get<ForgotPasswordController>
 export const passwordResetLinkController = container.get<PasswordResetLinkController>(TYPES_AUTH_CONTROLLERS.PasswordResetLinkController);
 export const providerVerificationController = container.get<ProviderVerificationController>(TYPES_ADMIN_CONTROLLERS.ProviderVerificationController);
 export const googleAuthController = container.get<GoogleAuthController>(TYPES_AUTH_CONTROLLERS.GoogleAuthController);
+export const changePasswordController = container.get<ChangePasswordController>(TYPES_AUTH_CONTROLLERS.ChangePasswordController);
 
 export const completeProviderProfileController = container.get<CompleteProviderProfileController>(TYPES_PROVIDER_CONTROLLERS.CompleteProviderProfileController);
 export const getProviderProfileController = container.get<GetProviderProfileController>(TYPES_PROVIDER_CONTROLLERS.GetProviderProfileController);
 export const getAllProvidersController = container.get<GetAllProvidersController>(TYPES_ADMIN_CONTROLLERS.GetAllProvidersController);
 export const updateProviderStatusController = container.get<UpdateProviderStatusController>(TYPES_ADMIN_CONTROLLERS.UpdateProviderStatusController);
+export const getAllUsersController = container.get<GetAllUsersController>(TYPES_ADMIN_CONTROLLERS.GetAllUsersController);
+export const updateUserStatusController = container.get<UpdateUserStatusController>(TYPES_ADMIN_CONTROLLERS.UpdateUserStatusController);  
+
+export const getUserProfileController = container.get<GetUserProfileController>(TYPES_USER_CONTROLLERS.GetUserProfileController);
+export const updateUserProfileController = container.get<UpdateUserProfileController>(TYPES_USER_CONTROLLERS.UpdateUserProfileController);   
 
 export const createAircraftController = container.get<CreateAircraftController>(TYPES_AIRCRAFT_CONTROLLERS.CreateAircraftController);
 export const getProviderAircraftsController = container.get<GetProviderAircraftsController>(TYPES_AIRCRAFT_CONTROLLERS.GetProviderAircraftsController);
@@ -116,14 +156,21 @@ export const generateSeatsController = container.get<GenerateSeatsController>(TY
 export const getSeatLayoutsController = container.get<GetSeatLayoutsController>(TYPES_AIRCRAFT_CONTROLLERS.GetSeatLayoutsController)
 export const deletleSeatLayoutController = container.get<DeleteSeatLayoutController>(TYPES_AIRCRAFT_CONTROLLERS.DeleteSeatLayoutController)
 
-export const createFlightController = container.get<CreateFlightController>(TYPES_AIRCRAFT_CONTROLLERS.CreateFlightController);
-export const availableAircraftsForScheduleController = container.get<AvailableAircraftsForScheduleController>(TYPES_AIRCRAFT_CONTROLLERS.AvailableAircraftsForScheduleController);  
+export const createFlightController = container.get<CreateFlightController>(TYPES_FLIGHT_CONTROLLERS.CreateFlightController);
+export const availableAircraftsForScheduleController = container.get<AvailableAircraftsForScheduleController>(TYPES_FLIGHT_CONTROLLERS.AvailableAircraftsForScheduleController);  
 
-export const getProviderFlightsController = container.get<GetProviderFlightsController>(TYPES_AIRCRAFT_CONTROLLERS.GetProviderFlightsController);
-export const pendingFlightsForApprovalController = container.get<PendingFlightsForApprovalController>(TYPES_AIRCRAFT_CONTROLLERS.PendingFlightsForApprovalController);
-export const approveFlightController = container.get<ApproveFlightController>(TYPES_AIRCRAFT_CONTROLLERS.ApproveFlightController);  
-export const updateFlightController = container.get<UpdateFlightController>(TYPES_AIRCRAFT_CONTROLLERS.UpdateFlightController);
-
+export const getProviderFlightsController = container.get<GetProviderFlightsController>(TYPES_FLIGHT_CONTROLLERS.GetProviderFlightsController);
+export const pendingFlightsForApprovalController = container.get<PendingFlightsForApprovalController>(TYPES_FLIGHT_CONTROLLERS.PendingFlightsForApprovalController);
+export const approveFlightController = container.get<ApproveFlightController>(TYPES_FLIGHT_CONTROLLERS.ApproveFlightController);  
+export const updateFlightController = container.get<UpdateFlightController>(TYPES_FLIGHT_CONTROLLERS.UpdateFlightController);
+export const getFlightByIdController = container.get<GetFlightByIdController>(TYPES_FLIGHT_CONTROLLERS.GetFlightByIdController);
+export const searchFlightsController = container.get<SearchFlightsController>(TYPES_FLIGHT_CONTROLLERS.SearchFlightsController);
+export const deleteFlightController = container.get<DeleteFlightController>(TYPES_FLIGHT_CONTROLLERS.DeleteFlightController);
+export const getFlightSeatsController = container.get<GetFlightSeatsController>(TYPES_FLIGHT_CONTROLLERS.GetFlightSeatsController);
+export const getFlightSeatsForUserController = container.get<GetFlightSeatsForUserController>(TYPES_FLIGHT_CONTROLLERS.GetFlightSeatsForUserController); 
+export const createRecurringFlightController = container.get<CreateRecurringFlightController>(TYPES_FLIGHT_CONTROLLERS.CreateRecurringFlightController);
+export const getAllFlightsForAdminController = container.get<GetAllFlightsForAdminController>(TYPES_FLIGHT_CONTROLLERS.GetAllFlightsForAdminController);
+export const rejectSingleFlightController = container.get<RejectSingleFlightController>(TYPES_FLIGHT_CONTROLLERS.RejectSingleFlightController); 
 
 export const createUseUseCase = container.get<ICreateUserUseCase>(TYPES_AUTH_USECASES.CreateUserUseCase);
 export const createProviderUseCase = container.get<ICreateProviderUseCase>(TYPES_AUTH_USECASES.CreateProviderUseCase);
@@ -133,6 +180,7 @@ export const otpUseCase = container.get<IOtpUseCase>(TYPES_AUTH_USECASES.OtpUseC
 export const signInUseCase = container.get<ISignInUseCase>(TYPES_AUTH_USECASES.SignInUseCase);
 export const forgotPasswordUseCase = container.get<IForgotPasswordUseCase>(TYPES_AUTH_USECASES.ForgotPasswordUseCase);
 export const sendPasswordResetLinkUseCase = container.get<ISendPasswordRestLinkUseCase>(TYPES_AUTH_USECASES.SendPasswordRestLinkUseCase);
+export const changePasswordUseCase = container.get<IChangePasswordUseCase>(TYPES_AUTH_USECASES.ChangePasswordUseCase)
 export const loggerUseCase = container.get<ILoggerUseCase>(TYPES_LOGGER_USECASES.LoggerUseCase);
 export const getPendingProvidersUseCase = container.get<IGetPendingProvidersUseCase>(TYPES_PROVIDER_USECASES.GetPendingProvidersUseCase)
 export const rejectProviderUseCase = container.get<IRejectProviderUseCase>(TYPES_PROVIDER_USECASES.RejectProviderUseCase);
@@ -141,7 +189,12 @@ export const completeProviderProfileUseCase = container.get<ICompleteProviderPro
 export const getProviderProfileUseCase = container.get<IGetProviderProfileUseCase>(TYPES_PROVIDER_USECASES.GetProviderProfileUseCase);
 
 export const getAllProvidersUseCase = container.get<IGetAllProvidersUseCase>(TYPES_ADMIN_USECASES.GetAllProvidersUseCase);
-export const updateProviderStatusUseCase = container.get<IUpdateProviderStatusUseCase>(TYPES_ADMIN_USECASES.UpdateProviderStatusUseCase);
+export const updateProviderStatusUseCase = container.get<IUpdateProviderStatusUseCase>(TYPES_ADMIN_USECASES.UpdateProviderStatusUseCase)
+export const getAllUsersUseCase = container.get<IGetAllUsersUseCase>(TYPES_ADMIN_USECASES.GetAllUsersUseCase);
+export const updateUserStatusUseCase = container.get<IUpdateUserStatusUseCase>(TYPES_ADMIN_USECASES.UpdateUserStatusUseCase);
+
+export const GetUserProfileUseCase = container.get<IGetUserProfileUseCase>(TYPES_USER_USECASES.GetUserProfileUseCase);
+export const UpdateUserProfileUseCase = container.get<IUpdateUserProfileUseCase>(TYPES_USER_USECASES.UpdateUserProfileUseCase);
 
 
 export const createAircraftUseCase = container.get<ICreateAircraftUseCase>(TYPES_AIRCRAFT_USECASES.CreateAircraftUseCase);
@@ -154,10 +207,19 @@ export const updateAircraftLocationUseCase = container.get<IUpdateAircraftLocati
 export const createSeatLayoutUseCase = container.get<ICreateSeatLayoutUseCase>(TYPES_AIRCRAFT_USECASES.CreateSeatLayoutUseCase);
 export const generateSeatsUseCase = container.get<IGenerateSeatsUseCase>(TYPES_AIRCRAFT_USECASES.GenerateSeatsUseCase);
 export const getAllSeatTypesUseCase = container.get<IGetAllSeatTypesUseCase>(TYPES_AIRCRAFT_USECASES.GetAllSeatTypesUseCase);
-export const deleteSeatLayoutUseCase = container.get<DeleteSeatLayoutUseCase>(TYPES_AIRCRAFT_USECASES.DeleteSeatLayoutUseCase);
-export const createFlightUseCase = container.get<ICreateFlightUseCase>(TYPES_AIRCRAFT_USECASES.CreateFlightUseCase);
-export const getProviderFlightsUseCase = container.get<IGetProviderFlightsUseCase>(TYPES_AIRCRAFT_USECASES.GetProviderFlightsUseCase);  
-export const pendingFlightsForApprovalUseCase = container.get<IPendingFlightsForApprovalUseCase>(TYPES_AIRCRAFT_USECASES.PendingFlightsForApprovalUseCase);
-export const approveFlightUseCase = container.get<IApproveFlightUseCase>(TYPES_AIRCRAFT_USECASES.ApproveFlightUseCase);   
-export const availableAircraftsForScheduleUseCase = container.get<IAvailableAircraftsForScheduleUsecase>(TYPES_AIRCRAFT_USECASES.AvailableAircraftsForScheduleUseCase); 
-export const updateFlightUsecase = container.get<IUpdateFlightUseCase>(TYPES_AIRCRAFT_USECASES.UpdateFlightUseCase)
+export const deleteSeatLayoutUseCase = container.get<IDeleteSeatLayoutUseCase>(TYPES_AIRCRAFT_USECASES.DeleteSeatLayoutUseCase);
+
+export const createFlightUseCase = container.get<ICreateFlightUseCase>(TYPES_FLIGHT_USECASES.CreateFlightUseCase);
+export const getProviderFlightsUseCase = container.get<IGetProviderFlightsUseCase>(TYPES_FLIGHT_USECASES.GetProviderFlightsUseCase);  
+export const pendingFlightsForApprovalUseCase = container.get<IPendingFlightsForApprovalUseCase>(TYPES_FLIGHT_USECASES.PendingFlightsForApprovalUseCase);
+export const approveFlightUseCase = container.get<IApproveFlightUseCase>(TYPES_FLIGHT_USECASES.ApproveFlightUseCase);   
+export const availableAircraftsForScheduleUseCase = container.get<IAvailableAircraftsForScheduleUsecase>(TYPES_FLIGHT_USECASES.AvailableAircraftsForScheduleUseCase); 
+export const updateFlightUsecase = container.get<IUpdateFlightUseCase>(TYPES_FLIGHT_USECASES.UpdateFlightUseCase);
+export const getFlightByIdUseCase = container.get<IGetFlightByIdUseCase>(TYPES_FLIGHT_USECASES.GetFlightByIdUseCase);
+export const searchFlightsUseCase = container.get<ISearchFlightsUseCase>(TYPES_FLIGHT_USECASES.SearchFlightsUseCase);
+export const deleteFlightUseCase = container.get<IDeleteFlightUseCase>(TYPES_FLIGHT_USECASES.DeleteFlightUseCase);
+export const getFlightSeatsUseCase = container.get<IGetFlightSeatsUseCase>(TYPES_FLIGHT_USECASES.GetFlightSeatsUseCase);
+export const getFlightSeatsForUserUseCase = container.get<IGetFlightSeatsUseCase>(TYPES_FLIGHT_USECASES.GetFlightSeatsUseCase);
+export const createRecurringFlightUseCase = container.get<ICreateRecurringFlightUseCase>(TYPES_FLIGHT_USECASES.CreateRecurringFlightUseCase);
+export const getAllFlightsForAdminUseCase = container.get<IGetAllFlightsForAdminUseCase>(TYPES_FLIGHT_USECASES.GetAllFlightsForAdminUseCase);
+export const rejectSingleFlightUseCase = container.get<IRejectSingleFlightUseCase>(TYPES_FLIGHT_USECASES.RejectSingleFlightUseCase);

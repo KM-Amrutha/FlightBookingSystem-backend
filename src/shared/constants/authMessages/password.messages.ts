@@ -9,6 +9,6 @@ export const PASSWORD_MESSAGES = {
     'The password reset link has expired. Please request a new one.',
   RESET_SUCCESS:
     'Your password has been successfully reset. You can now log in with your new password.',
-  INCORRECT:
+  INCORRECT_PASSWORD:
     'The password you entered is incorrect. Please try again.',
 } as const;

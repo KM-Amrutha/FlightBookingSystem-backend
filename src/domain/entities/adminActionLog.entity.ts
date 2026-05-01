@@ -1,6 +1,4 @@
-import mongoose, { Document } from "mongoose";
-
-export interface IAdminActionLog extends Document {
+export interface IAdminActionLog {
   _id: string;
   adminId: string;
   actionType: string;

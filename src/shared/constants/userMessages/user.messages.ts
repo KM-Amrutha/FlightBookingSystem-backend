@@ -1,4 +1,4 @@
 export const USER_MESSAGES = {
-    UserList : "Users are retrieved successfully",
-    FailedToRetrieveUserList : "An error occured whileC retrieving the users, Please try again"
+    USERS_LIST_RETRIEVED : "Users are retrieved successfully",
+    FAILED_TO_RETRIEVE_USERS_LIST : "An error occured while retrieving the users, Please try again"
 }as const;

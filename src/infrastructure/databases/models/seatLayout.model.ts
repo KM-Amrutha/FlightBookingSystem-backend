@@ -7,7 +7,6 @@ const seatLayoutSchema = new Schema<ISeatLayout>(
       type: String,
       required: [true, "Aircraft ID is required"],
       ref: "Aircraft",
-      index: true
     },
     cabinClass: {
       type: String,

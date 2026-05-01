@@ -1,14 +1,16 @@
-import mongoose, { Document } from "mongoose";
 
-export interface IPassenger extends Document {
-  _id: string;
-  bookingId: string;
-  firstName: string;
-  lastName: string;
-  gender: "male" | "female" | "other";
+// import { IBookingPassengerSegment } from "./booking.entity";
+export interface IPassenger {
+  passengerId: string;
+  name: string;
   dob: Date;
-  mobile: string;
+  gender: "male" | "female" | "other";
   address: string;
-  createdAt: Date;
-  updatedAt: Date;
+  mobile: string;
+  extraLuggageKg: number;
+  // segments: IBookingPassengerSegment[];
+  passengerTotal: number;
+  status: "active" | "cancelled";
+  cancelledAt?: Date;
+  refundAmount?: number;
 }

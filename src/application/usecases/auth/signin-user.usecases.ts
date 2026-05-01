@@ -17,11 +17,15 @@ import {
   validationError,
 } from "@presentation/middlewares/error.middleware";
 
-import { Provider } from "@application/dtos/provider-dtos";
+import { IProvider } from "@domain/entities/provider.entity";
 import { IUser } from "@domain/entities/user.entity";
 import { injectable, inject } from "inversify";
 import { TYPES_REPOSITORIES } from "@di/types-repositories";
 import { TYPES_SERVICES } from "@di/types-services";
+import { UserMapper } from "@application/mappers/userMapper";
+import { ProviderMapper } from "@application/mappers/providerMapper";
+import { userListDTO } from "@application/dtos/user-dtos";
+import { Provider } from "@application/dtos/provider-dtos";
 
 
 
@@ -39,16 +43,16 @@ export class SignInUseCase implements ISignInUseCase {
   ) {}
 
 
- private generateAccessToken(user: IUser | Provider): string {
+ private generateAccessToken(user: IUser | IProvider): string {
     return this._authService.generateAccessToken({
-      _id: user._id.toString(),
+      _id: user.id.toString(),
       role: user.role,
     });
   }
 
-   private generateRefreshToken(user: IUser | Provider): string {
+   private generateRefreshToken(user: IUser | IProvider): string {
     return this._authService.generateRefreshToken({
-      _id: user._id.toString(),
+      _id: user.id.toString(),
       role: user.role,
     });
   }
@@ -72,7 +76,7 @@ export class SignInUseCase implements ISignInUseCase {
       userData?.password
     );
     if (!isValidPassword) {
-      throw new validationError(PASSWORD_MESSAGES.INCORRECT);
+      throw new validationError(PASSWORD_MESSAGES.INCORRECT_PASSWORD);
     }
     return userData;
   }
@@ -80,7 +84,7 @@ export class SignInUseCase implements ISignInUseCase {
     private async validateProviderLogin(
     email: string,
     password: string
-  ): Promise<Provider> {
+  ): Promise<IProvider> {
     const providerData = await this._providerRepository.getProviderByEmailWithPassword(email);
     if (!providerData) {
       throw new validationError(AUTH_MESSAGES.EMAIL_NOT_FOUND);
@@ -96,7 +100,7 @@ export class SignInUseCase implements ISignInUseCase {
       providerData?.password
     );
     if (!isValidPassword) {
-      throw new validationError(PASSWORD_MESSAGES.INCORRECT);
+      throw new validationError(PASSWORD_MESSAGES.INCORRECT_PASSWORD);
     }
     const providerDTO =  await this._providerRepository.getProviderByEmail(email);
     if (!providerDTO) {
@@ -106,25 +110,33 @@ export class SignInUseCase implements ISignInUseCase {
   }
 
 
-   async execute({ email, password }: SignInDTO): Promise<{
-    accessToken: string;
-    refreshToken: string;
-    userData: IUser | Provider;
-  }> {
+ async execute({ email, password }: SignInDTO): Promise<{
+  accessToken: string;
+  refreshToken: string;
+  userData: userListDTO;
+} | {
+  accessToken: string;
+  refreshToken: string;
+  providerData: Provider;
+}> {
     try {
       const userData = await this.validateUserLogin(email, password);
       // const userWithRole = { ...userData, role: "user" };
       const accessToken = this.generateAccessToken(userData);
       const refreshToken = this.generateRefreshToken(userData);
-      return { accessToken, refreshToken, userData};
+      return UserMapper.toLoginResponse(userData, accessToken, refreshToken)
+     
     } catch (userError) {
       try {
         const providerData = await this.validateProviderLogin(email, password); 
         providerData.role = "provider";
         const accessToken = this.generateAccessToken(providerData);
         const refreshToken = this.generateRefreshToken(providerData);
-        return { accessToken, refreshToken, userData: providerData };
+         return ProviderMapper.toLoginResponse(providerData, accessToken, refreshToken);
+      
+       
       } catch (error) {
+        console.error("Login error:", error);
         throw userError;
       }
     }

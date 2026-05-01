@@ -1,7 +1,5 @@
-import { Document } from "mongoose";
-
-export interface IDestination extends Document {
-  _id: string;
+export interface IDestination {
+  id: string;
   name: string;
   iataCode: string;
   icaoCode?: string;

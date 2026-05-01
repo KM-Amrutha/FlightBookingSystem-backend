@@ -14,8 +14,11 @@ import {
   UpdateFlightDTO,
   FlightDetailsDTO,
 } from "@application/dtos/flight-dtos";
-import { validationError } from "@presentation/middlewares/error.middleware";
+import { IFlight } from "@domain/entities/flight.entity";
+import { validationError,NotFoundError, ForbiddenError } from "@presentation/middlewares/error.middleware";
 import { AUTH_MESSAGES } from "@shared/constants/index.constants";
+import { FlightMapper } from "@application/mappers/flightMapper";
+
 
 @injectable()
 export class UpdateFlightUseCase implements IUpdateFlightUseCase {
@@ -39,32 +42,43 @@ export class UpdateFlightUseCase implements IUpdateFlightUseCase {
 
     if (!providerId || !flightId) {
       throw new validationError("Provider ID and Flight ID are required");
+
     }
 
     const flight = await this._flightRepository.getFlightDetails(flightId);
     console.log("flight is: ", flight);
-    if (!flight) {
-      throw new validationError("Flight not found");
-    }
 
-    if (flight.providerId !== providerId) {
-      throw new validationError("You can only edit your own flights");
-    }
+   if (!flight) throw new NotFoundError("Flight not found");
+if (flight.providerId !== providerId) throw new ForbiddenError("You can only edit your own flights");
+
+      // ── flight status check ──
+if (flight.flightStatus !== "scheduled") {
+  throw new validationError("Only scheduled flights can be edited");
+}
+
+// ── departure time check ──
+if (new Date(flight.departureTime) <= new Date()) {
+  throw new validationError("Cannot edit a flight that has already departed");
+}
+
+// ── recurring/return restriction ──
+if (flight.flightType === "recurring" || flight.flightType === "return") {
+  if (data.durationMinutes !== undefined) {
+    throw new validationError("Duration cannot be edited for recurring or return flights");
+  }
+  if (data.arrivalDestinationId !== undefined) {
+    throw new validationError("Arrival destination cannot be edited for recurring or return flights");
+  }
+}
 
     const [provider, isBlocked] = await Promise.all([
       this._providerRepository.getProviderDetailsById(providerId),
       this._providerRepository.isProviderBlocked(providerId),
     ]);
 
-    if (!provider) { 
-      throw new validationError("Provider not found");
-    }
-    if (isBlocked) {
-      throw new validationError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
-    }
-    if (!provider.isVerified) {
-      throw new validationError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
-    }
+  if (!provider) throw new NotFoundError("Provider not found");
+if (isBlocked) throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
+if (!provider.isVerified) throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
 
     // Duration validation
     if (
@@ -99,36 +113,38 @@ export class UpdateFlightUseCase implements IUpdateFlightUseCase {
         data.arrivalDestinationId || flight.arrivalDestinationId;
       const arrDest = await this._destinationRepository.findById(arrDestId);
 
-      if (!depDest || !arrDest) {
-        throw new validationError("Invalid departure or arrival destination");
-      }
+    if (!depDest || !arrDest) throw new NotFoundError("Invalid departure or arrival destination");
 
       const departureLocal = new Date(flight.departureTime);
       if (isNaN(departureLocal.getTime())) {
         throw new validationError("Invalid stored departure time");
       }
 
-      const durationMinutes =
-        data.durationMinutes ?? flight.durationMinutes;
+      
+        const durationMinutes = data.durationMinutes ?? flight.durationMinutes;
 
       // Local departure → UTC
-      const departureUtc = new Date(
-        departureLocal.toLocaleString("en-US", { timeZone: depDest.timezone })
-      );
+      // const departureUtc = new Date(
+      //   departureLocal.toLocaleString("en-US", { timeZone: depDest.timezone })
+      // );
+      const departureUtc = new Date(flight.departureTime);
+
 
       // Add duration
       const arrivalUtc = new Date(
         departureUtc.getTime() + durationMinutes * 60 * 1000
       );
+      
+      calculatedArrivalTime = arrivalUtc;
 
       // UTC → Local arrival time
-      calculatedArrivalTime = new Date(
-        arrivalUtc.toLocaleString("en-US", { timeZone: arrDest.timezone })
-      );
+      // calculatedArrivalTime = new Date(
+      //   arrivalUtc.toLocaleString("en-US", { timeZone: arrDest.timezone })
+      // );
     }
 
     // Build update payload - type-safe intersection
-    const updatePayload: UpdateFlightDTO & { arrivalTime?: Date } = {
+    const updatePayload: Partial<IFlight> & { arrivalTime?: Date } = {
       ...data,
       ...(calculatedArrivalTime && { arrivalTime: calculatedArrivalTime }),
     };
@@ -139,10 +155,8 @@ export class UpdateFlightUseCase implements IUpdateFlightUseCase {
       updatePayload
     );
 
-    if (!updatedFlight) {
-      throw new validationError("Failed to update flight");
-    }
+   if (!updatedFlight) throw new NotFoundError("Failed to update flight");
 
-    return updatedFlight;
+    return FlightMapper.toFlightDetailsDTO(updatedFlight);
   }
 }

@@ -1,7 +1,6 @@
 import {IOtp} from "@domain/entities/otp.entity"
-import { IBaseRepository } from "@domain/interfaces/IBaseRepository"
-import { OtpDTO } from "@application/dtos/auth-dtos"
+import { IBaseRepository } from "@domain/interfaces/IBaseRepository";
 
 export interface IOtpRepository extends IBaseRepository <IOtp> {
-   create(createOTP:OtpDTO):Promise<IOtp>; 
+   createOtp(email:string,otp:string):Promise<IOtp>; 
 }

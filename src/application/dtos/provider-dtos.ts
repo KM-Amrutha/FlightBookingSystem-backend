@@ -78,3 +78,5 @@ export interface UpdateProviderDTO {
   rejectionReason?: string|null;
   rejectionDate?: Date |null;
 }
+
+

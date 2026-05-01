@@ -9,6 +9,10 @@ export {SeatRepository} from "@infrastructure/databases/repositories/seat.reposi
 export {SeatLayoutRepository} from "@infrastructure/databases/repositories/seatLayout.repository";
 export {SeatTypeRepository} from "@infrastructure/databases/repositories/seatType.repository";
 export {FlightRepository} from "@infrastructure/databases/repositories/flight.repository";
+export {FlightSeatRepository} from "@infrastructure/databases/repositories/flightSeat.repository";
+export {BookingRepository} from "@infrastructure/databases/repositories/booking.repository";
+export {FoodRepository} from "@infrastructure/databases/repositories/food.repository";  
+
 
 // services
 export {JwtService} from "@infrastructure/services/auth/jwt.service";
@@ -18,7 +22,8 @@ export {OtpService} from "@infrastructure/services/security/otp.services";
 export {EmailService} from "@infrastructure/services/communication/email.service";
 export {CloudinaryService} from "@infrastructure/services/storage/cloudinary.services";
 export {LoggerService} from "@infrastructure/services/logging/logger.services";
-export {GoogleAuthService} from "@infrastructure/services/auth/google.auth.service";    
+export {GoogleAuthService} from "@infrastructure/services/auth/google.auth.service";   
+export {RedisService} from "@infrastructure/services/cache/redis.service"; 
 //   Authentication UseCases
 export {CreateUserUseCase} from "@application/usecases/auth/create-user.usecases";
 export {CheckUserBlockStatusUseCase} from "@application/usecases/auth/check-user-blockstatus.usecase";
@@ -30,6 +35,7 @@ export {ForgotPasswordUseCase} from "@application/usecases/auth/forgot-password.
 export{SendPasswordRestLinkUseCase} from "@application/usecases/auth/send-password-reset-link.usecase";
 export {LoggerUseCase} from "@application/usecases/handle-log-usecase";
 export {GoogleAuthUseCase} from "@application/usecases/auth/google-auth.usecase";
+export {ChangePasswordUseCase} from "@application/usecases/auth/change-password.usecase";
 
 // ProviderUseCases
 
@@ -40,9 +46,15 @@ export {GetPendingProvidersUseCase} from "@application/usecases/admin/get-pendin
 export {CompleteProviderProfileUseCase} from "@application/usecases/provider/completeProviderProfile.usecase";
 export {GetProviderProfileUseCase} from "@application/usecases/provider/getProviderProfile.usecase";
 
+// User UseCases
+export {GetUserProfileUseCase} from "@application/usecases/user/getUserProfile.usecase";
+export {UpdateUserProfileUseCase} from "@application/usecases/user/UpdateUserProfile.usecase";
+
 // Admin UseCases
-export {GetAllProvidersUseCase} from "@application/usecases/admin/getAllProvider.usecase";
+export {GetAllProvidersUseCase} from "@application/usecases/admin/getAll-provider.usecase";
 export {UpdateProviderStatusUseCase} from "@application/usecases/admin/update-providerStatus.usecase";
+export {GetAllUsersUseCase} from "@application/usecases/admin/getAll-users.usecase";
+export {UpdateUserStatusUseCase} from "@application/usecases/admin/update-usersStatus.usecase";
 
 // Aircraft UseCases
 export {CreateAircraftUseCase} from "@application/usecases/aircraft/create-aircraft.usecase";
@@ -57,14 +69,22 @@ export {GenerateSeatsUseCase} from "@application/usecases/aircraft/generate-seat
 export {GetAllSeatTypesUseCase} from "@application/usecases/aircraft/getall-seatTypes.usecase";
 export {GetSeatLayoutsByAircraftUseCase} from "@application/usecases/aircraft/getSeatLayoutBYAircraft.usecase"
 export {DeleteSeatLayoutUseCase} from "@application/usecases/aircraft/delete-seatLayout.usecase"
+
+// Flight UseCases
 export {CreateFlightUseCase} from "@application/usecases/flight/create-flight.usecase";
-export {GetProviderFlightsUseCase} from "@application/usecases/flight/getProvider-flightUsecase";   
+export {GetProviderFlightsUseCase} from "@application/usecases/flight/getProvider-flight.usecase";   
 export {PendingFlightsForApprovalUseCase} from "@application/usecases/flight/pendingFlightsForApproval.usecase";
-export {ApproveFlightUseCase} from "@application/usecases/flight/aproove-flight.usecase";
+export {ApproveFlightUseCase} from "@application/usecases/flight/approve-flight.usecase";
 export {AvailableAircraftsForScheduleUseCase} from "@application/usecases/flight/availableAircraftForSchedule.usecase";
 export {UpdateFlightUseCase} from "@application/usecases/flight/update-flight.usecase";
-
-
+export {GetFlightByIdUseCase} from "@application/usecases/flight/get-flightById.usecase";
+export {SearchFlightsUseCase} from "@application/usecases/flight/searchFlight.usecase";
+export {DeleteFlightUseCase} from "@application/usecases/flight/delete-flight.usecase";
+export {GetFlightSeatsUseCase} from "@application/usecases/flight/getFlightSeat.usecase";
+export {CreateRecurringFlightUseCase} from "@application/usecases/flight/create-recurringFlight.usecase";  
+export {GetAllFlightsForAdminUseCase} from "@application/usecases/flight/getall-flightsForAdmin.usecase";
+export {RejectSingleFlightUseCase} from "@application/usecases/flight/reject-singleFlight.usecase";
+ 
 
 //   Authentication Controllers 
 
@@ -77,16 +97,23 @@ export {RefreshAccessTokenController} from "@presentation/controllers/auth/refre
 export {ForgotPasswordController} from "@presentation/controllers/auth/forget-password.controller";
 export {PasswordResetLinkController} from "presentation/controllers/auth/genereate-password-link.controller";
 export {GoogleAuthController} from "@presentation/controllers/auth/google-auth.controller"; 
+export {ChangePasswordController} from "@presentation/controllers/auth/change-password.controller"
 
 // Admin Controllers
 
 export {ProviderVerificationController} from "@presentation/controllers/admin/provider-verification.controller";
 export {GetAllProvidersController} from "@presentation/controllers/admin/get-allProvider.controller";
 export {UpdateProviderStatusController} from "@presentation/controllers/admin/update-providerStatus.controller";
+export {GetAllUsersController} from "@presentation/controllers/admin/get-allUsers.controller";
+export {UpdateUserStatusController} from "@presentation/controllers/admin/update-userStatus.controller";
+
 
 // Provider Controllers
 export {CompleteProviderProfileController} from "@presentation/controllers/provider/completeProviderProfile.controller";
 export {GetProviderProfileController} from "@presentation/controllers/provider/getProviderProfile.controller";
+
+export {GetUserProfileController} from "@presentation/controllers/user/getUserProfile.controller";
+export {UpdateUserProfileController} from "@presentation/controllers/user/updateUserProfile.controller";
 
 
 // Aircraft Controllers
@@ -101,12 +128,21 @@ export {GenerateSeatsController} from "@presentation/controllers/provider/genera
 export {GetSeatLayoutsController}  from "@presentation/controllers/provider/getSeatLayout.controller";
 export {DeleteSeatLayoutController} from "@presentation/controllers/provider/deleteSeatLayout.controller"
 
+// Flight Controllers
 export {CreateFlightController} from "@presentation/controllers/flight/createFlight.controller";
 export {GetProviderFlightsController} from "@presentation/controllers/flight/getProviderFlights.controller";
 export {PendingFlightsForApprovalController} from "@presentation/controllers/flight/pendingFlightsForApproval.controller";
 export {ApproveFlightController} from "@presentation/controllers/flight/approveFlights.controller";
-export {AvailableAircraftsForScheduleController} from "@presentation/controllers/flight/availableFlightsForSchedule.controller";    
+export {AvailableAircraftsForScheduleController} from "@presentation/controllers/flight/availableAircraftsForSchedule.controller";    
 export {UpdateFlightController} from "@presentation/controllers/flight/updateFlight.controller";
+export {GetFlightByIdController} from "@presentation/controllers/flight/getFlightById.controller";
+export {SearchFlightsController} from "@presentation/controllers/flight/searchFlights.controller";  
+export {DeleteFlightController} from "@presentation/controllers/flight/deleteFlight.controller";
+export {GetFlightSeatsController} from "@presentation/controllers/flight/getFlightSeat.controller";
+export {GetFlightSeatsForUserController} from "@presentation/controllers/flight/getFlightSeatUser.controller";
+export {CreateRecurringFlightController} from "@presentation/controllers/flight/createRecurringFlight.controller";
+export {RejectSingleFlightController} from "@presentation/controllers/flight/rejectSingleFlight.controller";
+export {GetAllFlightsForAdminController} from "@presentation/controllers/flight/getAllFlightsForAdmin.controller";  
 
 
 
@@ -121,7 +157,9 @@ export {ISeatRepository} from "@domain/interfaces/ISeatRepository";
 export {ISeatLayoutRepository} from "@domain/interfaces/ISeatLayoutRepository";
 export {ISeatTypeRepository} from "@domain/interfaces/ISeatTypeRepository";
 export {IFlightRepository} from "@domain/interfaces/IFlightRepository";
-
+export {IFlightSeatRepository} from "@domain/interfaces/IFlightSeatRepository";
+export {IBookingRepository} from "@domain/interfaces/IBookingRepository";
+export {IFoodRepository} from "@domain/interfaces/IFoodRepository";
 
 
 
@@ -136,31 +174,36 @@ export {IEmailService} from "@application/interfaces/service/communication/IEmai
 export {ICloudStorageService} from "@application/interfaces/service/storage/ICloud.storage.service";
 export {ILoggerService} from "@application/interfaces/service/logging/ILogger.service";
 export {IGoogleAuthService} from "@application/interfaces/service/auth/IGoogle.auth.service";   
+export {IRedisService} from "@application/interfaces/service/cache/IRedis.service";
 
 // usecase Interfaces
 
 
-export {ICheckUserBlockStatusUseCase} from "@application/interfaces/usecase/ICheck-userBlockStatus.usecase";
-export {ICreateProviderUseCase} from "@application/interfaces/usecase/ICreate-providerUsecase";
-export {ICreateUserUseCase} from "@application/interfaces/usecase/ICreate-user.usecase";
-export {IForgotPasswordUseCase} from "@application/interfaces/usecase/IForgot-password.usecase";
-export {IOtpUseCase} from "@application/interfaces/usecase/IOtp.usecase";
-export {ISendPasswordRestLinkUseCase} from "@application/interfaces/usecase/ISend-passwordLink.usecase";
-export {ISignInUseCase} from "@application/interfaces/usecase/ISignin-user.usecase";
-export {ITokenUseCase} from "@application/interfaces/usecase/IToken.usecase";
+export {ICheckUserBlockStatusUseCase} from "@application/interfaces/usecase/auth/ICheck-userBlockStatus.usecase";
+export {ICreateProviderUseCase} from "@application/interfaces/usecase/auth/ICreate-provider.usecase";
+export {ICreateUserUseCase} from "@application/interfaces/usecase/auth/ICreate-user.usecase";
+export {IForgotPasswordUseCase} from "@application/interfaces/usecase/auth/IForgot-password.usecase";
+export {IOtpUseCase} from "@application/interfaces/usecase/auth/IOtp.usecase";
+export {ISendPasswordRestLinkUseCase} from "@application/interfaces/usecase/auth/ISend-passwordLink.usecase";
+export {ISignInUseCase} from "@application/interfaces/usecase/auth/ISignin-user.usecase";
+export {ITokenUseCase} from "@application/interfaces/usecase/auth/IToken.usecase";
 export {ILoggerUseCase} from "@application/interfaces/usecase/ILogger-usecase";
+export {IChangePasswordUseCase} from "@application/interfaces/usecase/auth/IChange-password.usecase";
 
 
+export {IGetUserProfileUseCase} from "@application/interfaces/usecase/user/IGetUserProfile.usecase";
+export {IUpdateUserProfileUseCase} from "@application/interfaces/usecase/user/IUpdateUserProfile.usecase";
 
+export {IGetPendingProvidersUseCase} from "@application/interfaces/usecase/admin/IGetPendingProvider.usecase";
+export {IRejectProviderUseCase} from "@application/interfaces/usecase/admin/IRejectedProvider.usecase";
+export {IVerifyProviderUseCase} from "@application/interfaces/usecase/admin/IVerifyProvider.usecase";
+export {IUpdateUserStatusUseCase} from "@application/interfaces/usecase/admin/IUpdate-userStatus.usecase";
 
-export {IGetPendingProvidersUseCase} from "@application/interfaces/usecase/IGetPendingProviderUsecase";
-export {IRejectProviderUseCase} from "@application/interfaces/usecase/IRejectedProviderUsecase";
-export {IVerifyProviderUseCase} from "@application/interfaces/usecase/IVerifyProviderUsecase";
-
-export {ICompleteProviderProfileUseCase} from "@application/interfaces/usecase/ICompleteProvider-profileUsecase";
-export {IGetProviderProfileUseCase} from "@application/interfaces/usecase/IGetProviderProfileUsecase";
-export {IGetAllProvidersUseCase} from "@application/interfaces/usecase/IGetAllProvidersUsecase";
-export {IUpdateProviderStatusUseCase} from "@application/interfaces/usecase/IUpdate-providerStatus.usecase";
+export {ICompleteProviderProfileUseCase} from "@application/interfaces/usecase/provider/ICompleteProvider-profile.usecase";
+export {IGetProviderProfileUseCase} from "@application/interfaces/usecase/provider/IGetProviderProfile.usecase";
+export {IGetAllProvidersUseCase} from "@application/interfaces/usecase/admin/IGetAllProviders.usecase";
+export {IUpdateProviderStatusUseCase} from "@application/interfaces/usecase/admin/IUpdate-providerStatus.usecase";
+export {IGetAllUsersUseCase} from "@application/interfaces/usecase/admin/IGetAllUsers.usecase";
 
 export {ICreateAircraftUseCase} from "@application/interfaces/usecase/aircraft/ICreate-aircraftUsecase";
 export {IUpdateAircraftUseCase} from "@application/interfaces/usecase/aircraft/IUpdate-aircraftUsecase";
@@ -181,3 +224,10 @@ export {IPendingFlightsForApprovalUseCase} from "@application/interfaces/usecase
 export {IApproveFlightUseCase} from "@application/interfaces/usecase/flight/IApprove-flightUsecase";
 export {IAvailableAircraftsForScheduleUsecase} from "@application/interfaces/usecase/flight/IAvailableAircraftsForSchedule-Usecase";    
 export {IUpdateFlightUseCase} from "@application/interfaces/usecase/flight/IUpdate-flightUsecase";
+export {IGetFlightByIdUseCase} from "@application/interfaces/usecase/flight/IGetFlight-byIdUsecase";
+export {ISearchFlightsUseCase} from "@application/interfaces/usecase/flight/ISearch-flightUsecase"; 
+export {IDeleteFlightUseCase} from "@application/interfaces/usecase/flight/IDelete-flightUsecase";
+export {IGetFlightSeatsUseCase} from "@application/interfaces/usecase/flight/IGetFlight-seatUsecase";
+export {ICreateRecurringFlightUseCase} from "@application/interfaces/usecase/flight/ICreate-recurringFlightUsecase";
+export {IGetAllFlightsForAdminUseCase} from "@application/interfaces/usecase/flight/IGetAll-flightsForAdminUsecase";
+export {IRejectSingleFlightUseCase} from "@application/interfaces/usecase/flight/IReject-singleFlightUsecase";

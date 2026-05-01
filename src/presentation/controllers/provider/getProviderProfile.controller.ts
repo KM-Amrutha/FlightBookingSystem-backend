@@ -14,7 +14,7 @@ export class GetProviderProfileController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const providerId = (req as any).user._id;
+      const providerId = req.user!._id;
 
       const provider = await this._getProviderProfileUseCase.execute(providerId);
 

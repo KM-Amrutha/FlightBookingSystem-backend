@@ -1,6 +1,4 @@
-import mongoose, { Document } from "mongoose";
-
-export interface IAirportFacility extends Document {
+export interface IAirportFacility {
   _id: string;
   destinationId: string;
   facilityName: string;

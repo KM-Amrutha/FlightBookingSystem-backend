@@ -9,7 +9,7 @@ const seatTypeSchema = new Schema<ISeatType>(
       trim: true,
       unique: true,
       enum: {
-        values: ["Economy", "Premium Economy", "Business", "First"],
+        values: ["Economy", "Premium_economy", "Business", "First"],
         message: "{VALUE} is not a valid seat type"
       }
     },
@@ -51,8 +51,5 @@ const seatTypeSchema = new Schema<ISeatType>(
   }
 );
 
-seatTypeSchema.index({ seatTypeName: 1 });
-seatTypeSchema.index({ cabinClass: 1 });
-
-const SeatType = model<ISeatType>("SeatType", seatTypeSchema);
+const SeatType = model("SeatType", seatTypeSchema);
 export default SeatType;

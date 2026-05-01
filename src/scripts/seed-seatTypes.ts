@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
 import SeatType from "../infrastructure/databases/models/seatType.model";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const seatTypes = [
   {
@@ -14,7 +11,7 @@ const seatTypes = [
     features: ["standard", "tray-table", "overhead-storage"]
   },
   {
-    seatTypeName: "Premium Economy",
+    seatTypeName: "Premium_economy",
     cabinClass: "premium_economy",
     basePriceMultiplier: 1.5,
     seatPitch: 38,

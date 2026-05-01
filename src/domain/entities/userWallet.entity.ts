@@ -1,6 +1,4 @@
-import mongoose, { Document } from "mongoose";
-
-export interface IUserWallet extends Document {
+export interface IUserWallet {
   _id: string;
   userId: string;
   balance: number;

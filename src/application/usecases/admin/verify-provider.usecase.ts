@@ -3,9 +3,9 @@ import { TYPES_REPOSITORIES } from "@di/types-repositories";
 import { TYPES_SERVICES } from "@di/types-services";
 import { IProviderRepository } from "@domain/interfaces/IProviderRepository";
 import { IEmailService } from "@application/interfaces/service/communication/IEmail.service";
-import { IVerifyProviderUseCase } from "@application/interfaces/usecase/IVerifyProviderUsecase";
+import { IVerifyProviderUseCase } from "@application/interfaces/usecase/admin/IVerifyProvider.usecase";
 import { validationError } from "@presentation/middlewares/error.middleware";
-import { UpdateProviderDTO } from "@application/dtos/provider-dtos";
+import {IProvider} from "@domain/entities/provider.entity";
 
 @injectable()
 export class VerifyProviderUseCase implements IVerifyProviderUseCase {
@@ -27,8 +27,9 @@ export class VerifyProviderUseCase implements IVerifyProviderUseCase {
       throw new validationError("Provider already approved");
     }
  
-    const updateData:Partial<UpdateProviderDTO> = {
+    const updateData:Partial<IProvider> = {
       profileStatus: 'approved',
+      adminApproval:true,
       rejectionReason: null,
       rejectionDate: null
     }

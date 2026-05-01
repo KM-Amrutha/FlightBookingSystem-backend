@@ -1,4 +1,3 @@
-import { Model } from "mongoose";
 import { IDestination } from "@domain/entities/destination.entity";
 import { BaseRepository } from "@infrastructure/databases/repositories/base.repository";
 import { IDestinationRepository } from "@domain/interfaces/IDestinationRepository";
@@ -8,8 +7,8 @@ export class DestinationRepository
   extends BaseRepository<IDestination>
   implements IDestinationRepository
 {
-  constructor(model: Model<IDestination> = DestinationModel) {
-    super(model);
+  constructor() {
+    super(DestinationModel);
   }
 
   async findByIataCode(iataCode: string): Promise<IDestination | null> {

@@ -2,14 +2,14 @@ import { Request, Response } from "express";
 import { injectable, inject } from "inversify";
 import { sendResponse } from "@shared/utils/http.response";
 import { StatusCodes } from "@shared/constants/index.constants";
-import { TYPES_AIRCRAFT_USECASES } from "@di/types-usecases";
+import { TYPES_FLIGHT_USECASES } from "@di/types-usecases";
 import { IPendingFlightsForApprovalUseCase } from "@di/file-imports-index";
 import { FLIGHT_MESSAGES } from "@shared/constants/flightMessages/flight.messges";
 
 @injectable()
 export class PendingFlightsForApprovalController {
   constructor(
-    @inject(TYPES_AIRCRAFT_USECASES.PendingFlightsForApprovalUseCase)
+    @inject(TYPES_FLIGHT_USECASES.PendingFlightsForApprovalUseCase)
     private _getPendingFlightsUseCase: IPendingFlightsForApprovalUseCase
   ) {}
 

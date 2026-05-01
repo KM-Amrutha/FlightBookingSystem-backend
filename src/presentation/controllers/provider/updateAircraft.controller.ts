@@ -15,7 +15,7 @@ export class UpdateAircraftController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const providerId = (req as any).user._id;
+      const providerId = req.user!._id;
       const aircraftId = req.params.aircraftId;
 
       if (!aircraftId) {
@@ -61,8 +61,8 @@ export class UpdateAircraftController {
       }
 
       const aircraft = await this._updateAircraftUseCase.execute(
-        providerId,
         aircraftId,
+        providerId,
         updateData
       );
 

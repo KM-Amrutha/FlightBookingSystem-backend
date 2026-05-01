@@ -21,7 +21,7 @@ export const authenticateAdmin = async (
   }
   try {
     const decoded = await tokenUseCase.authAccessToken(accessToken);
-    (req as any).admin = decoded as JwtPayload;
+    req.user = decoded as JwtPayload & { _id: string; role: string; email: string };
     next();
   } catch (error: any) {
     console.log(`Error in admin authentication middleware: ${error}`);

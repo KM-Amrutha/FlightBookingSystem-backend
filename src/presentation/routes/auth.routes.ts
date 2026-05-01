@@ -11,6 +11,7 @@ import { refreshAccessTokenController } from "@di/container-resolver";
 import { forgotPasswordController } from "@di/container-resolver";
 import { passwordResetLinkController } from "@di/container-resolver";
 import { googleAuthController } from "@di/container-resolver";
+import { changePasswordController } from "@di/container-resolver";
 
 
 
@@ -34,5 +35,6 @@ authRoutes.post("/refresh-token",asyncHandler(refreshAccessTokenController.handl
 
 authRoutes.patch("/password-reset",asyncHandler(passwordResetLinkController.handle.bind(passwordResetLinkController)));
 authRoutes.post("/password-reset/:token", asyncHandler(forgotPasswordController.handle.bind(forgotPasswordController)));
+authRoutes.patch("/password/change", authenticate,asyncHandler(changePasswordController.handle.bind(changePasswordController)));
 
 export default authRoutes;

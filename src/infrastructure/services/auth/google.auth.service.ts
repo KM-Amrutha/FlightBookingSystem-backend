@@ -1,12 +1,9 @@
 import { OAuth2Client } from "google-auth-library";
 import { TokenPayload } from "google-auth-library";
-import dotenv from "dotenv";
 import { AUTH_MESSAGES } from "@shared/constants/index.constants";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { IGoogleAuthService } from "@application/interfaces/service/auth/IGoogle.auth.service";
 import { injectable } from "inversify";
-
-dotenv.config();
 
 @injectable()
 export class GoogleAuthService implements IGoogleAuthService {

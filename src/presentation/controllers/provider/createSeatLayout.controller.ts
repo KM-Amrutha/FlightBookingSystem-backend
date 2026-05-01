@@ -15,7 +15,7 @@ export class CreateSeatLayoutController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const providerId = (req as any).user._id;
+      const providerId = req.user!._id;
 
       const layoutData: CreateSeatLayoutDTO = {
         aircraftId: req.body.aircraftId,

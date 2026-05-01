@@ -1,7 +1,9 @@
-import { SeatTypeDTO } from "@application/dtos/seat-dtos";
+import { ISeatType } from "@domain/entities/seatType.entity"
+import { IBaseRepository } from "@domain/interfaces/IBaseRepository";
 
-export interface ISeatTypeRepository {
-  getAllSeatTypes(): Promise<SeatTypeDTO[]>;
-  getSeatTypeById(seatTypeId: string): Promise<SeatTypeDTO | null>;
-  getSeatTypeByClass(cabinClass: string): Promise<SeatTypeDTO | null>;
+
+export interface ISeatTypeRepository extends IBaseRepository<ISeatType> {
+  getAllSeatTypes(): Promise<ISeatType[]>;
+  getSeatTypeById(seatTypeId: string): Promise<ISeatType | null>;
+  getSeatTypeByClass(cabinClass: string): Promise<ISeatType | null>;
 }

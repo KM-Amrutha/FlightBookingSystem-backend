@@ -1,7 +1,5 @@
-import mongoose, { Document } from "mongoose"
-
-export interface IProvider extends Document {
-  _id: string;
+export interface IProvider {
+  id: string;
   companyName: string;
   email: string;
   mobile: string;

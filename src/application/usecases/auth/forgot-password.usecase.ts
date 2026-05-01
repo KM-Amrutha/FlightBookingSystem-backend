@@ -43,10 +43,11 @@ export class ForgotPasswordUseCase implements IForgotPasswordUseCase {
     }
     if (password) {
       const hashedPassword = await this._encryptionService.hash(password);
-      await this._userRepository.forgotPassword({
+      await this._userRepository.forgotPassword(
         email,
-        password: hashedPassword,
-      });
+        userData.password,
+         hashedPassword,
+      );
     }
   }
 }

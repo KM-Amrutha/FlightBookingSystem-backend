@@ -1,4 +1,3 @@
-import { IAircraft } from "@domain/entities/aircraft.entity";
 import mongoose, { Schema } from "mongoose";
 
 const aircraftSchema: Schema = new Schema(
@@ -74,7 +73,8 @@ const aircraftSchema: Schema = new Schema(
       required: true,
       enum: ["active", "inactive", "maintenance"],
       default: "active"
-    }
+    },
+
   },
   { timestamps: true }
 );
@@ -83,5 +83,5 @@ aircraftSchema.index({ providerId: 1 });
 aircraftSchema.index({ status: 1 });
 aircraftSchema.index({ aircraftType: 1 });
 
-const AircraftModel = mongoose.model<IAircraft>("Aircraft", aircraftSchema);
+const AircraftModel = mongoose.model("Aircraft", aircraftSchema);
 export default AircraftModel;

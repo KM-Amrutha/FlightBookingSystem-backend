@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { injectable, inject } from "inversify";
 import { sendResponse } from "@shared/utils/http.response";
 import { StatusCodes } from "@shared/constants/index.constants";
-import { TYPES_AIRCRAFT_USECASES } from "@di/types-usecases";
+import { TYPES_FLIGHT_USECASES } from "@di/types-usecases";
 import { IUpdateFlightUseCase } from "@di/file-imports-index";
 import { UpdateFlightDTO } from "@application/dtos/flight-dtos";
 import { FLIGHT_MESSAGES } from "@shared/constants/flightMessages/flight.messges";
@@ -10,13 +10,13 @@ import { FLIGHT_MESSAGES } from "@shared/constants/flightMessages/flight.messges
 @injectable()
 export class UpdateFlightController {
   constructor(
-    @inject(TYPES_AIRCRAFT_USECASES.UpdateFlightUseCase)
+    @inject(TYPES_FLIGHT_USECASES.UpdateFlightUseCase)
     private _updateFlightUseCase: IUpdateFlightUseCase
   ) {}
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const providerId = (req as any).user._id;
+      const providerId = req.user!._id;
       const flightId = req.params.flightId;
 
       if (!flightId) {
@@ -37,8 +37,8 @@ export class UpdateFlightController {
       if (body.baseFare?.economy != null) {
         baseFare.economy = Number(body.baseFare.economy);
       }
-      if (body.baseFare?.premiumEconomy != null) {
-        baseFare.premiumEconomy = Number(body.baseFare.premiumEconomy);
+      if (body.baseFare?.premium_economy != null) {
+        baseFare.premium_economy = Number(body.baseFare.premium_economy);
       }
       if (body.baseFare?.business != null) {
         baseFare.business = Number(body.baseFare.business);
