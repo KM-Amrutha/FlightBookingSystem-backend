@@ -4,6 +4,7 @@ const bookingPassengerSegmentSchema = new Schema(
   {
     flightId: { type: String, required: true },
     flightNumber: { type: String, required: true },
+    providerId: { type: String, required: true },
     from: { type: String, required: true },
     to: { type: String, required: true },
     departureTime: { type: Date, required: true },
@@ -56,6 +57,7 @@ const bookingFlightFoodSchema = new Schema(
   {
     flightId: { type: String, required: true },
     aircraftId: { type: String, required: true },
+      providerId: { type: String, required: true },
     items: [
       {
         foodId: { type: String, required: true },
@@ -96,6 +98,7 @@ const bookingSchema: Schema = new Schema(
     subtotal: { type: Number, required: true },
     discount: { type: Number, required: true, default: 0 },
     grandTotal: { type: Number, required: true },
+    commissionAmount: { type: Number, required: true, default: 0 },
     status: {
       type: String,
       enum: ["pending", "confirmed", "payment_failed", "cancelled"],

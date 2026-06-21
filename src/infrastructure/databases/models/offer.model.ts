@@ -1,50 +1,68 @@
-import { IOffer } from "@domain/entities/offer.entity";
 import mongoose, { Schema } from "mongoose";
 
 const offerSchema: Schema = new Schema(
   {
+    aircraftId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Aircraft",
+      required: true,
+    },
+    providerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Provider",
+      required: true,
+    },
     offerCode: {
       type: String,
       required: true,
-      unique: true,
+      trim: true,
       uppercase: true,
-      trim: true
     },
-    discountAmount: {
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    discountPercentage: {
       type: Number,
       required: true,
-      min: 0
+      min: 1,
+      max: 100,
+    },
+    minimumAmount: {
+      type: Number,
+      required: true,
+      min: 0,
     },
     validFrom: {
       type: Date,
-      required: true
+      required: true,
     },
     validTo: {
       type: Date,
-      required: true
-    },
-    createdByProvider: {
-      type: String,
       required: true,
-      ref: "Provider"
-    },
-    aircraftId: {
-      type: String,
-      required: true,
-      ref: "Aircraft"
     },
     isActive: {
       type: Boolean,
-      required: true,
-      default: true
-    }
+      default: true,
+    },
+    usageCount: {
+      type: Number,
+      default: 0,
+    },
+    usageLimit: {
+      type: Number,
+      default: null,
+    },
   },
   { timestamps: true }
 );
 
-offerSchema.index({ offerCode: 1 });
-offerSchema.index({ isActive: 1, validFrom: 1, validTo: 1 });
-offerSchema.index({ createdByProvider: 1 });
+offerSchema.index({ aircraftId: 1 });
+offerSchema.index({ providerId: 1 });
+offerSchema.index({ offerCode: 1 }, { unique: true });
+offerSchema.index({ aircraftId: 1, isActive: 1 });
+offerSchema.index({ validFrom: 1, validTo: 1 });
 
-const OfferModel = mongoose.model<IOffer>("Offer", offerSchema);
+const OfferModel = mongoose.model("Offer", offerSchema);
 export default OfferModel;

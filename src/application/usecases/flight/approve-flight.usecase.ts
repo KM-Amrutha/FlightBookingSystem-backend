@@ -13,7 +13,9 @@ export class ApproveFlightUseCase implements IApproveFlightUseCase {
     private _flightRepository: IFlightRepository
   ) {}
 
-  async execute(flightId: string, data: ApproveFlightDTO): Promise<FlightDetailsDTO> {
+  async execute(flightId: string, data: ApproveFlightDTO):
+   Promise<FlightDetailsDTO> {
+
     if (!flightId) {
       throw new validationError("Flight ID is required");
     }

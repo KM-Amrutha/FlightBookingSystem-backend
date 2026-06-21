@@ -1,5 +1,5 @@
 export interface FlightSeatDTO {
-  _id: string;
+  id: string;
   flightId: string;
   aircraftId: string;
   seatId: string;

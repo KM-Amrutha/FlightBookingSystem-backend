@@ -85,28 +85,49 @@ export class FoodRepository
 
     const [docs, totalCount] = await Promise.all([
       FoodModel.aggregate([
-        { $match: matchStage },
-        {
-          $project: {
-            _id: 1,
-            aircraftId: 1,
-            providerId: 1,
-            foodName: 1,
-            foodType: 1,
-            vegNonveg: 1,
-            serveMethod: 1,
-            isComplimentary: 1,
-            foodPrice: 1,
-            image: 1,
-            isActive: 1,
-            createdAt: 1,
-            updatedAt: 1,
-          },
-        },
-        { $sort: { createdAt: -1 } },
-        { $skip: skip },
-        { $limit: limitNumber },
-      ]),
+  { $match: matchStage },
+
+  {
+    $lookup: {
+      from: "aircrafts",
+      localField: "aircraftId",
+      foreignField: "_id",
+      as: "aircraft",
+    },
+  },
+
+  {
+    $unwind: {
+      path: "$aircraft",
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+
+  {
+    $project: {
+      _id: 1,
+      aircraftId: 1,
+
+      aircraftName: "$aircraft.aircraftName",
+
+      providerId: 1,
+      foodName: 1,
+      foodType: 1,
+      vegNonveg: 1,
+      serveMethod: 1,
+      isComplimentary: 1,
+      foodPrice: 1,
+      image: 1,
+      isActive: 1,
+      createdAt: 1,
+      updatedAt: 1,
+    },
+  },
+
+  { $sort: { createdAt: -1 } },
+  { $skip: skip },
+  { $limit: limitNumber },
+]),
       FoodModel.countDocuments(matchStage),
     ]);
 
@@ -121,9 +142,11 @@ export class FoodRepository
   }
 
   async updateFood(foodId: string, data: Partial<IFood>): Promise<IFood | null> {
-    const updated = await FoodModel.findByIdAndUpdate(foodId, data, {
-      new: true,
-    }).exec();
+    const updated = await FoodModel.findByIdAndUpdate(
+      foodId,
+       data, 
+       { new: true,}
+      ).exec();
     if (!updated) return null;
     return this.getFoodById(updated.id.toString());
   }

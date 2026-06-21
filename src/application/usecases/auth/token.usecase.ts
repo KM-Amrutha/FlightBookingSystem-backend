@@ -35,7 +35,7 @@ export class TokenUseCase implements ITokenUseCase{
     }
     const decoded = this._authService.authenticateRefreshToken(refreshToken);
     return this._authService.generateAccessToken({
-      _id: decoded._id,
+      id: decoded.id,
       role: decoded.role,
     });
   }

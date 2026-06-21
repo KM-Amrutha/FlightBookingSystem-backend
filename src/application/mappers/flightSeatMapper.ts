@@ -1,6 +1,5 @@
 import { IFlightSeat } from "@domain/entities/flightSeat.entity";
-import { IFlight } from "@domain/entities/flight.entity";
-import { FlightSeatDTO, FlightSeatMapDTO, CreateFlightSeatDTO } from "@application/dtos/flightSeat-dtos";
+import { FlightSeatDTO, FlightSeatMapDTO } from "@application/dtos/flightSeat-dtos";
 
 export class FlightSeatMapper {
 
@@ -8,36 +7,11 @@ export class FlightSeatMapper {
    * Convert CreateFlightSeatDTO → Partial<IFlightSeat>
    * Used by: FlightSeatRepository.createFlightSeats (via usecase)
    */
-  static toFlightSeatEntity(dto: CreateFlightSeatDTO): Partial<IFlightSeat> {
+
+  static toFlightSeatDTO(seat: IFlightSeat, fare:number): FlightSeatDTO {
+   
     return {
-      flightId: dto.flightId,
-      aircraftId: dto.aircraftId,
-      seatId: dto.seatId,
-      seatNumber: dto.seatNumber,
-      rowNumber: dto.rowNumber,
-      columnPosition: dto.columnPosition,
-      section: dto.section,
-      position: dto.position,
-      cabinClass: dto.cabinClass,
-      isExitRow: dto.isExitRow,
-      features: dto.features,
-      isBooked: dto.isBooked,
-      isBlocked: dto.isBlocked,
-      isLocked: dto.isLocked,
-    };
-  }
-
-  static toFlightSeatEntities(dtos: CreateFlightSeatDTO[]): Partial<IFlightSeat>[] {
-    return dtos.map((dto) => this.toFlightSeatEntity(dto));
-  }
-
-  static toFlightSeatDTO(seat: IFlightSeat, flight: IFlight): FlightSeatDTO {
-    const baseFare = flight.baseFare[seat.cabinClass as keyof typeof flight.baseFare] ?? 0;
-    const surcharge = flight.seatSurcharge[seat.position as keyof typeof flight.seatSurcharge] ?? 0;
-    const fare = baseFare + surcharge;
-
-    return {
-      _id: seat.id,
+      id: seat.id,
       flightId: seat.flightId,
       aircraftId: seat.aircraftId,
       seatId: seat.seatId,
@@ -60,27 +34,33 @@ export class FlightSeatMapper {
     };
   }
 
-  static toFlightSeatMapDTO(
+ static toFlightSeatMapDTO(
     seats: IFlightSeat[],
-    flight: IFlight,
-    cabinClass: string
+    flightId: string,
+    cabinClass: string,
+    baseFare: number,            
+    seatSurcharge: {
+      window?: number;
+      aisle?: number;
+      extraLegroom?: number;
+    }
   ): FlightSeatMapDTO {
-    const baseFare = flight.baseFare[cabinClass as keyof typeof flight.baseFare] ?? 0;
-
     return {
-      flightId: flight.id,
+      flightId,
       cabinClass,
       baseFare,
-      seatSurcharge: {
-        ...(flight.seatSurcharge.window && { window: flight.seatSurcharge.window }),
-        ...(flight.seatSurcharge.aisle && { aisle: flight.seatSurcharge.aisle }),
-        ...(flight.seatSurcharge.extraLegroom && { extraLegroom: flight.seatSurcharge.extraLegroom }),
-      },
-      seats: seats.map((seat) => this.toFlightSeatDTO(seat, flight)),
+      seatSurcharge,
+      seats: seats.map((seat) => {
+        const surcharge = seatSurcharge[seat.position as keyof typeof seatSurcharge] ?? 0;
+        const fare = baseFare + surcharge; // ✅ calculation in usecase caller, mapper just assembles
+        return this.toFlightSeatDTO(seat, fare);
+      }),
     };
   }
-
-  static toFlightSeatDTOs(seats: IFlightSeat[], flight: IFlight): FlightSeatDTO[] {
-    return seats.map((seat) => this.toFlightSeatDTO(seat, flight));
+  static toFlightSeatDTOs(seats: IFlightSeat[], fareMap: Map<string, number>): FlightSeatDTO[] {
+    return seats.map((seat) => {
+      const fare = fareMap.get(seat.id) ?? 0;
+      return this.toFlightSeatDTO(seat, fare);
+    });
   }
 }

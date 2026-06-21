@@ -1,6 +1,7 @@
 export interface IFood {
   id: string;
   aircraftId: string;
+  aircraftName?:string;
   providerId: string;
   foodName: string;
   foodType: string;

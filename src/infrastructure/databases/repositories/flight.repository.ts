@@ -13,11 +13,13 @@ export class FlightRepository
   }
 
     async createFlight(data: Partial<IFlight>): Promise<IFlight> {
+       console.log("createFlight received amenities:", data.amenities);
     const newFlight = new FlightModel({
       ...data,
       flightStatus: "scheduled",
       adminApproval: { status: "pending" }
     });
+    console.log("FlightModel instance amenities:", newFlight.amenities);
     const savedFlight = await newFlight.save();
     const details = await this.getFlightDetails(savedFlight.id.toString());
     if (!details) throw new Error("Failed to retrieve created flight");
@@ -99,7 +101,7 @@ async getPendingFlightsForApproval(): Promise<IFlight[]> {
     {
       $match: {
         "adminApproval.status": "pending",
-        flightType: { $ne: "return" }, // ← exclude return flights
+        // flightType: { $ne: "return" }, // ← exclude return flights
       }
     },
     ...this.baseDetailsPipeline(),
@@ -329,73 +331,187 @@ async getActiveFlightsForAircraft(aircraftId: string): Promise<IFlight[]> {
   });
 }
 
+async getReturnFlightByParentId(parentFlightId: string): Promise<IFlight | null> {
+  const result = await FlightModel.aggregate([
+    {
+      $match: {
+        parentFlightId: this.parseId(parentFlightId),
+        flightType: "return",
+      }
+    },
+    ...this.baseDetailsPipeline()
+  ]);
+  if (!result[0]) return null;
+  return { ...result[0], id: result[0]._id.toString() };
+}
+
+async updateReturnFlight(
+  parentFlightId: string,
+  departureTime: Date,
+  arrivalTime: Date
+): Promise<void> {
+  await FlightModel.updateOne(
+    { parentFlightId: this.parseId(parentFlightId), flightType: "return" },
+    {
+      departureTime,
+      arrivalTime,
+      "adminApproval.status": "pending",
+      "adminApproval.reason": null,
+      "adminApproval.reviewedAt": null,
+    }
+  ).exec();
+}
+
   // ---- private pipelines ----
 
-  private baseDetailsPipeline() {
-    return [
-      {
-        $lookup: {
-          from: "aircrafts",
-          localField: "aircraftId",
-          foreignField: "_id",
-          as: "aircraft"
-        }
-      },
-      { $unwind: { path: "$aircraft", preserveNullAndEmptyArrays: true } },
-      {
-        $lookup: {
-          from: "destinations",
-          localField: "departureDestinationId",
-          foreignField: "_id",
-          as: "departureDestination"
-        }
-      },
-      { $unwind: { path: "$departureDestination", preserveNullAndEmptyArrays: true } },
-      {
-        $lookup: {
-          from: "destinations",
-          localField: "arrivalDestinationId",
-          foreignField: "_id",
-          as: "arrivalDestination"
-        }
-      },
-      { $unwind: { path: "$arrivalDestination", preserveNullAndEmptyArrays: true } },
-      {
-        $project: {
-          _id: 1,
-          flightId: 1,
-          flightNumber: 1,
-          aircraftName: 1,
-          providerId: { $toString: "$providerId" },
-          aircraftId: 1,
-          seatLayoutId: 1,
-           flightType: 1,       
-        parentFlightId: 1,       
-        recurringGroupId: 1,    
-        recurringDays: 1,
-          departureDestinationId: 1,
-          arrivalDestinationId: 1,
-          departureTime: 1,
-          arrivalTime: 1,
-          durationMinutes: 1,
-          gate: 1,
-          baseFare: 1,
-          seatSurcharge: 1,
-          baggageRules: 1,
-          luggageRuleId: 1,
-          foodMenuId: 1,
-          flightStatus: 1,
-          adminApproval: 1,
-          createdAt: 1,
-          updatedAt: 1,
-          "departureDestination.name": 1,
-          "departureDestination.iataCode": 1,
-          "arrivalDestination.name": 1,
-          "arrivalDestination.iataCode": 1
-        }
+  // private baseDetailsPipeline() {
+  //   return [
+  //     {
+  //       $lookup: {
+  //         from: "aircrafts",
+  //         localField: "aircraftId",
+  //         foreignField: "_id",
+  //         as: "aircraft"
+  //       }
+  //     },
+  //     { $unwind: { path: "$aircraft", preserveNullAndEmptyArrays: true } },
+  //     {
+  //       $lookup: {
+  //         from: "destinations",
+  //         localField: "departureDestinationId",
+  //         foreignField: "_id",
+  //         as: "departureDestination"
+  //       }
+  //     },
+  //     { $unwind: { path: "$departureDestination", preserveNullAndEmptyArrays: true } },
+  //     {
+  //       $lookup: {
+  //         from: "destinations",
+  //         localField: "arrivalDestinationId",
+  //         foreignField: "_id",
+  //         as: "arrivalDestination"
+  //       }
+  //     },
+  //     { $unwind: { path: "$arrivalDestination", preserveNullAndEmptyArrays: true } },
+  //     {
+  //       $project: {
+  //         _id: 1,
+  //         flightId: 1,
+  //         flightNumber: 1,
+  //         aircraftName: 1,
+  //          manufacturer: "$aircraft.manufacturer",
+  //         aircraftType: "$aircraft.aircraftType", 
+  //         providerId: { $toString: "$providerId" },
+  //         aircraftId: 1,
+  //         seatLayoutId: 1,
+  //          flightType: 1,       
+  //       parentFlightId: 1,       
+  //       recurringGroupId: 1,    
+  //       recurringDays: 1,
+  //         departureDestinationId: 1,
+  //         arrivalDestinationId: 1,
+  //         departureTime: 1,
+  //         arrivalTime: 1,
+  //         durationMinutes: 1,
+  //         bufferMinutes: 1,
+  //         gate: 1,
+  //         baseFare: 1,
+  //         seatSurcharge: 1,
+  //         baggageRules: 1,
+  //         luggageRuleId: 1,
+  //         foodMenuId: 1,
+  //         flightStatus: 1,
+  //         adminApproval: 1,
+  //         createdAt: 1,
+  //         updatedAt: 1,
+  //         "departureDestination.name": 1,
+  //         "departureDestination.iataCode": 1,
+  //         "arrivalDestination.name": 1,
+  //         "arrivalDestination.iataCode": 1
+  //       }
+  //     }
+  //   ];
+  // }
+private baseDetailsPipeline() {
+  return [
+    {
+      $lookup: {
+        from: "aircrafts",
+        localField: "aircraftId",
+        foreignField: "_id",
+        as: "aircraft"
       }
-    ];
-  }
+    },
+    { $unwind: { path: "$aircraft", preserveNullAndEmptyArrays: true } },
+    {
+      $lookup: {
+        from: "providers",
+        localField: "providerId",
+        foreignField: "_id",
+        as: "provider"
+      }
+    },
+    { $unwind: { path: "$provider", preserveNullAndEmptyArrays: true } },
+    {
+      $lookup: {
+        from: "destinations",
+        localField: "departureDestinationId",
+        foreignField: "_id",
+        as: "departureDestination"
+      }
+    },
+    { $unwind: { path: "$departureDestination", preserveNullAndEmptyArrays: true } },
+    {
+      $lookup: {
+        from: "destinations",
+        localField: "arrivalDestinationId",
+        foreignField: "_id",
+        as: "arrivalDestination"
+      }
+    },
+    { $unwind: { path: "$arrivalDestination", preserveNullAndEmptyArrays: true } },
+    {
+      $project: {
+        _id: 1,
+        flightId: 1,
+        flightNumber: 1,
+        aircraftName: 1,
+        manufacturer: "$aircraft.manufacturer",
+        aircraftType: "$aircraft.aircraftType",
+        providerId: { $toString: "$providerId" },
+        providerName: "$provider.companyName",      
+        providerLogo: "$provider.logoUrl",       
+        aircraftId: 1,
+        seatLayoutId: 1,
+        flightType: 1,
+        parentFlightId: 1,
+        recurringGroupId: 1,
+        recurringDays: 1,
+        departureDestinationId: 1,
+        arrivalDestinationId: 1,
+        departureTime: 1,
+        arrivalTime: 1,
+        durationMinutes: 1,
+        bufferMinutes: 1,
+        gate: 1,
+        baseFare: 1,
+        seatSurcharge: 1,
+        baggageRules: 1,
+        luggageRuleId: 1,
+        amenities: 1,
+        foodMenuId: 1,
+        flightStatus: 1,
+        adminApproval: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        "departureDestination.name": 1,
+        "departureDestination.iataCode": 1,
+        "arrivalDestination.name": 1,
+        "arrivalDestination.iataCode": 1
+      }
+    }
+  ];
+}
 
   private baseListPipeline() {
     return [
@@ -411,6 +527,7 @@ async getActiveFlightsForAircraft(aircraftId: string): Promise<IFlight[]> {
           departureTime: 1,
           arrivalTime: 1,
           durationMinutes: 1,
+          bufferMinutes: 1,
           baseFare: 1,
           adminApproval: 1,
           flightStatus: 1

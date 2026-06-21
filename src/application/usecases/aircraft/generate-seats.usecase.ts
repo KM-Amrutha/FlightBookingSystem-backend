@@ -6,7 +6,7 @@ import {
   IProviderRepository
 } from "@di/file-imports-index";
 import { SeatDetailsDTO, 
-  CreateSeatDTO } from "@application/dtos/seat-dtos";
+  CreateSeatDTO ,SeatLayoutUseCaseDTO} from "@application/dtos/seat-dtos";
 import { validationError, NotFoundError, ForbiddenError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
@@ -17,7 +17,6 @@ import { APPLICATION_MESSAGES,
   PROVIDER_MESSAGES, 
   AIRCRAFT_MESSAGES } from "@shared/constants/index.constants";
 import { SeatMapper } from "@application/mappers/seatMapper";
-import { ISeatLayout } from "@domain/entities/seatLayout.entity";
 
 @injectable()
 export class GenerateSeatsUseCase implements IGenerateSeatsUseCase {
@@ -150,7 +149,7 @@ private async getExistingRowNumbers(aircraftId: string): Promise<Set<number>> {
 
   private async generateSeatsForLayout(
     aircraftId: string,
-    layout: ISeatLayout,
+    layout: SeatLayoutUseCaseDTO,
     seatTypeId: string,
     totalAircraftRows: number
   ): Promise<CreateSeatDTO[]> {
@@ -197,7 +196,7 @@ private async getExistingRowNumbers(aircraftId: string): Promise<Set<number>> {
     return seats;
   }
 
-  private calculateTotalRows(layouts: ISeatLayout[]): number {
+  private calculateTotalRows(layouts: SeatLayoutUseCaseDTO[]): number {
     if (layouts.length === 0) return 0;
     return Math.max(...layouts.map(layout => layout.endRow));
   }
@@ -220,7 +219,27 @@ private async getExistingRowNumbers(aircraftId: string): Promise<Set<number>> {
       this.validateSeatLayouts(aircraftId)
     ]);
 
-    const layouts = await this._seatLayoutRepository.getSeatLayoutsByAircraftId(aircraftId);
+    const layoutEntities =
+  await this._seatLayoutRepository.getSeatLayoutsByAircraftId(
+    aircraftId
+  );
+
+const layouts: SeatLayoutUseCaseDTO[] =
+  layoutEntities.map((layout) => ({
+    id: layout.id,
+    aircraftId: layout.aircraftId,
+    cabinClass: layout.cabinClass,
+    layout: layout.layout,
+    startRow: layout.startRow,
+    endRow: layout.endRow,
+    totalRows: layout.totalRows,
+    seatsPerRow: layout.seatsPerRow,
+    columns: layout.columns,
+    aisleColumns: layout.aisleColumns,
+    exitRows: layout.exitRows,
+    wingStartRow: layout.wingStartRow,
+    wingEndRow: layout.wingEndRow,
+  }));
     const totalAircraftRows = this.calculateTotalRows(layouts);
     const existingRowNumbers = await this.getExistingRowNumbers(aircraftId);
 

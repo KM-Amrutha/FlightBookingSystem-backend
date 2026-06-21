@@ -16,7 +16,8 @@ export class CreateRecurringFlightController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const providerId = req.user!._id;
+
+      const providerId = req.user!.id;
       const body = req.body;
 
       const baseFare: CreateRecurringFlightDTO["baseFare"] = {
@@ -84,4 +85,5 @@ export class CreateRecurringFlightController {
       );
     }
   }
-}
+};
+

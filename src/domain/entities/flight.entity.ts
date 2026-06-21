@@ -1,11 +1,17 @@
 export interface IFlight {
   id: string;
   aircraftName: string;
+  
   flightId: string;
   flightNumber: string;
   providerId: string;
   aircraftId: string;
+  aircraftType: string;
+  providerName?: string;
+  providerLogo?: string;
+manufacturer?: string;
   seatLayoutId: string;
+  
   
   flightType: "outbound" | "return" | "recurring";
   parentFlightId?: string;
@@ -48,6 +54,7 @@ export interface IFlight {
   };
  luggageRuleId?: string|null; // if you later create a luggage rule entity
   foodMenuId?: string[];
+  amenities?: string[];
   flightStatus: "scheduled"| "cancelled" | "completed";
   
    adminApproval: {

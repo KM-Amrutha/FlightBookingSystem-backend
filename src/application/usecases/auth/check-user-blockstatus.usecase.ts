@@ -17,13 +17,13 @@ export class CheckUserBlockStatusUseCase implements ICheckUserBlockStatusUseCase
     private _providerRepository: IProviderRepository
   ) {}
 
-  async execute(_id: string): Promise<boolean> {
-    if (!_id) {
+  async execute(id: string): Promise<boolean> {
+    if (!id) {
       throw new validationError(AUTH_MESSAGES.ID_REQUIRED);
     }
     const [userData, providerData] = await Promise.all([
-      this._userRepository.findById(_id),
-      this._providerRepository.getProviderDetailsById(_id.toString()),
+      this._userRepository.findById(id),
+      this._providerRepository.getProviderDetailsById(id.toString()),
     ]);
 
     if (!userData && !providerData) {

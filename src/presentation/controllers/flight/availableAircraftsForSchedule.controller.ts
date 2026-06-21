@@ -14,7 +14,7 @@ export class AvailableAircraftsForScheduleController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const providerId = req.user!._id;
+      const providerId = req.user!.id;
       const { departureDestinationId, departureTime, durationMinutes,bufferMinutes } = req.query;
 
      if (!departureDestinationId || !departureTime || !durationMinutes || !bufferMinutes) {
@@ -23,14 +23,6 @@ export class AvailableAircraftsForScheduleController {
          StatusCodes.BAD_REQUEST);
        return;
        }
-
-  console.log("Received request with parameters:", {
-        providerId,
-        departureDestinationId, 
-        departureTime,
-        durationMinutes,
-        bufferMinutes
-  });
       const aircrafts = await this._availableAircraftsForScheduleUsecase.execute(
         providerId,
         String(departureDestinationId),
@@ -38,9 +30,6 @@ export class AvailableAircraftsForScheduleController {
         Number(durationMinutes),
         Number(bufferMinutes)
       );
-
-      console.log("aircrafts retrieved:", aircrafts);
-
       sendResponse(
         res,
         "Available aircrafts retrieved successfully",

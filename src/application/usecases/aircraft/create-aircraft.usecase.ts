@@ -1,13 +1,16 @@
-import { IAircraftRepository } from "@di/file-imports-index";
-import { IProviderRepository } from "@domain/interfaces/IProviderRepository";
+import { IAircraftRepository, IProviderRepository } from "@di/file-imports-index"; // ✅ both from DI
 import { CreateAircraftDTO, AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
-import { APPLICATION_MESSAGES, AIRCRAFT_MESSAGES, AUTH_MESSAGES } from "@shared/constants/index.constants";
-import { validationError } from "@presentation/middlewares/error.middleware";
+import {
+  APPLICATION_MESSAGES,
+  AIRCRAFT_MESSAGES,
+  AUTH_MESSAGES,
+  PROVIDER_MESSAGES,
+} from "@shared/constants/index.constants";
+import { validationError, NotFoundError, ForbiddenError } from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
-import { TYPES_REPOSITORIES,TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
+import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { ICreateAircraftUseCase } from "@di/file-imports-index";
-import { AircraftMapper } from "@application/mappers/aircraftMapper"
-import { IAircraft } from "@domain/entities/aircraft.entity";
+import { AircraftMapper } from "@application/mappers/aircraftMapper";
 
 @injectable()
 export class CreateAircraftUseCase implements ICreateAircraftUseCase {
@@ -33,38 +36,52 @@ export class CreateAircraftUseCase implements ICreateAircraftUseCase {
     }
 
     const provider = await this._providerRepository.findById(data.providerId);
-    if (!provider) {
-      throw new validationError(AIRCRAFT_MESSAGES.PROVIDER_NOT_FOUND);
+    if (!provider) throw new NotFoundError(AIRCRAFT_MESSAGES.PROVIDER_NOT_FOUND);
+
+    if (!provider.adminApproval || provider.profileStatus !== "approved") {
+      throw new validationError(PROVIDER_MESSAGES.NOT_APPROVED);              
     }
 
-if (!provider.adminApproval || provider.profileStatus !== 'approved') {
-  throw new validationError("Your profile must be approved by admin before adding aircraft");
-}
-    
     if (provider.licenseExpiryDate) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const expiryDate = new Date(provider.licenseExpiryDate);
-  expiryDate.setHours(0, 0, 0, 0);
-  if (expiryDate < today) {
-    throw new validationError("Your license has expired. Please renew it before adding aircraft.");
-  }
-}
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const expiryDate = new Date(provider.licenseExpiryDate);
+      expiryDate.setHours(0, 0, 0, 0);
+      if (expiryDate < today) {
+        throw new validationError(PROVIDER_MESSAGES.LICENSE_EXPIRED);         
+      }
+    }
 
     const isProviderBlocked = await this._providerRepository.isProviderBlocked(data.providerId);
-    if (isProviderBlocked) {
-      throw new validationError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
-    }
-const { aircrafts: existingAircrafts } = await this._aircraftRepository.findByProviderId(data.providerId);
-const nameExists = existingAircrafts.some(
-  (aircraft: IAircraft) => aircraft.aircraftName.toLowerCase() === data.aircraftName.toLowerCase()
-);
-    
-    if (nameExists) {
-      throw new validationError(AIRCRAFT_MESSAGES.ALREADY_EXISTS);
-    }
+    if (isProviderBlocked) throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
 
-   const aircraft = await this._aircraftRepository.createAircraft(data);
-   return AircraftMapper.toAircraftDTO(aircraft);
+    const { aircrafts: existingAircrafts } = await this._aircraftRepository.findByProviderId(data.providerId);
+
+    
+    const nameExists = existingAircrafts.some(
+      (aircraft) => aircraft.aircraftName.toLowerCase() === data.aircraftName.toLowerCase()
+    );
+
+    if (nameExists) throw new validationError(AIRCRAFT_MESSAGES.ALREADY_EXISTS);
+
+    
+    const aircraft = await this._aircraftRepository.createAircraft({
+      providerId: data.providerId,
+      aircraftType: data.aircraftType,
+      aircraftName: data.aircraftName,
+      manufacturer: data.manufacturer,
+      buildYear: data.buildYear,
+      seatCapacity: data.seatCapacity,
+      flyingRangeKm: data.flyingRangeKm,
+      engineCount: data.engineCount,
+      lavatoryCount: data.lavatoryCount,
+      baseStationId: data.baseStationId,
+      currentLocationId: data.currentLocationId,
+      availableFrom: new Date(data.availableFrom),
+      status: data.status,
+    });
+
+    
+    return AircraftMapper.toAircraftDTO(aircraft);
   }
 }

@@ -1,3 +1,4 @@
+
 export const TYPES_AUTH_CONTROLLERS = {
     SignUpUserController: Symbol.for("SignUpUserController"),
     SignUpProviderController: Symbol.for("SignUpProviderController"),
@@ -18,6 +19,9 @@ export const TYPES_ADMIN_CONTROLLERS = {
     UpdateProviderStatusController : Symbol.for("UpdateProviderStatusController"),
     GetAllUsersController : Symbol.for("GetAllUsersController"),
     UpdateUserStatusController : Symbol.for("UpdateUserStatusController"),
+    GetAdminDashboardController: Symbol.for("GetAdminDashboardController"),
+    SetProviderCommissionController: Symbol.for("SetProviderCommissionController"),
+    GetAdminWalletController: Symbol.for("GetAdminWalletController"),
 }
 
 export const TYPES_PROVIDER_CONTROLLERS = {
@@ -58,4 +62,45 @@ export const TYPES_FLIGHT_CONTROLLERS = {
     RejectSingleFlightController: Symbol.for("RejectSingleFlightController"),
     GetAllFlightsForAdminController: Symbol.for("GetAllFlightsForAdminController"),
    
+}
+
+export const TYPES_BOOKING_CONTROLLERS = {
+    AddFlightToSegmentController: Symbol.for("AddFlightToSegmentController"),
+    GetBookingSegmentController: Symbol.for("GetBookingSegmentController"),
+    UpdateBookingSegmentController: Symbol.for("UpdateBookingSegmentController"),
+    GetBookingSeatsMapController: Symbol.for("GetBookingSeatsMapController"),
+    SeatLockController: Symbol.for("SeatLockController"),
+    BookingDetailsController: Symbol.for("BookingDetailsController"),
+    GetBookingSummaryController: Symbol.for("GetBookingSummaryController"),
+    InitiateBookingController: Symbol.for("InitiateBookingController"),
+    RetryPaymentController: Symbol.for("RetryPaymentController"),
+    HandleWebhookController: Symbol.for("HandleWebhookController"),
+    GetBookingByIdController: Symbol.for("GetBookingByIdController"),
+    GetUserBookingsController: Symbol.for("GetUserBookingsController"),
+    GetProviderBookingsController: Symbol.for("GetProviderBookingsController"),
+    GetAdminBookingsController: Symbol.for("GetAdminBookingsController"),
+    GetTicketController: Symbol.for("GetTicketController"),
+    CancelPassengerController: Symbol.for("CancelPassengerController"),
+    GetUserWalletController: Symbol.for("GetUserWalletController"),
+   GetProviderWalletController: Symbol.for("GetProviderWalletController"),
+   GetProviderBookingByIdController: Symbol.for("GetProviderBookingByIdController"),
+
+}
+
+export const TYPES_OFFER_CONTROLLERS = {
+    CreateOfferController: Symbol.for("CreateOfferController"),
+    GetProviderOffersController: Symbol.for("GetProviderOffersController"),
+    UpdateOfferController: Symbol.for("UpdateOfferController"),
+    DeleteOfferController: Symbol.for("DeleteOfferController"),
+    OfferStatusChangeController: Symbol.for("OfferStatusChangeController"),
+    GetEligibleOffersController: Symbol.for("GetEligibleOffersController")
+}
+
+export const TYPES_FOOD_CONTROLLERS = {
+    CreateFoodController: Symbol.for("CreateFoodController"),
+    UpdateFoodController: Symbol.for("UpdateFoodController"),
+    DeleteFoodController: Symbol.for("DeleteFoodController"),
+    GetFoodsByProviderController: Symbol.for("GetFoodsByProviderController"),
+    GetFoodsByAircraftController:Symbol.for("GetFoodsByAircraftController"),
+    FoodStatusChangeController:Symbol.for("FoodStatusChangeController"),
 }

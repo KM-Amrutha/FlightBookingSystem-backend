@@ -17,6 +17,7 @@ export interface IProvider {
   websiteUrl?: string;
   ceoName?: string;
   officeContactNumber?: string;
+  commissionRate: number; 
   createdAt: Date;
   updatedAt: Date;
   isActive: boolean;

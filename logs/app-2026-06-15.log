@@ -1,0 +1,17 @@
+15-06-2026 13:06:20 [[31MERROR[39M]: [/auth/sign-in] The password you entered is incorrect. Please try again.: The password you entered is incorrect. Please try again.
+Error: The password you entered is incorrect. Please try again.
+    at SignInUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:71:33)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\signin-user.usecases.ts:17:58)
+15-06-2026 13:06:20 [[32MINFO[39M]: POST /auth/sign-in 400 111 - 430.139 ms
+15-06-2026 13:06:23 [[32MINFO[39M]: POST /auth/sign-in 200 516 - 270.308 ms
+15-06-2026 13:06:56 [[32MINFO[39M]: GET /user/destinations/search?q=t 400 96 - 4.001 ms
+15-06-2026 13:06:56 [[32MINFO[39M]: GET /user/destinations/search?q=tr 304 - - 82.532 ms
+15-06-2026 13:06:56 [[32MINFO[39M]: GET /user/destinations/search?q=trv 304 - - 66.041 ms
+15-06-2026 13:07:02 [[32MINFO[39M]: GET /user/destinations/search?q=c 400 96 - 1.387 ms
+15-06-2026 13:07:02 [[32MINFO[39M]: GET /user/destinations/search?q=ch 200 4984 - 69.048 ms
+15-06-2026 13:07:03 [[32MINFO[39M]: GET /user/destinations/search?q=che 200 5029 - 64.900 ms
+15-06-2026 13:07:04 [[32MINFO[39M]: GET /user/destinations/search?q=chen 200 4894 - 70.359 ms
+15-06-2026 13:07:04 [[32MINFO[39M]: GET /user/destinations/search?q=chenn 200 322 - 64.002 ms
+15-06-2026 13:07:04 [[32MINFO[39M]: GET /user/destinations/search?q=chenna 200 322 - 63.157 ms
+15-06-2026 13:07:10 [[32MINFO[39M]: GET /user/flights/search?from=TRV&to=MAA&departureDate=2026-06-30&passengers=1&tripType=one-way&page=1&limit=6 200 1100 - 156.668 ms

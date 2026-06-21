@@ -7,11 +7,13 @@ export interface IBookingRepository extends IBaseRepository<IBooking> {
 
   // Get booking by ID
   getBookingById(bookingId: string): Promise<IBooking | null>;
+// Get booking by paymentIntentId — used in Stripe webhook
+    getBookingByPaymentIntentId(paymentIntentId: string): Promise<IBooking | null>;
 
   // Update booking status — called by Stripe webhook
   updateBookingStatus(
     bookingId: string,
-    status: "confirmed" | "payment_failed" | "cancelled",
+    status: "pending" | "confirmed" | "payment_failed" | "cancelled",
     paymentIntentId?: string,
     paymentConfirmedAt?: Date
   ): Promise<IBooking | null>;
@@ -60,7 +62,18 @@ export interface IBookingRepository extends IBaseRepository<IBooking> {
 
   // Update entire booking status to cancelled — when all passengers cancelled
   cancelBooking(bookingId: string): Promise<IBooking | null>;
-
-  // Get booking by paymentIntentId — used in Stripe webhook
-  getBookingByPaymentIntentId(paymentIntentId: string): Promise<IBooking | null>;
+  hasConfirmedBookingsForFlight(flightId: string): Promise<boolean>;
+  getStalePendingBookings(cutoffDate: Date): Promise<IBooking[]>;
+  
+  getAdminDashboardStats(): Promise<{
+  totalConfirmedBookings: number;
+  totalRevenue: number;
+  totalCommission: number;
+  monthlyStats: {
+    month: number;
+    year: number;
+    bookings: number;
+    revenue: number;
+  }[];
+}>;
 }

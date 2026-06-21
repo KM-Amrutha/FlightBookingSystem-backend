@@ -1,0 +1,147 @@
+10-06-2026 00:22:26 [[32MINFO[39M]: POST /auth/sign-in 200 516 - 401.622 ms
+10-06-2026 00:22:28 [[32MINFO[39M]: GET /user/destinations/search?q=d 400 96 - 2.886 ms
+10-06-2026 00:22:30 [[32MINFO[39M]: GET /user/destinations/search?q=c 400 96 - 2.184 ms
+10-06-2026 00:22:31 [[32MINFO[39M]: GET /user/destinations/search?q=co 304 - - 83.267 ms
+10-06-2026 00:22:31 [[32MINFO[39M]: GET /user/destinations/search?q=cok 304 - - 60.468 ms
+10-06-2026 00:22:34 [[32MINFO[39M]: GET /user/destinations/search?q=l 400 96 - 1.531 ms
+10-06-2026 00:22:35 [[32MINFO[39M]: GET /user/destinations/search?q=lh 304 - - 56.727 ms
+10-06-2026 00:22:35 [[32MINFO[39M]: GET /user/destinations/search?q=lhr 304 - - 55.793 ms
+10-06-2026 00:22:45 [[32MINFO[39M]: GET /user/flights/search?from=COK&to=LHR&departureDate=2026-06-30&passengers=1&tripType=one-way&page=1&limit=6 200 3568 - 190.899 ms
+10-06-2026 00:23:22 [[32MINFO[39M]: POST /user/bookings/segment 200 981 - 273.826 ms
+10-06-2026 00:23:30 [[32MINFO[39M]: POST /user/bookings/segment 200 1745 - 149.412 ms
+10-06-2026 00:23:32 [[32MINFO[39M]: POST /user/bookings/segment 200 2504 - 151.063 ms
+10-06-2026 00:23:34 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/segment 200 2498 - 238.393 ms
+10-06-2026 00:23:34 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/segment 304 - - 88.989 ms
+10-06-2026 00:23:36 [[32MINFO[39M]: PUT /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/segment 200 1732 - 168.084 ms
+10-06-2026 00:23:46 [[32MINFO[39M]: PUT /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/segment 200 1732 - 126.924 ms
+10-06-2026 00:24:01 [[32MINFO[39M]: PUT /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/segment 200 1732 - 61.980 ms
+10-06-2026 00:24:03 [[32MINFO[39M]: GET /user/aircrafts/69edb8c0341960e915459eae/foods 200 580 - 268.965 ms
+10-06-2026 00:24:03 [[32MINFO[39M]: GET /user/aircrafts/6a280d5e474123ddc469397c/foods 200 599 - 250.979 ms
+10-06-2026 00:24:03 [[32MINFO[39M]: GET /user/aircrafts/69edb8c0341960e915459eae/foods 304 - - 152.593 ms
+10-06-2026 00:24:03 [[32MINFO[39M]: GET /user/aircrafts/6a280d5e474123ddc469397c/foods 304 - - 143.534 ms
+10-06-2026 00:24:03 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/seats-map 200 68306 - 512.887 ms
+10-06-2026 00:24:03 [[32MINFO[39M]: GET /user/aircrafts/6a280d5e474123ddc469397c/foods 304 - - 154.417 ms
+10-06-2026 00:24:03 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/seats-map 304 - - 326.314 ms
+10-06-2026 00:24:12 [[32MINFO[39M]: POST /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/seat-lock 200 267 - 294.186 ms
+10-06-2026 00:24:20 [[32MINFO[39M]: POST /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/seat-lock 200 267 - 257.850 ms
+10-06-2026 00:25:30 [[32MINFO[39M]: POST /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/details 200 1870 - 1140.887 ms
+10-06-2026 00:25:31 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/summary 200 3374 - 96.234 ms
+10-06-2026 00:25:31 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/summary 304 - - 96.930 ms
+10-06-2026 00:25:31 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/offers 200 90 - 153.988 ms
+10-06-2026 00:25:31 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/offers 304 - - 96.571 ms
+10-06-2026 00:27:25 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/seats-map 200 68386 - 391.497 ms
+10-06-2026 00:27:25 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/seats-map 304 - - 290.059 ms
+10-06-2026 00:27:28 [[32MINFO[39M]: POST /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/details 200 1870 - 295.008 ms
+10-06-2026 00:27:28 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/summary 200 3374 - 63.969 ms
+10-06-2026 00:27:28 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/offers 304 - - 114.439 ms
+10-06-2026 00:27:28 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/summary 304 - - 68.740 ms
+10-06-2026 00:27:28 [[32MINFO[39M]: GET /user/bookings/4b5cff29-a121-4c66-883c-e639a99f8412/offers 304 - - 100.794 ms
+10-06-2026 00:30:47 [[32MINFO[39M]: POST /user/bookings/initiate 201 214 - 1394.382 ms
+10-06-2026 00:33:57 [[31MERROR[39M]: [/user/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+10-06-2026 00:33:57 [[32MINFO[39M]: GET /user/profile 401 133 - 57.405 ms
+10-06-2026 00:33:57 [[31MERROR[39M]: [/user/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+10-06-2026 00:33:57 [[32MINFO[39M]: GET /user/profile 401 133 - 20.097 ms
+10-06-2026 00:33:57 [[32MINFO[39M]: POST /auth/refresh-token 200 349 - 19.284 ms
+10-06-2026 00:33:57 [[32MINFO[39M]: POST /auth/refresh-token 200 349 - 5.189 ms
+10-06-2026 00:33:57 [[32MINFO[39M]: GET /user/profile 200 298 - 139.696 ms
+10-06-2026 00:33:58 [[32MINFO[39M]: GET /user/profile 304 - - 235.594 ms
+10-06-2026 00:34:01 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f 200 3039 - 205.017 ms
+10-06-2026 00:34:01 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f/ticket 200 1538 - 333.190 ms
+10-06-2026 00:34:01 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f 304 - - 748.067 ms
+10-06-2026 00:34:02 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f/ticket 304 - - 155.735 ms
+10-06-2026 00:35:13 [[32MINFO[39M]: GET /user/bookings?page=1&limit=4 200 2281 - 183.680 ms
+10-06-2026 00:35:13 [[32MINFO[39M]: GET /user/bookings?page=1&limit=4 304 - - 97.410 ms
+10-06-2026 00:35:29 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f 304 - - 233.899 ms
+10-06-2026 00:35:29 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f/ticket 304 - - 222.207 ms
+10-06-2026 00:35:29 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f 304 - - 365.638 ms
+10-06-2026 00:35:30 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f/ticket 304 - - 158.454 ms
+10-06-2026 00:35:36 [[32MINFO[39M]: POST /auth/sign-out/ 200 137 - 6.091 ms
+10-06-2026 00:35:36 [[31MERROR[39M]: [/user/profile] The authentication header is missing. Please include the Authorization header with a valid token.: The authentication header is missing. Please include the Authorization header with a valid token.
+Error: The authentication header is missing. Please include the Authorization header with a valid token.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:15:10
+    at Generator.next (<anonymous>)
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:4:12)
+    at authenticate (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:12:5)
+    at Layer.handleRequest (C:\Users\amrut\Desktop\airticketbooking\back-end\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\amrut\Desktop\airticketbooking\back-end\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\amrut\Desktop\airticketbooking\back-end\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\amrut\Desktop\airticketbooking\back-end\node_modules\router\index.js:435:11)
+10-06-2026 00:35:36 [[32MINFO[39M]: GET /user/profile 401 152 - 41.177 ms
+10-06-2026 00:35:36 [[31MERROR[39M]: [/auth/refresh-token] Refresh token is missing. Please ensure you provide a valid refresh token.: Refresh token is missing. Please ensure you provide a valid refresh token.
+Error: Refresh token is missing. Please ensure you provide a valid refresh token.
+    at TokenUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\token.usecase.ts:34:13)
+    at Generator.next (<anonymous>)
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\token.usecase.ts:20:71
+    at new Promise (<anonymous>)
+    at __awaiter (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\token.usecase.ts:16:12)
+    at TokenUseCase.refreshAccessToken (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\token.usecase.ts:47:16)
+    at RefreshAccessTokenController.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\controllers\auth\refresh-access-token.controller.ts:18:53)
+    at Generator.next (<anonymous>)
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\controllers\auth\refresh-access-token.controller.ts:20:71
+    at new Promise (<anonymous>)
+10-06-2026 00:35:36 [[32MINFO[39M]: POST /auth/refresh-token 403 129 - 49.174 ms
+10-06-2026 00:35:50 [[32MINFO[39M]: POST /auth/sign-in 200 1360 - 526.738 ms
+10-06-2026 00:35:56 [[32MINFO[39M]: GET /provider/bookings?page=1&limit=10 200 2281 - 131.620 ms
+10-06-2026 00:35:56 [[32MINFO[39M]: GET /provider/bookings?page=1&limit=10 304 - - 98.075 ms
+10-06-2026 11:42:22 [[32MINFO[39M]: POST /auth/sign-in 200 516 - 615.245 ms
+10-06-2026 11:42:41 [[32MINFO[39M]: GET /user/bookings?page=1&limit=4 304 - - 311.742 ms
+10-06-2026 11:42:41 [[32MINFO[39M]: GET /user/bookings?page=1&limit=4 304 - - 216.316 ms
+10-06-2026 11:42:52 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f 304 - - 432.748 ms
+10-06-2026 11:42:52 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f 304 - - 254.031 ms
+10-06-2026 11:42:53 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f/ticket 304 - - 212.065 ms
+10-06-2026 11:42:53 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f/ticket 304 - - 175.316 ms
+10-06-2026 11:43:29 [[32MINFO[39M]: GET /user/bookings?page=1&limit=4 304 - - 154.778 ms
+10-06-2026 11:43:29 [[32MINFO[39M]: GET /user/bookings?page=1&limit=4 304 - - 128.183 ms
+10-06-2026 11:43:37 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f 304 - - 362.355 ms
+10-06-2026 11:43:37 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f 304 - - 331.667 ms
+10-06-2026 11:43:37 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f/ticket 304 - - 212.514 ms
+10-06-2026 11:43:37 [[32MINFO[39M]: GET /user/bookings/6a2862dd5f0f160609ed538f/ticket 304 - - 164.447 ms
+10-06-2026 11:43:55 [[32MINFO[39M]: POST /auth/sign-out/ 200 137 - 10.277 ms
+10-06-2026 11:43:55 [[31MERROR[39M]: [/user/profile] The authentication header is missing. Please include the Authorization header with a valid token.: The authentication header is missing. Please include the Authorization header with a valid token.
+Error: The authentication header is missing. Please include the Authorization header with a valid token.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:15:10
+    at Generator.next (<anonymous>)
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:4:12)
+    at authenticate (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:12:5)
+    at Layer.handleRequest (C:\Users\amrut\Desktop\airticketbooking\back-end\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\amrut\Desktop\airticketbooking\back-end\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\amrut\Desktop\airticketbooking\back-end\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\amrut\Desktop\airticketbooking\back-end\node_modules\router\index.js:435:11)
+10-06-2026 11:43:55 [[32MINFO[39M]: GET /user/profile 401 152 - 64.910 ms
+10-06-2026 11:43:55 [[31MERROR[39M]: [/auth/refresh-token] Refresh token is missing. Please ensure you provide a valid refresh token.: Refresh token is missing. Please ensure you provide a valid refresh token.
+Error: Refresh token is missing. Please ensure you provide a valid refresh token.
+    at TokenUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\token.usecase.ts:34:13)
+    at Generator.next (<anonymous>)
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\token.usecase.ts:20:71
+    at new Promise (<anonymous>)
+    at __awaiter (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\token.usecase.ts:16:12)
+    at TokenUseCase.refreshAccessToken (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\auth\token.usecase.ts:47:16)
+    at RefreshAccessTokenController.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\controllers\auth\refresh-access-token.controller.ts:18:53)
+    at Generator.next (<anonymous>)
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\controllers\auth\refresh-access-token.controller.ts:20:71
+    at new Promise (<anonymous>)
+10-06-2026 11:43:55 [[32MINFO[39M]: POST /auth/refresh-token 403 129 - 23.793 ms
+10-06-2026 12:14:48 [[32MINFO[39M]: POST /auth/sign-in 200 1360 - 480.489 ms
+10-06-2026 12:14:52 [[32MINFO[39M]: GET /provider/bookings?page=1&limit=10 200 2281 - 127.839 ms
+10-06-2026 12:14:52 [[32MINFO[39M]: GET /provider/bookings?page=1&limit=10 304 - - 100.063 ms
+10-06-2026 12:15:29 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 200 4031 - 220.330 ms
+10-06-2026 12:15:29 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 277.101 ms
+10-06-2026 12:15:42 [[32MINFO[39M]: GET /provider/bookings?page=1&limit=10 304 - - 105.075 ms
+10-06-2026 12:15:42 [[32MINFO[39M]: GET /provider/bookings?page=1&limit=10 304 - - 116.817 ms
+10-06-2026 12:15:48 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 244.859 ms
+10-06-2026 12:15:49 [[32MINFO[39M]: GET /provider/flights?page=1&limit=4 304 - - 365.002 ms
+10-06-2026 12:15:53 [[32MINFO[39M]: GET /provider/flights?page=2&limit=4 304 - - 252.839 ms

@@ -21,8 +21,20 @@ import { completeProviderProfileController,
       getFlightByIdController,
       deleteFlightController,
       getFlightSeatsController,
-      createRecurringFlightController
-    
+      createRecurringFlightController,
+      createOfferController,
+      getProviderOffersController,
+      updateOfferController,
+      deleteOfferController,
+       offerStatusChangeController,
+    createFoodController,
+    updateFoodController,
+    deleteFoodController,
+    getFoodsByProviderController,
+    foodStatusChangeController,
+    getProviderBookingsController,
+    getProviderWalletController,
+    getProviderBookingByIdController
 
  } from "@di/container-resolver";
 
@@ -51,13 +63,29 @@ providerRoutes.put('/aircraft/:aircraftId', authenticate, asyncHandler(updateAir
 providerRoutes.delete('/aircraft/:aircraftId', authenticate, asyncHandler(deleteAircraftController.handle.bind(deleteAircraftController)));
 
 providerRoutes.post('/flights', authenticate, asyncHandler(createFlightController.handle.bind(createFlightController)));
-
 providerRoutes.get('/flights', authenticate,asyncHandler(getProviderFlightsController.handle.bind(getProviderFlightsController)));
 providerRoutes.put('/update-flights/:flightId',authenticate,asyncHandler(updateFlightController.handle.bind(updateFlightController)));
 providerRoutes.get('/flights/:flightId',authenticate,asyncHandler(getFlightByIdController.handle.bind(getFlightByIdController)))
 providerRoutes.delete('/flights/:flightId',authenticate,asyncHandler(deleteFlightController.handle.bind(deleteFlightController)));
 providerRoutes.get('/flights/:flightId/seats', authenticate, asyncHandler(getFlightSeatsController.handle.bind(getFlightSeatsController)));
 providerRoutes.post('/flights/recurring', authenticate, asyncHandler(createRecurringFlightController.handle.bind(createRecurringFlightController)));
+providerRoutes.get('/bookings/:bookingId', authenticate, asyncHandler(getProviderBookingByIdController.handle.bind(getProviderBookingByIdController)));  
 
+// offer
+providerRoutes.post('/offers', authenticate, asyncHandler(createOfferController.handle.bind(createOfferController)));
+providerRoutes.get('/offers', authenticate, asyncHandler(getProviderOffersController.handle.bind(getProviderOffersController)));
+providerRoutes.put('/offers/:offerId', authenticate, asyncHandler(updateOfferController.handle.bind(updateOfferController)));
+providerRoutes.delete('/offers/:offerId', authenticate, asyncHandler(deleteOfferController.handle.bind(deleteOfferController)));
+providerRoutes.patch('/offers/:offerId/status', authenticate, asyncHandler(offerStatusChangeController.handle.bind(offerStatusChangeController)));
+
+// food
+providerRoutes.post('/foods', authenticate, asyncHandler(createFoodController.handle.bind(createFoodController)));
+providerRoutes.get('/foods', authenticate, asyncHandler(getFoodsByProviderController.handle.bind(getFoodsByProviderController)));
+providerRoutes.put('/foods/:foodId', authenticate, asyncHandler(updateFoodController.handle.bind(updateFoodController)));
+providerRoutes.delete('/foods/:foodId', authenticate, asyncHandler(deleteFoodController.handle.bind(deleteFoodController)));
+providerRoutes.patch('/foods/:foodId/status', authenticate, asyncHandler(foodStatusChangeController.handle.bind(foodStatusChangeController)));
+
+providerRoutes.get('/bookings', authenticate, asyncHandler(getProviderBookingsController.handle.bind(getProviderBookingsController)));
+providerRoutes.get('/wallet', authenticate, asyncHandler(getProviderWalletController.handle.bind(getProviderWalletController)));
 export default providerRoutes;
 

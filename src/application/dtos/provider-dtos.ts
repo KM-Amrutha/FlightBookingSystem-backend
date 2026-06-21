@@ -1,5 +1,5 @@
 export interface Provider {
-  _id: string;
+  id: string;
   role: "user" | "provider";
   companyName: string;
   email: string;
@@ -79,4 +79,23 @@ export interface UpdateProviderDTO {
   rejectionDate?: Date |null;
 }
 
+export interface CompleteProviderProfileUpdateDTO {
+  establishmentYear: number;
+  licenseExpiryDate: Date;
+  headquartersAddress: string;
+  countryOfOperation: string;
+  typeOfOperation: string;
+  websiteUrl: string;
+  ceoName: string;
+  officeContactNumber: string;
+
+  logoUrl?: string;
+  registrationCertificateUrl?: string;
+  insuranceProofUrl?: string;
+
+  companyName?: string;
+  email?: string;
+  mobile?: string;
+  airlineCode?: string;
+}
 

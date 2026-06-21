@@ -1,3 +1,4 @@
+
 export const TYPES_AUTH_USECASES = {
             CheckUserBlockStatusUseCase: Symbol.for("CheckUserBlockStatusUseCase"),
             TokenUseCase: Symbol.for("TokenUseCase"),
@@ -38,6 +39,9 @@ export const TYPES_ADMIN_USECASES = {
   UpdateProviderStatusUseCase: Symbol.for("UpdateProviderStatusUseCase"), 
   GetAllUsersUseCase: Symbol.for("GetAllUsersUseCase"),
   UpdateUserStatusUseCase: Symbol.for("UpdateUserStatusUseCase"),
+  GetAdminDashboardUseCase: Symbol.for("GetAdminDashboardUseCase"),
+  SetProviderCommissionUseCase: Symbol.for("SetProviderCommissionUseCase"),
+  GetAdminWalletUseCase:Symbol.for("GetAdminWalletUseCase"),
 }
 
 export const TYPES_AIRCRAFT_USECASES = {
@@ -70,3 +74,54 @@ export const TYPES_FLIGHT_USECASES = {
   GetAllFlightsForAdminUseCase: Symbol.for("GetAllFlightsForAdminUseCase"),
   RejectSingleFlightUseCase: Symbol.for("RejectSingleFlightUseCase"),
 }
+
+export const TYPES_BOOKING_USECASES = {
+
+  AddFlightToSegmentUseCase: Symbol.for("AddFlightToSegmentUseCase"),
+  GetBookingSegmentUseCase: Symbol.for("GetBookingSegmentUseCase"),
+  UpdateBookingSegmentUseCase: Symbol.for("UpdateBookingSegmentUseCase"),
+  GetBookingSeatsMapUseCase: Symbol.for("GetBookingSeatsMapUseCase"),
+  SeatLockUseCase: Symbol.for("SeatLockUseCase"),
+  BookingDetailsUseCase: Symbol.for("BookingDetailsUseCase"),
+  GetBookingSummaryUseCase: Symbol.for("GetBookingSummaryUseCase"),
+// new
+
+InitiateBookingUseCase: Symbol.for("InitiateBookingUseCase"),
+RetryPaymentUseCase: Symbol.for("RetryPaymentUseCase"),
+HandleWebhookUseCase: Symbol.for("HandleWebhookUseCase"),
+
+GetBookingByIdUseCase: Symbol.for("GetBookingByIdUseCase"),
+GetUserBookingsUseCase: Symbol.for("GetUserBookingsUseCase"),
+GetProviderBookingsUseCase: Symbol.for("GetProviderBookingsUseCase"),
+GetAdminBookingsUseCase: Symbol.for("GetAdminBookingsUseCase"),
+GetTicketUseCase: Symbol.for("GetTicketUseCase"),
+CancelPassengerUseCase: Symbol.for("CancelPassengerUseCase"), 
+GetUserWalletUseCase: Symbol.for("GetUserWalletUseCase"),
+GetProviderWalletUseCase: Symbol.for("GetProviderWalletUseCase"), 
+GetProviderBookingByIdUseCase: Symbol.for("GetProviderBookingByIdUseCase"),
+
+
+
+
+}
+
+export const TYPES_OFFER_USECASES = {
+  
+CreateOfferUseCase:Symbol.for("CreateOfferUseCase"),
+GetProviderOffersUseCase: Symbol.for("GetProviderOffersUseCase"),
+UpdateOfferUseCase:Symbol.for("UpdateOfferUseCase"),
+DeleteOfferUseCase:Symbol.for("DeleteOfferUseCase"),
+OfferStatusChangeUseCase:Symbol.for("OfferStatusChangeUseCase"),
+GetEligibleOffersUseCase:Symbol.for("GetEligibleOffersUseCase"),
+
+}
+
+export const TYPES_FOOD_USECASES = {
+  CreateFoodUseCase: Symbol.for("CreateFoodUseCase"),
+  DeleteFoodUseCase:Symbol.for("DeleteFoodUseCase"),
+  FoodStatusChangeUseCase:Symbol.for("FoodStatusChangeUseCase"),
+  GetFoodsByProviderUseCase:Symbol.for("GetFoodsByProviderUseCase"),
+  GetFoodsByAircraftUseCase:Symbol.for("GetFoodsByAircraftUseCase"),
+  UpdateFoodUseCase:Symbol.for("UpdateFoodUseCase")
+}
+

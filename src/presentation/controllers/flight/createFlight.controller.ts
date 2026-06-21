@@ -16,7 +16,7 @@ export class CreateFlightController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const providerId = req.user!._id;
+      const providerId = req.user!.id;
       const body = req.body;
 
       const baseFare: CreateFlightDTO["baseFare"] = {
@@ -56,6 +56,7 @@ export class CreateFlightController {
         baggageRules,
         ...(body.luggageRuleId && { luggageRuleId: body.luggageRuleId }),
         ...(body.foodMenuId && { foodMenuId: body.foodMenuId }),
+         amenities: Array.isArray(body.amenities) ? body.amenities : [],
       };
 
       const flight = await this._createFlightUseCase.execute(providerId, flightData);

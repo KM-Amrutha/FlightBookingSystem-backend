@@ -1,20 +1,27 @@
-import { 
-  IAircraftRepository, 
-  IFlightRepository, 
-  IFlightSeatRepository, 
-  IProviderRepository, 
+import {
+  IAircraftRepository,
+  IFlightRepository,
+  IFlightSeatRepository,
+  IProviderRepository,
   ISeatLayoutRepository,
-  ISeatRepository
+  ISeatRepository,
 } from "@di/file-imports-index";
 import { AircraftDetailsDTO } from "@application/dtos/aircraft-dtos";
-import { AIRCRAFT_MESSAGES, AUTH_MESSAGES, APPLICATION_MESSAGES } from "@shared/constants/index.constants";
-import { validationError, NotFoundError, ForbiddenError, ConflictError } from "@presentation/middlewares/error.middleware";
+import {
+  AIRCRAFT_MESSAGES,
+  AUTH_MESSAGES,
+  APPLICATION_MESSAGES,
+} from "@shared/constants/index.constants";
+import {
+  validationError,
+  NotFoundError,
+  ForbiddenError,
+  ConflictError,
+} from "@presentation/middlewares/error.middleware";
 import { inject, injectable } from "inversify";
 import { TYPES_REPOSITORIES, TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { IDeleteAircraftUseCase } from "@di/file-imports-index";
 import { AircraftMapper } from "@application/mappers/aircraftMapper";
-import { IAircraft } from "@domain/entities/aircraft.entity";
-
 
 @injectable()
 export class DeleteAircraftUseCase implements IDeleteAircraftUseCase {
@@ -36,76 +43,61 @@ export class DeleteAircraftUseCase implements IDeleteAircraftUseCase {
   private async validateProvider(providerId: string): Promise<void> {
     const [provider, isBlocked] = await Promise.all([
       this._providerRepository.getProviderDetailsById(providerId),
-      this._providerRepository.isProviderBlocked(providerId)
+      this._providerRepository.isProviderBlocked(providerId),
     ]);
-
-    if (!provider) {
-      throw new NotFoundError(AIRCRAFT_MESSAGES.PROVIDER_NOT_FOUND);
-    }
-
-    if (isBlocked) {
-      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
-    }
-
-    if (!provider.isVerified) {
-      throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
-    }
+    if (!provider) throw new NotFoundError(AIRCRAFT_MESSAGES.PROVIDER_NOT_FOUND);
+    if (isBlocked) throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED);
+    if (!provider.isVerified) throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
   }
 
- private async validateOwnershipAndStatus(aircraftId: string, providerId: string): Promise<IAircraft> {
-  const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
-  if (!aircraft) throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
-  if (aircraft.providerId !== providerId)
-    throw new ForbiddenError("You don't have permission to delete this aircraft");
-  return aircraft;
-}
-
-
- private async checkForUpcomingFlights(aircraftId: string): Promise<void> {
-  const hasFlights = await this._flightRepository.hasActiveFlightsForAircraft(aircraftId);
-  if (hasFlights) {
-    throw new ConflictError(
-      "Cannot delete aircraft with scheduled flights. Cancel or complete all flights first."
-    );
+  
+  private async validateOwnershipAndStatus(aircraftId: string, providerId: string) {
+    const aircraft = await this._aircraftRepository.getAircraftById(aircraftId);
+    if (!aircraft) throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
+    if (aircraft.providerId !== providerId) {
+      throw new ForbiddenError(AIRCRAFT_MESSAGES.DELETE_FORBIDDEN);          
+    }
+    return aircraft;
   }
-}
+
+  private async checkForUpcomingFlights(aircraftId: string): Promise<void> {
+    const hasFlights = await this._flightRepository.hasActiveFlightsForAircraft(aircraftId);
+    if (hasFlights) {
+      throw new ConflictError(AIRCRAFT_MESSAGES.HAS_SCHEDULED_FLIGHTS);       
+    }
+  }
 
   private async checkForActiveBookings(aircraftId: string): Promise<void> {
-  
+    // reserved for future booking check logic
   }
 
   private async performDeletionChecks(aircraftId: string): Promise<void> {
     await Promise.all([
       this.checkForUpcomingFlights(aircraftId),
-      this.checkForActiveBookings(aircraftId)
+      this.checkForActiveBookings(aircraftId),
     ]);
   }
 
-private async verifyProviderAircraftCount(providerId: string): Promise<void> {
-  const { totalCount } = await this._aircraftRepository.findByProviderId(providerId);
-
-  if (totalCount === 1) {
-    throw new ConflictError(
-      "Cannot delete your only aircraft. Providers must have at least one aircraft"
-    );
+  private async verifyProviderAircraftCount(providerId: string): Promise<void> {
+    const { totalCount } = await this._aircraftRepository.findByProviderId(providerId);
+    if (totalCount === 1) {
+      throw new ConflictError(AIRCRAFT_MESSAGES.CANNOT_DELETE_ONLY_AIRCRAFT); 
+    }
   }
-}
 
-
- async execute(aircraftId: string, providerId: string): Promise<AircraftDetailsDTO> {
-
+  async execute(aircraftId: string, providerId: string): Promise<AircraftDetailsDTO> {
     if (!aircraftId || !providerId) {
       throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
 
     if (!aircraftId.match(/^[0-9a-fA-F]{24}$/)) {
-      throw new validationError("Invalid aircraft ID format");
+      throw new validationError(AIRCRAFT_MESSAGES.INVALID_AIRCRAFT_ID_FORMAT);
     }
 
     const [aircraft] = await Promise.all([
       this.validateOwnershipAndStatus(aircraftId, providerId),
       this.validateProvider(providerId),
-      this.verifyProviderAircraftCount(providerId)
+      this.verifyProviderAircraftCount(providerId),
     ]);
 
     await this.performDeletionChecks(aircraftId);
@@ -113,13 +105,11 @@ private async verifyProviderAircraftCount(providerId: string): Promise<void> {
     await Promise.all([
       this._seatRepository.deleteSeatsByAircraftId(aircraftId),
       this._seatLayoutRepository.deleteSeatLayoutsByAircraftId(aircraftId),
-    
     ]);
 
+    const deleted = await this._aircraftRepository.deleteAircraft(aircraftId);
+    if (!deleted) throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
 
-  const deleted = await this._aircraftRepository.deleteAircraft(aircraftId);
-  if (!deleted) throw new NotFoundError(AIRCRAFT_MESSAGES.NOT_FOUND);
-
-  return AircraftMapper.toAircraftDTO(aircraft);
+    return AircraftMapper.toAircraftDTO(aircraft);
   }
 }

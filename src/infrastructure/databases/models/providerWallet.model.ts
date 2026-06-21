@@ -1,43 +1,30 @@
-// providerWallet.model.ts
-import { IProviderWallet } from "@domain/entities/providerWallet.entity";
 import mongoose, { Schema } from "mongoose";
+
+const providerWalletTransactionSchema = new Schema(
+  {
+    transactionId: { type: String, required: true },
+    type: { type: String, enum: ["credit"], required: true },
+    amount: { type: Number, required: true },
+    description: { type: String, required: true },
+    bookingId: { type: String, default: null },
+    flightId: { type: String, default: null },
+    createdAt: { type: Date, default: Date.now },
+  },
+  { _id: false }
+);
 
 const providerWalletSchema: Schema = new Schema(
   {
     providerId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Provider",
       required: true,
       unique: true,
-      ref: "Provider"
     },
-    balance: {
-      type: Number,
-      required: true,
-      default: 0,
-      min: 0
-    },
-    currency: {
-      type: String,
-      required: true,
-      default: "INR",
-      uppercase: true
-    },
-    lastTransactionDate: {
-      type: Date
-    },
-    isActive: {
-      type: Boolean,
-      default: true
-    }
+    balance: { type: Number, required: true, default: 0 },
+    transactions: { type: [providerWalletTransactionSchema], default: [] },
   },
   { timestamps: true }
 );
-
-providerWalletSchema.index({ providerId: 1 });
-providerWalletSchema.index({ isActive: 1 });
-
-const ProviderWalletModel = mongoose.model<IProviderWallet>(
-  "ProviderWallet",
-  providerWalletSchema
-);
+const ProviderWalletModel = mongoose.model("ProviderWallet", providerWalletSchema);
 export default ProviderWalletModel;

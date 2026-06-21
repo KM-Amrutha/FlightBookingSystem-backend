@@ -30,5 +30,8 @@ export interface IFlightRepository extends IBaseRepository<IFlight> {
   hasActiveFlightsForAircraft(aircraftId: string): Promise<boolean>;
   deleteFlightById(flightId: string): Promise<IFlight|null>;
    getActiveFlightsForAircraft(aircraftId: string): Promise<IFlight[]>;
+   getReturnFlightByParentId(parentFlightId: string): Promise<IFlight | null>;
+getReturnFlightByParentId(parentFlightId: string): Promise<IFlight | null>;
+updateReturnFlight(parentFlightId: string, departureTime: Date, arrivalTime: Date): Promise<void>;
 
 }

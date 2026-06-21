@@ -1,3 +1,24 @@
+
+// Repository Interfaces
+export {IUserRepository} from "@domain/interfaces/IUserRepository"
+export {IOtpRepository} from "@domain/interfaces/IOtpRepository";
+export {IProviderRepository} from "@domain/interfaces/IProviderRepository";
+export {IPasswordResetRepository} from "@domain/interfaces/IPasswordResetTokenRepository";
+export {IAircraftRepository} from "@domain/interfaces/IAircraftRepository";
+export {IDestinationRepository} from "@domain/interfaces/IDestinationRepository";
+export {ISeatRepository} from "@domain/interfaces/ISeatRepository";
+export {ISeatLayoutRepository} from "@domain/interfaces/ISeatLayoutRepository";
+export {ISeatTypeRepository} from "@domain/interfaces/ISeatTypeRepository";
+export {IFlightRepository} from "@domain/interfaces/IFlightRepository";
+export {IFlightSeatRepository} from "@domain/interfaces/IFlightSeatRepository";
+export {IBookingRepository} from "@domain/interfaces/IBookingRepository";
+export {IFoodRepository} from "@domain/interfaces/IFoodRepository";
+export {IOfferRepository} from "@domain/interfaces/IOfferRepository";
+export {ITicketRepository} from "@domain/interfaces/ITicketRepository";
+export {IUserWalletRepository} from "@domain/interfaces/IUserWalletRepository";
+export {IProviderWalletRepository} from "@domain/interfaces/IProviderWalletRepository";
+export {IAdminWalletRepository} from "@domain/interfaces/IAdminWalletRepository";
+
 //   Repositories
 export {UserRepository} from "@infrastructure/databases/repositories/user.repository";
 export {ProviderRepository} from "@infrastructure/databases/repositories/provider.repository";
@@ -12,7 +33,11 @@ export {FlightRepository} from "@infrastructure/databases/repositories/flight.re
 export {FlightSeatRepository} from "@infrastructure/databases/repositories/flightSeat.repository";
 export {BookingRepository} from "@infrastructure/databases/repositories/booking.repository";
 export {FoodRepository} from "@infrastructure/databases/repositories/food.repository";  
-
+export {OfferRepository} from "@infrastructure/databases/repositories/offer.repository";
+export {TicketRepository} from "@infrastructure/databases/repositories/ticket.repository";
+export {UserWalletRepository} from "@infrastructure/databases/repositories/userWallet.repository";
+export {ProviderWalletRepository} from "@infrastructure/databases/repositories/providerWalletRepository";
+export {AdminWalletRepository} from "@infrastructure/databases/repositories/adminWallet.repository";
 
 // services
 export {JwtService} from "@infrastructure/services/auth/jwt.service";
@@ -23,8 +48,30 @@ export {EmailService} from "@infrastructure/services/communication/email.service
 export {CloudinaryService} from "@infrastructure/services/storage/cloudinary.services";
 export {LoggerService} from "@infrastructure/services/logging/logger.services";
 export {GoogleAuthService} from "@infrastructure/services/auth/google.auth.service";   
+export {S3StorageService} from "@infrastructure/services/storage/s3storage.services"
 export {RedisService} from "@infrastructure/services/cache/redis.service"; 
+export {StripeService} from "@infrastructure/services/payment/stripe.service";
+export {UserWalletCreditService} from "@infrastructure/services/payment/userWalletCredit.service";
+export {ProviderWalletService} from "@infrastructure/services/payment/providerWallet.service";
+export {TicketGenerationService} from "@infrastructure/services/payment/ticketGeneration.service";
+
+// service Interfaces
+export {IAuthService} from "@application/interfaces/service/auth/IAuth.service";
+export {IEncryptionService} from "@application/interfaces/service/security/IEncryption.service";
+export {IHashService} from "@application/interfaces/service/security/IHash.service";
+export {IOtpService} from "@application/interfaces/service/security/IGenerate-otp.service";
+export {IEmailService} from "@application/interfaces/service/communication/IEmail.service";
+export {ICloudStorageService} from "@application/interfaces/service/storage/ICloud.storage.service";
+export {ILoggerService} from "@application/interfaces/service/logging/ILogger.service";
+export {IGoogleAuthService} from "@application/interfaces/service/auth/IGoogle.auth.service";   
+export {IRedisService} from "@application/interfaces/service/cache/IRedis.service";
+export {IStripeService} from "@application/interfaces/service/payment/IStripe.service";
+export {IUserWalletCreditService} from "@application/interfaces/service/payment/IUserWalletCredit.service";
+export {IProviderWalletService} from "@application/interfaces/service/payment/IProviderWallet.service";
+export {ITicketGenerationService} from "@application/interfaces/service/payment/ITicketGeneration.service";
+
 //   Authentication UseCases
+
 export {CreateUserUseCase} from "@application/usecases/auth/create-user.usecases";
 export {CheckUserBlockStatusUseCase} from "@application/usecases/auth/check-user-blockstatus.usecase";
 export {TokenUseCase} from "@application/usecases/auth/token.usecase";
@@ -36,6 +83,8 @@ export{SendPasswordRestLinkUseCase} from "@application/usecases/auth/send-passwo
 export {LoggerUseCase} from "@application/usecases/handle-log-usecase";
 export {GoogleAuthUseCase} from "@application/usecases/auth/google-auth.usecase";
 export {ChangePasswordUseCase} from "@application/usecases/auth/change-password.usecase";
+
+
 
 // ProviderUseCases
 
@@ -55,6 +104,9 @@ export {GetAllProvidersUseCase} from "@application/usecases/admin/getAll-provide
 export {UpdateProviderStatusUseCase} from "@application/usecases/admin/update-providerStatus.usecase";
 export {GetAllUsersUseCase} from "@application/usecases/admin/getAll-users.usecase";
 export {UpdateUserStatusUseCase} from "@application/usecases/admin/update-usersStatus.usecase";
+export {GetAdminDashboardUseCase} from "application/usecases/admin/get-adminDashboard.usecase";
+export {SetProviderCommissionUseCase} from "@application/usecases/admin/set-providerCommision.usecase";
+export {GetAdminWalletUseCase} from "@application/usecases/admin/get-adminWallet.usecase";
 
 // Aircraft UseCases
 export {CreateAircraftUseCase} from "@application/usecases/aircraft/create-aircraft.usecase";
@@ -67,7 +119,7 @@ export {UpdateAircraftLocationUseCase} from "@application/usecases/aircraft/upda
 export {CreateSeatLayoutUseCase} from "@application/usecases/aircraft/create-seatLayout.usecase";
 export {GenerateSeatsUseCase} from "@application/usecases/aircraft/generate-seats.usecase";
 export {GetAllSeatTypesUseCase} from "@application/usecases/aircraft/getall-seatTypes.usecase";
-export {GetSeatLayoutsByAircraftUseCase} from "@application/usecases/aircraft/getSeatLayoutBYAircraft.usecase"
+export {GetSeatLayoutsByAircraftUseCase} from "@application/usecases/aircraft/getSeatLayoutByAircraft.usecase"
 export {DeleteSeatLayoutUseCase} from "@application/usecases/aircraft/delete-seatLayout.usecase"
 
 // Flight UseCases
@@ -78,13 +130,53 @@ export {ApproveFlightUseCase} from "@application/usecases/flight/approve-flight.
 export {AvailableAircraftsForScheduleUseCase} from "@application/usecases/flight/availableAircraftForSchedule.usecase";
 export {UpdateFlightUseCase} from "@application/usecases/flight/update-flight.usecase";
 export {GetFlightByIdUseCase} from "@application/usecases/flight/get-flightById.usecase";
-export {SearchFlightsUseCase} from "@application/usecases/flight/searchFlight.usecase";
+export {SearchFlightsUseCase} from "@application/usecases/flight/search-flight.usecase";
 export {DeleteFlightUseCase} from "@application/usecases/flight/delete-flight.usecase";
 export {GetFlightSeatsUseCase} from "@application/usecases/flight/getFlightSeat.usecase";
 export {CreateRecurringFlightUseCase} from "@application/usecases/flight/create-recurringFlight.usecase";  
 export {GetAllFlightsForAdminUseCase} from "@application/usecases/flight/getall-flightsForAdmin.usecase";
 export {RejectSingleFlightUseCase} from "@application/usecases/flight/reject-singleFlight.usecase";
- 
+
+// Booking UseCases
+export {AddFlightToSegmentUseCase} from "@application/usecases/booking/addFlight-toSegment.usecase";
+export {GetBookingSegmentUseCase} from "@application/usecases/booking/getBooking-segment.usecase";
+export {UpdateBookingSegmentUseCase} from "@application/usecases/booking/updateBooking-segment.usecase";
+export {GetBookingSeatsMapUseCase} from "@application/usecases/booking/getBooking-seatsMap.usecase";
+export {SeatLockUseCase} from "@application/usecases/booking/seat-lock.usecase";
+export {BookingDetailsUseCase} from "@application/usecases/booking/booking-details.usecase" 
+export {GetBookingSummaryUseCase} from "@application/usecases/booking/getBooking-summary.usecase"
+
+export {InitiateBookingUseCase} from "@application/usecases/booking/initiate-booking.usecase";
+export {RetryPaymentUseCase} from "@application/usecases/booking/retry-payment.usecase";
+export {HandleWebhookUseCase} from "@application/usecases/booking/handle-webhook.usecase";
+export {GetBookingByIdUseCase} from "@application/usecases/booking/get-bookingById.usecase";
+export {GetUserBookingsUseCase} from "@application/usecases/booking/get-userBookings.usecase";  
+export {GetProviderBookingsUseCase} from "@application/usecases/booking/get-providerBookings.usecase";
+export {GetAdminBookingsUseCase} from "@application/usecases/booking/get-adminBookings.usecase";
+export {GetTicketUseCase} from "@application/usecases/booking/get-ticket.usecase";
+export {CancelPassengerUseCase} from "@application/usecases/booking/cancel-passenger.usecase";
+export {GetUserWalletUseCase} from "@application/usecases/booking/get-userWallet.usecase";
+export {GetProviderWalletUseCase} from "@application/usecases/booking/get-providerWallet.usecase";
+export {GetProviderBookingByIdUseCase} from "@application/usecases/booking/get-providerBookingById.usecase";
+
+
+// Offer Usecases
+
+export {CreateOfferUseCase} from "@application/usecases/offer/create-offer.usecase";
+export {GetProviderOffersUseCase} from "@application/usecases/offer/getProvider-offers.usecase";
+export {UpdateOfferUseCase} from "@application/usecases/offer/update-offer.usecase";
+export {DeleteOfferUseCase} from "@application/usecases/offer/delete-offer.usecase";
+export {OfferStatusChangeUseCase} from "@application/usecases/offer/offerStatus-change.usecase";
+export {GetEligibleOffersUseCase} from "@application/usecases/offer/get-eligibleOffers.usecase";
+
+// food Usecase
+export {CreateFoodUseCase} from "@application/usecases/food/create-food.usecase";
+export {DeleteFoodUseCase} from "@application/usecases/food/delete-food.usecase";
+export {FoodStatusChangeUseCase} from "@application/usecases/food/foodStatus-change.usecase";
+export {GetFoodsByProviderUseCase} from "@application/usecases/food/getFoods-byProvider.usecase";
+export {GetFoodsByAircraftUseCase} from "@application/usecases/food/getFoods-byAircraft.usecase";
+export {UpdateFoodUseCase} from "@application/usecases/food/update-food.usecase";
+
 
 //   Authentication Controllers 
 
@@ -106,8 +198,10 @@ export {GetAllProvidersController} from "@presentation/controllers/admin/get-all
 export {UpdateProviderStatusController} from "@presentation/controllers/admin/update-providerStatus.controller";
 export {GetAllUsersController} from "@presentation/controllers/admin/get-allUsers.controller";
 export {UpdateUserStatusController} from "@presentation/controllers/admin/update-userStatus.controller";
-
-
+export {GetAdminDashboardController} from "@presentation/controllers/admin/get-adminDashboard.controller";
+export {SetProviderCommissionController} from "@presentation/controllers/admin/set-providerCommission.controller";
+export {GetAdminWalletController} from "@presentation/controllers/admin/get-adminWallet.controllers";
+ 
 // Provider Controllers
 export {CompleteProviderProfileController} from "@presentation/controllers/provider/completeProviderProfile.controller";
 export {GetProviderProfileController} from "@presentation/controllers/provider/getProviderProfile.controller";
@@ -144,37 +238,46 @@ export {CreateRecurringFlightController} from "@presentation/controllers/flight/
 export {RejectSingleFlightController} from "@presentation/controllers/flight/rejectSingleFlight.controller";
 export {GetAllFlightsForAdminController} from "@presentation/controllers/flight/getAllFlightsForAdmin.controller";  
 
+// Booking Controllers
+export {AddFlightToSegmentController} from "@presentation/controllers/booking/addFlightToSegment.controller";   
+export {GetBookingSegmentController} from "@presentation/controllers/booking/getBookingSegment.controller";
+export {UpdateBookingSegmentController} from "@presentation/controllers/booking/updateBookingSegment.controller";
+export {GetBookingSeatsMapController} from "@presentation/controllers/booking/getBookingSeatsMap.controller";
+export {SeatLockController} from "@presentation/controllers/booking/seatLock.controller";
+export {BookingDetailsController} from "@presentation/controllers/booking/bookingDetails.controller";
+export {GetBookingSummaryController} from "@presentation/controllers/booking/getBookingSummary.controller";
+
+export {InitiateBookingController} from "@presentation/controllers/booking/initiateBooking.controller"; 
+export {RetryPaymentController} from "@presentation/controllers/booking/retryPayment.controller";
+export {HandleWebhookController} from "@presentation/controllers/booking/handleWebhook.controller";
+export {GetBookingByIdController} from "@presentation/controllers/booking/getBookingById.controller";
+export {GetUserBookingsController} from "@presentation/controllers/booking/getUserBookings.controller";
+export {GetProviderBookingsController} from "@presentation/controllers/booking/getProviderBookings.controller";   
+export {GetAdminBookingsController} from "@presentation/controllers/booking/getAdminBookings.controller"; 
+export {GetTicketController} from "@presentation/controllers/booking/getTicket.controller";
+export {CancelPassengerController} from "@presentation/controllers/booking/cancelPassenger.controller"; 
+export {GetUserWalletController} from "@presentation/controllers/booking/getUserWallet.controller";
+export {GetProviderWalletController} from "@presentation/controllers/booking/getProviderWallet.controller";
+export {GetProviderBookingByIdController} from "@presentation/controllers/booking/getProviderBookingById.controller";
+
+// Offer controller
+
+export {CreateOfferController} from "@presentation/controllers/offer/createOffer.controller";
+export {GetProviderOffersController} from "@presentation/controllers/offer/getProviderOffers.controller";
+export {UpdateOfferController} from "@presentation/controllers/offer/updateOffer.controller";
+export {DeleteOfferController} from "@presentation/controllers/offer/deleteOffer.controller";
+export {OfferStatusChangeController} from "@presentation/controllers/offer/offersStatusChange.controller";
+export {GetEligibleOffersController} from "@presentation/controllers/offer/getEligibleOffers.controller";
+
+// food controller
+export {CreateFoodController} from "@presentation/controllers/food/createFood.controller";
+export {UpdateFoodController} from "@presentation/controllers/food/updateFood.controller";
+export {DeleteFoodController} from "@presentation/controllers/food/deleteFood.controller";
+export {GetFoodsByProviderController} from "@presentation/controllers/food/getFoodsByProvider.controller";
+export {GetFoodsByAircraftController} from "@presentation/controllers/food/getFoodsByAricraft.controller";
+export {FoodStatusChangeController} from "presentation/controllers/food/foodStatusChange.controller";
 
 
-// Repository Interfaces
-export {IUserRepository} from "@domain/interfaces/IUserRepository"
-export {IOtpRepository} from "@domain/interfaces/IOtpRepository";
-export {IProviderRepository} from "@domain/interfaces/IProviderRepository";
-export {IPasswordResetRepository} from "@domain/interfaces/IPasswordResetTokenRepository";
-export {IAircraftRepository} from "@domain/interfaces/IAircraftRepository";
-export {IDestinationRepository} from "@domain/interfaces/IDestinationRepository";
-export {ISeatRepository} from "@domain/interfaces/ISeatRepository";
-export {ISeatLayoutRepository} from "@domain/interfaces/ISeatLayoutRepository";
-export {ISeatTypeRepository} from "@domain/interfaces/ISeatTypeRepository";
-export {IFlightRepository} from "@domain/interfaces/IFlightRepository";
-export {IFlightSeatRepository} from "@domain/interfaces/IFlightSeatRepository";
-export {IBookingRepository} from "@domain/interfaces/IBookingRepository";
-export {IFoodRepository} from "@domain/interfaces/IFoodRepository";
-
-
-
-
-// service Interfaces
-
-export {IAuthService} from "@application/interfaces/service/auth/IAuth.service";
-export {IEncryptionService} from "@application/interfaces/service/security/IEncryption.service";
-export {IHashService} from "@application/interfaces/service/security/IHash.service";
-export {IOtpService} from "@application/interfaces/service/security/IGenerate-otp.service";
-export {IEmailService} from "@application/interfaces/service/communication/IEmail.service";
-export {ICloudStorageService} from "@application/interfaces/service/storage/ICloud.storage.service";
-export {ILoggerService} from "@application/interfaces/service/logging/ILogger.service";
-export {IGoogleAuthService} from "@application/interfaces/service/auth/IGoogle.auth.service";   
-export {IRedisService} from "@application/interfaces/service/cache/IRedis.service";
 
 // usecase Interfaces
 
@@ -198,6 +301,9 @@ export {IGetPendingProvidersUseCase} from "@application/interfaces/usecase/admin
 export {IRejectProviderUseCase} from "@application/interfaces/usecase/admin/IRejectedProvider.usecase";
 export {IVerifyProviderUseCase} from "@application/interfaces/usecase/admin/IVerifyProvider.usecase";
 export {IUpdateUserStatusUseCase} from "@application/interfaces/usecase/admin/IUpdate-userStatus.usecase";
+export {IGetAdminDashboardUseCase} from "application/interfaces/usecase/admin/IGetAdminDashboard.usecase";
+export {ISetProviderCommissionUseCase} from "application/interfaces/usecase/admin/ISet-providerCommisionUsecase";
+export {IGetAdminWalletUseCase} from "@application/interfaces/usecase/admin/IGet-adminWalletUsecase";
 
 export {ICompleteProviderProfileUseCase} from "@application/interfaces/usecase/provider/ICompleteProvider-profile.usecase";
 export {IGetProviderProfileUseCase} from "@application/interfaces/usecase/provider/IGetProviderProfile.usecase";
@@ -231,3 +337,42 @@ export {IGetFlightSeatsUseCase} from "@application/interfaces/usecase/flight/IGe
 export {ICreateRecurringFlightUseCase} from "@application/interfaces/usecase/flight/ICreate-recurringFlightUsecase";
 export {IGetAllFlightsForAdminUseCase} from "@application/interfaces/usecase/flight/IGetAll-flightsForAdminUsecase";
 export {IRejectSingleFlightUseCase} from "@application/interfaces/usecase/flight/IReject-singleFlightUsecase";
+export {IAddFlightToSegmentUseCase} from "@application/interfaces/usecase/booking/IAddFlight-toSegmentUsecase";
+export {IGetBookingSegmentUseCase} from "@application/interfaces/usecase/booking/IGetBooking-segmentUsecase";
+export {IUpdateBookingSegmentUseCase} from "@application/interfaces/usecase/booking/IUpdateBooking-segmentUsecase";
+export {IGetBookingSeatsMapUseCase} from "@application/interfaces/usecase/booking/IGetBooking-seatMapUsecase";
+export {ISeatLockUseCase} from "@application/interfaces/usecase/booking/ISeat-lockUsecase";
+export {IBookingDetailsUseCase} from "@application/interfaces/usecase/booking/IBooking-detailsUsecase";
+export {IGetBookingSummaryUseCase} from "@application/interfaces/usecase/booking/IGet-bookingSummaryUsecase"
+
+export {IInitiateBookingUseCase} from "@application/interfaces/usecase/booking/IInitiate-bookingUsecase";
+export {IRetryPaymentUseCase} from "@application/interfaces/usecase/booking/IRetry-payment.usecase";
+export {IHandleWebhookUseCase} from "@application/interfaces/usecase/booking/IHandle-webhookUsecase";
+export {IGetBookingByIdUseCase} from "@application/interfaces/usecase/booking/IGet-bookingByIdUsecase";
+export {IGetUserBookingsUseCase} from "@application/interfaces/usecase/booking/IGet-userBookingsUsecase";
+export {IGetProviderBookingsUseCase} from "@application/interfaces/usecase/booking/IGet-providerBookingsUsecase";   
+export {IGetAdminBookingsUseCase} from "@application/interfaces/usecase/booking/IGet-adminBookingsUsecase"; 
+export {IGetTicketUseCase} from "@application/interfaces/usecase/booking/IGet-ticketUsecase";
+export {ICancelPassengerUseCase} from "@application/interfaces/usecase/booking/ICancel-passengerUsecase";
+export {IGetUserWalletUseCase} from "@application/interfaces/usecase/booking/IGet-userWalletUsecase";
+export {IGetProviderWalletUseCase} from "@application/interfaces/usecase/booking/IGet-providerWalletUsecase";
+export {IGetProviderBookingByIdUseCase} from "@application/interfaces/usecase/booking/IGet-ProviderBookingByIdUsecase";
+
+// Offer Interfaces
+
+export {ICreateOfferUseCase} from "@application/interfaces/usecase/offer/ICreate-offerUsecase";
+export {IGetEligibleOffersUseCase} from "@application/interfaces/usecase/offer/IGet-eligibleOfferUsecase";
+export {IOfferStatusChangeUseCase} from "@application/interfaces/usecase/offer/IOffer-statusChangeUsecase";
+export {IUpdateOfferUseCase} from "@application/interfaces/usecase/offer/IUpdate-offerUsecase";
+export {IGetProviderOffersUseCase} from "@application/interfaces/usecase/offer/IGetProvider-offersUsecase";
+export {IDeleteOfferUseCase} from "@application/interfaces/usecase/offer/IDelete-offerUsecase";
+
+// food Interfaces
+
+
+export {ICreateFoodUseCase} from "@application/interfaces/usecase/food/ICreate-foodUsecase";
+export {IUpdateFoodUseCase} from "@application/interfaces/usecase/food/IUpdate-foodUsecase";
+export {IGetFoodsByAircraftUseCase} from "@application/interfaces/usecase/food/IGetFood-ByAircraftUsecase";
+export {IGetFoodsByProviderUseCase} from "@application/interfaces/usecase/food/IGetFood-byProviderUsecase";
+export {IFoodStatusChangeUseCase} from "@application/interfaces/usecase/food/IFoodStatus-changeUsecase";
+export {IDeleteFoodUseCase} from "@application/interfaces/usecase/food/IDelete-foodUsecase";

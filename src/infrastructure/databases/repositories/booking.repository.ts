@@ -22,6 +22,7 @@ export class BookingRepository
       subtotal: 1,
       discount: 1,
       grandTotal: 1,
+      commissionAmount: 1,
       status: 1,
       paymentIntentId: 1,
       paymentConfirmedAt: 1,
@@ -49,7 +50,7 @@ export class BookingRepository
 
   async updateBookingStatus(
     bookingId: string,
-    status: "confirmed" | "payment_failed" | "cancelled",
+    status: "pending" | "confirmed" | "payment_failed" | "cancelled",
     paymentIntentId?: string,
     paymentConfirmedAt?: Date
   ): Promise<IBooking | null> {
@@ -111,7 +112,10 @@ export class BookingRepository
     totalPages: number;
   }> {
     const { pageNumber, limitNumber, skip } = paginateReq(page, limit);
-    const matchStage = { "segments.providerId": providerId };
+    const matchStage = {
+      status: "confirmed",
+      "passengers.segments.providerId": providerId,
+    };
 
     const [docs, totalCount] = await Promise.all([
       BookingModel.aggregate([
@@ -207,5 +211,81 @@ export class BookingRepository
     ]);
     if (!docs[0]) return null;
     return { ...docs[0], id: docs[0]._id.toString() };
+  }
+
+  async hasConfirmedBookingsForFlight(flightId: string): Promise<boolean> {
+    const docs = await BookingModel.aggregate([
+      {
+        $match: {
+          status: "confirmed",
+          "passengers.segments.flightId": flightId,
+          "passengers.segments.status": "active",
+        },
+      },
+      { $project: { _id: 1 } },
+      { $limit: 1 },
+    ]);
+    return docs.length > 0;
+  }
+
+  async getStalePendingBookings(cutoffDate: Date): Promise<IBooking[]> {
+    const docs = await BookingModel.aggregate([
+      {
+        $match: {
+          status: "pending",
+          createdAt: { $lt: cutoffDate },
+        },
+      },
+      { $project: this.baseProjection() },
+    ]);
+    return docs.map((doc) => ({ ...doc, id: doc._id.toString() }));
+  }
+
+  async getAdminDashboardStats(): Promise<{
+    totalConfirmedBookings: number;
+    totalRevenue: number;
+    totalCommission: number;
+    monthlyStats: { month: number; year: number; bookings: number; revenue: number }[];
+  }> {
+    const [confirmedStats, monthlyStats] = await Promise.all([
+      BookingModel.aggregate([
+        { $match: { status: "confirmed" } },
+        {
+          $group: {
+            _id: null,
+            totalConfirmedBookings: { $sum: 1 },
+            totalRevenue: { $sum: "$grandTotal" },
+            totalCommission: { $sum: "$commissionAmount" },
+          },
+        },
+      ]),
+      BookingModel.aggregate([
+        { $match: { status: "confirmed" } },
+        {
+          $group: {
+            _id: {
+              year: { $year: "$paymentConfirmedAt" },
+              month: { $month: "$paymentConfirmedAt" },
+            },
+            bookings: { $sum: 1 },
+            revenue: { $sum: "$grandTotal" },
+          },
+        },
+        { $sort: { "_id.year": -1, "_id.month": -1 } },
+        { $limit: 6 },
+      ]),
+    ]);
+
+    return {
+      totalConfirmedBookings: confirmedStats[0]?.totalConfirmedBookings ?? 0,
+      totalRevenue: confirmedStats[0]?.totalRevenue ?? 0,
+      totalCommission: confirmedStats[0]?.totalCommission ?? 0,
+      monthlyStats: monthlyStats.map((s) => ({
+        month: s._id.month,
+        year: s._id.year,
+        bookings: s.bookings,
+        revenue: s.revenue,
+      })),
+    };
   }
 }

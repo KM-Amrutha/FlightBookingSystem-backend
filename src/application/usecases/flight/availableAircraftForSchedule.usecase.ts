@@ -65,7 +65,7 @@ export class AvailableAircraftsForScheduleUseCase
   eligibleAircraftDTOs.map(async (aircraftDTO) => {
     try {
       const activeFlights = await this._flightRepository.getActiveFlightsForAircraft(
-        aircraftDTO._id
+        aircraftDTO.id
       );
       
       const flightDTOs = activeFlights.map((f) => ({
@@ -81,15 +81,14 @@ const isAvailable = this._isAircraftAvailable(
   newWindowEnd,
   bufferMinutes
 );
-      console.log(`Aircraft ${aircraftDTO._id} availability:`, isAvailable);
+    
       return { aircraftDTO, isAvailable };
     } catch (err) {
-      console.error(`Error checking aircraft ${aircraftDTO._id}:`, err);
+      console.error(`Error checking aircraft ${aircraftDTO.id}:`, err);
       return { aircraftDTO, isAvailable: false };
     }
   })
 );
-console.log("availabilityChecks:", availabilityChecks);
     return availabilityChecks
       .filter(({ isAvailable }) => isAvailable)
       .map(({ aircraftDTO }) => aircraftDTO);

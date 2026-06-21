@@ -7,7 +7,6 @@ import { IUserRepository,
 ICreateUserUseCase, } from "@di/file-imports-index";
 
 import { CreateUserDTO, userListDTO } from "@application/dtos/user-dtos";
-import { IUser } from "@domain/entities/user.entity";
 import { APPLICATION_MESSAGES,
      AUTH_MESSAGES } 
      from "@shared/constants/index.constants";

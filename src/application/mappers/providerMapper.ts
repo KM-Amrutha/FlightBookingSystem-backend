@@ -8,7 +8,7 @@ export class ProviderMapper {
    */
   static toProviderDTO(provider: IProvider): Provider {
     return {
-      _id: provider.id,
+      id: provider.id,
       role: provider.role,
       companyName: provider.companyName,
       email: provider.email,

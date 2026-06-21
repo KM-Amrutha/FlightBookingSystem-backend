@@ -1,5 +1,5 @@
 import { IFlight } from "@domain/entities/flight.entity";
-import { CreateFlightDTO, FlightListDTO, FlightDetailsDTO, SearchFlightResultDTO } from "@application/dtos/flight-dtos";
+import {FlightListDTO, FlightDetailsDTO, SearchFlightResultDTO } from "@application/dtos/flight-dtos";
 
 export class FlightMapper {
 
@@ -7,43 +7,22 @@ export class FlightMapper {
    * Convert CreateFlightDTO → Partial<IFlight>
    * Used by: FlightRepository.createFlight (via usecase)
    */
-  static toFlightEntity(dto: CreateFlightDTO): Partial<IFlight> {
+  static toFlightListDTO(flight: IFlight, providerName?: string, providerLogo?: string): FlightListDTO {
     return {
-      flightId: dto.flightId,
-      flightNumber: dto.flightNumber,
-      providerId: dto.providerId,
-      aircraftId: dto.aircraftId,
-      ...(dto.seatLayoutId && { seatLayoutId: dto.seatLayoutId }),
-      aircraftName: dto.aircraftName ?? "",
-      departureDestinationId: dto.departureDestinationId,
-      arrivalDestinationId: dto.arrivalDestinationId,
-      departureTime: new Date(dto.departureTime),
-      arrivalTime: new Date(
-        new Date(dto.departureTime).getTime() + dto.durationMinutes * 60 * 1000
-      ),
-      durationMinutes: dto.durationMinutes,
-      ...(dto.gate && { gate: dto.gate }),
-      ...(dto.bufferMinutes && { bufferMinutes: dto.bufferMinutes }),
-      baseFare: dto.baseFare,
-      seatSurcharge: dto.seatSurcharge,
-      baggageRules: dto.baggageRules,
-      ...(dto.luggageRuleId && { luggageRuleId: dto.luggageRuleId }),
-      ...(dto.foodMenuId && { foodMenuId: dto.foodMenuId }),
-      flightType: dto.flightType ?? "outbound",
-      ...(dto.parentFlightId && { parentFlightId: dto.parentFlightId }),
-      ...(dto.recurringGroupId && { recurringGroupId: dto.recurringGroupId }),
-      ...(dto.recurringDays && { recurringDays: dto.recurringDays }),
-    };
-  }
-
-  static toFlightListDTO(flight: IFlight, providerName?: string): FlightListDTO {
-    return {
-      _id: flight.id,
+      id: flight.id,
       flightId: flight.flightId,
       flightNumber: flight.flightNumber,
       aircraftName: flight.aircraftName,
+        ...(flight.aircraftType && { aircraftType: flight.aircraftType }),
       providerId: flight.providerId,
       ...(providerName && { providerName }),
+      ...(providerLogo && {
+  providerLogo: providerLogo,
+}),
+
+...(flight.manufacturer && {
+  manufacturer: flight.manufacturer,
+}),
       flightType: flight.flightType,
       ...(flight.parentFlightId && { parentFlightId: flight.parentFlightId }),
       ...(flight.recurringGroupId && { recurringGroupId: flight.recurringGroupId }),
@@ -70,6 +49,7 @@ export class FlightMapper {
       departureTime: flight.departureTime.toISOString(),
       arrivalTime: flight.arrivalTime.toISOString(),
       durationMinutes: flight.durationMinutes,
+      ...(flight.bufferMinutes && { bufferMinutes: flight.bufferMinutes }),
       baseFare: {
         economy: flight.baseFare.economy ?? 0,
         ...(flight.baseFare.premium_economy && { premium_economy: flight.baseFare.premium_economy }),
@@ -81,6 +61,7 @@ export class FlightMapper {
         extraChargePerKg: flight.baggageRules?.extraChargePerKg ?? 0,
         ...(flight.baggageRules?.maxExtraKg && { maxExtraKg: flight.baggageRules.maxExtraKg }),
       },
+      ...(flight.amenities && flight.amenities.length > 0 && { amenities: flight.amenities }),
       adminApproval: {
         status: flight.adminApproval.status,
         ...(flight.adminApproval.reviewedAt && {
@@ -98,7 +79,7 @@ export class FlightMapper {
 
   static toFlightDetailsDTO(flight: IFlight): FlightDetailsDTO {
     return {
-      _id: flight.id,
+      id: flight.id,
       flightId: flight.flightId,
       flightNumber: flight.flightNumber,
       aircraftName: flight.aircraftName,
@@ -146,6 +127,7 @@ export class FlightMapper {
       },
       ...(flight.luggageRuleId && { luggageRuleId: flight.luggageRuleId }),
       ...(flight.foodMenuId && { foodMenuId: flight.foodMenuId }),
+      ...(flight.amenities && flight.amenities.length > 0 && { amenities: flight.amenities }),
       flightStatus: flight.flightStatus,
       adminApproval: {
         status: flight.adminApproval.status,
@@ -187,10 +169,12 @@ export class FlightMapper {
     if (flight.baseFare.first) availableClasses.push("first");
 
     return {
-      _id: flight.id,
+      id: flight.id,
       flightId: flight.flightId,
       flightNumber: flight.flightNumber,
       aircraftName: flight.aircraftName,
+      ...(flight.providerName && { providerName: flight.providerName }),
+...(flight.providerLogo && { providerLogo: flight.providerLogo }),
       departure: {
         destinationId: flight.departureDestinationId,
         name: flight.departureDestination?.name ?? "",
@@ -216,6 +200,7 @@ export class FlightMapper {
         extraChargePerKg: flight.baggageRules?.extraChargePerKg ?? 0,
         ...(flight.baggageRules?.maxExtraKg && { maxExtraKg: flight.baggageRules.maxExtraKg }),
       },
+      ...(flight.amenities && flight.amenities.length > 0 && { amenities: flight.amenities }),
       flightStatus: flight.flightStatus,
       availableClasses,
     };

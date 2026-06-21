@@ -1,3 +1,4 @@
+
 export const TYPES_REPOSITORIES = {
      OtpRepository: Symbol.for("OtpRepository"),
      UserRepository: Symbol.for("UserRepository"),
@@ -19,4 +20,9 @@ export const  TYPES_AIRCRAFT_REPOSITORIES = {
 export const TYPES_BOOKING_REPOSITORIES = {
      BookingRepository: Symbol.for("BookingRepository"),
      FoodRepository: Symbol.for("FoodRepository"),
+     OfferRepository: Symbol.for("OfferRepository"),
+     TicketRepository: Symbol.for("TicketRepository"),
+     UserWalletRepository: Symbol.for("UserWalletRepository"),
+     ProviderWalletRepository: Symbol.for("ProviderWalletRepository"),
+     AdminWalletRepository: Symbol.for("AdminWalletRepository"),
 }

@@ -86,6 +86,10 @@ const flightSchema: Schema = new Schema({
    },
   foodMenuId: [{ type: mongoose.Schema.Types.ObjectId,
      ref: 'FoodMenu' }],
+     amenities: {
+  type: [String],
+  default: [],
+},
   flightStatus: { type: String,
      enum: ['scheduled', 'cancelled', 'completed'], 
      default: 'scheduled' 

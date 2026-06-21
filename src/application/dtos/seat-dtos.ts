@@ -1,5 +1,5 @@
 export interface SeatDetailsDTO {
-  _id: string;
+  id: string;                   
   aircraftId: string;
   seatTypeId: string;
   seatTypeName?: string;
@@ -13,14 +13,14 @@ export interface SeatDetailsDTO {
   isBlocked: boolean;
   blockReason?: string;
   features: string[];
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date;           
+  updatedAt: Date;                  
 }
 
 export interface CreateSeatDTO {
   aircraftId: string;
   seatTypeId: string;
-  cabinClass:string;
+  cabinClass: string;
   seatNumber: string;
   rowNumber: number;
   columnPosition: string;
@@ -30,7 +30,6 @@ export interface CreateSeatDTO {
   isBlocked: boolean;
   blockReason?: string;
   features: string[];
-  
 }
 
 export interface UpdateSeatDTO {
@@ -40,7 +39,7 @@ export interface UpdateSeatDTO {
 }
 
 export interface SeatLayoutDetailsDTO {
-  _id: string;
+  id: string;                        
   aircraftId: string;
   cabinClass: string;
   layout: string;
@@ -53,8 +52,23 @@ export interface SeatLayoutDetailsDTO {
   exitRows: number[];
   wingStartRow: number;
   wingEndRow: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date;              
+  updatedAt: Date;                 
+}
+export interface SeatLayoutUseCaseDTO {
+  id: string;
+  aircraftId: string;
+  cabinClass: string;
+  layout: string;
+  startRow: number;
+  endRow: number;
+  totalRows: number;
+  seatsPerRow: number;
+  columns: string[];
+  aisleColumns: string[];
+  exitRows: number[];
+  wingStartRow: number;
+  wingEndRow: number;
 }
 
 export interface CreateSeatLayoutDTO {
@@ -72,13 +86,13 @@ export interface CreateSeatLayoutDTO {
 }
 
 export interface SeatTypeDTO {
-  _id: string;
+  id: string;                          
   seatTypeName: string;
   cabinClass: string;
   basePriceMultiplier: number;
   seatPitch: number;
   seatWidth: number;
   features: string[];
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date;             
+  updatedAt: Date;                   
 }

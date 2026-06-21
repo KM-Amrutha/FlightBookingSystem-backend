@@ -35,6 +35,7 @@ export interface CreateFlightDTO {
   aircraftName?: string;  // populated from aircraft
   luggageRuleId?: string;
   foodMenuId?: string[];
+  amenities?: string[];
   flightType?: "outbound" | "return" | "recurring";
   parentFlightId?: string;
   recurringGroupId?: string;
@@ -47,6 +48,8 @@ export interface UpdateFlightDTO {
   gate?: string;
   durationMinutes?: number;  // Changing duration affects arrival time
   arrivalDestinationId?: string;
+  departureTime?: string; 
+  bufferMinutes?: number;    // minimum time between outbound and return, e.g. 120 for 2 hours
   baseFare?: {
     economy?: number;
     premium_economy?: number;
@@ -65,24 +68,30 @@ export interface UpdateFlightDTO {
   };
   luggageRuleId?: string | null;
   foodMenuId?: string[];
+  amenities?: string[];
 }
 
 export interface FlightListDTO {
-  _id: string;
+  id: string;
   flightId: string;
   flightNumber: string;
   aircraftName: string;
+  aircraftType?: string;
   providerId: string;
+  manufacturer?: string;
   providerName?:string;
+  providerLogo?: string;
   flightType: "outbound" | "return" | "recurring";  
   parentFlightId?: string;                           
   recurringGroupId?: string; 
   recurringDays?: number[];
   departureDestinationId: string;
   arrivalDestinationId: string;
-  departureTime: string;  // ISO string
+  departureTime: string; 
+  bufferMinutes?: number;    // minimum time between outbound and return, e.g. 120 for 2 hours
   arrivalTime: string;
   durationMinutes: number;
+  amenities?: string[];
   gate?: string;
 seatSurcharge: {
   window?: number;
@@ -115,7 +124,7 @@ export interface ApproveFlightDTO {
 
 
 export interface FlightDetailsDTO{
-  _id: string;
+  id: string;
   flightId: string;
   flightNumber: string;
   aircraftName: string;
@@ -155,6 +164,7 @@ export interface FlightDetailsDTO{
   // Status info
   luggageRuleId?: string;
   foodMenuId?: string[];
+  amenities?: string[];
   flightStatus: 'scheduled' | 'cancelled' | 'completed';
   adminApproval: {
     status: 'pending' | 'approved' | 'rejected';
@@ -186,10 +196,12 @@ export interface SearchFlightsDTO {
 }
 
 export interface SearchFlightResultDTO {
-  _id: string;
+  id: string;
   flightId: string;
   flightNumber: string;
   aircraftName: string;
+  providerName?: string;
+providerLogo?: string;
 
   departure: {
     destinationId: string;
@@ -220,7 +232,7 @@ export interface SearchFlightResultDTO {
     extraChargePerKg: number;
     maxExtraKg?: number;
   };
-
+amenities?: string[];
   flightStatus: "scheduled" | "cancelled" | "completed";
   availableClasses: Array<"economy" | "premium_economy" | "business" | "first">;
 }

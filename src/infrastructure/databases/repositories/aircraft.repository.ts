@@ -30,73 +30,78 @@ async createAircraft(data: Partial<IAircraft>): Promise<IAircraft> {
   }
 
   async getAircraftById(aircraftId: string): Promise<IAircraft | null> {
-    const aircraftData = await AircraftModel.aggregate([
-      {
-        $match: {
-          _id: this.parseId(aircraftId)
-        }
+  const aircraftData = await AircraftModel.aggregate([
+    { $match: { _id: this.parseId(aircraftId) } },
+    {
+      $lookup: {
+        from: "destinations",
+        localField: "baseStationId",
+        foreignField: "_id",
+        as: "baseStation",
       },
-      {
-        $lookup: {
-          from: "destinations",
-          localField: "baseStationId",
-          foreignField: "_id",
-          as: "baseStation"
-        }
+    },
+    {
+      $lookup: {
+        from: "destinations",
+        localField: "currentLocationId",
+        foreignField: "_id",
+        as: "currentLocation",
       },
-      {
-        $lookup: {
-          from: "destinations",
-          localField: "currentLocationId",
-          foreignField: "_id",
-          as: "currentLocation"
-        }
+    },
+    { $unwind: { path: "$baseStation", preserveNullAndEmptyArrays: true } },
+    { $unwind: { path: "$currentLocation", preserveNullAndEmptyArrays: true } },
+    {
+      $project: {
+        _id: 1,
+        providerId: 1,
+        aircraftType: 1,
+        aircraftName: 1,
+        manufacturer: 1,
+        buildYear: 1,
+        seatCapacity: 1,
+        seatLayoutType: 1,
+        flyingRangeKm: 1,
+        engineCount: 1,
+        lavatoryCount: 1,
+        baseStationId: 1,
+        currentLocationId: 1,
+        availableFrom: 1,
+        status: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        "baseStation._id": 1,
+        "baseStation.name": 1,
+        "baseStation.municipality": 1,           
+        "baseStation.isoCountry": 1,           
+        "currentLocation._id": 1,
+        "currentLocation.name": 1,
+        "currentLocation.municipality": 1,    
+        "currentLocation.isoCountry": 1,         
       },
-      {
-        $unwind: {
-          path: "$baseStation",
-          preserveNullAndEmptyArrays: true
-        }
+    },
+  ]);
+
+  if (!aircraftData[0]) return null;
+
+  const doc = aircraftData[0];
+  return {
+    ...doc,
+    id: doc._id.toString(),
+    ...(doc.baseStation && {
+      baseStation: {
+        ...doc.baseStation,
+        id: doc.baseStation._id.toString(),  
       },
-      {
-        $unwind: {
-          path: "$currentLocation",
-          preserveNullAndEmptyArrays: true
-        }
+    }),
+    ...(doc.currentLocation && {
+      currentLocation: {
+        ...doc.currentLocation,
+        id: doc.currentLocation._id.toString(),
       },
-      {
-        $project: {
-          _id: 1,
-          providerId: 1,
-          aircraftType: 1,
-          aircraftName: 1,
-          manufacturer: 1,
-          buildYear: 1,
-          seatCapacity: 1,
-          seatLayoutType: 1,
-          flyingRangeKm: 1,
-          engineCount: 1,
-          lavatoryCount: 1,
-          baseStationId: 1,
-          currentLocationId: 1,
-          availableFrom: 1,
-          status: 1,
-          createdAt: 1,
-          updatedAt: 1,
-          "baseStation._id": 1,
-          "baseStation.name": 1,
-          "baseStation.city": 1,
-          "baseStation.country": 1,
-          "currentLocation._id": 1,
-          "currentLocation.name": 1,
-          "currentLocation.city": 1,
-          "currentLocation.country": 1
-        }
-      }
-    ]);
-     if (!aircraftData[0]) return null;
-    return { ...aircraftData[0], id: aircraftData[0]._id.toString() }
-  }
+    }),
+  };
+}
+
 
 // async getAircraftsByProvider(providerId: string): Promise<IAircraft[]> {
 //   const aircraftsData = await AircraftModel.aggregate([
@@ -163,42 +168,40 @@ async createAircraft(data: Partial<IAircraft>): Promise<IAircraft> {
 
 async getAircraftsByProvider(providerId: string): Promise<IAircraft[]> {
   const aircraftsData = await AircraftModel.aggregate([
-    {
-      $match: { providerId }
-    },
+    { $match: { providerId } },
     {
       $addFields: {
         baseStationObjectId: {
           $cond: {
             if: { $and: [{ $ne: ["$baseStationId", ""] }, { $ne: ["$baseStationId", null] }] },
             then: { $toObjectId: "$baseStationId" },
-            else: null
-          }
+            else: null,
+          },
         },
         currentLocationObjectId: {
           $cond: {
             if: { $and: [{ $ne: ["$currentLocationId", ""] }, { $ne: ["$currentLocationId", null] }] },
             then: { $toObjectId: "$currentLocationId" },
-            else: null
-          }
-        }
-      }
+            else: null,
+          },
+        },
+      },
     },
     {
       $lookup: {
         from: "destinations",
         localField: "baseStationObjectId",
         foreignField: "_id",
-        as: "baseStation"
-      }
+        as: "baseStation",
+      },
     },
     {
       $lookup: {
         from: "destinations",
         localField: "currentLocationObjectId",
         foreignField: "_id",
-        as: "currentLocation"
-      }
+        as: "currentLocation",
+      },
     },
     { $unwind: { path: "$baseStation", preserveNullAndEmptyArrays: true } },
     { $unwind: { path: "$currentLocation", preserveNullAndEmptyArrays: true } },
@@ -223,18 +226,29 @@ async getAircraftsByProvider(providerId: string): Promise<IAircraft[]> {
         updatedAt: 1,
         "baseStation._id": 1,
         "baseStation.name": 1,
-        "baseStation.city": 1,
-        "baseStation.country": 1,
+        "baseStation.municipality": 1,    
+        "baseStation.isoCountry": 1,          
         "currentLocation._id": 1,
         "currentLocation.name": 1,
-        "currentLocation.city": 1,
-        "currentLocation.country": 1
-      }
-    }
-  ]).sort({ createdAt: -1 });
+        "currentLocation.municipality": 1,      
+        "currentLocation.isoCountry": 1,        
+      },
+    },
+    { $sort: { createdAt: -1 } },
+  ]);
 
-  return aircraftsData.map((a) => ({ ...a, id: a._id.toString() }));
+  return aircraftsData.map((a) => ({
+    ...a,
+    id: a._id.toString(),
+    ...(a.baseStation && {
+      baseStation: { ...a.baseStation, id: a.baseStation._id.toString() },
+    }),
+    ...(a.currentLocation && {
+      currentLocation: { ...a.currentLocation, id: a.currentLocation._id.toString() },
+    }),
+  }));
 }
+
 
 
     async getAllAircrafts(): Promise<IAircraft[]> {
@@ -346,6 +360,7 @@ async getAircraftsByProvider(providerId: string): Promise<IAircraft[]> {
     return aircraft?.status === "active" || false;
   }
 
+  // ── findByProviderId ──────────────────────────────────────────────────────────
 async findByProviderId(
   providerId: string,
   page: number = 1,
@@ -357,7 +372,6 @@ async findByProviderId(
   totalPages: number;
 }> {
   const skip = (page - 1) * limit;
-
   const totalCount = await AircraftModel.countDocuments({ providerId });
 
   const aircraftData = await AircraftModel.aggregate([
@@ -368,33 +382,33 @@ async findByProviderId(
           $cond: {
             if: { $and: [{ $ne: ["$baseStationId", ""] }, { $ne: ["$baseStationId", null] }] },
             then: { $toObjectId: "$baseStationId" },
-            else: null
-          }
+            else: null,
+          },
         },
         currentLocationObjectId: {
           $cond: {
             if: { $and: [{ $ne: ["$currentLocationId", ""] }, { $ne: ["$currentLocationId", null] }] },
             then: { $toObjectId: "$currentLocationId" },
-            else: null
-          }
-        }
-      }
+            else: null,
+          },
+        },
+      },
     },
     {
       $lookup: {
         from: "destinations",
         localField: "baseStationObjectId",
         foreignField: "_id",
-        as: "baseStation"
-      }
+        as: "baseStation",
+      },
     },
     {
       $lookup: {
         from: "destinations",
         localField: "currentLocationObjectId",
         foreignField: "_id",
-        as: "currentLocation"
-      }
+        as: "currentLocation",
+      },
     },
     { $unwind: { path: "$baseStation", preserveNullAndEmptyArrays: true } },
     { $unwind: { path: "$currentLocation", preserveNullAndEmptyArrays: true } },
@@ -419,22 +433,28 @@ async findByProviderId(
         updatedAt: 1,
         "baseStation._id": 1,
         "baseStation.name": 1,
-        "baseStation.city": 1,
-        "baseStation.country": 1,
+        "baseStation.municipality": 1,      
+        "baseStation.isoCountry": 1,         
         "currentLocation._id": 1,
         "currentLocation.name": 1,
-        "currentLocation.city": 1,
-        "currentLocation.country": 1
-      }
+        "currentLocation.municipality": 1,    
+        "currentLocation.isoCountry": 1,        
+      },
     },
     { $sort: { createdAt: -1 } },
     { $skip: skip },
-    { $limit: limit }
+    { $limit: limit },
   ]);
 
   const aircrafts: IAircraft[] = aircraftData.map((a) => ({
     ...a,
-    id: a._id.toString()
+    id: a._id.toString(),
+    ...(a.baseStation && {
+      baseStation: { ...a.baseStation, id: a.baseStation._id.toString() },
+    }),
+    ...(a.currentLocation && {
+      currentLocation: { ...a.currentLocation, id: a.currentLocation._id.toString() },
+    }),
   }));
 
   return {
@@ -444,6 +464,7 @@ async findByProviderId(
     totalPages: Math.ceil(totalCount / limit),
   };
 }
+
 
   async findByStatus(status: "active" | "inactive" | "maintenance"): Promise<IAircraft[]> {
     return await this.findMany({ status });

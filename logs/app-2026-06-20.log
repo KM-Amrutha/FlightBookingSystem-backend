@@ -1,0 +1,198 @@
+20-06-2026 18:25:25 [[32MINFO[39M]: POST /auth/sign-in 200 758 - 367.276 ms
+20-06-2026 18:25:51 [[32MINFO[39M]: GET /user/destinations/search?q=c 400 96 - 4.454 ms
+20-06-2026 18:25:51 [[32MINFO[39M]: GET /user/destinations/search?q=co 304 - - 106.458 ms
+20-06-2026 18:25:51 [[32MINFO[39M]: GET /user/destinations/search?q=cok 304 - - 71.495 ms
+20-06-2026 18:25:54 [[32MINFO[39M]: GET /user/destinations/search?q=d 400 96 - 1.607 ms
+20-06-2026 18:25:54 [[32MINFO[39M]: GET /user/destinations/search?q=dx 304 - - 76.305 ms
+20-06-2026 18:25:55 [[32MINFO[39M]: GET /user/destinations/search?q=dxb 304 - - 69.196 ms
+20-06-2026 18:26:02 [[32MINFO[39M]: GET /user/flights/search?from=COK&to=DXB&departureDate=2026-06-30&passengers=1&tripType=one-way&page=1&limit=6 200 2720 - 211.392 ms
+20-06-2026 18:27:47 [[32MINFO[39M]: GET /user/flights/search?from=COK&to=DXB&departureDate=2026-06-30&passengers=1&tripType=one-way&page=1&limit=6 304 - - 160.704 ms
+20-06-2026 18:28:16 [[32MINFO[39M]: GET /user/destinations/search?q=c 400 96 - 2.229 ms
+20-06-2026 18:28:16 [[32MINFO[39M]: GET /user/destinations/search?q=co 304 - - 51.619 ms
+20-06-2026 18:28:17 [[32MINFO[39M]: GET /user/destinations/search?q=cok 304 - - 81.599 ms
+20-06-2026 18:28:21 [[32MINFO[39M]: GET /user/destinations/search?q=d 400 96 - 1.215 ms
+20-06-2026 18:28:22 [[32MINFO[39M]: GET /user/destinations/search?q=dx 304 - - 75.991 ms
+20-06-2026 18:28:22 [[32MINFO[39M]: GET /user/destinations/search?q=dxb 304 - - 72.073 ms
+20-06-2026 18:28:40 [[32MINFO[39M]: GET /user/flights/search?from=COK&to=DXB&departureDate=2026-06-30&passengers=1&tripType=round-trip&returnDate=2026-07-01&page=1&limit=6 200 2789 - 248.463 ms
+20-06-2026 20:08:35 [[32MINFO[39M]: GET /user/destinations/search?q=c 400 96 - 53.404 ms
+20-06-2026 20:08:36 [[32MINFO[39M]: GET /user/destinations/search?q=co 304 - - 692.778 ms
+20-06-2026 20:08:36 [[32MINFO[39M]: GET /user/destinations/search?q=cok 304 - - 539.679 ms
+20-06-2026 20:08:39 [[32MINFO[39M]: GET /user/destinations/search?q=d 400 96 - 1.214 ms
+20-06-2026 20:08:39 [[32MINFO[39M]: GET /user/destinations/search?q=dx 304 - - 88.576 ms
+20-06-2026 20:08:40 [[32MINFO[39M]: GET /user/destinations/search?q=dxb 304 - - 70.696 ms
+20-06-2026 20:08:57 [[32MINFO[39M]: GET /user/flights/search?from=COK&to=DXB&departureDate=2026-06-30&passengers=1&tripType=one-way&page=1&limit=6 304 - - 302.086 ms
+20-06-2026 20:17:56 [[31MERROR[39M]: [/user/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+20-06-2026 20:17:56 [[32MINFO[39M]: GET /user/profile 401 133 - 222.922 ms
+20-06-2026 20:17:56 [[31MERROR[39M]: [/user/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+20-06-2026 20:17:56 [[32MINFO[39M]: GET /user/profile 401 133 - 8.907 ms
+20-06-2026 20:17:56 [[32MINFO[39M]: POST /auth/refresh-token 200 349 - 43.781 ms
+20-06-2026 20:17:56 [[32MINFO[39M]: POST /auth/refresh-token 200 349 - 8.564 ms
+20-06-2026 20:17:57 [[32MINFO[39M]: GET /user/profile 200 540 - 728.734 ms
+20-06-2026 20:17:57 [[32MINFO[39M]: GET /user/profile 304 - - 100.711 ms
+20-06-2026 20:21:41 [[32MINFO[39M]: GET /user/destinations/search?q=d 400 96 - 5.319 ms
+20-06-2026 20:21:41 [[32MINFO[39M]: GET /user/destinations/search?q=dx 304 - - 102.039 ms
+20-06-2026 20:21:41 [[32MINFO[39M]: GET /user/destinations/search?q=dxb 304 - - 70.473 ms
+20-06-2026 20:21:44 [[32MINFO[39M]: GET /user/destinations/search?q=c 400 96 - 1.895 ms
+20-06-2026 20:21:44 [[32MINFO[39M]: GET /user/destinations/search?q=co 304 - - 68.744 ms
+20-06-2026 20:21:44 [[32MINFO[39M]: GET /user/destinations/search?q=cok 304 - - 80.637 ms
+20-06-2026 20:21:51 [[32MINFO[39M]: GET /user/flights/search?from=DXB&to=COK&departureDate=2026-06-30&passengers=1&tripType=one-way&page=1&limit=6 200 2746 - 230.053 ms
+20-06-2026 21:44:22 [[31MERROR[39M]: [/user/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+20-06-2026 21:44:22 [[32MINFO[39M]: GET /user/profile 401 133 - 136.500 ms
+20-06-2026 21:44:22 [[31MERROR[39M]: [/user/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+20-06-2026 21:44:22 [[32MINFO[39M]: GET /user/profile 401 133 - 17.979 ms
+20-06-2026 21:44:25 [[32MINFO[39M]: POST /auth/refresh-token 200 349 - 92.584 ms
+20-06-2026 21:44:25 [[32MINFO[39M]: POST /auth/refresh-token 200 349 - 8.433 ms
+20-06-2026 21:44:29 [[32MINFO[39M]: GET /user/profile 304 - - 595.353 ms
+20-06-2026 21:44:29 [[32MINFO[39M]: GET /user/profile 304 - - 125.400 ms
+20-06-2026 21:49:51 [[32MINFO[39M]: POST /auth/sign-in 200 758 - 377.659 ms
+20-06-2026 21:49:53 [[32MINFO[39M]: GET /user/destinations/search?q=c 400 96 - 2.701 ms
+20-06-2026 21:49:54 [[32MINFO[39M]: GET /user/destinations/search?q=co 304 - - 83.419 ms
+20-06-2026 21:49:54 [[32MINFO[39M]: GET /user/destinations/search?q=cok 304 - - 80.209 ms
+20-06-2026 21:49:58 [[32MINFO[39M]: GET /user/destinations/search?q=d 400 96 - 3.048 ms
+20-06-2026 21:49:58 [[32MINFO[39M]: GET /user/destinations/search?q=dx 304 - - 76.423 ms
+20-06-2026 21:49:58 [[32MINFO[39M]: GET /user/destinations/search?q=dxb 304 - - 76.289 ms
+20-06-2026 21:50:08 [[32MINFO[39M]: GET /user/flights/search?from=COK&to=DXB&departureDate=2026-06-30&passengers=1&tripType=one-way&page=1&limit=6 304 - - 185.600 ms
+20-06-2026 22:25:32 [[31MERROR[39M]: [/user/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+20-06-2026 22:25:32 [[32MINFO[39M]: GET /user/profile 401 133 - 391.647 ms
+20-06-2026 22:25:32 [[31MERROR[39M]: [/user/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+20-06-2026 22:25:32 [[32MINFO[39M]: GET /user/profile 401 133 - 27.277 ms
+20-06-2026 22:25:33 [[32MINFO[39M]: POST /auth/refresh-token 200 349 - 76.914 ms
+20-06-2026 22:25:33 [[32MINFO[39M]: POST /auth/refresh-token 200 349 - 11.571 ms
+20-06-2026 22:25:34 [[32MINFO[39M]: GET /user/profile 304 - - 792.564 ms
+20-06-2026 22:25:34 [[32MINFO[39M]: GET /user/profile 304 - - 154.055 ms
+20-06-2026 22:26:33 [[32MINFO[39M]: POST /auth/sign-in 200 758 - 1312.975 ms
+20-06-2026 22:27:42 [[32MINFO[39M]: POST /auth/sign-in 200 758 - 358.964 ms
+20-06-2026 22:27:44 [[32MINFO[39M]: GET /user/destinations/search?q=c 400 96 - 79.344 ms
+20-06-2026 22:27:45 [[32MINFO[39M]: GET /user/destinations/search?q=co 304 - - 314.878 ms
+20-06-2026 22:27:45 [[32MINFO[39M]: GET /user/destinations/search?q=cok 304 - - 194.350 ms
+20-06-2026 22:27:47 [[32MINFO[39M]: GET /user/destinations/search?q=d 400 96 - 1.401 ms
+20-06-2026 22:27:47 [[32MINFO[39M]: GET /user/destinations/search?q=dx 304 - - 81.906 ms
+20-06-2026 22:27:48 [[32MINFO[39M]: GET /user/destinations/search?q=dxb 304 - - 350.405 ms
+20-06-2026 22:27:54 [[32MINFO[39M]: GET /user/flights/search?from=COK&to=DXB&departureDate=2026-06-30&passengers=1&tripType=one-way&page=1&limit=6 304 - - 284.699 ms
+20-06-2026 22:46:08 [[31MERROR[39M]: [/user/bookings/segment] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+20-06-2026 22:46:08 [[32MINFO[39M]: POST /user/bookings/segment 401 133 - 213.820 ms
+20-06-2026 22:46:08 [[32MINFO[39M]: POST /auth/refresh-token 200 349 - 19.120 ms
+20-06-2026 22:46:08 [[32MINFO[39M]: POST /user/bookings/segment 200 996 - 431.833 ms
+20-06-2026 22:46:11 [[32MINFO[39M]: GET /user/bookings/38884fed-0078-4230-b1d1-8e311ce3a33b/segment 200 990 - 365.568 ms
+20-06-2026 22:46:11 [[32MINFO[39M]: GET /user/bookings/38884fed-0078-4230-b1d1-8e311ce3a33b/segment 304 - - 57.052 ms
+20-06-2026 22:46:31 [[32MINFO[39M]: PUT /user/bookings/38884fed-0078-4230-b1d1-8e311ce3a33b/segment 200 988 - 121.257 ms
+20-06-2026 22:46:33 [[32MINFO[39M]: GET /user/aircrafts/69edb8c0341960e915459eae/foods 200 580 - 389.622 ms
+20-06-2026 22:46:33 [[32MINFO[39M]: GET /user/bookings/38884fed-0078-4230-b1d1-8e311ce3a33b/seats-map 200 14890 - 563.701 ms
+20-06-2026 22:46:33 [[32MINFO[39M]: GET /user/aircrafts/69edb8c0341960e915459eae/foods 304 - - 195.430 ms
+20-06-2026 22:46:34 [[32MINFO[39M]: GET /user/bookings/38884fed-0078-4230-b1d1-8e311ce3a33b/seats-map 304 - - 298.101 ms
+20-06-2026 22:52:48 [[32MINFO[39M]: GET /user/profile 304 - - 1737.365 ms
+20-06-2026 22:52:48 [[32MINFO[39M]: GET /user/profile 304 - - 113.888 ms
+20-06-2026 22:52:51 [[32MINFO[39M]: GET /user/bookings/38884fed-0078-4230-b1d1-8e311ce3a33b/seats-map 304 - - 421.959 ms
+20-06-2026 22:52:51 [[32MINFO[39M]: GET /user/bookings/38884fed-0078-4230-b1d1-8e311ce3a33b/seats-map 304 - - 336.824 ms
+20-06-2026 23:32:04 [[32MINFO[39M]: POST /auth/sign-in 200 758 - 334.168 ms
+20-06-2026 23:32:07 [[32MINFO[39M]: GET /user/destinations/search?q=c 400 96 - 7.689 ms
+20-06-2026 23:32:07 [[32MINFO[39M]: GET /user/destinations/search?q=co 304 - - 95.466 ms
+20-06-2026 23:32:07 [[32MINFO[39M]: GET /user/destinations/search?q=cok 304 - - 80.842 ms
+20-06-2026 23:32:10 [[32MINFO[39M]: GET /user/destinations/search?q=d 400 96 - 2.132 ms
+20-06-2026 23:32:10 [[32MINFO[39M]: GET /user/destinations/search?q=dx 304 - - 73.596 ms
+20-06-2026 23:32:10 [[32MINFO[39M]: GET /user/destinations/search?q=dxb 304 - - 71.319 ms
+20-06-2026 23:32:16 [[32MINFO[39M]: GET /user/flights/search?from=COK&to=DXB&departureDate=2026-06-30&passengers=1&tripType=one-way&page=1&limit=6 304 - - 166.029 ms
+20-06-2026 23:32:18 [[32MINFO[39M]: POST /user/bookings/segment 200 996 - 203.260 ms
+20-06-2026 23:32:19 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 200 990 - 65.689 ms
+20-06-2026 23:32:19 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 304 - - 164.933 ms
+20-06-2026 23:32:36 [[32MINFO[39M]: PUT /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 200 988 - 156.428 ms
+20-06-2026 23:32:38 [[32MINFO[39M]: PUT /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 200 988 - 103.417 ms
+20-06-2026 23:42:28 [[31MERROR[39M]: [/user/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+20-06-2026 23:42:28 [[32MINFO[39M]: GET /user/profile 401 133 - 389.689 ms
+20-06-2026 23:42:28 [[31MERROR[39M]: [/user/profile] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+20-06-2026 23:42:28 [[32MINFO[39M]: GET /user/profile 401 133 - 310.409 ms
+20-06-2026 23:42:28 [[32MINFO[39M]: POST /auth/refresh-token 200 349 - 73.322 ms
+20-06-2026 23:42:28 [[32MINFO[39M]: POST /auth/refresh-token 200 349 - 19.709 ms
+20-06-2026 23:42:29 [[32MINFO[39M]: GET /user/profile 304 - - 943.264 ms
+20-06-2026 23:42:29 [[32MINFO[39M]: GET /user/profile 304 - - 150.571 ms
+20-06-2026 23:42:30 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 200 990 - 444.316 ms
+20-06-2026 23:42:30 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 304 - - 62.568 ms
+20-06-2026 23:48:47 [[32MINFO[39M]: GET /user/profile 304 - - 1897.961 ms
+20-06-2026 23:48:48 [[32MINFO[39M]: GET /user/profile 304 - - 181.076 ms
+20-06-2026 23:48:57 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 304 - - 432.288 ms
+20-06-2026 23:48:57 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 304 - - 134.202 ms
+20-06-2026 23:49:32 [[32MINFO[39M]: GET /user/destinations/search?q=c 400 96 - 20.303 ms
+20-06-2026 23:49:32 [[32MINFO[39M]: GET /user/destinations/search?q=co 304 - - 167.141 ms
+20-06-2026 23:49:32 [[32MINFO[39M]: GET /user/destinations/search?q=cok 304 - - 90.730 ms
+20-06-2026 23:49:34 [[32MINFO[39M]: GET /user/destinations/search?q=d 400 96 - 4.079 ms
+20-06-2026 23:49:35 [[32MINFO[39M]: GET /user/destinations/search?q=dx 304 - - 77.037 ms
+20-06-2026 23:49:35 [[32MINFO[39M]: GET /user/destinations/search?q=dxb 304 - - 73.379 ms
+20-06-2026 23:49:41 [[32MINFO[39M]: GET /user/flights/search?from=COK&to=DXB&departureDate=2026-06-30&passengers=1&tripType=one-way&page=1&limit=6 304 - - 310.555 ms
+20-06-2026 23:49:44 [[31MERROR[39M]: [/user/bookings/segment] This flight is already added to your booking: This flight is already added to your booking
+Error: This flight is already added to your booking
+    at AddFlightToSegmentUseCase.<anonymous> (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\booking\addFlight-toSegment.usecase.ts:108:15)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\amrut\Desktop\airticketbooking\back-end\src\application\usecases\booking\addFlight-toSegment.usecase.ts:17:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+20-06-2026 23:49:44 [[32MINFO[39M]: POST /user/bookings/segment 400 99 - 509.164 ms
+20-06-2026 23:49:48 [[32MINFO[39M]: POST /user/bookings/segment 200 1772 - 379.642 ms
+20-06-2026 23:49:49 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 200 1766 - 82.154 ms
+20-06-2026 23:49:49 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 304 - - 106.758 ms
+20-06-2026 23:49:51 [[32MINFO[39M]: PUT /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 200 985 - 115.821 ms
+20-06-2026 23:49:56 [[32MINFO[39M]: PUT /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 200 985 - 807.323 ms
+20-06-2026 23:50:04 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 200 987 - 270.034 ms
+20-06-2026 23:50:04 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 304 - - 161.726 ms
+20-06-2026 23:50:07 [[32MINFO[39M]: PUT /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 200 985 - 206.920 ms
+20-06-2026 23:50:36 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/seats-map 200 53696 - 924.522 ms
+20-06-2026 23:50:36 [[32MINFO[39M]: GET /user/aircrafts/6a280d5e474123ddc469397c/foods 200 599 - 1123.887 ms
+20-06-2026 23:50:36 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/seats-map 304 - - 372.809 ms
+20-06-2026 23:50:36 [[32MINFO[39M]: GET /user/aircrafts/6a280d5e474123ddc469397c/foods 304 - - 190.014 ms
+20-06-2026 23:58:52 [[31MERROR[39M]: [/user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/seat-lock] No access token provided. Please include a valid access token in your request.: No access token provided. Please include a valid access token in your request.
+Error: No access token provided. Please include a valid access token in your request.
+    at C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:37:10
+    at Generator.throw (<anonymous>)
+    at rejected (C:\Users\amrut\Desktop\airticketbooking\back-end\src\presentation\middlewares\auth.middleware.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+20-06-2026 23:58:52 [[32MINFO[39M]: POST /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/seat-lock 401 133 - 251.806 ms
+20-06-2026 23:58:52 [[32MINFO[39M]: POST /auth/refresh-token 200 349 - 27.761 ms
+20-06-2026 23:58:53 [[32MINFO[39M]: POST /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/seat-lock 200 267 - 744.775 ms
+20-06-2026 23:59:06 [[32MINFO[39M]: POST /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/seat-lock 200 267 - 247.841 ms
+20-06-2026 23:59:29 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 200 987 - 83.873 ms
+20-06-2026 23:59:29 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/segment 304 - - 72.635 ms
+20-06-2026 23:59:33 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/seats-map 200 53776 - 327.910 ms
+20-06-2026 23:59:33 [[32MINFO[39M]: GET /user/bookings/613afd95-60ac-4711-b01a-469cd6f2e7e7/seats-map 304 - - 263.793 ms

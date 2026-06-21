@@ -16,7 +16,7 @@ export class UpdateFlightController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const providerId = req.user!._id;
+      const providerId = req.user!.id;
       const flightId = req.params.flightId;
 
       if (!flightId) {
@@ -28,8 +28,10 @@ export class UpdateFlightController {
         );
         return;
       }
+      
 
       const body = req.body;
+      
 
       // -------- Build baseFare (only if provided) --------
       const baseFare: UpdateFlightDTO["baseFare"] = {};
@@ -85,6 +87,13 @@ export class UpdateFlightController {
       if (body.durationMinutes != null) {
         updateData.durationMinutes = Number(body.durationMinutes);
       }
+      if (body.departureTime !== undefined) {
+      updateData.departureTime = body.departureTime;
+    }
+    if (body.bufferMinutes != null) {
+  updateData.bufferMinutes = Number(body.bufferMinutes);
+}
+
       if (body.arrivalDestinationId !== undefined) {
         updateData.arrivalDestinationId = body.arrivalDestinationId;
       }

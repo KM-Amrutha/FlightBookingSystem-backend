@@ -16,7 +16,7 @@ export class GetProviderFlightsController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const providerId = req.user!._id;
+      const providerId = req.user!.id;
  const { page, limit } = parseQueryParams(req.query);
 
       const {flightsList, paginationData} =

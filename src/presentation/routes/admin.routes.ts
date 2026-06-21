@@ -9,7 +9,11 @@ import { providerVerificationController,
         getAllUsersController,
         updateUserStatusController,
         getAllFlightsForAdminController,
-        rejectSingleFlightController
+        rejectSingleFlightController,
+        getAdminBookingsController,
+        getAdminDashboardController,
+        getAdminWalletController,
+        setProviderCommissionController
 
  } from "@di/container-resolver";
 
@@ -31,5 +35,10 @@ adminRoutes.patch('/users/:id/status', authenticateAdmin, asyncHandler( updateUs
 
 adminRoutes.get('/flights', authenticateAdmin, asyncHandler(getAllFlightsForAdminController.handle.bind(getAllFlightsForAdminController)));
 adminRoutes.patch('/flights/:flightId/reject', authenticateAdmin, asyncHandler(rejectSingleFlightController.handle.bind(rejectSingleFlightController)));
+
+adminRoutes.get('/bookings', authenticateAdmin, asyncHandler(getAdminBookingsController.handle.bind(getAdminBookingsController)));
+adminRoutes.get('/dashboard', authenticateAdmin, asyncHandler(getAdminDashboardController.handle.bind(getAdminDashboardController)));
+adminRoutes.get('/wallet', authenticateAdmin, asyncHandler(getAdminWalletController.handle.bind(getAdminWalletController)));
+adminRoutes.patch('/providers/:providerId/commission', authenticateAdmin, asyncHandler(setProviderCommissionController.handle.bind(setProviderCommissionController)));
 
 export default adminRoutes;

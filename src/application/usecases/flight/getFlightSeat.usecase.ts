@@ -5,7 +5,7 @@ import { NotFoundError, ForbiddenError, validationError } from "@presentation/mi
 import { TYPES_AIRCRAFT_REPOSITORIES } from "@di/types-repositories";
 import { IGetFlightSeatsUseCase } from "@di/file-imports-index";
 import { FlightSeatMapper } from "@application/mappers/flightSeatMapper";
-import { IFlightSeat } from "@domain/entities/flightSeat.entity";
+import { FLIGHT_MESSAGES } from "@shared/constants/flightMessages/flight.messges";
 
 @injectable()
 export class GetFlightSeatsUseCase implements IGetFlightSeatsUseCase {
@@ -22,49 +22,57 @@ export class GetFlightSeatsUseCase implements IGetFlightSeatsUseCase {
     role: "provider" | "user"
   ): Promise<FlightSeatMapDTO[]> {
     if (!flightId) {
-      throw new validationError("Flight ID is required");
+      throw new validationError(FLIGHT_MESSAGES.FLIGHT_ID_REQUIRED);     
     }
 
     const flight = await this._flightRepository.getFlightDetails(flightId);
     if (!flight) {
-      throw new NotFoundError("Flight not found");
+      throw new NotFoundError(FLIGHT_MESSAGES.NOT_FOUND);                  
     }
 
-    // Provider — must own the flight
     if (role === "provider") {
       if (flight.providerId !== requesterId) {
-        throw new ForbiddenError("You don't have permission to view this flight's seats");
+        throw new ForbiddenError(FLIGHT_MESSAGES.SEAT_VIEW_FORBIDDEN);    
       }
     }
 
-    // User — flight must be approved and scheduled
     if (role === "user") {
       if (flight.adminApproval.status !== "approved") {
-        throw new ForbiddenError("This flight is not available for booking");
+        throw new ForbiddenError(FLIGHT_MESSAGES.FLIGHT_NOT_AVAILABLE);   
       }
       if (flight.flightStatus !== "scheduled") {
-        throw new ForbiddenError("This flight is not available for booking");
+        throw new ForbiddenError(FLIGHT_MESSAGES.FLIGHT_NOT_AVAILABLE);    
       }
     }
 
     let seats = await this._flightSeatRepository.getFlightSeatsByFlightId(flightId);
     if (!seats || seats.length === 0) return [];
 
-    // User sees only available seats — filter out blocked ones
     if (role === "user") {
       seats = seats.filter((seat) => !seat.isBlocked);
     }
 
     const groupedByCabin = seats.reduce((acc, seat) => {
-      if (!acc[seat.cabinClass]) {
-        acc[seat.cabinClass] = [];
-      }
+      if (!acc[seat.cabinClass]) acc[seat.cabinClass] = [];
       acc[seat.cabinClass]!.push(seat);
       return acc;
-    }, {} as Record<string, IFlightSeat[]>);
+    }, {} as Record<string, typeof seats>);
 
-    return Object.entries(groupedByCabin).map(([cabinClass, cabinSeats]) =>
-      FlightSeatMapper.toFlightSeatMapDTO(cabinSeats, flight, cabinClass)
-    );
+    return Object.entries(groupedByCabin).map(([cabinClass, cabinSeats]) => {
+      const baseFare = flight.baseFare[cabinClass as keyof typeof flight.baseFare] ?? 0;
+      const seatSurcharge = {
+        ...(flight.seatSurcharge.window !== undefined && { window: flight.seatSurcharge.window }),
+        ...(flight.seatSurcharge.aisle !== undefined && { aisle: flight.seatSurcharge.aisle }),
+        ...(flight.seatSurcharge.extraLegroom !== undefined && { extraLegroom: flight.seatSurcharge.extraLegroom }),
+      };
+
+      return FlightSeatMapper.toFlightSeatMapDTO(
+        cabinSeats,
+        flight.id,
+        cabinClass,
+        baseFare,       
+        seatSurcharge  
+      );
+    });
   }
 }

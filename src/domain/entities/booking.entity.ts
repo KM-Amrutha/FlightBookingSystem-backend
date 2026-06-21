@@ -14,6 +14,7 @@ export interface IBooking {
   subtotal: number;
   discount: number;
   grandTotal: number;
+  commissionAmount: number; 
   status: "pending" | "confirmed" | "payment_failed" | "cancelled";
   paymentIntentId?: string;
   paymentConfirmedAt?: Date;
@@ -24,6 +25,7 @@ export interface IBooking {
 export interface IBookingPassengerSegment {
   flightId: string;
   flightNumber: string;
+   providerId: string; 
   from: string;
   to: string;
   departureTime: Date;
@@ -58,6 +60,7 @@ export interface IBookingPassenger {
 export interface IBookingFlightFood {
   flightId: string;
   aircraftId: string;
+   providerId: string; 
   items: {
     foodId: string;
     foodName: string;

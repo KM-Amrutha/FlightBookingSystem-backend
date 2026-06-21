@@ -1,5 +1,5 @@
 export interface DestinationDTO {
-  _id: string;
+  id: string;
   name: string;
   iataCode: string;
   icaoCode?: string;

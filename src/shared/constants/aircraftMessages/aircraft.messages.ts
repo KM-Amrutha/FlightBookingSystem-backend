@@ -13,4 +13,30 @@ export const AIRCRAFT_MESSAGES = {
   PROVIDER_NOT_FOUND: 'Provider account not found. Please verify provider ID.',
   STATION_NOT_FOUND: 'The specified station does not exist.',
   ALREADY_EXISTS: 'An aircraft with this name already exists for this provider.',
+  DELETE_FORBIDDEN: "You don't have permission to delete this aircraft",
+HAS_SCHEDULED_FLIGHTS: "Cannot update aircraft with scheduled flights. Cancel or complete all flights first.",
+CANNOT_DELETE_ONLY_AIRCRAFT: "Cannot delete your only aircraft. Providers must have at least one aircraft",
+UPDATE_FORBIDDEN: "You don't have permission to update this aircraft",
+DESTINATION_NOT_ACTIVE: "Selected destination is not active",
+SEAT_CAPACITY_EXCEEDED: "Seat capacity cannot exceed 1000",
+INVALID_FLYING_RANGE: "Flying range must be greater than 0",
+INVALID_ENGINE_COUNT: "Engine count must be between 1 and 8",
+INVALID_LAVATORY_COUNT: "Lavatory count cannot be negative",
+CANNOT_UPDATE_IN_MAINTENANCE: "Cannot update aircraft while in maintenance mode",
+INVALID_AIRCRAFT_ID_FORMAT: "Invalid aircraft ID format",
+LOCATION_CHANGE_MAINTENANCE: "Cannot change location for aircraft under maintenance. Complete maintenance first",
+LOCATION_CHANGE_INACTIVE: "Cannot change location for inactive aircraft. Activate aircraft first",
+ALREADY_AT_LOCATION: "Aircraft is already at this location",
+INVALID_DESTINATION_ID_FORMAT: "Invalid destination ID format",
+ALREADY_IN_STATUS: (status: string) => `Aircraft is already in ${status} status`,
+INVALID_STATUS_TRANSITION: (from: string, to: string) =>
+  `Invalid status transition from ${from} to ${to}`,
+CANNOT_ACTIVATE_NOT_YET_AVAILABLE: (date: string) =>
+  `Cannot activate aircraft. Available from ${date}`,
+MAX_ACTIVE_AIRCRAFT_REACHED:
+  "Maximum active aircraft limit (50) reached. Deactivate another aircraft first",
+INVALID_STATUS_VALUE: (valid: string[]) =>
+  `Invalid status. Must be one of: ${valid.join(", ")}`,
+CONFIGURE_FORBIDDEN: "You don't have permission to configure this aircraft",
+GENERATE_SEATS_FORBIDDEN: "You don't have permission to generate seats for this aircraft",
 } as const;

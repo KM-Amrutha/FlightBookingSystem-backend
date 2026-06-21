@@ -15,7 +15,7 @@ export class GetFlightByIdController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const providerId = req.user!._id;
+      const providerId = req.user!.id;
       const { flightId } = req.params;
 
       if (!flightId) {

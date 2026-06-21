@@ -3,7 +3,8 @@ import { TYPES_REPOSITORIES } from "@di/types-repositories";
 import { TYPES_SERVICES } from "@di/types-services";
 import { IProviderRepository } from "@domain/interfaces/IProviderRepository";
 import { ICloudStorageService } from "@di/file-imports-index";
-import { IProvider } from "@domain/entities/provider.entity";
+import { CompleteProviderProfileUpdateDTO } from "@application/dtos/provider-dtos";
+// import { IProvider } from "@domain/entities/provider.entity";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { ICompleteProviderProfileUseCase } from "@application/interfaces/usecase/provider/ICompleteProvider-profile.usecase";
 
@@ -126,7 +127,7 @@ export class CompleteProviderProfileUseCase implements ICompleteProviderProfileU
     }
 
     // Build update data
-    const updateData: Partial<IProvider> = {
+    const updateData: CompleteProviderProfileUpdateDTO = {
       establishmentYear: Number(establishmentYear),
       licenseExpiryDate: new Date(licenseExpiryDate),
       headquartersAddress,

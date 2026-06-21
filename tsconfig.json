@@ -61,6 +61,6 @@
     "typeRoots": ["./src/types", "./node_modules/@types"]
   },
     // "include": ["src"],
-     "include": ["src/**/*.ts", "src/domain/entities/flightSeat.entity.ts"],
+     "include": ["src/**/*.ts", "src/domain/entities/flightSeat.entity.ts", "src/presentation/controllers/admin/get-adminWallet.controllers.ts"],
   "exclude": ["node_modules"]
 }

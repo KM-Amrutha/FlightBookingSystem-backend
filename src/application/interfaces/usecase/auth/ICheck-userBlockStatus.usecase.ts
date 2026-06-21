@@ -1,4 +1,4 @@
 
 export interface ICheckUserBlockStatusUseCase {
-  execute(_id: string): Promise<boolean>;
+  execute(id: string): Promise<boolean>;
 }

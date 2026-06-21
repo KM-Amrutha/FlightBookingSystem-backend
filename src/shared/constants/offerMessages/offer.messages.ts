@@ -1,0 +1,23 @@
+
+export const OFFER_MESSAGES = {
+OFFER_ALL_FIELDS_REQUIRED: "All offer fields are required",
+OFFER_INVALID_DISCOUNT: "Discount percentage must be between 1 and 100",
+OFFER_INVALID_MINIMUM_AMOUNT: "Minimum amount cannot be negative",
+OFFER_INVALID_DATE: "Invalid date format",
+OFFER_INVALID_DATE_RANGE: "Valid from date must be before valid to date",
+OFFER_PAST_DATE: "Valid from date cannot be in the past",
+OFFER_AIRCRAFT_NOT_FOUND: "Aircraft not found",
+OFFER_NOT_YOUR_AIRCRAFT: "You do not own this aircraft",
+OFFER_CODE_EXISTS: "Offer code already exists",
+OFFER_ID_REQUIRED: "Offer ID is required",
+OFFER_NOT_FOUND: "Offer not found",
+OFFER_NOT_YOUR_OFFER: "You do not own this offer",
+OFFER_CANNOT_EDIT_USED: "Cannot edit offer code, discount or minimum amount after offer has been used",
+OFFER_PROVIDER_REQUIRED: "Provider ID is required",
+OFFERS_RETRIEVED: "Eligible offers retrieved successfully",
+  OFFER_NOT_ELIGIBLE: "This offer is not eligible for your booking",
+  OFFER_EXPIRED: "This offer has expired",
+  OFFER_CREATED: "Offer created successfully",
+  OFFER_UPDATED: "Offer updated successfully",
+  OFFER_DELETED: "Offer deleted successfully",
+}

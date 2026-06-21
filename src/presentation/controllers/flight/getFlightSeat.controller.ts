@@ -17,7 +17,7 @@ export class GetFlightSeatsController {
     try {
       const { flightId } = req.params;
     
-      const providerId = req.user!._id;
+      const providerId = req.user!.id;
 
       if (!flightId) {
         sendResponse(res, FLIGHT_MESSAGES.ID_REQUIRED, null, StatusCodes.BAD_REQUEST);

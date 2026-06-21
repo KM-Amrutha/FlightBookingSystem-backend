@@ -15,5 +15,9 @@ export const APPLICATION_MESSAGES = {
     'Missing required JWT environment variables.',
   ALL_FIELDS_ARE_REQUIRED:
     'Please ensure that all required fields are available.',
+    NO_FIELDS_TO_UPDATE: "No fields to update",
+    MISSING_S3_CREDENTIALS: "Missing required AWS S3 environment variables",
+FAILED_TO_UPLOAD_TO_S3: "Failed to upload image to S3",
+INVALID_IMAGE_FORMAT: "Invalid image format. Expected base64 data URI",
 } as const
 

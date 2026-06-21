@@ -8,7 +8,6 @@ import { IOtpRepository ,
 } from "@di/file-imports-index";
 
 import { OtpDTO } from "@application/dtos/auth-dtos";
-import { IOtp } from "@domain/entities/otp.entity";
 
 import { OTP_MESSAGES } from "@shared/constants/index.constants";
 import { validationError } from "@presentation/middlewares/error.middleware";

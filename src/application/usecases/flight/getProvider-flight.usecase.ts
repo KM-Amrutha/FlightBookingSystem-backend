@@ -29,6 +29,7 @@ export class GetProviderFlightsUseCase implements IGetProviderFlightsUseCase {
     if (!provider.isVerified) throw new ForbiddenError(AUTH_MESSAGES.ACCOUNT_NOT_VERIFIED);
   }
 
+
   async execute(
     providerId: string,
     page: number = 1,
@@ -37,22 +38,23 @@ export class GetProviderFlightsUseCase implements IGetProviderFlightsUseCase {
     flightsList: FlightListDTO[];
     paginationData: PaginationDTO;
   }> {
+
     if (!providerId) {
       throw new validationError(APPLICATION_MESSAGES.ALL_FIELDS_ARE_REQUIRED);
     }
 
     await this.validateProvider(providerId);
-
     const { flights, totalPages, currentPage } =
       await this._flightRepository.getFlightsByProvider(providerId, page, limit);
 
     if (flights.length === 0) {
       return {
+       
         flightsList: [],
         paginationData: { totalPages: 0, currentPage: page },
       };
+       
     }
-
     return {
       flightsList: FlightMapper.toFlightListDTOs(flights),
       paginationData: { totalPages, currentPage },

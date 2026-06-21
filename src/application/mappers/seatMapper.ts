@@ -10,7 +10,7 @@ export class SeatMapper {
    */
   static toSeatDTO(seat: ISeat): SeatDetailsDTO {
     return {
-      _id: seat.id,
+      id: seat.id,
       aircraftId: seat.aircraftId,
       seatTypeId: seat.seatTypeId,
       seatNumber: seat.seatNumber,
@@ -43,7 +43,7 @@ export class SeatMapper {
    */
   static toSeatLayoutDTO(layout: ISeatLayout): SeatLayoutDetailsDTO {
     return {
-      _id: layout.id,
+      id: layout.id,
       aircraftId: layout.aircraftId,
       cabinClass: layout.cabinClass,
       layout: layout.layout,
@@ -75,7 +75,7 @@ export class SeatMapper {
    */
   static toSeatTypeDTO(seatType: ISeatType): SeatTypeDTO {
     return {
-      _id: seatType.id,
+      id: seatType.id,
       seatTypeName: seatType.seatTypeName,
       cabinClass: seatType.cabinClass,
       basePriceMultiplier: seatType.basePriceMultiplier,

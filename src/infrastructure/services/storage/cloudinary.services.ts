@@ -1,4 +1,4 @@
-import { UploadApiResponse } from "cloudinary";
+import { UploadApiOptions,UploadApiResponse } from "cloudinary";
 import cloudinary from "@infrastructure/config/cloudinary.config";
 import { validationError } from "@presentation/middlewares/error.middleware";
 import { APPLICATION_MESSAGES } from "@shared/constants/index.constants";
@@ -14,7 +14,7 @@ export class CloudinaryService implements ICloudStorageService {
       const isPDF = image.includes('data:application/pdf') || 
                     image.includes('.pdf') ||
                     image.toLowerCase().endsWith('.pdf');
-      const uploadOptions: any = { 
+      const uploadOptions: UploadApiOptions = { 
         folder,
         resource_type: isPDF ? 'raw' : 'image'
       };

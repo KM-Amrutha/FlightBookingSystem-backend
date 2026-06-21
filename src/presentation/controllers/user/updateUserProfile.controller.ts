@@ -15,7 +15,7 @@ export class UpdateUserProfileController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const userId = req.user!._id;
+      const userId = req.user!.id;
 
       const dto: UpdateUserProfileDTO = {
         userId,

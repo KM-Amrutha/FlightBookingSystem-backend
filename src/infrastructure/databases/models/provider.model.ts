@@ -81,6 +81,13 @@ const providerSchema = new Schema(
       type: String,
       trim: true
     },
+    commissionRate: {
+     type: Number,
+      required: true,
+      default: 10,
+       min: 0,
+       max: 100,
+      },
     isActive: {
       type: Boolean,
       default: true

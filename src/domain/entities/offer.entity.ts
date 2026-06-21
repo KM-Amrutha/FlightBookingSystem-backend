@@ -1,13 +1,17 @@
-
 export interface IOffer {
-  _id: string;
+  id: string;
+  aircraftId: string;
+  aircraftName?: string;
+  providerId: string;
   offerCode: string;
-  discountAmount: number;
+  description: string;
+  discountPercentage: number;
+  minimumAmount: number;
   validFrom: Date;
   validTo: Date;
-  createdByProvider: string;
-  aircraftId: string;
   isActive: boolean;
+  usageCount: number;
+  usageLimit?: number;
   createdAt: Date;
   updatedAt: Date;
 }

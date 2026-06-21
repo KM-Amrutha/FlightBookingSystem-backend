@@ -22,10 +22,10 @@ export const authenticate = async (
   }
   try {
     const decoded = await tokenUseCase.authAccessToken(accessToken);
-     req.user = decoded as JwtPayload & { _id: string; role: string; email: string };
-    
+     req.user = decoded as JwtPayload & { id: string; role: string; email: string };
+    console.log(decoded);
 
-    const isActive = await checkUserBlockStatusUseCase.execute(req.user._id);
+    const isActive = await checkUserBlockStatusUseCase.execute(req.user.id);
     
     if (!isActive){
       next(new ForbiddenError(AUTH_MESSAGES.ACCOUNT_BLOCKED));

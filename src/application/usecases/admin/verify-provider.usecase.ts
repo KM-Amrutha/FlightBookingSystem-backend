@@ -18,6 +18,7 @@ export class VerifyProviderUseCase implements IVerifyProviderUseCase {
 
   async execute(providerId: string): Promise<void> {
     const provider = await this._providerRepository.findById(providerId);
+  
     
     if (!provider) {
       throw new validationError("Provider not found");
@@ -33,6 +34,7 @@ export class VerifyProviderUseCase implements IVerifyProviderUseCase {
       rejectionReason: null,
       rejectionDate: null
     }
+
 
     await this._providerRepository.update(providerId,updateData);
 

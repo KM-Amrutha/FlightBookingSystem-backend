@@ -5,11 +5,13 @@ import "reflect-metadata";
 import app from "@server";
 import connectDB from "@infrastructure/config/db.config";
 import { connectRedis } from "@infrastructure/config/redis.config";
+import { startBookingCleanupJob } from "@shared/utils/booking-cleanup";
+import { bookingRepository, flightSeatRepository } from "@di/container-resolver";
 import { createServer } from "http";
 
 connectDB();
 connectRedis();
-
+startBookingCleanupJob(bookingRepository, flightSeatRepository);
 const httpServer = createServer(app);
 
 const PORT = process.env.PORT;

@@ -4,7 +4,7 @@ import { DestinationDTO } from "@application/dtos/destination-dtos";
 export class DestinationMapper {
   static toDestinationDTO(destination: IDestination): DestinationDTO {
     return {
-      _id: destination.id,
+      id: destination.id,
       name: destination.name,
       iataCode: destination.iataCode,
       municipality: destination.municipality,

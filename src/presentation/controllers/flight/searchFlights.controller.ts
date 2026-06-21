@@ -31,7 +31,7 @@ export class SearchFlightsController {
     };
 
     const results = await this._searchFlightsUseCase.execute(searchData);
-
+     console.log("Search Flights Results:", results); 
     sendResponse(res, FLIGHT_MESSAGES.SEARCH_SUCCESS, results, StatusCodes.OK);
   }
 }

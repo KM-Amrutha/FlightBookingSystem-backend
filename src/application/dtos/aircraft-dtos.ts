@@ -1,4 +1,3 @@
-
 export interface CreateAircraftDTO {
   providerId: string;
   aircraftType: string;
@@ -11,20 +10,20 @@ export interface CreateAircraftDTO {
   lavatoryCount: number;
   baseStationId: string;
   currentLocationId: string;
-  availableFrom: Date;
+  availableFrom: Date;                       
   status: "active" | "inactive" | "maintenance";
 }
 
 export interface UpdateAircraftDTO {
   aircraftName?: string;
-   buildYear?: number;
+  buildYear?: number;
   seatCapacity?: number;
   flyingRangeKm?: number;
   engineCount?: number;
   lavatoryCount?: number;
   baseStationId?: string;
   currentLocationId?: string;
-  availableFrom?: Date;
+  availableFrom?: Date;                       
   status?: "active" | "inactive" | "maintenance";
 }
 
@@ -39,7 +38,7 @@ export interface UpdateAircraftLocationDTO {
 }
 
 export interface AircraftDetailsDTO {
-  _id: string;
+  id: string;                                
   providerId: string;
   aircraftType: string;
   aircraftName: string;
@@ -49,20 +48,20 @@ export interface AircraftDetailsDTO {
   flyingRangeKm: number;
   engineCount: number;
   lavatoryCount: number;
-  availableFrom: Date;
+  availableFrom: string;                       
   baseStationId: string;
   currentLocationId: string;
   status: "active" | "inactive" | "maintenance";
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date;                         
+  updatedAt: Date;                           
   baseStation?: {
-    _id: string;
+    id: string;                             
     name: string;
     city: string;
     country: string;
   };
   currentLocation?: {
-    _id: string;
+    id: string;                          
     name: string;
     city: string;
     country: string;

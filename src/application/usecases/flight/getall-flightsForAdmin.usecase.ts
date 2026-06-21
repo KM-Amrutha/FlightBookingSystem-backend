@@ -37,17 +37,21 @@ export class GetAllFlightsForAdminUseCase implements IGetAllFlightsForAdminUseCa
       };
     }
 
-    const flightDTOs = await Promise.all(
-      flights.map(async (flight) => {
-        const provider = await this._providerRepository.getProviderDetailsById(
-          flight.providerId
-        );
-        return FlightMapper.toFlightListDTO(flight, provider?.companyName);
-      })
+    const flightDTO = await Promise.all(
+  flights.map(async (flight) => {
+    const provider = await this._providerRepository.getProviderDetailsById(
+      flight.providerId.toString()
     );
+    return FlightMapper.toFlightListDTO(
+      flight,
+      provider?.companyName,
+      provider?.logoUrl  
+    );
+  })
+);
 
     return {
-      flightsList: flightDTOs,
+      flightsList: flightDTO,
       paginationData: { totalPages, currentPage },
     };
   }

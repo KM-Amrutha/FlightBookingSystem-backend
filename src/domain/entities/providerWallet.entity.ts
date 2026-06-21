@@ -1,10 +1,18 @@
+export interface IProviderWalletTransaction {
+  transactionId: string;
+  type: "credit";
+  amount: number;
+  description: string;
+  bookingId?: string;
+  flightId?: string;
+  createdAt: Date;
+}
+
 export interface IProviderWallet {
-  _id: string;
+  id: string;
   providerId: string;
   balance: number;
-  currency: string;
-  lastTransactionDate?: Date;
-  isActive: boolean;
+  transactions: IProviderWalletTransaction[];
   createdAt: Date;
   updatedAt: Date;
 }

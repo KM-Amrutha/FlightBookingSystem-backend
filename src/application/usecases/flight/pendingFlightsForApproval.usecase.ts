@@ -18,14 +18,15 @@ export class PendingFlightsForApprovalUseCase
 
 async execute(): Promise<FlightListDTO[]> {
     const flights = await this._flightRepository.getPendingFlightsForApproval();
+  
 
     const flightDTOs = await Promise.all(
       flights.map(async (flight) => {
         const provider = await this._providerRepository.getProviderDetailsById(flight.providerId);
-        return FlightMapper.toFlightListDTO(flight, provider?.companyName);
+        return FlightMapper.toFlightListDTO(flight, provider?.companyName, provider?.logoUrl);
+        
       })
     );
-
     return flightDTOs;
 }
 }
